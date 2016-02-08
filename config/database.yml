@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: TMC_development
+
+test:
+  <<: *default
+  database: TMC_test
+
+production:
+  <<: *default
+  database: TMC_production
+  username: TMC
+  password: <%= ENV['TMC_DATABASE_PASSWORD'] %>
