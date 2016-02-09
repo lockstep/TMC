@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.describe PagesController, type: :controller do
 
   describe '#show' do
-    context 'Access to Homepage' do
-      subject { get :show, page: 'home' }
-      it { is_expected.to render_template('pages/home')}
+    PagesController::PAGES.each do |page|
+      context "Access to #{page} page" do
+        subject { get :show, page: page }
+        it { is_expected.to render_template("pages/#{page}")}
+      end
     end
 
     context 'Access non-existing page' do
