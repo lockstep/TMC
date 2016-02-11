@@ -15,6 +15,7 @@ gem 'haml', '~> 4.0.7'
 gem 'active_model_serializers', '~> 0.10.0rc4'
 gem 'sidekiq', '~> 4.1.0'
 gem 'devise', '~> 3.5.6'
+gem "administrate", "~> 0.1.2"
 
 group :development, :test do
   gem 'pry-rails'
