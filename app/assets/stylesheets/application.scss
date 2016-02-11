@@ -1,1 +1,6 @@
+@import "variables";
 @import "frameworks_and_overrides";
+
+main {
+  @include make-container();
+}

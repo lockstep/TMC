@@ -14,6 +14,7 @@ gem 'haml', '~> 4.0.7'
 
 gem 'active_model_serializers', '~> 0.10.0rc4'
 gem 'sidekiq', '~> 4.1.0'
+gem 'devise', '~> 3.5.6'
 
 group :development, :test do
   gem 'pry-rails'
@@ -24,7 +25,9 @@ group :development, :test do
 end
 
 group :development do
+  gem 'letter_opener'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'erb2haml'
 end
 

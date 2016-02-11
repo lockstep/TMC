@@ -1,1 +1,9 @@
-TMC
+%a#hello{href: "/"}
+  HOME
+pages/home.html.haml
+= current_user.email if current_user
+.row
+  %a.btn.btn-primary{href: "/presentations"}
+    Presentations
+  %a.btn.btn-primary{href: "/products"}
+    Products
