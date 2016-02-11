@@ -1,6 +1,25 @@
 @import "variables";
 @import "frameworks_and_overrides";
+@import "trix";
 
 main {
   @include make-container();
+}
+
+section {
+  &#presentation {
+    div {
+      @include make-col();
+
+      &.sidebar {
+        background-color: $pearl;
+        @include make-col-span(4);
+      }
+
+      &.presentation {
+        background-color: $light-blue;
+        @include make-col-span(8);
+      }
+    }
+  }
 }
