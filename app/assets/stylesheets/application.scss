@@ -3,22 +3,28 @@
 @import "trix";
 
 main {
+  background-color: $light-yellow;
   @include make-container();
 }
 
 section {
+  padding-top: 20px;
   &#presentation {
-    div {
+    div, h1 {
       @include make-col();
 
       &.sidebar {
-        background-color: $pearl;
         @include make-col-span(4);
       }
 
       &.presentation {
-        background-color: $light-blue;
         @include make-col-span(8);
+      }
+
+      .content {
+        background-color: $pearl;
+        @include make-col();
+        @include make-col-span(12);
       }
     }
   }

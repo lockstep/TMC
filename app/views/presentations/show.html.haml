@@ -1,10 +1,12 @@
 %section#presentation
   .sidebar
-    Sidebar
+    .content
+      Sidebar
   .presentation
-    %h1
-      = @presentation.name
+    .content
+      %h1
+        = @presentation.name
 
-    %div
-      = @presentation.description.html_safe
+      %div
+        = @presentation.description.html_safe
 

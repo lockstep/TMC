@@ -1,0 +1,14 @@
+- if page.current?
+  %li.page-item.active
+    = content_tag :a,
+      page,
+      class: 'page-link',
+      remote: remote,
+      rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil))
+- else
+  %li.page-item
+    = link_to page,
+      url,
+      class: 'page-link',
+      remote: remote,
+      rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil))

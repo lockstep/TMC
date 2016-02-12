@@ -267,6 +267,7 @@ DEPENDENCIES
   erb2haml
   haml (~> 4.0.7)
   jquery-rails
+  kaminari (~> 0.16.2)
   letter_opener
   pg (~> 0.15)
   poltergeist

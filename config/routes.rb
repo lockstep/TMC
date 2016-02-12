@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'pages/:page' => 'pages#show'
 
   devise_for :users
-  resources :presentations, only: [:show]
+  resources :presentations, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -5,7 +5,7 @@ describe 'Visitors access to Homepage', type: :feature do
 
   before { visit root_path }
 
-  it 'should display application\' name' do
+  it 'should display application\'s name' do
     expect(page).to have_content(application_name)
   end
 end
