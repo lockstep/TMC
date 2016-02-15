@@ -1,3 +1,4 @@
-memory_game:
-  name: Memory game
+quiz_game:
+  name: Quiz game
   description: This is not a game you're looking for
+  topic: memory_quiz

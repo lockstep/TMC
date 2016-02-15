@@ -1,4 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Presentation, type: :model do
+  describe '#topic' do
+    fixtures :topics
+    fixtures :presentations
+
+    let(:memory_quiz)   { topics(:memory_quiz) }
+    let(:quiz_game)     { presentations(:quiz_game) }
+
+    it 'respond to topic call correctly' do
+      expect(quiz_game.topic).to eq memory_quiz
+    end
+  end
 end
