@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class PresentationDashboard < Administrate::BaseDashboard
+class TopicDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,10 +8,13 @@ class PresentationDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    parent: Field::BelongsTo.with_options(class_name: "Topic"),
+    children: Field::HasMany.with_options(class_name: "Topic"),
+    presentations: Field::HasMany,
     id: Field::Number,
     name: Field::String,
-    topic: Field::BelongsTo,
-    description: Field::WysiwygField,
+    description: Field::Text,
+    parent_id: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }
@@ -22,20 +25,23 @@ class PresentationDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :id,
     :name,
-    :description,
-    :topic,
-    :created_at,
+    :parent,
+    :children,
+    :presentations,
+    :id,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
+    :parent,
+    :children,
+    :presentations,
     :id,
-    :topic,
     :name,
     :description,
+    :parent_id,
     :created_at,
     :updated_at,
   ]
@@ -44,18 +50,21 @@ class PresentationDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :topic,
+    :parent,
+    :children,
+    :presentations,
     :name,
     :description,
+    :parent_id,
   ]
 
-  # Overwrite this method to customize how presentations are displayed
+  # Overwrite this method to customize how topics are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(presentation)
-  #   "Presentation ##{presentation.id}"
+  # def display_resource(topic)
+  #   "Topic ##{topic.id}"
   # end
-  def display_resource(presentation)
-    "#{presentation.name}"
+  def display_resource(topic)
+    "#{topic.name}"
   end
 end

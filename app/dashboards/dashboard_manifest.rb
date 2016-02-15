@@ -11,7 +11,8 @@ class DashboardManifest
   # to work correctly.
   DASHBOARDS = [
     :users,
-    :presentations
+    :presentations,
+    :topics,
   ]
 
   # `ROOT_DASHBOARD`
