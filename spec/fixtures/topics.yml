@@ -1,0 +1,13 @@
+memory_game:
+  name: Memory Game
+  description: This is Description
+
+memory_quiz:
+  name: Memory Quiz
+  description: This is Description
+  parent: memory_game
+
+memory_puzzle:
+  name: Puzzle
+  description: This is Description
+  parent: memory_game
