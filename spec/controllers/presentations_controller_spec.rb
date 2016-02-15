@@ -10,9 +10,9 @@ RSpec.describe PresentationsController, type: :controller do
   end
 
   describe '#show' do
-    let(:memory_game) { presentations(:memory_game) }
+    let(:quiz_game) { presentations(:quiz_game) }
 
-    before            { get :show, id: memory_game.id }
+    before            { get :show, id: quiz_game.id }
 
     it { expect(response).to render_template('presentations/show') }
   end
