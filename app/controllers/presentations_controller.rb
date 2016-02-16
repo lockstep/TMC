@@ -2,10 +2,11 @@ class PresentationsController < ApplicationController
   before_action :set_presentation, only: [:show]
 
   def index
-    @presentations = Presentation.search( search_query )
-    # @presentations = Presentation.order(created_at: :desc)
-    #                              .page(params[:page] || 1)
-    #                              .per(10)
+    @presentations = Presentation
+                      .search( search_query,
+                               page: params[:page] || 1,
+                               per_page: 10,
+                             )
   end
 
   def show
