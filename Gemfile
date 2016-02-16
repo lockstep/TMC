@@ -19,6 +19,9 @@ gem 'devise', '~> 3.5.6'
 gem 'administrate', '~> 0.1.2'
 gem 'kaminari', '~> 0.16.2'
 
+gem 'searchkick', '~> 1.2.1'
+gem 'typhoeus'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
