@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe PresentationsController, type: :controller do
   fixtures :presentations
 
+  before(:all) do
+    Presentation.reindex
+  end
+
   describe '#index' do
     before { get :index }
 
