@@ -36,4 +36,23 @@ RSpec.describe Topic, type: :model do
       expect(memory_quiz.presentations.first).to eq quiz_game
     end
   end
+
+  describe '#ancestor_ids' do
+    subject { memory_quiz.ancestor_ids }
+
+    it 'return ancestor\'s id in type of array' do
+      is_expected.to be_kind_of Array
+      is_expected.to include memory_quiz.parent.id
+    end
+  end
+
+  describe '#related_topic_ids' do
+    subject { memory_quiz.related_topic_ids }
+
+    it 'return self and parent if in type of array' do
+      is_expected.to be_kind_of Array
+      is_expected.to include memory_quiz.id
+      is_expected.to include memory_quiz.parent.id
+    end
+  end
 end
