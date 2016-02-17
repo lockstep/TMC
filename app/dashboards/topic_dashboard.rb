@@ -55,7 +55,6 @@ class TopicDashboard < Administrate::BaseDashboard
     :presentations,
     :name,
     :description,
-    :parent_id,
   ]
 
   # Overwrite this method to customize how topics are displayed
