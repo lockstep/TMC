@@ -9,7 +9,7 @@ main {
 
 section {
   padding-top: 20px;
-  &#presentation {
+  &#body {
     div, h1 {
       @include make-col();
 
@@ -17,7 +17,7 @@ section {
         @include make-col-span(4);
       }
 
-      &.presentation {
+      &.main {
         @include make-col-span(8);
       }
 

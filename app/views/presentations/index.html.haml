@@ -1,3 +1,16 @@
-= render @presentations
+%section#body
+  .sidebar
+    .content
+      %h3 Select topic
+      %ul
+        - @topics.each do |topic|
+          %li.topic-selection
+            = link_to(topic.name,
+                      '/',
+                      remote: true,
+                     )
+  .main
+    .content
+      = render @presentations
 
-= paginate @presentations
+      = paginate @presentations
