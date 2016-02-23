@@ -12,7 +12,4 @@ test:
   database: TMC_test
 
 production:
-  <<: *default
-  database: TMC_production
-  username: TMC
-  password: <%= ENV['TMC_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>

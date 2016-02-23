@@ -21,6 +21,7 @@ gem 'kaminari', '~> 0.16.2'
 
 gem 'searchkick', '~> 1.2.1'
 gem 'typhoeus'
+gem 'airbrake', '~> 5.0'
 
 group :development, :test do
   gem 'pry-rails'
@@ -35,5 +36,9 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'erb2haml'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
 
