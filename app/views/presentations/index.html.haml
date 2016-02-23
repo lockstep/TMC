@@ -1,16 +1,16 @@
-%section#body
-  .sidebar
-    .content
-      %h3 Select topic
-      %ul
-        - @topics.each do |topic|
-          %li.topic-selection
-            = link_to(topic.name,
-                      '/',
-                      remote: true,
-                     )
-  .main
-    .content
+.container
+  .row
+    .col-md-4
+      .well
+        %h4 Topics
+        .row
+          .col-lg-12
+            %ul.list-unstyled
+              - @topics.each do |topic|
+                %li.topic-selection
+                  = link_to(topic.name,
+                            "/presentations?topic_ids=#{topic.id}",
+                           )
+    .col-lg-8
       = render @presentations
-
       = paginate @presentations

@@ -1,0 +1,12 @@
+%section#body
+  .sidebar
+    .content
+      Sidebar
+  .main
+    .content
+      %h1
+        = @presentation.name
+
+      %div
+        = @presentation.description.html_safe
+

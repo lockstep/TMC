@@ -10,6 +10,7 @@ class PresentationDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     name: Field::String,
+    summary: Field::String,
     topic: Field::BelongsTo,
     description: Field::WysiwygField,
     created_at: Field::DateTime,
@@ -24,7 +25,7 @@ class PresentationDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
-    :description,
+    :summary,
     :topic,
     :created_at,
   ]
@@ -35,6 +36,7 @@ class PresentationDashboard < Administrate::BaseDashboard
     :id,
     :topic,
     :name,
+    :summary,
     :description,
     :created_at,
     :updated_at,
@@ -46,6 +48,7 @@ class PresentationDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :topic,
     :name,
+    :summary,
     :description,
   ]
 

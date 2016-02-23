@@ -2,21 +2,33 @@ class PresentationsController < ApplicationController
   before_action :set_presentation, only: [:show]
 
   def index
-    @presentations = Presentation
-                      .search( search_query,
-                               misspellings: {
-                                 edit_distance: 2
-                               },
-                               aggs: [:topic_ids],
-                               page: page,
-                               per_page: 10,
-                             )
+    if params[:topic_ids].nil?
+      @presentations = Presentation.search(search_query,
+                                           misspellings: {
+                                             edit_distance: 2
+                                           },
+                                           aggs: [:topic_ids],
+                                           page: page,
+                                           per_page: 10,
+                                          )
+    else
+      @presentations = Presentation.search(search_query,
+                                           misspellings: {
+                                             edit_distance: 2
+                                           },
+                                           where: where,
+                                           aggs: [:topic_ids],
+                                           page: page,
+                                           per_page: 10,
+                                          )
+    end
     topic_ids = @presentations.aggs["topic_ids"]["buckets"]
                               .map{ |agg| agg["key"] }
     @topics = Topic.where(id: topic_ids)
   end
 
   def show
+    @topics = Topic.where(id: @presentation.topic.related_topic_ids)
   end
 
   private
@@ -32,7 +44,7 @@ class PresentationsController < ApplicationController
   end
 
   def topic_ids
-    params[:topic_ids] ? params[:topic_ids].split(',') : []
+    params[:topic_ids].split(',')
   end
 
   def page

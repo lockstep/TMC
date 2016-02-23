@@ -1,12 +1,20 @@
-%section#body
-  .sidebar
-    .content
-      Sidebar
-  .main
-    .content
+.container
+  .row
+    .col-md-4
+      .well
+    .col-lg-8
+      %ol.breadcrumb{:style => "margin-top: 5px;"}
+        - @topics.each do |topic|
+          %li
+            %a{href: "/presentations?topic_ids=#{topic.id}"}
+              = topic.name
+        %li.active
+          = @presentation.name
       %h1
         = @presentation.name
-
-      %div
-        = @presentation.description.html_safe
-
+      %p
+        %span.glyphicon.glyphicon-time
+          Updated on
+          = time_tag @presentation.updated_at
+      %hr/
+      = @presentation.description.html_safe
