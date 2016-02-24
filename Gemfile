@@ -22,6 +22,7 @@ gem 'kaminari', '~> 0.16.2'
 gem 'searchkick', '~> 1.2.1'
 gem 'typhoeus'
 gem 'airbrake', '~> 5.0'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'pry-rails'

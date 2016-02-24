@@ -154,6 +154,7 @@ GEM
     neat (1.7.2)
       bourbon (>= 4.0)
       sass (>= 3.3)
+    newrelic_rpm (3.15.0.314)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     normalize-rails (3.0.3)
@@ -299,6 +300,7 @@ DEPENDENCIES
   jquery-rails
   kaminari (~> 0.16.2)
   letter_opener
+  newrelic_rpm
   pg (~> 0.15)
   poltergeist
   pry-rails
