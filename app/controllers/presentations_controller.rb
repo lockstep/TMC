@@ -1,5 +1,6 @@
 class PresentationsController < ApplicationController
   before_action :set_presentation, only: [:show]
+  before_action :set_topics, only: [:show, :index]
 
   def index
     if params[:topic_ids].nil?
@@ -22,13 +23,9 @@ class PresentationsController < ApplicationController
                                            per_page: 10,
                                           )
     end
-    topic_ids = @presentations.aggs["topic_ids"]["buckets"]
-                              .map{ |agg| agg["key"] }
-    @topics = Topic.where(id: topic_ids)
   end
 
   def show
-    @topics = Topic.where(id: @presentation.topic.related_topic_ids)
   end
 
   private
@@ -53,5 +50,9 @@ class PresentationsController < ApplicationController
 
   def set_presentation
     @presentation = Presentation.find(params[:id])
+  end
+
+  def set_topics
+    @topics = Topic.includes(:children).where(parent_id: nil)
   end
 end

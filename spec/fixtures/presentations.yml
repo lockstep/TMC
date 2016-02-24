@@ -1,4 +1,5 @@
 quiz_game:
   name: Quiz game
+  summary: This is a summary of Quiz game
   description: This is not a game you're looking for
   topic: memory_quiz
