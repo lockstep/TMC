@@ -1,6 +1,6 @@
 class PresentationsController < ApplicationController
   before_action :set_presentation, only: [:show]
-  before_action :set_topics, only: [:show, :index]
+  before_action :set_topics_nav, only: [:show, :index]
 
   def index
     if params[:topic_ids].nil?
@@ -22,10 +22,17 @@ class PresentationsController < ApplicationController
                                            page: page,
                                            per_page: 10,
                                           )
+      topic = Topic.find(topic_ids.last)
+      if topic.parent_id
+        @topics = Topic.where(id: topic.related_topic_ids)
+      else
+        @topics = [topic]
+      end
     end
   end
 
   def show
+    @topics = Topic.where(id: @presentation.topic.related_topic_ids)
   end
 
   private
@@ -52,7 +59,7 @@ class PresentationsController < ApplicationController
     @presentation = Presentation.find(params[:id])
   end
 
-  def set_topics
-    @topics = Topic.includes(:children).where(parent_id: nil)
+  def set_topics_nav
+    @topics_nav = Topic.includes(:children).where(parent_id: nil)
   end
 end

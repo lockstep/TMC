@@ -5,7 +5,7 @@ RSpec.describe "presentations/index" do
   fixtures :topics
 
   before do
-    assign(:topics, Topic.includes(:children).where(parent_id: nil))
+    assign(:topics_nav, Topic.includes(:children).where(parent_id: nil))
     assign(:presentations, Presentation.all.page(1))
 
     render

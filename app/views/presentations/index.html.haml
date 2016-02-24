@@ -3,5 +3,6 @@
     .col-md-4
       = topics_nav
     .col-lg-8
+      = breadcrumb_nav if @topics
       = render @presentations
       = paginate @presentations

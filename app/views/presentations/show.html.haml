@@ -1,15 +1,9 @@
 .container
   .row
     .col-md-4
-      .well
+      = topics_nav
     .col-lg-8
-      %ol.breadcrumb{:style => "margin-top: 5px;"}
-        - @topics.each do |topic|
-          %li
-            %a{href: "/presentations?topic_ids=#{topic.id}"}
-              = topic.name
-        %li.active
-          = @presentation.name
+      = breadcrumb_nav
       %h1
         = @presentation.name
       %p
