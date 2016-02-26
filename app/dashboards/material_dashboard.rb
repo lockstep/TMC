@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class PresentationDashboard < Administrate::BaseDashboard
+class MaterialDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,12 +8,10 @@ class PresentationDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    presentations: Field::HasMany,
     id: Field::Number,
     name: Field::String,
-    summary: Field::String,
-    topic: Field::BelongsTo,
-    materials: Field::HasMany,
-    description: Field::WysiwygField,
+    description: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }
@@ -24,21 +22,18 @@ class PresentationDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
+    :presentations,
     :id,
     :name,
-    :summary,
-    :topic,
-    :created_at,
+    :description,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
+    :presentations,
     :id,
-    :topic,
     :name,
-    :summary,
-    :materials,
     :description,
     :created_at,
     :updated_at,
@@ -48,20 +43,15 @@ class PresentationDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :topic,
+    :presentations,
     :name,
-    :summary,
-    :materials,
     :description,
   ]
 
-  # Overwrite this method to customize how presentations are displayed
+  # Overwrite this method to customize how materials are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(presentation)
-  #   "Presentation ##{presentation.id}"
-  # end
-  def display_resource(presentation)
-    "#{presentation.name}"
+  def display_resource(material)
+    "##{material.id} #{material.name}"
   end
 end

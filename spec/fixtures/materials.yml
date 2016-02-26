@@ -1,0 +1,9 @@
+number_cards:
+  name: Number Cards
+  description: cards of number
+  presentations: quiz_game
+
+number_board:
+  name: Number Board
+  description: put a card onto it
+  presentations: quiz_game

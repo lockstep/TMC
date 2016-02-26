@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PresentationsController, type: :controller do
   fixtures :presentations
+  fixtures :topics
 
   before(:all) do
     Presentation.reindex
