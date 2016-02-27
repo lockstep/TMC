@@ -11,4 +11,6 @@
           Updated on
           = time_tag @presentation.updated_at
       %hr/
+      %ul
+        = render @presentation.materials
       = @presentation.description.html_safe
