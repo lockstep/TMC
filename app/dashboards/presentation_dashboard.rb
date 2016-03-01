@@ -12,6 +12,7 @@ class PresentationDashboard < Administrate::BaseDashboard
     name: Field::String,
     summary: Field::String,
     topic: Field::BelongsTo,
+    section: Field::Enum,
     materials: Field::HasMany,
     description: Field::WysiwygField,
     created_at: Field::DateTime,
@@ -36,6 +37,7 @@ class PresentationDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :topic,
+    :section,
     :name,
     :summary,
     :materials,
@@ -49,6 +51,7 @@ class PresentationDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :topic,
+    :section,
     :name,
     :summary,
     :materials,
