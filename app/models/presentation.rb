@@ -10,6 +10,7 @@ class Presentation < ActiveRecord::Base
     {
       name: name,
       topic_ids: topic.related_topic_ids,
+      section: section.to_i,
     }
   end
 end
