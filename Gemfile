@@ -24,6 +24,7 @@ gem 'searchkick', '~> 1.2.1'
 gem 'typhoeus'
 gem 'airbrake', '~> 5.0'
 gem 'newrelic_rpm'
+gem 'friendly_id', '~> 5.1.0'
 
 group :development, :test do
   gem 'pry-rails'
