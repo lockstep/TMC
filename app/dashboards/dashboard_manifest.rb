@@ -13,7 +13,7 @@ class DashboardManifest
     :users,
     :topics,
     :presentations,
-    :materials,
+    :products,
   ]
 
   # `ROOT_DASHBOARD`

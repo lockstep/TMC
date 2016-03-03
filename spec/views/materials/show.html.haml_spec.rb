@@ -1,17 +1,17 @@
 require "rails_helper"
 
-RSpec.describe "materials/show" do
-  fixtures :materials
+RSpec.describe "products/show" do
+  fixtures :products
 
-  let(:number_cards) { materials(:number_cards) }
+  let(:number_cards) { products(:number_cards) }
 
   before do
-    assign(:material, Material.find(number_cards.id))
+    assign(:product, Product.find(number_cards.id))
 
     render
   end
 
-  it 'display material\'s name correctly' do
+  it 'display product\'s name correctly' do
     expect(rendered).to match /#{Regexp.escape(number_cards.name)}/
   end
 end

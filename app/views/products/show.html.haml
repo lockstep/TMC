@@ -3,10 +3,10 @@
     .col-md-4
     .col-lg-8
       %h1
-        = @material.name
+        = @product.name
       %p
         %span.glyphicon.glyphicon-time
           Updated on
-          = time_tag @material.updated_at
+          = time_tag @product.updated_at
       %hr/
-      = @material.description.html_safe
+      = @product.description.html_safe

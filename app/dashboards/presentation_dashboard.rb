@@ -13,7 +13,7 @@ class PresentationDashboard < Administrate::BaseDashboard
     summary: Field::String,
     topic: Field::BelongsTo,
     section: Field::Enum,
-    materials: Field::HasMany,
+    products: Field::HasMany,
     description: Field::WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -40,7 +40,7 @@ class PresentationDashboard < Administrate::BaseDashboard
     :section,
     :name,
     :summary,
-    :materials,
+    :products,
     :description,
     :created_at,
     :updated_at,
@@ -54,7 +54,7 @@ class PresentationDashboard < Administrate::BaseDashboard
     :section,
     :name,
     :summary,
-    :materials,
+    :products,
     :description,
   ]
 

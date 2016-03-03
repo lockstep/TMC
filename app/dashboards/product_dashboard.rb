@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class MaterialDashboard < Administrate::BaseDashboard
+class ProductDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -48,10 +48,10 @@ class MaterialDashboard < Administrate::BaseDashboard
     :description,
   ]
 
-  # Overwrite this method to customize how materials are displayed
+  # Overwrite this method to customize how products are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(material)
-    "##{material.id} #{material.name}"
+  def display_resource(product)
+    "##{product.id} #{product.name}"
   end
 end

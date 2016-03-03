@@ -29,18 +29,6 @@ ActiveRecord::Schema.define(version: 20160303033021) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
-  create_table "materials", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "materials_presentations", id: false, force: :cascade do |t|
-    t.integer "presentation_id", null: false
-    t.integer "material_id",     null: false
-  end
-
   create_table "presentations", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -55,15 +43,27 @@ ActiveRecord::Schema.define(version: 20160303033021) do
   add_index "presentations", ["slug"], name: "index_presentations_on_slug", unique: true, using: :btree
   add_index "presentations", ["topic_id"], name: "index_presentations_on_topic_id", using: :btree
 
-  create_table "skus", force: :cascade do |t|
-    t.integer  "stock"
-    t.float    "price"
-    t.integer  "material_id"
+  create_table "presentations_products", id: false, force: :cascade do |t|
+    t.integer "presentation_id", null: false
+    t.integer "product_id",      null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "skus", ["material_id"], name: "index_skus_on_material_id", using: :btree
+  create_table "skus", force: :cascade do |t|
+    t.integer  "stock"
+    t.float    "price"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "skus", ["product_id"], name: "index_skus_on_product_id", using: :btree
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
@@ -100,5 +100,5 @@ ActiveRecord::Schema.define(version: 20160303033021) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "presentations", "topics"
-  add_foreign_key "skus", "materials"
+  add_foreign_key "skus", "products"
 end

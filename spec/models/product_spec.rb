@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Material, type: :model do
-  fixtures :materials
+RSpec.describe Product, type: :model do
+  fixtures :products
   fixtures :presentations
   fixtures :skus
 
   let(:quiz_game)        { presentations(:quiz_game) }
-  let(:number_cards)     { materials(:number_cards) }
+  let(:number_cards)     { products(:number_cards) }
   let(:number_cards_sku) { skus(:number_cards_sku) }
 
   describe '#presentations' do

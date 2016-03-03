@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Sku, type: :model do
   fixtures :skus
-  fixtures :materials
+  fixtures :products
 
   let(:sku)          { skus(:number_cards_sku) }
-  let(:number_cards) { materials(:number_cards) }
+  let(:number_cards) { products(:number_cards) }
 
-  describe '#material' do
-    it 'respond to .material call correctly' do
-      expect(sku.material).to eq(number_cards)
+  describe '#product' do
+    it 'respond to .product call correctly' do
+      expect(sku.product).to eq(number_cards)
     end
   end
 end
