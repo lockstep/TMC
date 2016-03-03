@@ -1,10 +1,19 @@
 class Presentation < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :slug_candidates, use: [:slugged, :finders]
+  searchkick text_middle: [:name]
+
   belongs_to :topic
   has_and_belongs_to_many :materials
 
   enum section: [:default, :language, :memory_games]
 
-  searchkick text_middle: [:name]
+  def slug_candidates
+    [
+      :name,
+      [:topic, :name],
+    ]
+  end
 
   def search_data
     {

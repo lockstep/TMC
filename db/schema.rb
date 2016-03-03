@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303005737) do
+ActiveRecord::Schema.define(version: 20160303033021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,8 +49,10 @@ ActiveRecord::Schema.define(version: 20160303005737) do
     t.integer  "topic_id"
     t.string   "summary"
     t.integer  "section",     default: 0
+    t.string   "slug"
   end
 
+  add_index "presentations", ["slug"], name: "index_presentations_on_slug", unique: true, using: :btree
   add_index "presentations", ["topic_id"], name: "index_presentations_on_topic_id", using: :btree
 
   create_table "skus", force: :cascade do |t|
@@ -69,9 +71,11 @@ ActiveRecord::Schema.define(version: 20160303005737) do
     t.integer  "parent_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "slug"
   end
 
   add_index "topics", ["parent_id"], name: "index_topics_on_parent_id", using: :btree
+  add_index "topics", ["slug"], name: "index_topics_on_slug", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -1,4 +1,7 @@
 class Topic < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :finders]
+
   belongs_to :parent, class_name: 'Topic', foreign_key: 'parent_id'
   has_many :children, class_name: 'Topic', foreign_key: 'parent_id'
 
