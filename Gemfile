@@ -39,6 +39,8 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'erb2haml'
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :production do
