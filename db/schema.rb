@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(version: 20160303033021) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "materials", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "materials_presentations", id: false, force: :cascade do |t|
+    t.integer "presentation_id", null: false
+    t.integer "material_id",     null: false
+  end
+
   create_table "presentations", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -53,6 +65,11 @@ ActiveRecord::Schema.define(version: 20160303033021) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "products_presentations", id: false, force: :cascade do |t|
+    t.integer "presentation_id", null: false
+    t.integer "product_id",      null: false
   end
 
   create_table "skus", force: :cascade do |t|
