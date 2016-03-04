@@ -1,5 +1,7 @@
 - content_for :title, @presentation.name
-
+- content_for :meta_tags do
+  = meta_tags(title: @presentation.name,
+              description: @presentation.summary)
 .container
   .row
     .col-md-4
