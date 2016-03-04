@@ -1,0 +1,9 @@
+## Customize database setup
+database:
+  override:
+    - bundle exec rake db:create db:schema:load --trace:
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test
+          AIRBRAKE_PROJECT_ID: 123456
+          AIRBRAKE_API_KEY: my_secret_api_key
