@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe 'Visitors access to Homepage', type: :feature do
   let(:application_name)  { 'TMC' }
 

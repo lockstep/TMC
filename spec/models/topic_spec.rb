@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe Topic, type: :model do
+describe Topic, type: :model do
   fixtures :topics
   fixtures :presentations
 

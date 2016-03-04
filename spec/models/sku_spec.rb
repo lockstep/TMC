@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe Sku, type: :model do
+describe Sku, type: :model do
   fixtures :skus
   fixtures :products
 

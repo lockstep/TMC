@@ -1,6 +1,4 @@
-require "rails_helper"
-
-RSpec.describe "presentations/show" do
+describe "presentations/show" do
   fixtures :presentations
   fixtures :topics
 
