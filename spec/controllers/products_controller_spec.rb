@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe ProductsController, type: :controller do
+describe ProductsController, type: :controller do
   fixtures :products
 
   let(:number_cards)  { products(:number_cards) }

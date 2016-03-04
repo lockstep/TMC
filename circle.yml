@@ -1,0 +1,32 @@
+dependencies:
+  cache_directories:
+    - elasticsearch-2.2.0
+  post:
+    - if [[ ! -e elasticsearch-2.2.0 ]]; then wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-2.2.0.tar.gz && tar -xvf elasticsearch-2.2.0.tar.gz; fi
+    - elasticsearch-2.2.0/bin/elasticsearch: {background: true}
+
+## Customize database setup
+database:
+  override:
+    - bundle exec rake db:create db:schema:load --trace:
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test
+          AIRBRAKE_PROJECT_ID: 123456
+          AIRBRAKE_API_KEY: my_secret_api_key
+
+## Customize test commands
+test:
+  override:
+    - bundle exec rspec:
+        environment:
+          AIRBRAKE_PROJECT_ID: 123456
+          AIRBRAKE_API_KEY: my_secret_api_key
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+      - git push git@heroku.com:themontessoricompany.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app themontessoricompany

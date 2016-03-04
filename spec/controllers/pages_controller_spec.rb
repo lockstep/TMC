@@ -1,7 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe PagesController, type: :controller do
-
+describe PagesController, type: :controller do
   describe '#show' do
     PagesController::PAGES.each do |page|
       context "Access to #{page} page" do

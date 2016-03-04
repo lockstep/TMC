@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe PresentationsController, type: :controller do
+describe PresentationsController, type: :controller do
   fixtures :presentations
   fixtures :topics
 
