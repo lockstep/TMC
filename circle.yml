@@ -7,3 +7,11 @@ database:
           RACK_ENV: test
           AIRBRAKE_PROJECT_ID: 123456
           AIRBRAKE_API_KEY: my_secret_api_key
+
+## Customize test commands
+test:
+  override:
+    - bundle exec rspec:
+        environment:
+          AIRBRAKE_PROJECT_ID: 123456
+          AIRBRAKE_API_KEY: my_secret_api_key
