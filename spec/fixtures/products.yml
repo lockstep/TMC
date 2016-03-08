@@ -1,9 +1,11 @@
 number_cards:
   name: Number Cards
+  price: 10.00
   description: cards of number
   presentations: quiz_game
 
 number_board:
   name: Number Board
+  price: 15.00
   description: put a card onto it
   presentations: quiz_game

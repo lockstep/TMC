@@ -1,15 +1,19 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the OrdersHelper. For example:
-#
-# describe OrdersHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe OrdersHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  fixtures :orders
+  fixtures :products
+  fixtures :line_items
+
+  let(:buy_cards)    { orders(:buy_cards) }
+
+  describe '#total_pricing' do
+    before do
+      assign(:order, Order.find(buy_cards.id))
+    end
+
+    it 'include total price correctly' do
+      expect(helper.total_pricing).to include('20', 'USD')
+    end
+  end
 end
