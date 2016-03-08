@@ -60,6 +60,10 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap (4.0.0.alpha3)
@@ -173,6 +177,8 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -295,6 +301,8 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0rc4)
   administrate (~> 0.1.2)
   airbrake (~> 5.0)
+  better_errors
+  binding_of_caller
   bootstrap (~> 4.0.0.alpha3)
   byebug
   capybara
@@ -310,6 +318,7 @@ DEPENDENCIES
   pg (~> 0.15)
   poltergeist
   pry-rails
+  quiet_assets
   rails (= 4.2.5)
   rails_12factor
   rspec-rails

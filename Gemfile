@@ -36,10 +36,12 @@ end
 
 group :development do
   gem 'letter_opener'
+  gem 'better_errors'
+  gem 'quiet_assets'
+  gem 'binding_of_caller'
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'erb2haml'
-  gem 'spring'
   gem 'spring-commands-rspec'
 end
 
