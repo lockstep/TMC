@@ -11,6 +11,7 @@ class ProductDashboard < Administrate::BaseDashboard
     presentations: Field::HasMany,
     id: Field::Number,
     name: Field::String,
+    price: Field::Number,
     description: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -25,7 +26,7 @@ class ProductDashboard < Administrate::BaseDashboard
     :presentations,
     :id,
     :name,
-    :description,
+    :price,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,6 +35,7 @@ class ProductDashboard < Administrate::BaseDashboard
     :presentations,
     :id,
     :name,
+    :price,
     :description,
     :created_at,
     :updated_at,
@@ -45,6 +47,7 @@ class ProductDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :presentations,
     :name,
+    :price,
     :description,
   ]
 

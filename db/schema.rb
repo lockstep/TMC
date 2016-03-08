@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303033021) do
+ActiveRecord::Schema.define(version: 20160307091653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 20160303033021) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "order_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "quantity",   default: 0
+  end
+
+  add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
+  add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
+
   create_table "materials", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -39,6 +50,12 @@ ActiveRecord::Schema.define(version: 20160303033021) do
   create_table "materials_presentations", id: false, force: :cascade do |t|
     t.integer "presentation_id", null: false
     t.integer "material_id",     null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "state",      default: 0
   end
 
   create_table "presentations", force: :cascade do |t|
@@ -65,22 +82,13 @@ ActiveRecord::Schema.define(version: 20160303033021) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.float    "price"
   end
 
   create_table "products_presentations", id: false, force: :cascade do |t|
     t.integer "presentation_id", null: false
     t.integer "product_id",      null: false
   end
-
-  create_table "skus", force: :cascade do |t|
-    t.integer  "stock"
-    t.float    "price"
-    t.integer  "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "skus", ["product_id"], name: "index_skus_on_product_id", using: :btree
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
@@ -116,6 +124,7 @@ ActiveRecord::Schema.define(version: 20160303033021) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "line_items", "products"
   add_foreign_key "presentations", "topics"
-  add_foreign_key "skus", "products"
 end

@@ -1,0 +1,6 @@
+%h1
+  = @order.line_items.size
+%ul
+- @order.line_items.each do |line_item|
+  .li
+    = line_item.quantity

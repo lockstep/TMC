@@ -1,9 +1,0 @@
-number_cards_sku:
-  stock: 10
-  price: 9.99
-  product: number_cards
-
-number_board_sku:
-  stock: 5
-  price: 19.99
-  product: number_board

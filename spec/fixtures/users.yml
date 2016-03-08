@@ -1,0 +1,6 @@
+default: &default
+  sign_in_count: 14
+
+michelle:
+  <<: *default
+  email: mich@tmc.com
