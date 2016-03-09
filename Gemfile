@@ -26,6 +26,8 @@ gem 'airbrake', '~> 5.0'
 gem 'newrelic_rpm'
 gem 'friendly_id', '~> 5.1.0'
 
+gem 'stripe', '~> 1.36.1'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
