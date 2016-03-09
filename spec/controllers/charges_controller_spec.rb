@@ -29,5 +29,7 @@ RSpec.describe ChargesController, type: :controller do
   end
 
   describe '#create' do
+    before do
+    end
   end
 end

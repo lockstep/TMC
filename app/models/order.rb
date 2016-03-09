@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   has_one :charge
   has_many :line_items
 
-  enum state: [:active, :completed]
+  enum state: [:active, :paid]
 
   def total_price
     line_items.inject(0) do |sum, line_item|
