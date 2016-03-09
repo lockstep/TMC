@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :products, only: [:show]
   resources :orders do
     resources :line_items, only: [:create]
+    resources :payments, only: [:new, :create]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

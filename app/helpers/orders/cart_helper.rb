@@ -8,4 +8,10 @@ module Orders::CartHelper
       )
     end
   end
+
+  def checkout_btn
+    <<-BTN.html_safe
+      <a href='/payments/new' class='btn btn-info'>Checkout</a>
+    BTN
+  end
 end
