@@ -1,9 +1,5 @@
-require 'rails_helper'
-
-RSpec.describe Order, type: :model do
+describe Order, type: :model do
   fixtures :orders
-  fixtures :line_items
-  fixtures :products
 
   let(:buy_cards) { orders(:buy_cards) }
 
