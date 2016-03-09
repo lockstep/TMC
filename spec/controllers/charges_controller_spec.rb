@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PaymentsController, type: :controller do
+RSpec.describe ChargesController, type: :controller do
   fixtures :users
   fixtures :orders
   fixtures :products
@@ -16,7 +16,7 @@ RSpec.describe PaymentsController, type: :controller do
         get :new, order_id: buy_cards.id
       end
 
-      it {expect(response).to render_template('payments/new')}
+      it {expect(response).to render_template('charges/new')}
     end
 
     context 'user\'s not signed in' do

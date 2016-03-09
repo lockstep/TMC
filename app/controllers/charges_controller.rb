@@ -1,4 +1,4 @@
-class PaymentsController < ApplicationController
+class ChargesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: [:new]
 
