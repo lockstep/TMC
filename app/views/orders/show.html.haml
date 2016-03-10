@@ -1,11 +1,14 @@
 .container
   .row
+    .col-md-8
+      %h3
+        Your Cart
+      #cart-contents.list-group
+        - if @order.line_items.empty?
+          Your cart is empty.
+        - else
+          = render @order.line_items
     .col-md-4
       .cart-actions
         = total_pricing
         = checkout_btn
-    .col-lg-8
-      %h1
-        Review Cart Items
-      .list-group
-        = render @order.line_items

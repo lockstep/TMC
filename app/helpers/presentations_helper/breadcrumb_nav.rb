@@ -20,13 +20,13 @@ module PresentationsHelper
                   style: 'margin-top: 5px;',
                  ) do
         links = @topics.collect do |topic|
-          breadcrump_item_link(topic.name, topic.id)
+          breadcrumb_item_link(topic.name, topic.id)
         end
-        safe_join(links.unshift(breadcrump_item_link('Presentations', 0)))
+        safe_join(links.unshift(breadcrumb_item_link('Presentations', 0)))
       end
     end
 
-    def breadcrump_item_link(topic_name, topic_id)
+    def breadcrumb_item_link(topic_name, topic_id)
       content_tag :li do
         unless topic_id == 0
           link_to(topic_name,

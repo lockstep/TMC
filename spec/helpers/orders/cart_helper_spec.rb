@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe Orders::CartHelper, type: :helper do
+describe Orders::CartHelper, type: :helper do
   fixtures :orders
   fixtures :products
   fixtures :line_items
@@ -11,7 +9,6 @@ RSpec.describe Orders::CartHelper, type: :helper do
   describe '#add_to_cart' do
     before do
       assign(:order, Order.find(cards_order.id))
-      assign(:line_item, LineItem.new)
       assign(:product, Product.find(number_cards.id))
     end
 

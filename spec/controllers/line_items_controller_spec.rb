@@ -1,65 +1,46 @@
-require 'rails_helper'
-
-RSpec.describe LineItemsController, type: :controller do
-  fixtures :line_items
+describe LineItemsController, type: :controller do
   fixtures :products
   fixtures :orders
+  fixtures :line_items
 
-  let(:cards_order)       { orders(:cards_order) }
-  let(:line_item_cards) { line_items(:line_item_cards) }
+  let(:cards_order)     { orders(:cards_order) }
   let(:number_cards)    { products(:number_cards) }
   let(:number_board)    { products(:number_board) }
+  let(:line_item_cards) { line_items(:line_item_cards) }
 
   describe '#create' do
     context 'create new line_item' do
-      it 'increase line_item by 1' do
+      it 'creates line item' do
         expect {
           post :create,
-               order_id: cards_order.id,
-               line_item: {
-                product_id: number_board.id,
-               }
-        }.to change{ LineItem.count }.by(1)
-      end
-
-      context '#attributes' do
-        before do
-          post :create,
-               order_id: cards_order.id,
-               line_item: {
-                product_id: number_board.id,
-               }
-        end
-
-        it 'have quantity = 1' do
-          expect(LineItem.last.quantity).to eq(1)
-        end
+            order_id: cards_order.id,
+            line_item: {
+              product_id: number_board.id,
+            }
+        }.to change{ LineItem.count }.by 1
       end
     end
-
-    context 'existing line_item with same product' do
-      it 'increase line_item by 0' do
+    context 'adding a product already in the cart' do
+      it 'does not add a new line item' do
         expect {
           post :create,
-               order_id: cards_order.id,
-               line_item: {
-                product_id: number_cards.id,
-               }
-        }.to change{ LineItem.count }.by(0)
+            order_id: cards_order.id,
+            line_item: {
+              product_id: number_cards.id,
+            }
+        }.to change{ LineItem.count }.by 0
       end
+    end
+  end
 
-      context '#attributes' do
-        before do
-          post :create,
-               order_id: cards_order.id,
-               line_item: {
-                product_id: number_cards.id,
-               }
-        end
-
-        it 'increase quantity by 1' do
-          expect(line_item_cards.quantity).to eq(3)
-        end
+  describe '#destroy' do
+    context 'line item in cart' do
+      it 'removes the line item' do
+        expect {
+          delete :destroy,
+            id: line_item_cards.id,
+            order_id: cards_order.id
+        }.to change{ cards_order.line_items.count }.from(1).to(0)
       end
     end
   end

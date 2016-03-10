@@ -11,7 +11,7 @@ describe "presentations/index" do
 
   it "display list of presentations" do
     presentations.each do |presentation|
-      expect(rendered).to match /#{Regexp.escape(presentation.name)}/
+      expect(rendered).to match presentation.name
     end
   end
 end

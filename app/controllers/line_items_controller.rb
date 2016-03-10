@@ -1,14 +1,23 @@
 class LineItemsController < ApplicationController
+  before_action :set_order, only: [:create, :destroy]
+
   def create
-    @order = Order.find(params[:order_id])
-    line_item = LineItem.where(line_item_params).first_or_create
-    line_item.update_attributes(quantity: line_item.quantity + 1)
+    @order.line_items.create(line_item_params)
+    redirect_to @order
+  end
+
+  def destroy
+    @order.line_items.destroy(params[:id])
     redirect_to @order
   end
 
   private
 
+  def set_order
+    @order = Order.find(params[:order_id])
+  end
+
   def line_item_params
-    params.require(:line_item).permit(:product_id, :order_id)
+    params.require(:line_item).permit(:product_id)
   end
 end

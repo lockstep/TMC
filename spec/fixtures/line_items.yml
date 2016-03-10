@@ -1,4 +1,3 @@
 line_item_cards:
-  quantity: 2
   product: number_cards
   order: cards_order

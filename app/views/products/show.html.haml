@@ -4,9 +4,7 @@
 
 .container
   .row
-    .col-md-4
-      = add_to_cart
-    .col-lg-8
+    .col-md-8
       %h1
         = @product.name
       %p
@@ -15,3 +13,10 @@
           = time_tag @product.updated_at
       %hr/
       = @product.description.html_safe
+    .col-md-4
+      - unless is_in_cart?(@order, @product)
+        = add_to_cart
+      - else
+        This product is already in
+        = succeed "." do
+          = link_to 'your cart', order_url(@order)

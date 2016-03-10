@@ -13,6 +13,6 @@ describe "presentations/show" do
   end
 
   it 'display presentation\'s name correctly' do
-    expect(rendered).to match /#{Regexp.escape(quiz_game.name)}/
+    expect(rendered).to match quiz_game.name
   end
 end

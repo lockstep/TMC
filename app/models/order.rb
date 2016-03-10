@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
 
   def total_price
     line_items.inject(0) do |sum, line_item|
-      sum + line_item.quantity * line_item.product.price
+      sum + line_item.product.price
     end
   end
 end

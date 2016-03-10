@@ -1,0 +1,24 @@
+.order-line-item {
+  min-height: 88px;
+
+  button {
+    padding: 0.175rem 0.6rem;
+  }
+
+  .product-name {
+    display: inline;
+  }
+  .product-price {
+    margin-left: 8px;
+    color: #6F6F6F;
+    font-size: 0.85rem;
+  }
+  .product-description {
+    padding: 10px 0;
+    font-size: 0.95rem;
+  }
+}
+
+#cart-contents {
+  margin-top: 20px;
+}

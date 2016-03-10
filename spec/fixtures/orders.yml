@@ -1,2 +1,5 @@
 cards_order:
-  state: active
+  state: <%= Order.states[:active] %>
+
+cards_order_completed:
+  state: <%= Order.states[:completed] %>

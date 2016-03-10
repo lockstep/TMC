@@ -2,8 +2,13 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show]
 
   def show
-    @order = Order.first_or_create(state: :active)
-    @line_item = LineItem.new
+    if session[:order_id].present?
+      @order = Order.find(session[:order_id]).active? ?
+        Order.find(session[:order_id]) : Order.create(state: :active)
+    else
+      @order = Order.create(state: :active)
+    end
+    session[:order_id] = @order.id
   end
 
   private

@@ -5,7 +5,7 @@ describe Order, type: :model do
 
   describe '#total_price' do
     it 'return total price of order correctly' do
-      expect(cards_order.total_price).to eq(20.00)
+      expect(cards_order.total_price).to eq(10.00)
     end
   end
 end

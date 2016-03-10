@@ -5,7 +5,7 @@ RSpec.describe OrdersHelper, type: :helper do
   fixtures :products
   fixtures :line_items
 
-  let(:cards_order)    { orders(:cards_order) }
+  let(:cards_order) { orders(:cards_order) }
 
   describe '#total_pricing' do
     before do
@@ -13,7 +13,7 @@ RSpec.describe OrdersHelper, type: :helper do
     end
 
     it 'include total price correctly' do
-      expect(helper.total_pricing).to include('20', 'USD')
+      expect(helper.total_pricing).to include('10', 'USD')
     end
   end
 end
