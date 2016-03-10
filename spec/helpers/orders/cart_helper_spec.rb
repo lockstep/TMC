@@ -6,11 +6,11 @@ RSpec.describe Orders::CartHelper, type: :helper do
   fixtures :line_items
 
   let(:number_cards) { products(:number_cards) }
-  let(:buy_cards)    { orders(:buy_cards) }
+  let(:cards_order)    { orders(:cards_order) }
 
   describe '#add_to_cart' do
     before do
-      assign(:order, Order.find(buy_cards.id))
+      assign(:order, Order.find(cards_order.id))
       assign(:line_item, LineItem.new)
       assign(:product, Product.find(number_cards.id))
     end
@@ -18,7 +18,7 @@ RSpec.describe Orders::CartHelper, type: :helper do
     subject { helper.add_to_cart }
 
     it 'contain order_id' do
-      is_expected.to include(buy_cards.id.to_s)
+      is_expected.to include(cards_order.id.to_s)
     end
 
     it 'contain product_id' do

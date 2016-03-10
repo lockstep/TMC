@@ -5,12 +5,13 @@ describe "products/show" do
 
   let(:michelle)     { users(:michelle) }
   let(:number_cards) { products(:number_cards) }
-  let(:buy_cards)    { orders(:buy_cards) }
+  let(:cards_order)    { orders(:cards_order) }
 
   context 'User\'s not signed in' do
     before do
+      assign(:order, Order.find(cards_order.id))
+      assign(:line_item, LineItem.new)
       assign(:product, Product.find(number_cards.id))
-
       render
     end
 
@@ -19,7 +20,7 @@ describe "products/show" do
     end
 
     it "not display add_to_cart button" do
-      expect(rendered).not_to include('Add to cart')
+      expect(rendered).to include('Add to cart')
     end
   end
 
@@ -27,7 +28,7 @@ describe "products/show" do
     before do
       sign_in michelle
 
-      assign(:order, Order.find(buy_cards.id))
+      assign(:order, Order.find(cards_order.id))
       assign(:line_item, LineItem.new)
       assign(:product, Product.find(number_cards.id))
 
