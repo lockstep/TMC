@@ -1,6 +1,8 @@
 class ChargesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_order, only: [:new, :create]
+
+  def show
+  end
 
   def new
   end
@@ -16,6 +18,7 @@ class ChargesController < ApplicationController
                         )
     @order.state = 1
     @order.save
+    redirect_to order_charge_path(order_id: @order.id, id: @order.charge.id)
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to @order
