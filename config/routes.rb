@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   resources :products, only: [:show]
   resources :orders do
     resources :line_items, only: [:create, :destroy]
-    resources :charges, only: [:new, :create]
+    resources :charges, only: [:show, :new, :create]
   end
 end
