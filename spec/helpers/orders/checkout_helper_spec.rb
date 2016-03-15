@@ -19,7 +19,7 @@ describe Orders::CheckoutHelper, type: :helper do
 
     context 'user\'s not signed in' do
       it 'display sing_in or sign_up link' do
-        is_expected.to include('Sign in')
+        is_expected.to include('Log in')
       end
     end
 

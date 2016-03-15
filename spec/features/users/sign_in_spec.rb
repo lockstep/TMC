@@ -20,10 +20,10 @@ describe 'Sign in', :devise do
 
   it 'redirect user to order page if user came from order page' do
     visit order_path(cards_order)
-    click_on('Sign in')
+    click_on('Log in')
 
     fill_sign_in_form(michelle.email, 'qawsedrf')
-    click_button('Sign in')
+    click_button('Log in')
 
     expect(page).to have_content(I18n.t('devise.sessions.signed_in'))
     expect(page).to have_current_path(order_path(cards_order))

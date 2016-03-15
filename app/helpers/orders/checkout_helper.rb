@@ -6,7 +6,7 @@ module Orders::CheckoutHelper
   private
 
   def authenticate_btn
-    link_to 'Sign in', new_user_session_path
+    link_to 'Log in', new_user_session_path
   end
 
   def checkout_btn
