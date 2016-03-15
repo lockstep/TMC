@@ -24,4 +24,4 @@
       - else
         This product is already in
         = succeed "." do
-          = link_to 'your cart', order_url(@order)
+          = link_to 'your cart', order_url(@order), data: { turbolinks: false }
