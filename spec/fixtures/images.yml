@@ -1,0 +1,9 @@
+primary:
+  imageable: number_cards (Product)
+  caption: My primary image.
+  primary: true
+
+secondary:
+  imageable: number_cards (Product)
+  caption: My secondary image.
+  primary: false

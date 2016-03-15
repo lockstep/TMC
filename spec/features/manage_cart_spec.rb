@@ -9,6 +9,7 @@ describe 'Ordering process', type: :feature do
     it 'takes the user to the cart summary' do
       visit product_path @product
       expect(page).to have_content @product.name
+      expect(page).to have_content @product.price
       click_button 'Add to Cart'
       expect(page).to have_content 'Your Cart'
       expect(page).to have_css('h5', text: @product.name)

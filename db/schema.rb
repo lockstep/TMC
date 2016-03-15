@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310084402) do
+ActiveRecord::Schema.define(version: 20160314081134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,22 @@ ActiveRecord::Schema.define(version: 20160310084402) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "images", force: :cascade do |t|
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.text     "caption"
+    t.boolean  "primary",            default: false
+    t.string   "s3_key"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "images", ["imageable_id", "imageable_type", "primary"], name: "index_images_on_imageable_id_and_imageable_type_and_primary", unique: true, where: "(\"primary\" = true)", using: :btree
+
   create_table "line_items", force: :cascade do |t|
     t.integer  "product_id"
     t.integer  "order_id"
@@ -49,18 +65,6 @@ ActiveRecord::Schema.define(version: 20160310084402) do
 
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
   add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
-
-  create_table "materials", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "materials_presentations", id: false, force: :cascade do |t|
-    t.integer "presentation_id", null: false
-    t.integer "material_id",     null: false
-  end
 
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at",             null: false
@@ -93,11 +97,6 @@ ActiveRecord::Schema.define(version: 20160310084402) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.float    "price"
-  end
-
-  create_table "products_presentations", id: false, force: :cascade do |t|
-    t.integer "presentation_id", null: false
-    t.integer "product_id",      null: false
   end
 
   create_table "topics", force: :cascade do |t|
