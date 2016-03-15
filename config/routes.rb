@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   root 'pages#show', page: 'home'
   get 'pages/:page' => 'pages#show'
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   resources :presentations, only: [:index, :show]
 
   resources :products, only: [:show]
