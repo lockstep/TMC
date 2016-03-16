@@ -1,8 +1,14 @@
 default: &default
   sign_in_count: 14
-
-michelle:
-  <<: *default
-  email: mich@tmc.com
   encrypted_password: <%= User.new.send(:password_digest, 'qawsedrf') %>
   confirmed_at: <%= Time.zone.now %>
+
+michelle:
+  email: mich@tmc.com
+  role: <%= User.roles[:admin] %>
+  <<: *default
+
+paul:
+  email: paul@tmc.com
+  role: <%= User.roles[:user] %>
+  <<: *default
