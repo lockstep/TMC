@@ -20,7 +20,7 @@ module Admin
 
     def is_current_user_admin?
       if current_user
-        current_user.role == :admin
+        current_user.role == 'admin'
       else
         false
       end
