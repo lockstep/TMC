@@ -8,12 +8,12 @@ RSpec.describe ChargesController, type: :controller do
   fixtures :charges
 
   let(:michelle)         { users(:michelle) }
-  let(:cards_order)        { orders(:cards_order)}
-  let(:buy_cards_charge) {charges(:buy_cards_charge)}
+  let(:cards_order)      { orders(:cards_order) }
+  let(:cards_charge)     { charges(:cards_charge) }
 
   describe '#show' do
     before do
-      get :show, order_id: cards_order.id, id: buy_cards_charge.id
+      get :show, order_id: cards_order.id, id: cards_charge.id
     end
 
     it { expect(response).to render_template('charges/show') }

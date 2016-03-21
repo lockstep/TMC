@@ -1,38 +1,18 @@
 require "rails_helper"
 
 RSpec.describe UsersMailer, type: :mailer do
+  include_context 'before_after_mailer'
   fixtures :users
 
-  before do
-    ActionMailer::Base.delivery_method = :test
-    ActionMailer::Base.perform_deliveries = true
-    ActionMailer::Base.deliveries = []
-  end
-
   let(:michelle)  { users(:michelle) }
-  let(:sender)    { 'noreply@tmc.com' }
 
-  describe 'send .welcome_new_user email' do
+  describe '.welcome_new_user' do
     before { UsersMailer.welcome_new_user(michelle.id).deliver_now }
 
-    it 'already sent' do
-      expect(ActionMailer::Base.deliveries.count).to eq(1)
+    it_behaves_like "sending_email" do
+      let(:sender)     { ['noreply@tmc.com'] }
+      let(:recipients) { [ michelle.email] }
+      let(:subject)    { 'Welcome to TMC' }
     end
-
-    it 'have correct recipient' do
-      expect(ActionMailer::Base.deliveries.first.to).to include(michelle.email)
-    end
-
-    it 'have correct sender' do
-      expect(ActionMailer::Base.deliveries.first.from).to include(sender)
-    end
-
-    it 'have correct subject' do
-      expect(ActionMailer::Base.deliveries.first.subject).to eq('Welcome to TMC')
-    end
-  end
-
-  after do
-    ActionMailer::Base.deliveries.clear
   end
 end
