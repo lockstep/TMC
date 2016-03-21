@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :presentations, only: [:index, :show]
 
   resources :products, only: [:show]
+  resources :users, only: [:show, :edit, :update]
   resources :orders do
     resources :line_items, only: [:create, :destroy]
     resources :charges, only: [:show, :new, :create]

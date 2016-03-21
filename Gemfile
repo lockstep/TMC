@@ -16,6 +16,7 @@ gem 'haml', '~> 4.0.7'
 gem 'font-awesome-rails'
 gem 'paperclip', '~> 4.3'
 gem 'aws-sdk'
+gem 'cancancan', '~> 1.10'
 
 gem 'active_model_serializers', '~> 0.10.0rc4'
 gem 'sidekiq', '~> 4.1.0'
