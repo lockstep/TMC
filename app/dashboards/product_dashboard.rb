@@ -10,6 +10,7 @@ class ProductDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     presentations: Field::HasMany,
     images: Field::HasMany,
+    downloadable: Field::HasOne,
     id: Field::Number,
     name: Field::String,
     price: Field::Number,
@@ -37,6 +38,7 @@ class ProductDashboard < Administrate::BaseDashboard
     :id,
     :presentations,
     :images,
+    :downloadable,
     :name,
     :price,
     :description,
