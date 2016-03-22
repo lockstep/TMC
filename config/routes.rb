@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   get 'pages/:page' => 'pages#show'
 
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    confirmations: 'users/confirmations'
   }
   resources :presentations, only: [:index, :show]
 
