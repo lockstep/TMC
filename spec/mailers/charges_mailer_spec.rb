@@ -15,9 +15,9 @@ RSpec.describe ChargesMailer, type: :mailer do
     before { ChargesMailer.confirmed_charge(cards_charge.id).deliver_now }
 
     it_behaves_like "sending_email" do
-      let(:sender)     { ['noreply@tmc.com'] }
+      let(:sender)     { ['hello@themontessoricompany.com'] }
       let(:recipients) { [ cards_charge.email] }
-      let(:subject)    { "Confirmed Payment##{cards_charge.id}" }
+      let(:subject)    { "Confirmed Payment ##{cards_charge.id}" }
     end
   end
 end
