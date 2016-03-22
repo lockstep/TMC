@@ -1,5 +1,5 @@
-buy_cards_charge:
+cards_charge:
   amount: 20
   currency: usd
   email: hello@charge.tmc
-  order: buy_cards
+  order: cards_order
