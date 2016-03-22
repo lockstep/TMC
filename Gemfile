@@ -32,6 +32,10 @@ gem 'friendly_id', '~> 5.1.0'
 
 gem 'stripe', '~> 1.36.1'
 
+group :test do
+  gem 'stripe-ruby-mock', require: 'stripe_mock'
+end
+
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug'

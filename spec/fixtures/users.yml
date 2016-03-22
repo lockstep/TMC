@@ -12,3 +12,10 @@ paul:
   email: paul@tmc.com
   role: <%= User.roles[:user] %>
   <<: *default
+
+new_guy:
+  email: new@tmc.com
+  encrypted_password: <%= User.new.send(:password_digest, 'qawsedrf') %>
+  role: <%= User.roles[:user] %>
+  confirmation_token: this_is_a_token
+  confirmed_at:
