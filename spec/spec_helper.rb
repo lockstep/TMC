@@ -19,6 +19,16 @@
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 
+Capybara.register_driver :poltergeist do |app|
+  options = {
+    js_errors: false,
+    phantomjs_options: ['--load-images=no'],
+    inspector: true,
+    debug: false
+  }
+  Capybara::Poltergeist::Driver.new(app, options)
+end
+
 Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
