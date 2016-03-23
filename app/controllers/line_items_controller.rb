@@ -3,6 +3,9 @@ class LineItemsController < ApplicationController
 
   def create
     @order.line_items.create(line_item_params)
+    if !@order.user && current_user
+      @order.update(user: current_user)
+    end
     redirect_to @order
   end
 

@@ -5,3 +5,6 @@ cards_order:
 cards_order_completed:
   state: <%= Order.states[:completed] %>
   user: michelle
+
+unassigned_order:
+  state: <%= Order.states[:active] %>

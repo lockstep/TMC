@@ -8,6 +8,7 @@ class ChargesController < ApplicationController
   end
 
   def create
+    @order.update(user: current_user) unless @order.user
     @amount = (@order.total_price*100).to_i
 
     stripe_processing
@@ -16,8 +17,7 @@ class ChargesController < ApplicationController
                          amount: @amount,
                          currency: 'usd',
                         )
-    @order.state = 1
-    @order.save
+    @order.update(state: :paid)
     redirect_to order_charge_path(order_id: @order.id, id: @order.charge.id)
   rescue Stripe::CardError => e
     flash[:error] = e.message
@@ -47,10 +47,10 @@ class ChargesController < ApplicationController
   end
 
   def create_stripe_charge
-    charge = Stripe::Charge.create(
+    Stripe::Charge.create(
       customer: @customer.id,
       amount: @amount,
-      description: "payment for order##{@order.id}",
+      description: "payment for order ##{@order.id}",
       currency: 'usd',
     )
   end

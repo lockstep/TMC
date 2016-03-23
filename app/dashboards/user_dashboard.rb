@@ -9,8 +9,9 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    role: Field::Number,
+    role: Field::String,
     email: Field::String,
+    orders: Field::HasMany,
     encrypted_password: Field::String,
     reset_password_token: Field::String,
     reset_password_sent_at: Field::DateTime,
@@ -36,8 +37,8 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :email,
-    :encrypted_password,
-    :reset_password_token,
+    :orders,
+    :role
   ]
 
   # SHOW_PAGE_ATTRIBUTES
@@ -46,21 +47,10 @@ class UserDashboard < Administrate::BaseDashboard
     :id,
     :role,
     :email,
-    :encrypted_password,
-    :reset_password_token,
-    :reset_password_sent_at,
-    :remember_created_at,
+    :orders,
     :sign_in_count,
-    :current_sign_in_at,
     :last_sign_in_at,
-    :current_sign_in_ip,
-    :last_sign_in_ip,
-    :confirmation_token,
-    :confirmed_at,
-    :confirmation_sent_at,
-    :unconfirmed_email,
-    :created_at,
-    :updated_at,
+    :created_at
   ]
 
   # FORM_ATTRIBUTES

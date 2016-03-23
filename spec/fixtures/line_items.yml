@@ -1,3 +1,8 @@
 line_item_cards:
   product: number_cards
   order: cards_order
+
+unassigned_order_items:
+  product: number_cards
+  order: unassigned_order
+

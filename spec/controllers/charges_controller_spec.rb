@@ -1,15 +1,15 @@
-require 'rails_helper'
 require 'stripe_mock'
 
-RSpec.describe ChargesController, type: :controller do
-  fixtures :users
-  fixtures :orders
+describe ChargesController, type: :controller do
   fixtures :products
+  fixtures :orders
   fixtures :line_items
+  fixtures :users
   fixtures :charges
 
   let(:michelle)         { users(:michelle) }
   let(:cards_order)      { orders(:cards_order) }
+  let(:unassigned_order) { orders(:unassigned_order) }
   let(:cards_charge)     { charges(:cards_charge) }
 
   describe '#show' do
@@ -41,10 +41,21 @@ RSpec.describe ChargesController, type: :controller do
     before { StripeMock.start }
     after { StripeMock.stop }
 
-    it 'completed order' do
-      expect{
-        post :create, order_id: cards_order.id, params: stripeParams
-      }.to change{ Order.first.state }.from('active').to('paid')
+    context 'completed order' do
+      it 'changes order from active to paid' do
+        expect{
+          post :create, order_id: cards_order.id, params: stripeParams
+        }.to change{ Order.first.state }.from('active').to('paid')
+      end
+      context 'signed in user' do
+        before do
+          sign_in michelle
+          post :create, order_id: unassigned_order.id, params: stripeParams
+        end
+        it 'assigns the order to the user' do
+          expect(unassigned_order.reload.user).to eq michelle
+        end
+      end
     end
 
     context 'sending confimed_order email' do
