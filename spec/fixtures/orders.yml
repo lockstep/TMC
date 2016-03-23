@@ -3,8 +3,16 @@ cards_order:
   user: michelle
 
 cards_order_completed:
-  state: <%= Order.states[:completed] %>
+  state: <%= Order.states[:paid] %>
   user: michelle
 
 unassigned_order:
   state: <%= Order.states[:active] %>
+
+animal_cards_order:
+  state: <%= Order.states[:active] %>
+  user: paul
+
+paid_animal_cards_order:
+  state: <%= Order.states[:paid] %>
+  user: paul

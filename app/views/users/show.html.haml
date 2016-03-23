@@ -3,4 +3,8 @@
     .col-sm-12
       %h3
         = "Hello, #{@user.email}!"
-      = link_to 'Edit', edit_user_path(@user)
+      %ul
+        %li
+          = link_to 'Edit', edit_user_path(@user)
+        %li
+          = link_to 'My orders', user_orders_path(@user)

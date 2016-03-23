@@ -6,3 +6,6 @@ unassigned_order_items:
   product: number_cards
   order: unassigned_order
 
+line_item_animal:
+  product: animal_cards
+  order: animal_cards_order

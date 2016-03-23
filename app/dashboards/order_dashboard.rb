@@ -41,8 +41,7 @@ class OrderDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :user,
-    :total_price,
-    :created_at
+    :state
   ]
 
   # Overwrite this method to customize how products are displayed

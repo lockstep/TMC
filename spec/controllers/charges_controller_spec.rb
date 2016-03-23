@@ -45,7 +45,7 @@ describe ChargesController, type: :controller do
       it 'changes order from active to paid' do
         expect{
           post :create, order_id: cards_order.id, params: stripeParams
-        }.to change{ Order.first.state }.from('active').to('paid')
+        }.to change{ Order.find(cards_order.id).state }.from('active').to('paid')
       end
       context 'signed in user' do
         before do
