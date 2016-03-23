@@ -11,5 +11,13 @@ describe PagesController, type: :controller do
       subject { get :show, page: 'not-existed' }
       it { is_expected.to redirect_to(root_path) }
     end
+
+    context 'Error pages' do
+      ['403', '404'].each do |error|
+        subject { get :show, page: error }
+
+        it { is_expected.to redirect_to(root_path) }
+      end
+    end
   end
 end

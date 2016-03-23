@@ -1,0 +1,13 @@
+%li
+  .row
+    .col-sm-1
+      .order_id
+        ID:
+        = link_to order.id, user_order_path(order.user, order)
+    .col-sm-2
+      .order_price
+        $
+        = order.total_price
+    .col-sm-2
+      %a.btn.btn-info.order_detail{href: "/users/#{@user.id}/orders/#{order.id}"}
+        detail

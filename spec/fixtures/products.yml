@@ -9,3 +9,9 @@ number_board:
   price: 15.00
   description: put a card onto it
   presentations: quiz_game
+
+animal_cards:
+  name: Animal Cards
+  price: 20.00
+  description: cards of animal
+  presentations: quiz_game

@@ -1,0 +1,4 @@
+%h1 My Orders
+%ul
+  - @orders.each do |order|
+    = render( partial: 'users/orders/order', locals: { order: order } )

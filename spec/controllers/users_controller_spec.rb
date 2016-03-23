@@ -20,7 +20,7 @@ describe UsersController, type: :controller do
           get :show, id: paul.id
         end
 
-        it { is_expected.to redirect_to(root_path) }
+        it { is_expected.to redirect_to(error_403_path) }
       end
     end
   end
@@ -29,6 +29,6 @@ describe UsersController, type: :controller do
       get :show, id: michelle.id
     end
 
-    it { is_expected.to redirect_to(root_path) }
+    it { is_expected.to redirect_to(error_403_path) }
   end
 end

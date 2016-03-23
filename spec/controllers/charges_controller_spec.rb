@@ -44,7 +44,7 @@ RSpec.describe ChargesController, type: :controller do
     it 'completed order' do
       expect{
         post :create, order_id: cards_order.id, params: stripeParams
-      }.to change{ Order.first.state }.from('active').to('paid')
+      }.to change{ Order.find(cards_order.id).state }.from('active').to('paid')
     end
 
     context 'sending confimed_order email' do

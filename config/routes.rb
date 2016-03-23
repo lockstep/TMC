@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   end
 
   root 'pages#show', page: 'home'
-  get 'pages/:page' => 'pages#show'
+  resources :pages, param: :page, only: [:show]
+
+  get '/403', to: 'pages#show', page: 'home', as: 'error_403'
+  get '/404', to: 'pages#show', page: 'home', as: 'error_404'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -17,7 +20,9 @@ Rails.application.routes.draw do
   resources :presentations, only: [:index, :show]
 
   resources :products, only: [:show]
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    resources :orders, only: [:index, :show], controller: 'users/orders'
+  end
   resources :orders do
     resources :line_items, only: [:create, :destroy]
     resources :charges, only: [:show, :new, :create]

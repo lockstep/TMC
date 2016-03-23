@@ -1,3 +1,7 @@
 line_item_cards:
   product: number_cards
   order: cards_order
+
+line_item_animal:
+  product: animal_cards
+  order: animal_cards_order
