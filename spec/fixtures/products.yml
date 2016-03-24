@@ -1,7 +1,7 @@
 number_cards:
   name: Number Cards
   price: 10.00
-  description: cards of number
+  description: cards of numbers
   presentations: quiz_game
 
 number_board:

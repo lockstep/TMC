@@ -5,7 +5,7 @@ class Users::OrdersController < ApplicationController
 
   def index
     authorize! :show, @user
-    @orders = @user.orders.paids
+    @orders = @user.orders.paid
   end
 
   def show

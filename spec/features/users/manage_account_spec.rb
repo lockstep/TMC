@@ -1,19 +1,32 @@
 describe 'Manage user account', :devise do
   fixtures :users
+  fixtures :downloadables
 
-  let(:michelle) { users(:michelle) }
+  let(:user) { users(:michelle) }
 
   context 'signing in' do
     before do
-      signin(michelle.email, 'qawsedrf')
+      signin(user.email, 'qawsedrf')
     end
     it 'can see and edit user details' do
-      visit user_path(michelle)
-      expect(page).to have_content michelle.email
+      visit user_path(user)
+      expect(page).to have_content user.email
       click_link 'Edit'
       fill_in_user_form
-      expect(page).to have_content michelle.email
+      expect(page).to have_content user.email
       expect(page).to have_content 'have been updated'
+    end
+
+    context 'materials' do
+      before do
+        allow_any_instance_of(Product).to receive(:download_url)
+          .and_return('my_downloadable_file.pdf')
+      end
+      it 'can see materials' do
+        visit user_path(user)
+        click_link 'My Materials'
+        expect(page).to have_link('Animal Cards', href: /my_downloadable_file/)
+      end
     end
   end
 

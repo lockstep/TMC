@@ -19,4 +19,13 @@ class Downloadable < ActiveRecord::Base
 
     validates_with AttachmentContentTypeValidator, attributes: :file,
       content_type: /pdf/
+
+    def download_url
+      s3 = AWS::S3.new.buckets[ENV['S3_BUCKET']]
+      s3.objects[self.file.path].url_for(:read,
+        expires_in: 10.minutes,
+        use_ssl: true,
+        response_content_disposition:
+          "attachment; filename=\"#{file_file_name}\"" ).to_s
+    end
 end

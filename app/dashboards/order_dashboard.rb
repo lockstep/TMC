@@ -11,6 +11,7 @@ class OrderDashboard < Administrate::BaseDashboard
       multiplier: 0.01,
       decimals: 1,
     ),
+    products: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }
@@ -31,6 +32,7 @@ class OrderDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :user,
+    :products,
     :total_price,
     :created_at,
     :updated_at

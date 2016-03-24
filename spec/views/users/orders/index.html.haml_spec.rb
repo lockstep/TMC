@@ -13,7 +13,7 @@ describe "users/orders/index" do
   context 'product show page' do
     before do
       assign(:user, paul)
-      assign(:orders, paul.orders.paids)
+      assign(:orders, paul.orders.paid)
 
       render
     end

@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
 
   has_many :orders
+  has_many :completed_orders, -> { paid }, class_name: 'Order'
+  has_many :line_items, through: :completed_orders
+  has_many :purchased_products, through: :line_items, source: :product
 
   enum role: [:user, :admin]
 

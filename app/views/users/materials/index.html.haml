@@ -1,0 +1,7 @@
+.container
+  .row
+    .col-sm-12
+      %h3 My Materials
+      - @products.each do |product|
+        = link_to product.name, product.download_url
+        %br

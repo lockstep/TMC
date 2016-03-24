@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :products, only: [:show]
   resources :users, only: [:show, :edit, :update] do
     resources :orders, only: [:index, :show], controller: 'users/orders'
+    resources :materials, only: [:index], controller: 'users/materials'
   end
   resources :orders do
     resources :line_items, only: [:create, :destroy]

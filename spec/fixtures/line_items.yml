@@ -2,6 +2,10 @@ line_item_cards:
   product: number_cards
   order: cards_order
 
+line_item_cards_completed:
+  product: animal_cards
+  order: cards_order_completed
+
 unassigned_order_items:
   product: number_cards
   order: unassigned_order

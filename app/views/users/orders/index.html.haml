@@ -1,4 +1,7 @@
-%h1 My Orders
-%ul
-  - @orders.each do |order|
-    = render( partial: 'users/orders/order', locals: { order: order } )
+.container
+  .row
+    .col-sm-12
+      %h3 My Orders
+      %ul
+        - @orders.each do |order|
+          = render( partial: 'users/orders/order', locals: { order: order } )

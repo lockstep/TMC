@@ -13,7 +13,12 @@ class ProductDashboard < Administrate::BaseDashboard
     downloadable: Field::HasOne,
     id: Field::Number,
     name: Field::String,
-    price: Field::Number,
+    price: Field::Number.with_options(
+      title: "Order Total",
+      prefix: "$",
+      multiplier: 0.01,
+      decimals: 1,
+    ),
     description: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -28,7 +33,7 @@ class ProductDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :price,
-    :presentations,
+    :downloadable,
     :images
   ]
 
