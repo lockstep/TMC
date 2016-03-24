@@ -14,7 +14,7 @@ describe Presentation, type: :model do
 
   describe '#products' do
     it 'respond to products call correctly' do
-      expect(quiz_game.products.count).to eq 2
+      expect(quiz_game.products.count).to eq 3
     end
   end
 end

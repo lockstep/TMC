@@ -14,7 +14,7 @@ class Users::OrdersController < ApplicationController
   private
 
   def authorize_order
-    authorize! :show, (@user && @order)
+    authorize! :show, @order
   end
 
   def set_order

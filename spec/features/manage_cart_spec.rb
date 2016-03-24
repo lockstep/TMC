@@ -1,4 +1,5 @@
 describe 'Ordering process', type: :feature do
+  fixtures :users
   fixtures :products
   fixtures :orders
 
@@ -22,8 +23,11 @@ describe 'Ordering process', type: :feature do
 
   context 'removing product from cart' do
     before do
+      @michelle = users(:michelle)
       @product = products(:number_cards)
       @order = orders(:cards_order)
+
+      signin(@michelle.email, 'qawsedrf')
     end
     it 'removes the line item from cart' do
       visit order_path @order

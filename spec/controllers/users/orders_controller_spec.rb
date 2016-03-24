@@ -8,8 +8,9 @@ RSpec.describe Users::OrdersController, type: :controller do
 
   let(:paul)                         { users(:paul) }
   let(:michelle)                     { users(:michelle) }
+  let(:animal_cards_order)           { orders(:animal_cards_order) }
   let(:paid_animal_cards_order)      { orders(:paid_animal_cards_order) }
-  let(:cards_order_completed)        { orders(:cards_order_completed) }
+  let(:cards_order)                  { orders(:cards_order) }
 
   describe '#index' do
     context 'user\'s signed in and order\'s owner' do
@@ -41,7 +42,7 @@ RSpec.describe Users::OrdersController, type: :controller do
     context 'user\'s signed in and order\'s owner' do
       before do
         sign_in paul
-        get :show, user_id: paul.id, id: paid_animal_cards_order.id
+        get :show, user_id: paul.id, id: animal_cards_order.id
       end
 
       it { expect(response).to render_template('users/orders/show') }
@@ -50,7 +51,7 @@ RSpec.describe Users::OrdersController, type: :controller do
     context 'user\'s signed in but not order\'s owner' do
       before do
         sign_in paul
-        get :show, user_id: paul.id, id: cards_order_completed.id
+        get :show, user_id: paul.id, id: cards_order.id
       end
 
       it { expect(response).to redirect_to(error_403_path) }
@@ -58,7 +59,7 @@ RSpec.describe Users::OrdersController, type: :controller do
 
     context 'user\'s not signed in' do
       before do
-        get :show, user_id: paul.id, id: paid_animal_cards_order.id
+        get :show, user_id: paul.id, id: animal_cards_order.id
       end
 
       it { expect(response).to redirect_to(error_403_path) }
