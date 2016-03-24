@@ -12,22 +12,6 @@ describe ChargesController, type: :controller do
   let(:unassigned_order) { orders(:unassigned_order) }
   let(:cards_charge)     { charges(:cards_charge) }
 
-  describe '#show' do
-    before do
-      get :show, order_id: cards_order.id, id: cards_charge.id
-    end
-
-    it { expect(response).to render_template('charges/show') }
-  end
-
-  describe '#new' do
-    before do
-      get :new, order_id: cards_order.id
-    end
-
-    it {expect(response).to render_template('charges/new') }
-  end
-
   describe '#create' do
     include_context 'before_after_mailer'
 

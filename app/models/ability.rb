@@ -7,5 +7,8 @@ class Ability
     can :show, Order do |order|
       (!order.user || order.user == user) && !order.paid?
     end
+    can :review, Order do |order|
+      order.user == user && order.paid?
+    end
   end
 end

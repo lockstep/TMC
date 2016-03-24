@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-sm-12
+      %h3 You're the Best!
+      %p
+        Thank you so much for your order! Your materials are ready for
+        download:
+      %ul
+        - @order.line_items.each do |item|
+          %li= link_to item.name, item.download_url

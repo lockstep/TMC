@@ -23,6 +23,8 @@ describe 'Display stripe button', js: true, type: :feature do
     click_on('Add to Cart')
     click_on(number_board.name)
     click_on('your cart')
+    expect(page).to have_content 'Your Cart'
+    expect(page).to have_content number_board.description
     expect(page).to have_content('Pay with Card')
   end
 end

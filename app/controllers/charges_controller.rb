@@ -1,11 +1,5 @@
 class ChargesController < ApplicationController
-  before_action :set_order, only: [:new, :create]
-
-  def show
-  end
-
-  def new
-  end
+  before_action :set_order, only: [:create]
 
   def create
     @order.update(user: current_user) unless @order.user
@@ -18,7 +12,7 @@ class ChargesController < ApplicationController
                          currency: 'usd',
                         )
     @order.update(state: :paid)
-    redirect_to order_charge_path(order_id: @order.id, id: @order.charge.id)
+    redirect_to success_order_path(id: @order.id)
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to @order

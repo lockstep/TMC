@@ -23,12 +23,12 @@ describe UsersController, type: :controller do
         it { is_expected.to redirect_to(error_403_path) }
       end
     end
-  end
-  context 'not signed in' do
-    before do
-      get :show, id: michelle.id
-    end
+    context 'not signed in' do
+      before do
+        get :show, id: michelle.id
+      end
 
-    it { is_expected.to redirect_to(error_403_path) }
+      it { is_expected.to redirect_to(error_403_path) }
+    end
   end
 end
