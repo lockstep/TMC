@@ -9,8 +9,8 @@
       %h1
         = @post.title
       %p
-        %span.glyphicon.glyphicon-time
-          Updated on
-          = time_tag @post.updated_at
+        = fa_icon 'clock-o'
+        Posted on
+        = time_tag @post.created_at
       %hr/
       = @post.body.html_safe

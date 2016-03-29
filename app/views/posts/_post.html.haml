@@ -1,5 +1,9 @@
 %h2
   = link_to(post.title, post)
-%hr/
+%p
+  = fa_icon 'clock-o'
+  Posted on
+  = time_tag post.created_at
 %p
   = post.summary
+%hr
