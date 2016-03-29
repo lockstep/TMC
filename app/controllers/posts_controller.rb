@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show]
 
+  def index
+    @posts = Post.all
+                 .page(params[:page || 1])
+                 .per(10)
+  end
+
   def show
   end
 

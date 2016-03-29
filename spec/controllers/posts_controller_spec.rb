@@ -5,6 +5,12 @@ RSpec.describe PostsController, type: :controller do
 
   let(:hello_tmc)   { posts(:hello_tmc) }
 
+  describe '#index' do
+    subject { get :index }
+
+    it { is_expected.to render_template('posts/index') }
+  end
+
   describe '#show' do
     subject { get :show, id: hello_tmc.slug }
 

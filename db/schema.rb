@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329053630) do
+ActiveRecord::Schema.define(version: 20160329083514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,18 @@ ActiveRecord::Schema.define(version: 20160329053630) do
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
   add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
 
+  create_table "materials", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "materials_presentations", id: false, force: :cascade do |t|
+    t.integer "presentation_id", null: false
+    t.integer "material_id",     null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -91,6 +103,7 @@ ActiveRecord::Schema.define(version: 20160329053630) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "slug"
+    t.text     "summary"
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
@@ -120,6 +133,11 @@ ActiveRecord::Schema.define(version: 20160329053630) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.float    "price"
+  end
+
+  create_table "products_presentations", id: false, force: :cascade do |t|
+    t.integer "presentation_id", null: false
+    t.integer "product_id",      null: false
   end
 
   create_table "topics", force: :cascade do |t|

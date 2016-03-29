@@ -10,6 +10,7 @@ class PostDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
+    summary: Field::String,
     body: Field::WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -24,7 +25,7 @@ class PostDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :title,
-    :body,
+    :summary,
     :created_at,
   ]
 
@@ -34,6 +35,7 @@ class PostDashboard < Administrate::BaseDashboard
     :id,
     :title,
     :slug,
+    :summary,
     :body,
     :created_at,
     :updated_at,
@@ -44,6 +46,7 @@ class PostDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :title,
+    :summary,
     :body,
   ]
 
