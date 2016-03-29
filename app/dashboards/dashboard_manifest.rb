@@ -16,7 +16,8 @@ class DashboardManifest
     :presentations,
     :products,
     :images,
-    :downloadables
+    :downloadables,
+    :posts
   ]
 
   # `ROOT_DASHBOARD`

@@ -29,4 +29,5 @@ Rails.application.routes.draw do
     resources :line_items, only: [:create, :destroy]
     resources :charges, only: [:create]
   end
+  resources :posts, only: [:show]
 end
