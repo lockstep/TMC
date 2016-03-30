@@ -13,6 +13,7 @@
         %span.glyphicon.glyphicon-time
           Updated on
           = time_tag @product.updated_at
+      = facebook_like
       %hr
       = @product.description.html_safe
       .images-container
@@ -25,3 +26,5 @@
         This product is already in
         = succeed "." do
           = link_to 'your cart', order_url(@order), data: { turbolinks: false }
+
+= pin_it_on_images

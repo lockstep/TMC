@@ -14,6 +14,7 @@
         %span.glyphicon.glyphicon-time
           Updated on
           = time_tag @presentation.updated_at
+      = facebook_like
       %hr/
       %ul
         = render @presentation.products
