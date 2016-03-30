@@ -14,7 +14,7 @@ class PresentationDashboard < Administrate::BaseDashboard
     topic: Field::BelongsTo,
     section: Field::Enum,
     products: Field::HasMany,
-    description: Field::WysiwygField,
+    description: WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }

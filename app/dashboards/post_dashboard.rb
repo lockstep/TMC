@@ -11,7 +11,7 @@ class PostDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     summary: Field::String,
-    body: Field::WysiwygField,
+    body: WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     slug: Field::String,
