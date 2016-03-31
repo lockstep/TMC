@@ -10,11 +10,9 @@ Devise.setup do |config|
     3c774ef4dd404f037286c52e4c2cc6aae42f4e9c4421c2d2ec21807d256f90a568d36a9170a
     a15393534336ee4493fa927730bf1d8a81011ef41cbfcb385c407
   SECRET
-  # ==> Mailer Configuration
-  # Configure the e-mail address which will be shown in Devise::Mailer,
-  # note that it will be overwritten if you use your own mailer class
-  # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+
+  config.parent_mailer = 'ApplicationMailer'
+  config.mailer_sender = 'hello@themontessoricompany.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
