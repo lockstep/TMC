@@ -1,11 +1,12 @@
 module SocialsHelper::ShareButtons
-  def pin_it_on_images
+  def pin_it(url: current_full_url, image:, description: '')
     <<-PIN.html_safe
-      <script async
-              defer
-              data-pin-hover='true'
-              src='//assets.pinterest.com/js/pinit.js'>
-      </script>
+      <div id="pin-it"></div>
+      <a data-pin-do="buttonPin"
+         data-pin-color="red"
+         href="https://www.pinterest.com/pin/create/button/?url=#{url}
+               &media=#{image}&description=#{description}">
+      </a>
     PIN
   end
 
@@ -30,22 +31,6 @@ module SocialsHelper::ShareButtons
         data-size="#{size}">
         Tweet
       </a>
-      #{tweet_script}
     TWEET
-  end
-
-  private
-
-  def tweet_script
-    <<-SCRIPT
-      <script>
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],
-        p=/^http:/.test(d.location)?'http':'https';
-        if(!d.getElementById(id)){js=d.createElement(s);
-        js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
-        fjs.parentNode.insertBefore(js,fjs);
-        }}(document, 'script', 'twitter-wjs');
-      </script>
-    SCRIPT
   end
 end

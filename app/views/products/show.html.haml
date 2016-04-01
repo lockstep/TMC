@@ -1,7 +1,9 @@
 - content_for :title, @product.name
 - content_for :meta_tags do
   = meta_tags(title: @product.name,
-              image: object_image(@product))
+              type: 'product',
+              image: object_image(@product),
+              amount: @product.price)
 
 .container
   .row
@@ -14,6 +16,7 @@
         %span.glyphicon.glyphicon-time
           Updated on
           = time_tag @product.updated_at
+      = pin_it(image: object_image(@product))
       = tweet(text: @product.name)
       = facebook_like
       %hr
@@ -28,5 +31,3 @@
         This product is already in
         = succeed "." do
           = link_to 'your cart', order_url(@order), data: { turbolinks: false }
-
-= pin_it_on_images

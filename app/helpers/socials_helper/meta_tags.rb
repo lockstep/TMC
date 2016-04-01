@@ -1,13 +1,21 @@
 module SocialsHelper::MetaTags
 
-  def meta_tags(title:, url: current_full_url,
+  def meta_tags(title:, type: 'article', url: current_full_url,
                 image: SocialsHelper::DEFAULT_IMAGE,
                 author: SocialsHelper::DEFAULT_AUTHOR,
-                description: SocialsHelper::DEFAULT_DESCRIPTION)
+                description: SocialsHelper::DEFAULT_DESCRIPTION,
+                amount: 0)
 
-    og(title: title, url: url, image: image,
-       description: description, author: author
-      ).concat(twitter(title: title, image: image, description: description)
+    og(title: title,
+       type: type,
+       url: url,
+       image: image,
+       description: description,
+       author: author,
+       amount: amount
+      ).concat(twitter(title: title,
+                       image: image,
+                       description: description)
               ).html_safe
   end
 
@@ -21,7 +29,7 @@ module SocialsHelper::MetaTags
 
   private
 
-  def og(title:, url:, type: 'article', image:, description:, author:)
+  def og(title:, url:, type: , image:, description:, author:, amount: 0)
     <<-META
       <meta property='og:title' content='#{title}'/>
       <meta property='og:type' content='#{type}'/>
@@ -35,6 +43,10 @@ module SocialsHelper::MetaTags
 
       <meta name='author' content='#{author}'/>
       <meta name='description' content='#{description}'/>
+
+      <meta property="og:brand" content="The Montessori Company"/>
+      <meta property="og:price:amount" content="#{amount}"/>
+      <meta property="og:price:currency" content="USD"/>
     META
   end
 
