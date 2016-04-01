@@ -1,5 +1,5 @@
 module SocialsHelper::MetaTags
-  DEFAULT_IMAGE = 'image_url_here'
+  DEFAULT_IMAGE = 'https://themontessori.com/default.jpg'
   DEFAULT_AUTHOR = 'The Montessori Company'
   DEFAULT_DESCRIPTION = 'default_description_here'
 
@@ -14,6 +14,10 @@ module SocialsHelper::MetaTags
        description: description, author: author
       ).concat(twitter(title: title, image: image, description: description)
               ).html_safe
+  end
+
+  def object_image(object)
+    object.images.empty? ? DEFAULT_IMAGE : object.primary_image.image.url
   end
 
   private
