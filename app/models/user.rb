@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
+         :confirmable, :omniauthable
 
   after_initialize :set_default_role, :if => :new_record?
 
@@ -16,5 +16,25 @@ class User < ActiveRecord::Base
 
   def set_default_role
     self.role ||= :user
+  end
+
+  def self.find_for_oauth(auth, signed_in_resource = nil)
+    identity = Identity.find_for_oauth(auth)
+    user = signed_in_resource ? signed_in_resource : identity.user
+
+    if user.nil?
+      user = User.where(email: auth.info.email).first_or_initialize
+      unless user.persisted?
+        user.password = Devise.friendly_token[0,20]
+        user.skip_confirmation!
+        user.save!
+      end
+    end
+
+    if identity.user != user
+      identity.user = user
+      identity.save!
+    end
+    user
   end
 end

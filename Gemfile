@@ -22,6 +22,8 @@ gem 'actionmailer_inline_css'
 gem 'active_model_serializers', '~> 0.10.0rc4'
 gem 'sidekiq', '~> 4.1.0'
 gem 'devise', '~> 3.5.6'
+gem 'omniauth', '~> 1.3.1'
+gem 'omniauth-facebook', '~> 3.0.0'
 gem 'administrate', '~> 0.1.2'
 gem 'kaminari', '~> 0.16.2'
 
