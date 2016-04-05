@@ -33,3 +33,23 @@
     .spacer
       = image_tag 'leaf.png', alt: 'The Montessori Company leaf'
 
+%section#newsletter
+  .container
+    .body
+      %h1 Join our mailing list
+      %form
+        .row
+          .col-sm-4
+            %input{type: "text", name: "first_name", class: "form-control",
+            placeholder: "First Name"}
+          .col-sm-4
+            %input{type: "email", name: "email", class: "form-control",
+            placeholder: "Email"}
+          .col-sm-4
+            %input{type: "submit", value: "Submit",
+            class: "btn btn-primary form-control"}
+
+%section#featured-products
+  .container
+    %h1 featured products
+

@@ -48,7 +48,9 @@ section {
 }
 
 .no-left-gutter {
-  padding-left: 0;
+  @media (min-width: 34em) {
+    padding-left: 0;
+  }
 }
 
 .spacer {
@@ -57,5 +59,12 @@ section {
 
   img {
     width: 65px;
+  }
+}
+
+// ensure vertical spacing for form inputs when stacked on small screens
+@media (max-width: 768px) {
+  [class*="col-"]{
+      margin-bottom: 15px;
   }
 }

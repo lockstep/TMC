@@ -2,3 +2,6 @@ $navbar-light-color:                #A7A7A7 !default;
 $navbar-light-hover-color:          darken($navbar-light-color, 30%) !default;
 $navbar-light-active-color:         darken($navbar-light-color, 50%) !default;
 $navbar-light-disabled-color:       lighten($navbar-light-color, 20%) !default;
+$border-radius:                     0;
+$brand-primary:                     #dbe0e3;
+$input-border-color:                lighten($grey, 3%);
