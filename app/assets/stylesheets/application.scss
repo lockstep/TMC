@@ -2,19 +2,17 @@
 @import "frameworks_and_overrides";
 @import "trix";
 
+@import "navbar";
+@import "home";
 @import "orders";
 @import "products";
-
 @import "blog";
 
-main {
-  // background-color: $light-yellow;
-  @include make-container();
-  margin-top: 30px;
+body {
+  font-family: 'Lato';
 }
 
 section {
-  padding-top: 20px;
   &#body {
     div, h1 {
       @include make-col();

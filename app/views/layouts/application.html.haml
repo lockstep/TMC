@@ -5,7 +5,10 @@
     = yield(:meta_tags)
     %title
       = "#{yield(:title)} | #{t(:site_name)}"
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = favicon_link_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato:300'
+    = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lora:400italic'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body

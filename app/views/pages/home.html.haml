@@ -2,4 +2,9 @@
 - content_for :meta_tags do
   = meta_tags(title: 'Home')
 
-\/pages/home.html.haml
+%section#home
+  .container
+    .logo-container
+      = link_to root_url do
+        = image_tag 'primary-logo.png',
+          alt: 'The Montessori Company', class: 'img-fluid'

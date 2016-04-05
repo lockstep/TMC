@@ -1,21 +1,28 @@
-%nav.navbar.navbar-light.bg-faded
-  %a.navbar-brand{href: "/"} TMC
-  %ul.nav.navbar-nav
-    %li.nav-item
-      %a.nav-link{href: "/presentations"}
-        Presentations
-    %li.nav-item
-      %a.nav-link{href: "/posts"}
-        Blog
-    %li.nav-item
-      %a.nav-link{href: "/pages/about"}
-        About
-  %ul.nav.navbar-nav.pull-xs-right
-    - if user_signed_in?
-      %li.nav-item
-        = link_to 'My Profile', user_path(current_user), class: 'nav-link'
-      %li.nav-item
-        = link_to 'Logout', destroy_user_session_path, method: :delete,
-          class: 'nav-link'
-    - else
-      = link_to 'Login', new_user_session_path, class: 'nav-link'
+%nav.navbar.navbar-light
+  .container
+    %button{class: "navbar-toggler hidden-sm-up", type: "button",
+      :data => { toggle: "collapse", target: "#collapsing-navbar"}}
+      &#9776;
+    .collapse.navbar-toggleable-xs#collapsing-navbar
+      %ul.nav.navbar-nav
+        %li.nav-item
+          %a.nav-link{href: "/"}
+            Home
+        %li.nav-item
+          %a.nav-link{href: "/presentations"}
+            Presentations
+        %li.nav-item
+          %a.nav-link{href: "/posts"}
+            Blog
+        %li.nav-item
+          %a.nav-link{href: "/pages/about"}
+            About
+        - if user_signed_in?
+          %li.nav-item
+            = link_to 'Account', user_path(current_user), class: 'nav-link'
+          %li.nav-item.pull-sm-right
+            = link_to 'Logout', destroy_user_session_path, method: :delete,
+              class: 'nav-link'
+        - else
+          %li.nav-item.pull-sm-right
+            = link_to 'Login', new_user_session_path, class: 'nav-link'
