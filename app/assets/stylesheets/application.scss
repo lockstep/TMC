@@ -1,35 +1,10 @@
 @import "variables";
+@import "mixins";
 @import "frameworks_and_overrides";
 @import "trix";
-
+@import "global";
 @import "navbar";
 @import "home";
 @import "orders";
 @import "products";
 @import "blog";
-
-body {
-  font-family: 'Lato';
-}
-
-section {
-  &#body {
-    div, h1 {
-      @include make-col();
-
-      &.sidebar {
-        @include make-col-span(4);
-      }
-
-      &.main {
-        @include make-col-span(8);
-      }
-
-      .content {
-        background-color: $pearl;
-        @include make-col();
-        @include make-col-span(12);
-      }
-    }
-  }
-}

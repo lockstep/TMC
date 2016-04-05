@@ -3,4 +3,56 @@
     max-width: 500px;
     margin: 0 auto;
   }
+  .hero-container {
+    height: 390px;
+    background: url(hero_bg.jpg) no-repeat left;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    .tagline {
+      @include center-vertically(30px);
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.65);
+      padding: 30px 0 20px;
+      text-align: center;
+      letter-spacing: 2px;
+      font-size: 0.75rem;
+    }
+  }
+
+  .section-tile {
+    text-align: center;
+    height: 120px;
+    margin-bottom: 15px;
+    position: relative;
+
+    .content {
+      @include center-vertically(5px);
+    }
+
+    .line-one {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.75rem;
+    }
+
+    .line-two {
+      font-size: 1.75rem;
+      font-family: 'Script';
+    }
+
+    #presentations {
+      color: darken($grey, 50%);
+    }
+
+    #products {
+      color: darken($green, 50%);
+    }
+
+    #blog {
+      color: darken($beige, 50%);
+    }
+  }
 }

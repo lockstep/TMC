@@ -1,0 +1,61 @@
+@font-face {
+  font-family: 'Script';
+  src: url('Salt_and_Spices_Pro_Regular.eot?#iefix') format('embedded-opentype'),
+       url('Salt_and_Spices_Pro_Regular.otf')  format('opentype'),
+       url('Salt_and_Spices_Pro_Regular.woff') format('woff'),
+       url('Salt_and_Spices_Pro_Regular.ttf')  format('truetype'),
+       url('Salt_and_Spices_Pro_Regular.svg#Salt_and_Spices_Pro_Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Lato';
+}
+
+section {
+  &#body {
+    div, h1 {
+      @include make-col();
+
+      &.sidebar {
+        @include make-col-span(4);
+      }
+
+      &.main {
+        @include make-col-span(8);
+      }
+
+      .content {
+        background-color: $pearl;
+        @include make-col();
+        @include make-col-span(12);
+      }
+    }
+  }
+}
+
+.grey {
+  background: $grey;
+}
+
+.green {
+  background: $green;
+}
+
+.beige {
+  background: $beige;
+}
+
+.no-left-gutter {
+  padding-left: 0;
+}
+
+.spacer {
+  text-align: center;
+  margin: 20px 0;
+
+  img {
+    width: 65px;
+  }
+}

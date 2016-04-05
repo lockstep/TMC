@@ -8,3 +8,28 @@
       = link_to root_url do
         = image_tag 'primary-logo.png',
           alt: 'The Montessori Company', class: 'img-fluid'
+    #hero
+      .row
+        .col-sm-4
+          .section-tile.grey
+            = link_to presentations_url do
+              .content#presentations
+                .line-one View our
+                .line-two presentations
+          .section-tile.green
+            .content#products
+              .line-one Shop our
+              .line-two products
+          .section-tile.beige
+            = link_to posts_url do
+              .content#blog
+                .line-one Read our
+                .line-two blog
+        .col-sm-8.no-left-gutter
+          .hero-container
+            .tagline
+              %p Beautiful Montessori resources.
+              %p Lovingly crafted by an AMI Montessori guide.
+    .spacer
+      = image_tag 'leaf.png', alt: 'The Montessori Company leaf'
+

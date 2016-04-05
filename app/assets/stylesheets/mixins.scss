@@ -1,0 +1,7 @@
+@mixin center-vertically($x-margin) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: $x-margin;
+  right: $x-margin;
+}
