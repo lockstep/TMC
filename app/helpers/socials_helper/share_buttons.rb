@@ -25,9 +25,9 @@ module SocialsHelper::ShareButtons
     <<-TWEET.html_safe
       <a class="twitter-share-button"
         href="https://twitter.com/intent/tweet"
-        data-text=#{text}
-        data-url=#{url}
-        data-via=#{SocialsHelper::TWITTER_ACCOUNT}
+        data-text="#{text}"
+        data-url="#{url}"
+        data-via="#{SocialsHelper::TWITTER_ACCOUNT}"
         data-size="#{size}">
         Tweet
       </a>
