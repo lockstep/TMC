@@ -1,4 +1,31 @@
-.container
-  .row
-    .col-lg-12
-      %p Copyright &copy; TMC 2016
+.container#footer
+  = image_tag 'submark.jpg', alt: 'The Montessori Company', class: 'submark'
+  .row.navbar
+    .col-sm-12.navbar-light
+      %ul.nav.navbar-nav
+        %li.nav-item
+          %a.nav-link{href: "/presentations"}
+            Presentations
+        %li.nav-item
+          %a.nav-link{href: "#"}
+            Products
+        %li.nav-item
+          %a.nav-link{href: "#"}
+            Terms & Conditions
+        %li.nav-item
+          %a.nav-link{href: "#"}
+            FAQ
+        %li.nav-item
+          %a.nav-link{href: "#"}
+            Privacy Policy
+        %li.nav-item
+          %a.nav-link{href: "#"}
+            Contact Us
+
+      %ul.social-icons
+        %li
+          = fa_icon 'facebook'
+        %li
+          = fa_icon 'twitter'
+        %li
+          = fa_icon 'pinterest'

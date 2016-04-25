@@ -11,6 +11,7 @@ bindTwitterEventHandlers = function() {
 };
 
 renderTweetButtons = function() {
+  console.log('rendering tweet buttons');
   $('.twitter-share-button').each(function() {
     var button;
     button = $(this);
@@ -25,5 +26,6 @@ renderTweetButtons = function() {
 };
 
 loadTwitterSDK = function() {
+  console.log('loading Twitter script');
   return $.getScript("//platform.twitter.com/widgets.js");
 };

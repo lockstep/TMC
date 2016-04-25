@@ -3,6 +3,7 @@
 //= require social_sdks/pinterest
 
 document.addEventListener("turbolinks:load", function() {
+  console.log('Turbolinks loaded');
   loadTwitterSDK();
   if (!twttr_events_bound) {
     bindTwitterEventHandlers();

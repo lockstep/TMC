@@ -35,6 +35,10 @@ section {
   }
 }
 
+a, a:hover {
+  text-decoration: none;
+}
+
 .grey {
   background: $grey;
 }

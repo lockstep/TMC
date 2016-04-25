@@ -1,0 +1,27 @@
+#footer {
+  margin: 100px auto 50px;
+  border-top: 1px solid $grey;
+  text-align: center;
+
+  .submark {
+    height: 150px;
+    margin-top: -80px;
+  }
+
+  ul {
+    margin: 10px auto 15px;
+    display: block;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      float: none;
+    }
+  }
+
+  .social-icons {
+    li:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+}

@@ -52,4 +52,53 @@
 %section#featured-products
   .container
     %h1 featured products
-
+    .row
+      .col-sm-3
+        .product-tile
+          = link_to product_url(Product.first) do
+            = image_tag 'flowers.png', alt: 'Product image', class: 'img-fluid'
+          = link_to 'Sample product', product_url(Product.first), class: 'name'
+          .price
+            $40
+      .col-sm-3
+        .product-tile
+          = link_to product_url(Product.first) do
+            = image_tag 'flowers.png', alt: 'Product image', class: 'img-fluid'
+          = link_to 'Sample product', product_url(Product.first), class: 'name'
+          .price
+            $80
+      .col-sm-3
+        .product-tile
+          = link_to product_url(Product.first) do
+            = image_tag 'flowers.png', alt: 'Product image', class: 'img-fluid'
+          = link_to 'Sample product', product_url(Product.first), class: 'name'
+          .price
+            $55
+      .col-sm-3
+        .product-tile
+          = link_to product_url(Product.first) do
+            = image_tag 'flowers.png', alt: 'Product image', class: 'img-fluid'
+          = link_to 'Sample product', product_url(Product.first), class: 'name'
+          .price
+            $40
+%section#testimonials
+  .container
+    .row
+      .col-sm-8
+        %h1 praise for our products
+        .testimonial
+          .text
+            Lorizzle da bomb dolor ma nizzle things, dawg adipiscing owned.
+            Rizzle sapizzle velizzle, gangsta volutpizzle, suscipizzle quizzle,
+            mofo vizzle, arcu. Pellentesque daahng dawg tortizzle.
+            Sizzle erizzle.
+            %p.author
+              \- Author of Testimonial
+          .image.hidden-md-down
+      .col-sm-4
+        %h1 meet michelle
+        = image_tag 'blonde.jpg', alt: 'Michelle', class: 'img-fluid'
+        .about
+          Lorizzle da bomb dolor ma nizzle things, dawg adipiscing owned.
+          Rizzle sapizzle velizzle, gangsta volutpizzle, suscipizzle quizzle.
+        = link_to 'Read More', page_url('about'), class: 'btn btn-primary'
