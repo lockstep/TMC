@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require turbolinks-compatibility
+//= require tether
 //= require bootstrap
 //= require social_sdks
