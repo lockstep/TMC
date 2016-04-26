@@ -1,8 +1,4 @@
 #home {
-  .logo-container {
-    max-width: 500px;
-    margin: 0 auto;
-  }
   .hero-container {
     height: 390px;
     background: url(hero_bg.jpg) no-repeat left;
@@ -89,26 +85,6 @@
     color: $blue;
     font-size: 2.5rem;
     margin-bottom: 45px;
-  }
-
-  .product-tile {
-    text-align: center;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-
-    img {
-      margin: 0 auto 20px;
-    }
-
-    .name {
-      color: darken($green, 10%);
-      font-weight: bolder;
-      margin-bottom: 3px;
-
-      &:hover {
-        color: darken($green, 30%);
-      }
-    }
   }
 }
 

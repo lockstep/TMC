@@ -1,11 +1,5 @@
-@import "variables";
+@import "variables/vars";
 @import "mixins";
 @import "frameworks_and_overrides";
 @import "trix";
-@import "global";
-@import "navbar";
-@import "home";
-@import "footer";
-@import "orders";
-@import "products";
-@import "blog";
+@import "components/**/*";

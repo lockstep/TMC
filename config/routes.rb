@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   }
   resources :presentations, only: [:index, :show]
 
-  resources :products, only: [:show]
+  resources :products, only: [:show, :index]
   resources :users, only: [:show, :edit, :update] do
     resources :orders, only: [:index, :show], controller: 'users/orders'
     resources :materials, only: [:index], controller: 'users/materials'

@@ -19,10 +19,17 @@
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 
+# don't pollute the spec output with JS console messages
+module FakePoltergeistLogger
+  def self.puts(*)
+  end
+end
+
 Capybara.register_driver :poltergeist do |app|
   options = {
     js_errors: false,
     phantomjs_options: ['--load-images=no'],
+    phantomjs_logger: FakePoltergeistLogger,
     inspector: true,
     debug: false
   }

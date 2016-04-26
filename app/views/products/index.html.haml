@@ -1,0 +1,33 @@
+- content_for :title, 'Products'
+
+%section#products
+  .container
+    = render 'shared/header'
+    .row
+      .col-sm-4#sidebar
+        %h1 Product Categories
+        %ul.category
+          %span.name
+            Main Category 1
+            = fa_icon 'caret-right'
+          .subcategories
+            %li Subcategory 1
+            %li Subcategory 2
+            %li Subcategory 3
+            %li Subcategory 4
+            %li Subcategory 5
+            %li Subcategory 6
+            %li Subcategory 7
+        %ul.category
+          %span.name
+            Main Category 2
+            = fa_icon 'caret-right'
+          .subcategories
+            %li Subcategory 1
+            %li Subcategory 2
+            %li Subcategory 3
+        %h1 Looking for something?
+        %h1 Refine your search
+        %h1 Recently viewed
+        %h1 Be the first to know
+      .col-sm-8

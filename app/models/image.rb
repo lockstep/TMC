@@ -3,6 +3,8 @@ class Image < ActiveRecord::Base
   belongs_to :product, class_name: 'Product', foreign_key: 'imageable_id'
   validates_uniqueness_of :primary, scope: [:imageable_id, :imageable_type],
                                     if: :primary
+  delegate :url, to: :image
+
   has_attached_file :image,
     url: ':s3_domain_url',
     path: 'images/:id/:basename.:hash.:extension',

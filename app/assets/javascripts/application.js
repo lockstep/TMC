@@ -16,4 +16,4 @@
 //= require turbolinks-compatibility
 //= require tether
 //= require bootstrap
-//= require social_sdks
+//= require tmc

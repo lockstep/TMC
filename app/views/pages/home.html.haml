@@ -4,10 +4,7 @@
 
 %section#home
   .container
-    .logo-container
-      = link_to root_url do
-        = image_tag 'primary-logo.png',
-          alt: 'The Montessori Company', class: 'img-fluid'
+    = render 'shared/header'
     #hero
       .row
         .col-sm-4
@@ -17,9 +14,10 @@
                 .line-one View our
                 .line-two presentations
           .section-tile.green
-            .content#products
-              .line-one Shop our
-              .line-two products
+            = link_to products_url do
+              .content#products
+                .line-one Shop our
+                .line-two products
           .section-tile.beige
             = link_to posts_url do
               .content#blog
@@ -53,34 +51,17 @@
   .container
     %h1 featured products
     .row
-      .col-sm-3
-        .product-tile
-          = link_to product_url(Product.first) do
-            = image_tag 'flowers.png', alt: 'Product image', class: 'img-fluid'
-          = link_to 'Sample product', product_url(Product.first), class: 'name'
-          .price
-            $40
-      .col-sm-3
-        .product-tile
-          = link_to product_url(Product.first) do
-            = image_tag 'flowers.png', alt: 'Product image', class: 'img-fluid'
-          = link_to 'Sample product', product_url(Product.first), class: 'name'
-          .price
-            $80
-      .col-sm-3
-        .product-tile
-          = link_to product_url(Product.first) do
-            = image_tag 'flowers.png', alt: 'Product image', class: 'img-fluid'
-          = link_to 'Sample product', product_url(Product.first), class: 'name'
-          .price
-            $55
-      .col-sm-3
-        .product-tile
-          = link_to product_url(Product.first) do
-            = image_tag 'flowers.png', alt: 'Product image', class: 'img-fluid'
-          = link_to 'Sample product', product_url(Product.first), class: 'name'
-          .price
-            $40
+      - @featured_products.each do |product|
+        .col-sm-3
+          .product-tile
+            = link_to product_url(product) do
+              = image_tag product.primary_image.url,
+                alt: product.name, class: 'img-fluid'
+            = link_to product.name,
+              product_url(product), class: 'name'
+            .price
+              = number_to_currency(product.price, precision: 0)
+
 %section#testimonials
   .container
     .row
