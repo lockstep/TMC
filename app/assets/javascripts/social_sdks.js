@@ -3,7 +3,6 @@
 //= require social_sdks/pinterest
 
 $(document).ready(function(){
-  console.log('Turbolinks loaded');
   loadTwitterSDK().done(function(script, status) {
     if (!twttr_events_bound) {
       bindTwitterEventHandlers();
@@ -15,7 +14,8 @@ $(document).ready(function(){
     bindFacebookEvents();
   }
 
-  if ($('#pin-it').length != 0){
-    Pinterest.load();
+  Pinterest.load();
+  if (!window.pinterest_events_bound) {
+    Pinterest.bindEventHandlers();
   }
 })
