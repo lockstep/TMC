@@ -36,7 +36,7 @@ loadFacebookSDK = function() {
 
 initializeFacebookSDK = function() {
   return FB.init({
-    appId: '380747128713975',
+    appId: '1096980653700006',
     version : 'v2.5',
     status: true,
     cookie: true,
