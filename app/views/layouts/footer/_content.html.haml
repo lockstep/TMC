@@ -4,11 +4,9 @@
     .col-sm-12.navbar-light
       %ul.nav.navbar-nav
         %li.nav-item
-          %a.nav-link{href: "/presentations"}
-            Presentations
+          = link_to 'Presentations', presentations_url, class: 'nav-link'
         %li.nav-item
-          %a.nav-link{href: "#"}
-            Products
+          = link_to 'Products', products_url, class: 'nav-link'
         %li.nav-item
           %a.nav-link{href: "#"}
             Terms & Conditions

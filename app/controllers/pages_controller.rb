@@ -4,8 +4,7 @@ class PagesController < ApplicationController
   def show
     if !params[:page].blank? && PAGES.include?(params[:page])
       if params[:page] == 'home'
-        limit = Product.count >= 4 ? 4 : Product.count
-        @featured_products = Product.order("RANDOM()").limit(limit)
+        @featured_products = Product.order("RANDOM()").limit(4)
       end
       render template: "pages/#{params[:page]}"
     else

@@ -1,6 +1,11 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show]
 
+  def index
+    @results = Product.all.order("RANDOM()")
+    @recent_products = @results.limit(4)
+  end
+
   def show
     if session[:order_id].present?
       @order = Order.find(session[:order_id]).active? ?

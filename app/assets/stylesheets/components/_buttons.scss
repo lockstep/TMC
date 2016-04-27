@@ -1,0 +1,29 @@
+.btn {
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.btn-green {
+  background: $green;
+  color: black;
+  font-size: 11pt;
+
+  &:hover {
+    background: $green-medium;
+  }
+}
+
+.btn-cart {
+  background: $grey;
+  color: darken($grey, 40%);
+  font-size: 9pt;
+
+  &:hover {
+    background: darken($grey, 20%);
+  }
+}

@@ -34,7 +34,7 @@ TMC.define_component('social buttons', function() {
 TMC.define_component('product index page', function() {
   $('#sidebar .category .name').click(function() {
     $(this).closest('.category').toggleClass('active');
-    $(this).closest('.category').find('.subcategories').slideToggle('slow');
+    $(this).closest('.category').find('.content').slideToggle('slow');
   });
 });
 

@@ -8,19 +8,19 @@
     #hero
       .row
         .col-sm-4
-          .section-tile.grey
+          .section-tile.grey#presentations
             = link_to presentations_url do
-              .content#presentations
+              .content
                 .line-one View our
                 .line-two presentations
-          .section-tile.green
+          .section-tile.green#products
             = link_to products_url do
-              .content#products
+              .content
                 .line-one Shop our
                 .line-two products
-          .section-tile.beige
+          .section-tile.beige#blog
             = link_to posts_url do
-              .content#blog
+              .content
                 .line-one Read our
                 .line-two blog
         .col-sm-8.no-left-gutter
@@ -60,7 +60,7 @@
             = link_to product.name,
               product_url(product), class: 'name'
             .price
-              = number_to_currency(product.price, precision: 0)
+              = number_to_currency(product.price, precision: 1)
 
 %section#testimonials
   .container
