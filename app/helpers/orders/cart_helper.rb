@@ -2,7 +2,7 @@ module Orders::CartHelper
   def add_to_cart
     form_for [@order, LineItem.new] do |f|
       f.hidden_field(:product_id, value: @product.id).concat(
-        f.submit('Add to Cart')
+        f.submit 'Add to Cart', class: 'btn btn-cart'
       )
     end
   end

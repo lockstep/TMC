@@ -5,29 +5,44 @@
               image: object_image(@product),
               amount: @product.price)
 
-.container
-  .row
-    .col-md-8
-      %h1
-        = @product.name
-      %h4
-        = "$#{@product.price}"
-      %p
-        %span.glyphicon.glyphicon-time
-          Updated on
-          = time_tag @product.updated_at
-      = pin_it(image: object_image(@product))
-      = tweet(text: @product.name)
-      = facebook_like
-      %hr
-      = @product.description.html_safe
-      .images-container
-        - @product.images.each do |image|
-          = image_tag image.image.url
-    .col-md-4
-      - unless is_in_cart?(@order, @product)
-        = add_to_cart
-      - else
-        This product is already in
-        = succeed "." do
-          = link_to 'your cart', order_url(@order), data: { turbolinks: false }
+%section#product
+  .container
+    = render 'shared/header'
+    .row
+      .col-sm-12.navigation
+        = link_to '<  Back to search', products_url
+    .row
+      .col-md-7
+        = image_tag @product.primary_image.url,
+          alt: @product.name, id: 'primary-image', class: 'img-fluid'
+        .images-container
+          - @product.images.each do |image|
+            = image_tag image.image.url
+      .col-md-5
+        %h1.name
+          = @product.name
+        %h4.price
+          = "$#{@product.price}"
+        .social
+          = pin_it(image: object_image(@product))
+          = tweet(text: @product.name)
+          = facebook_like
+        %h5.section-title
+          Description
+        .section
+          = @product.description.html_safe
+        - unless is_in_cart?(@order, @product)
+          = add_to_cart
+        - else
+          This product is already in
+          = succeed "." do
+            = link_to 'your cart', order_url(@order),
+              data: { turbolinks: false }
+        %h5.section-title
+          Details
+        .section
+          Lorizzle da bomb dolor ma nizzle things, dawg adipiscing owned.
+          Rizzle sapizzle velizzle, gangsta volutpizzle, suscipizzle quizzle,
+          mofo vizzle, arcu. Pellentesque daahng dawg tortizzle.
+          Sizzle erizzle.
+

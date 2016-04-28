@@ -5,8 +5,10 @@ $light-blue: rgb(162, 204, 222);
 $light-turquoise: rgb(199, 227, 225);
 
 $grey: #dbe0e3;
+$black: #373a3c;
 $green: #cbd8ce;
 $green-medium: darken($green, 10%);
 $green-dark: darken($green, 30%);
 $beige: #eee9e5;
 $blue: #578BB7;
+$blue-light: lighten($blue, 15%);

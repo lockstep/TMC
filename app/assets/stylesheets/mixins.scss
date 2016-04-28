@@ -1,0 +1,12 @@
+@mixin hero-tile($color) {
+  a {
+    color: darken($color, 50%);
+  }
+
+  &:hover {
+    background: darken($color, 30%);
+    a {
+      color: white;
+    }
+  }
+}

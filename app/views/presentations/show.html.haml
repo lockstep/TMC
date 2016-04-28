@@ -11,9 +11,9 @@
       %h1
         = @presentation.name
       %p
-        %span.glyphicon.glyphicon-time
-          Updated on
-          = time_tag @presentation.updated_at
+        = fa_icon 'clock-o'
+        Updated on
+        = time_tag @presentation.updated_at
       = tweet(text: @presentation.name)
       = facebook_like
       %hr/

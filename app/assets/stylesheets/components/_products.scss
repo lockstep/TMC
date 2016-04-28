@@ -1,9 +1,50 @@
-.images-container {
-  margin-top: 25px;
-  img {
-    max-height: 200px;
-    float: left;
-    padding: 0 20px 20px 0;
+#product {
+  .images-container {
+    img {
+      max-height: 200px;
+      float: left;
+      padding: 0 20px 20px 0;
+    }
+  }
+
+  .social {
+    margin: 40px 0 30px;
+  }
+
+  .navigation {
+    text-transform: uppercase;
+    font-size: 10pt;
+    margin-bottom: 35px;
+
+    a {
+      color: $black;
+    }
+  }
+
+  .name {
+    text-transform: uppercase;
+    font-size: 22pt;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    clear: both;
+  }
+
+  .price {
+    color: $green-medium;
+    font-size: 18pt;
+  }
+
+  .section-title {
+    font-size: 12pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $blue-light;
+    margin-top: 40px;
+  }
+
+  .section {
+    margin-bottom: 20px;
+    font-size: 12pt;
   }
 }
 
