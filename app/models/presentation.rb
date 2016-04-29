@@ -8,18 +8,20 @@ class Presentation < ActiveRecord::Base
 
   enum section: [:default, :language, :memory_games]
 
-  def slug_candidates
-    [
-      :name,
-      [:topic, :name],
-    ]
-  end
-
   def search_data
     {
       name: name,
       topic_ids: topic.related_topic_ids,
       section: section.to_i,
     }
+  end
+
+  private
+
+  def slug_candidates
+    [
+      :name,
+      [:topic, :name],
+    ]
   end
 end

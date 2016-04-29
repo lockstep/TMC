@@ -2,8 +2,15 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show]
 
   def index
-    @results = Product.all.order("RANDOM()")
-    @recent_products = @results.limit(4)
+    @results = Product.search(
+      search_query,
+      misspellings: { edit_distance: 2 },
+      fields: [:name, :description],
+      page: page,
+      per_page: 10
+    )
+    @recent_products = @results
+    @query = search_query == '*' ? '' : search_query
   end
 
   def show
@@ -20,5 +27,13 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def search_query
+    params[:q].present? ? params[:q] : '*'
+  end
+
+  def page
+    params[:page] || 1
   end
 end

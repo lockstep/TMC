@@ -2,7 +2,6 @@
 
 %section#products
   .container
-    = render 'shared/header'
     .row
       .col-sm-4#sidebar
         %h1 Product Categories
@@ -27,14 +26,12 @@
             %li Subcategory 2
             %li Subcategory 3
         %h1 Looking for something?
-        %form
+        = form_tag products_path, method: :get do
           .query-container
-            %input{type: "text", name: "query",
-              id: "query", class: "form-control"}
+            = text_field_tag :q, @query, class: "form-control"
             %span.icon
               = fa_icon 'search'
-          %input{type: "submit", value: "Search",
-            class: "btn btn-green form-control"}
+          = submit_tag "Search", class: "btn btn-green form-control"
         %h1 Refine your search
         %ul.category
           %span.name
@@ -42,18 +39,6 @@
             = fa_icon 'caret-right'
           .content
             %li Options
-        %ul.category
-          %span.name
-            By posting date
-            = fa_icon 'caret-right'
-          .content
-            %li Options
-        %ul.category
-          %span.name
-            Other
-            = fa_icon 'caret-right'
-          .content
-            %li Other Options
         %h1 Recently viewed
         #recently-viewed
           - @recent_products.each do |product|

@@ -6,6 +6,16 @@ describe ProductsController, type: :controller do
   let(:cards_order)  { orders(:cards_order) }
   let(:cards_order_completed)  { orders(:cards_order_completed) }
 
+  before(:all) do
+    Product.reindex
+  end
+
+  describe '#index' do
+    before { get :index }
+
+    it {expect(response).to render_template('products/index')}
+  end
+
   describe '#show' do
     it 'renders the correct template' do
       get :show, id: number_cards.id
