@@ -79,5 +79,11 @@
                 .price
                   = number_to_currency(product.price, precision: 1)
                 .add-to-cart
-                  %input{type: "button", value: "Add to cart",
-                    class: "btn btn-cart"}
+                  - unless is_in_cart?(@order, product)
+                    = add_to_cart(product)
+                  - else
+                    .in-cart
+                      Already in
+                      = succeed "." do
+                        = link_to 'your cart', order_url(@order),
+                          data: { turbolinks: false }

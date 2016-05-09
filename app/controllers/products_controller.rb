@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show]
+  before_action :find_or_create_order, only: [:show, :index]
 
   def index
     @results = Product.search(
@@ -13,7 +14,13 @@ class ProductsController < ApplicationController
     @query = search_query == '*' ? '' : search_query
   end
 
-  def show
+  private
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  def find_or_create_order
     if session[:order_id].present?
       @order = Order.find(session[:order_id]).active? ?
         Order.find(session[:order_id]) : Order.create(state: :active)
@@ -21,12 +28,6 @@ class ProductsController < ApplicationController
       @order = Order.create(state: :active)
     end
     session[:order_id] = @order.id
-  end
-
-  private
-
-  def set_product
-    @product = Product.find(params[:id])
   end
 
   def search_query

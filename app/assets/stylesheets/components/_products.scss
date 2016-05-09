@@ -1,4 +1,8 @@
 #product {
+  #primary-image {
+    margin-bottom: 20px;
+  }
+
   .images-container {
     img {
       max-height: 200px;
@@ -182,5 +186,10 @@
     .btn {
       margin-top: 15px;
     }
+  }
+
+  .in-cart {
+    text-transform: initial;
+    margin-top: 8px;
   }
 }

@@ -1,5 +1,9 @@
 .order-line-item {
-  min-height: 88px;
+  min-height: 140px;
+
+  .content {
+    width: 80%;
+  }
 
   button {
     padding: 0.175rem 0.6rem;
@@ -16,6 +20,12 @@
   .product-description {
     padding: 10px 0;
     font-size: 0.95rem;
+  }
+
+  .cart-thumb {
+    width: 170px;
+    float: left;
+    margin-right: 20px;
   }
 }
 

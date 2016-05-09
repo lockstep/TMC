@@ -53,7 +53,7 @@ group :development do
   gem 'quiet_assets'
   gem 'binding_of_caller'
   gem 'web-console', '~> 2.0'
-  gem 'spring'
+  gem 'spring', '1.6.4'
   gem 'erb2haml'
   gem 'spring-commands-rspec'
 end

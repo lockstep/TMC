@@ -1,5 +1,7 @@
 .list-group-item.order-line-item
-  .pull-xs-left
+  .pull-xs-left.content
+    = image_tag line_item.product.primary_image.url,
+      alt: line_item.product.name, class: 'cart-thumb'
     = link_to product_url(line_item.product) do
       %h5.product-name
         = line_item.product.name

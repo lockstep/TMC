@@ -317,7 +317,7 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       redis (~> 3.2, >= 3.2.1)
     slop (3.6.0)
-    spring (1.6.3)
+    spring (1.6.4)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sprockets (3.5.2)
@@ -403,7 +403,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   searchkick (~> 1.2.1)
   sidekiq (~> 4.1.0)
-  spring
+  spring (= 1.6.4)
   spring-commands-rspec
   stripe (~> 1.36.1)
   stripe-ruby-mock
