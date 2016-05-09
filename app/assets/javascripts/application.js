@@ -15,5 +15,6 @@
 //= require turbolinks
 //= require turbolinks-compatibility
 //= require tether
+//= require ion.rangeSlider
 //= require bootstrap
 //= require tmc

@@ -38,7 +38,8 @@
             By price
             = fa_icon 'caret-right'
           .content
-            %li Options
+            %input{type: "text", id: "price-range", class: "form-control",
+              placeholder: "your name"}
         %h1 Recently viewed
         #recently-viewed
           - @recent_products.each do |product|

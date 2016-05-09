@@ -36,16 +36,27 @@ TMC.define_component('product index page', function() {
     $(this).closest('.category').toggleClass('active');
     $(this).closest('.category').find('.content').slideToggle('slow');
   });
+
+  $("#price-range").ionRangeSlider({
+    type: "double",
+    grid: true,
+    min: 0,
+    max: 70,
+    from: 1,
+    to: 49,
+    step: 0.1,
+    prefix: "$"
+  });
 });
 
-TMC.setup = function() {
-  for (var c in TMC.components) {
-    var component = TMC.components[c];
-    component.setup();
-  }
-};
+  TMC.setup = function() {
+    for (var c in TMC.components) {
+      var component = TMC.components[c];
+      component.setup();
+    }
+  };
 
-document.addEventListener("turbolinks:load", function() {
-  TMC.setup();
-});
+  document.addEventListener("turbolinks:load", function() {
+    TMC.setup();
+  });
 
