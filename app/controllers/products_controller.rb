@@ -7,11 +7,17 @@ class ProductsController < ApplicationController
       search_query,
       misspellings: { edit_distance: 2 },
       fields: [:name, :description],
+      where: {
+        price: price_range.split(';')[0]..price_range.split(';')[1]
+      },
+      order: sort_by,
       page: page,
       per_page: 10
     )
     @recent_products = @results
     @query = search_query == '*' ? '' : search_query
+    @price_range = price_range
+    @sort_by = params[:sort] || 'price:asc'
   end
 
   private
@@ -32,6 +38,19 @@ class ProductsController < ApplicationController
 
   def search_query
     params[:q].present? ? params[:q] : '*'
+  end
+
+  def price_range
+    params[:price_range].present? ? params[:price_range] : '1;49'
+  end
+
+  def sort_by
+    return { price: :asc } unless params[:sort].present?
+    attribute = params[:sort].split(':')[0]
+    direction = params[:sort].split(':')[1]
+    result = {}
+    result[attribute] = direction
+    result
   end
 
   def page

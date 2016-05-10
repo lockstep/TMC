@@ -1,0 +1,56 @@
+%h1 Product Categories
+%ul.category
+  %span.name
+    Main Category 1
+    = fa_icon 'caret-right'
+  .content
+    %li Subcategory 1
+    %li Subcategory 2
+    %li Subcategory 3
+    %li Subcategory 4
+    %li Subcategory 5
+    %li Subcategory 6
+    %li Subcategory 7
+%ul.category
+  %span.name
+    Main Category 2
+    = fa_icon 'caret-right'
+  .content
+    %li Subcategory 1
+    %li Subcategory 2
+    %li Subcategory 3
+
+%h1 Looking for something?
+.query-container
+  = text_field_tag :q, @query, id: 'query', class: "form-control"
+  %span.icon
+    = fa_icon 'search'
+%ul.category
+  %span.name#refine
+    Refine
+  = fa_icon 'caret-right'
+  .content
+    = text_field_tag :price_range, @price_range,
+      id: "price-range", class: "form-control"
+  = submit_tag "Search", id: 'search-button',
+    class: "btn btn-green form-control"
+
+%h1 Recently viewed
+#recently-viewed
+  - @recent_products.each do |product|
+    .row.product
+      .col-xs-6
+        = link_to product_url(product) do
+          = image_tag product.primary_image.url,
+            alt: product.name, class: 'img-fluid'
+      .col-xs-6.name
+        = link_to product.name, product_url(product), class: 'name'
+%h1 Be the first to know
+%form#newsletter
+  %input{type: "text", name: "first_name", class: "form-control",
+    placeholder: "your name"}
+  %input{type: "email", name: "email", class: "form-control",
+    placeholder: "your email address"}
+  %input{type: "submit", value: "Submit",
+    class: "btn btn-green form-control"}
+

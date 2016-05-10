@@ -37,15 +37,31 @@ TMC.define_component('product index page', function() {
     $(this).closest('.category').find('.content').slideToggle('slow');
   });
 
+  var range = $('#price-range').val();
+  var from, to;
+  if (range) {
+    from = range.split(';')[0];
+    to = range.split(';')[1];
+  }
+
+  // show if the user set custom values
+  if (from != 1 || to != 49) {
+    $('#sidebar #refine').click();
+  }
+
   $("#price-range").ionRangeSlider({
     type: "double",
     grid: true,
     min: 0,
     max: 70,
-    from: 1,
-    to: 49,
+    from: from,
+    to: to,
     step: 0.1,
     prefix: "$"
+  });
+
+  $('#sort').change(function() {
+    $('#product-search-form').submit();
   });
 });
 

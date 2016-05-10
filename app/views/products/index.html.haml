@@ -1,90 +1,12 @@
 - content_for :title, 'Products'
 
 %section#products
-  .container
-    .row
-      .col-sm-4#sidebar
-        %h1 Product Categories
-        %ul.category
-          %span.name
-            Main Category 1
-            = fa_icon 'caret-right'
-          .content
-            %li Subcategory 1
-            %li Subcategory 2
-            %li Subcategory 3
-            %li Subcategory 4
-            %li Subcategory 5
-            %li Subcategory 6
-            %li Subcategory 7
-        %ul.category
-          %span.name
-            Main Category 2
-            = fa_icon 'caret-right'
-          .content
-            %li Subcategory 1
-            %li Subcategory 2
-            %li Subcategory 3
-        %h1 Looking for something?
-        = form_tag products_path, method: :get do
-          .query-container
-            = text_field_tag :q, @query, class: "form-control"
-            %span.icon
-              = fa_icon 'search'
-          = submit_tag "Search", class: "btn btn-green form-control"
-        %h1 Refine your search
-        %ul.category
-          %span.name
-            By price
-            = fa_icon 'caret-right'
-          .content
-            %input{type: "text", id: "price-range", class: "form-control",
-              placeholder: "your name"}
-        %h1 Recently viewed
-        #recently-viewed
-          - @recent_products.each do |product|
-            .row.product
-              .col-xs-6
-                = link_to product_url(product) do
-                  = image_tag product.primary_image.url,
-                    alt: product.name, class: 'img-fluid'
-              .col-xs-6.name
-                = link_to product.name, product_url(product), class: 'name'
-        %h1 Be the first to know
-        %form#newsletter
-          %input{type: "text", name: "first_name", class: "form-control",
-            placeholder: "your name"}
-          %input{type: "email", name: "email", class: "form-control",
-            placeholder: "your email address"}
-          %input{type: "submit", value: "Submit",
-            class: "btn btn-green form-control"}
-      .col-sm-8#products-list
-        .sort-bar
-          %span.status
-            Showing all products
-          .sort
-            Sort:
-            %form#sort-by
-              %select{name: 'sort-by'}
-                %option{value: 'date'} BY DATE ADDED
-                %option{value: 'price'} BY PRICE
-        .row.list
-          - @results.each do |product|
-            .col-md-4.product-tile
-              = link_to product_url(product) do
-                = image_tag product.primary_image.url,
-                  alt: product.name, class: 'img-fluid'
-              .details
-                = link_to product.name,
-                  product_url(product), class: 'name'
-                .price
-                  = number_to_currency(product.price, precision: 1)
-                .add-to-cart
-                  - unless is_in_cart?(@order, product)
-                    = add_to_cart(product)
-                  - else
-                    .in-cart
-                      Already in
-                      = succeed "." do
-                        = link_to 'your cart', order_url(@order),
-                          data: { turbolinks: false }
+  = form_tag products_path, id: 'product-search-form', method: :get do
+    .container
+      .row
+        .col-sm-4#sidebar
+          = render 'sidebar'
+        .col-sm-8#products-list
+          = render 'sort_bar'
+          = render 'products_list'
+

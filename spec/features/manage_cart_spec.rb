@@ -6,7 +6,9 @@ describe 'Ordering process', type: :feature do
   context 'adding a product to cart' do
     before do
       @product = products(:number_board)
+      LineItem.destroy_all
     end
+
     it 'takes the user to the cart summary' do
       visit product_path @product
       expect(page).to have_content @product.name

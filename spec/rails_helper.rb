@@ -55,4 +55,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.before(:each, js: true) do
+    page.driver.browser.url_blacklist = [
+      "https://fonts.googleapis.com",
+      "http://connect.facebook.net",
+      "http://platform.twitter.com"
+    ]
+  end
 end

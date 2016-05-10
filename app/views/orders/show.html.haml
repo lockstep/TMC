@@ -10,6 +10,8 @@
           Your cart is empty.
         - else
           = render @order.line_items
+      .text-xs-center
+        = link_to 'Keep shopping', products_path, class: 'btn btn-cart'
     .col-md-4
       .cart-actions
         = total_pricing
