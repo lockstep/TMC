@@ -1,23 +1,24 @@
 - content_for :title, 'Welcome Back!'
 
 .container
-  .row
-    .col-sm-12
-      %h2 Welcome Back!
-      = form_for(resource, as: resource_name,
-        url: session_path(resource_name)) do |f|
+  %h2.text-xs-center Welcome Back!
+  #auth
+    = render 'users/shared/social'
+    = form_for(resource, as: resource_name,
+      url: session_path(resource_name)) do |f|
+      .form-group
+        = f.label :email, class: 'form-label'
+        %br/
+        = f.email_field :email, autofocus: true, class: 'form-control'
+      .form-group
+        = f.label :password, class: 'form-label'
+        %br/
+        = f.password_field :password, autocomplete: "off",
+          class: 'form-control'
+      - if devise_mapping.rememberable?
         .field
-          = f.label :email
-          %br/
-          = f.email_field :email, autofocus: true
-        .field
-          = f.label :password
-          %br/
-          = f.password_field :password, autocomplete: "off"
-        - if devise_mapping.rememberable?
-          .field
-            = f.check_box :remember_me
-            = f.label :remember_me
-        .actions
-          = f.submit "Log in"
-      = render "users/shared/links"
+          = f.check_box :remember_me
+          = f.label :remember_me
+      .actions
+        = f.submit "Log in", class: 'btn btn-cart form-control'
+    = render "users/shared/links"

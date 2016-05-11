@@ -1,0 +1,7 @@
+.social-login-icon
+  = link_to omniauth_authorize_path('user', 'facebook') do
+    = image_tag 'fb_login.png', alt: 'Sign in using Facebook',
+      class: 'facebook'
+%hr
+.text-xs-center
+  .or or

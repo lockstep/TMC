@@ -1,0 +1,44 @@
+#auth {
+  width: 320px;
+  padding: 10px;
+  margin: 40px auto;
+
+  .actions {
+    margin: 20px 0 10px;
+  }
+
+  .or {
+    display: inline-block;
+    top: -27px;
+    position: relative;
+    background: white;
+    padding: 0 15px;
+    color: darken($grey, 40%);
+  }
+
+  .social-login-icon {
+    display: inline-block;
+    margin-bottom: 18px;
+    width: 100%;
+    text-align: center;
+
+    .facebook {
+      width: 303px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #auth {
+    margin: 0 5% 0;
+    left: auto;
+    width: 90%;
+
+    .social-login-icon {
+      .facebook {
+        margin: 30px auto 0;
+        width: 90%;
+      }
+    }
+  }
+}
