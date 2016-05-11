@@ -14,16 +14,29 @@ class ProductsController < ApplicationController
       page: page,
       per_page: 10
     )
-    @recent_products = @results
+    @recent_products = recently_viewed
     @query = search_query == '*' ? '' : search_query
     @price_range = price_range
     @sort_by = params[:sort] || 'price:asc'
+  end
+
+  def show
+    session[:recently_viewed] ||= []
+    session[:recently_viewed].delete(@product.id)
+    session[:recently_viewed].unshift(@product.id)
+    session[:recently_viewed] = session[:recently_viewed].take(5)
   end
 
   private
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def recently_viewed
+    return [] if session[:recently_viewed].nil?
+    products = Product.find(Array(session[:recently_viewed])).group_by(&:id)
+    session[:recently_viewed].map { |i| products[i].first }
   end
 
   def find_or_create_order

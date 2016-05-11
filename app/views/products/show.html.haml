@@ -10,7 +10,8 @@
   .container
     .row
       .col-sm-12.navigation
-        = link_to '<  Back to search', products_url
+        .back &lt;
+        = link_to 'Back to search', products_url
     .row
       .col-md-7
         = image_tag @product.primary_image.url,

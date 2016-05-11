@@ -20,6 +20,11 @@
     font-size: 10pt;
     margin-bottom: 35px;
 
+    .back {
+      display: inline-block;
+      margin-right: 5px;
+    }
+
     a {
       color: $black;
     }

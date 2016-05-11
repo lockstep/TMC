@@ -1,0 +1,13 @@
+#recently-viewed
+  - if @recent_products.empty?
+    .text-xs-center
+      None yet :(
+  - else
+    - @recent_products.each do |product|
+      .row.product
+        .col-xs-6
+          = link_to product_url(product) do
+            = image_tag product.primary_image.url,
+              alt: product.name, class: 'img-fluid'
+        .col-xs-6.name
+          = link_to product.name, product_url(product), class: 'name'

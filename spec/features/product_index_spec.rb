@@ -37,4 +37,17 @@ describe 'Product search page', type: :feature do
       end
     end
   end
+
+  context 'recently viewed' do
+    it 'lists the recently viewed products' do
+      # make sure the visited product is listed, but only once
+      visit products_path
+      expect(page).to have_content 'None yet :('
+      visit product_path @product
+      click_link 'Back to search'
+      within('#recently-viewed') do
+        expect(page).to have_content @product.name
+      end
+    end
+  end
 end
