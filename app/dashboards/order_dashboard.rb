@@ -4,7 +4,7 @@ class OrderDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     user: Field::BelongsTo,
-    state: Field::String,
+    state: Enum,
     total_price: Field::Number.with_options(
       title: "Order Total",
       prefix: "$",

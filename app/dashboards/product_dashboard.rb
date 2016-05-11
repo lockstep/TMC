@@ -19,6 +19,7 @@ class ProductDashboard < Administrate::BaseDashboard
       multiplier: 0.01,
       decimals: 1,
     ),
+    featured: Field::Boolean,
     description: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -32,6 +33,7 @@ class ProductDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
+    :featured,
     :price,
     :downloadable,
     :images
@@ -46,6 +48,7 @@ class ProductDashboard < Administrate::BaseDashboard
     :downloadable,
     :name,
     :price,
+    :featured,
     :description,
     :created_at,
     :updated_at,
@@ -60,6 +63,7 @@ class ProductDashboard < Administrate::BaseDashboard
     :name,
     :price,
     :description,
+    :featured
   ]
 
   # Overwrite this method to customize how products are displayed

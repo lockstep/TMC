@@ -27,4 +27,14 @@ describe Product, type: :model do
       expect(number_cards.images).to include primary_image, secondary_image
     end
   end
+
+  describe '#featured' do
+    before do
+      @featured = products(:flamingo)
+    end
+    it 'returns an array of featured products' do
+      expect(Product.featured.size).to eq 1
+      expect(Product.featured).to include @featured
+    end
+  end
 end

@@ -12,7 +12,7 @@ class PresentationDashboard < Administrate::BaseDashboard
     name: Field::String,
     summary: Field::String,
     topic: Field::BelongsTo,
-    section: Field::Enum,
+    section: Enum,
     products: Field::HasMany,
     description: WysiwygField,
     created_at: Field::DateTime,

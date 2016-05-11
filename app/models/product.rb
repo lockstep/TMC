@@ -6,6 +6,8 @@ class Product < ActiveRecord::Base
 
   has_and_belongs_to_many :presentations
   has_one :downloadable
+  scope :featured, -> { where(featured: true) }
+
   delegate :download_url, to: :downloadable
 
   def search_data
