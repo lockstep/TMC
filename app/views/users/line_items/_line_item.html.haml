@@ -1,6 +1,13 @@
-%li
-  .row
-    .col-sm-4
-      = line_item.product.name
-    .col-sm-2
+.list-group-item.order-line-item.row
+  .col-sm-3
+    = image_tag line_item.product.primary_image.url,
+      alt: line_item.product.name, class: 'cart-thumb'
+  .col-sm-9
+    = link_to product_url(line_item.product) do
+      %h5.product-name
+        = line_item.product.name
+    %span.product-price
       = "$#{line_item.product.price}"
+    %p.product-description
+      = line_item.product.description
+%hr.hidden-sm-up

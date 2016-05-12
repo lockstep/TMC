@@ -1,16 +1,18 @@
-.container
+- content_for :title, 'Your Order'
+
+.container#cart
+  %h3.text-xs-center
+    Your Order
   .row
-    .col-sm-12
-      %h3
-        = "Order ##{@order.id}"
-
-      %ul
-        - @order.line_items.each do |line_item|
-          = render line_item
-
-        %li
-          .row
-            .col-sm-4
-              total
-            .col-sm-2
-              = "$#{@order.total_price}"
+    .col-sm-8.col-sm-offset-2
+      #cart-contents.list-group
+        = render @order.line_items
+  .row
+    .col-sm-8.col-sm-offset-2
+      .details.text-xs-left
+        .time
+          Created on:
+          = time_tag @order.created_at
+        .price
+          Order total:
+          = number_to_currency(@order.total_price, precision: 1)

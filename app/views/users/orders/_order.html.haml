@@ -9,5 +9,5 @@
         $
         = order.total_price
     .col-sm-2
-      %a.btn.btn-info.order_detail{href: "/users/#{@user.id}/orders/#{order.id}"}
-        detail
+      = link_to 'detail', user_order_path(@user, order),
+        class: 'btn btn-info order_detail'

@@ -8,6 +8,7 @@ describe OrdersController, type: :controller do
   let(:paul)                   { users(:paul) }
   let(:own_order_unfinished)   { orders(:cards_order) }
   let(:own_order_paid)         { orders(:cards_order_completed) }
+  let(:other_order_paid)       { orders(:paid_animal_cards_order) }
   let(:other_order)            { orders(:animal_cards_order) }
   let(:unassigned_order)       { orders(:unassigned_order) }
 
@@ -31,6 +32,25 @@ describe OrdersController, type: :controller do
 
         it { expect(response).to redirect_to(error_403_path) }
       end
+
+      context 'paid order' do
+        context 'own order' do
+          before do
+            get :show, id: own_order_paid.id
+          end
+          it 'takes the user to their order history view' do
+            expect(response).to redirect_to(
+              user_order_path(michelle, own_order_paid)
+            )
+          end
+        end
+        context "somebody else's order" do
+          before do
+            get :show, id: other_order_paid.id
+          end
+          it { expect(response).to redirect_to(error_403_path) }
+        end
+      end
     end
 
     context 'not signed in' do
@@ -49,14 +69,6 @@ describe OrdersController, type: :controller do
 
         it { expect(response).to render_template('orders/show') }
       end
-    end
-
-    context 'paid order' do
-      before do
-        sign_in michelle
-        get :show, id: own_order_paid.id
-      end
-      it { expect(response).to redirect_to(error_403_path) }
     end
   end
 

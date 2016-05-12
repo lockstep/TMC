@@ -5,7 +5,7 @@ class Ability
     user ||= User.new
     can [:show, :update], User, id: user.id
     can :show, Order do |order|
-      (!order.user || order.user == user) && !order.paid?
+      !order.user || order.user == user
     end
     can :review, Order do |order|
       order.user == user && order.paid?

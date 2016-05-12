@@ -4,7 +4,7 @@ describe 'Manage user account', :devise do
 
   let(:user) { users(:michelle) }
 
-  context 'signing in' do
+  context 'signed in' do
     before do
       signin(user.email, 'qawsedrf')
     end

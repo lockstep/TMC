@@ -42,7 +42,7 @@ RSpec.describe Users::OrdersController, type: :controller do
     context 'user\'s signed in and order\'s owner' do
       before do
         sign_in paul
-        get :show, user_id: paul.id, id: animal_cards_order.id
+        get :show, user_id: paul.id, id: paid_animal_cards_order.id
       end
 
       it { expect(response).to render_template('users/orders/show') }
