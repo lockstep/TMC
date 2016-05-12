@@ -27,3 +27,25 @@
     background: darken($grey, 20%);
   }
 }
+
+.btn-secondary {
+  background: white;
+  color: darken($grey, 40%);
+  border: 1px solid darken($grey, 40%);
+  font-size: 9pt;
+
+  &:hover {
+    background: darken($grey, 20%);
+  }
+}
+
+.btn-checkout {
+  padding: 20px 35px;
+  font-size: 12pt;
+  background: $blue;
+  color: white;
+
+  &:hover {
+    background: darken($blue, 10%);
+  }
+}

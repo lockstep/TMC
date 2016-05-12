@@ -24,10 +24,6 @@ class ChargesController < ApplicationController
     @order = Order.find(params[:order_id])
   end
 
-  def payment_params
-    params.require(:payment).permit(:order_id)
-  end
-
   def stripe_processing
     create_stripe_customer
     create_stripe_charge
@@ -44,7 +40,7 @@ class ChargesController < ApplicationController
     Stripe::Charge.create(
       customer: @customer.id,
       amount: @amount,
-      description: "payment for order ##{@order.id}",
+      description: "payment for Order ##{@order.id}",
       currency: 'usd',
     )
   end

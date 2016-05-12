@@ -1,10 +1,10 @@
-.order-line-item {
-  min-height: 140px;
-
-  .content {
-    width: 80%;
+#cart {
+  h3 {
+    margin-bottom: 40px;
   }
+}
 
+.order-line-item {
   button {
     padding: 0.175rem 0.6rem;
   }
@@ -23,12 +23,39 @@
   }
 
   .cart-thumb {
-    width: 170px;
-    float: left;
-    margin-right: 20px;
+    width: 100%;
   }
 }
 
 #cart-contents {
   margin: 20px 0 30px;
+}
+
+#checkout-container {
+  margin-top: 45px;
+
+  hr {
+    width: 40%;
+  }
+
+  .or {
+    display: inline-block;
+    top: -27px;
+    position: relative;
+    background: white;
+    padding: 0 15px;
+    color: #6a7d88;
+  }
+
+  .prompt {
+    margin-bottom: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  #cart-contents {
+    .list-group-item {
+      border: none;
+    }
+  }
 }

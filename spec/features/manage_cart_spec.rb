@@ -36,6 +36,7 @@ describe 'Ordering process', type: :feature do
       expect(page).to have_content @product.name
       find(:css, '.btn-danger').click
       expect(page).to have_content 'Your cart is empty'
+      expect(page).not_to have_link 'Checkout'
     end
   end
 end

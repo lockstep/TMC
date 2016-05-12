@@ -32,6 +32,7 @@ class OrderDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :user,
+    :state,
     :products,
     :total_price,
     :created_at,

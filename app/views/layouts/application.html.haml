@@ -8,6 +8,8 @@
       = "#{yield(:title)} | #{t(:site_name)}"
     = favicon_link_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'https://checkout.stripe.com/checkout.js',
+      'data-turbolinks-track' => false
     = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato:300'
     = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lora:400italic'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
@@ -21,5 +23,6 @@
       = yield
     %footer{role: "contentinfo"}
       = render "layouts/footer/content"
+    = yield :javascript
 
 

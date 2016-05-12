@@ -1,18 +1,54 @@
 - content_for :title, 'Your Cart'
 
-.container
+.container#cart
+  %h3.text-xs-center
+    Your Cart
   .row
-    .col-md-8
-      %h3
-        Your Cart
+    .col-sm-8.col-sm-offset-2
       #cart-contents.list-group
         - if @order.line_items.empty?
-          Your cart is empty.
+          .text-xs-center
+            Your cart is empty :(
         - else
           = render @order.line_items
-      .text-xs-center
-        = link_to 'Keep shopping', products_path, class: 'btn btn-cart'
-    .col-md-4
-      .cart-actions
-        = total_pricing
-        = checkout_actions
+      #checkout-container.text-xs-center
+        - unless @order.line_items.empty?
+          .prompt
+            - if current_user
+              = link_to 'Checkout', '#', id: 'checkout-button',
+                class: 'btn btn-checkout'
+            - else
+              Please
+              = link_to 'Log in', new_user_session_path
+              to check out
+          %hr
+          .text-xs-center
+            .or or
+        = link_to 'Keep shopping', products_path, class: 'btn btn-secondary'
+
+= form_for [@order, Charge.new], html: { id: 'checkout-form' } do |f|
+  = hidden_field_tag 'stripeToken'
+  = hidden_field_tag 'stripeEmail'
+
+- content_for :javascript do
+  :javascript
+    var handler = StripeCheckout.configure({
+      key: "#{ENV.fetch('STRIPE_KEY')}",
+      image: "#{image_url 'stripe_cover.png'}",
+      locale: 'auto',
+      token: function(token) {
+        $("#stripeToken").val(token.id);
+        $("#stripeEmail").val(token.email);
+        $("#checkout-form").submit();
+      }
+    });
+
+    $('#checkout-button').on('click', function(e) {
+      e.preventDefault();
+      handler.open({
+        name: 'Your order',
+        description: 'from The Montessori Company',
+        amount: #{@order.total_price*100}
+      });
+    });
+
