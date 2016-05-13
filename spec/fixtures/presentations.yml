@@ -3,4 +3,3 @@ quiz_game:
   summary: This is a summary of Quiz game
   description: This is not a game you're looking for
   topic: memory_quiz
-  products: number_cards, number_board, animal_cards

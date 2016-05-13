@@ -8,10 +8,9 @@ describe Product, type: :model do
   let(:primary_image)    { images(:primary) }
   let(:secondary_image)  { images(:secondary) }
 
-  describe '#presentations' do
-    it 'responds to .presentations call correctly' do
-      expect(number_cards.presentations.count).to eq(1)
-      expect(number_cards.presentations.first).to eq(quiz_game)
+  describe '#presentation' do
+    it 'returns the presentation it belongs to' do
+      expect(number_cards.presentation).to eq quiz_game
     end
   end
 

@@ -4,7 +4,7 @@ class Presentation < ActiveRecord::Base
   searchkick text_middle: [:name]
 
   belongs_to :topic
-  has_and_belongs_to_many :products
+  has_many :products
 
   enum section: [:default, :language, :memory_games]
 

@@ -2,19 +2,19 @@ number_cards:
   name: Number Cards
   price: 10.00
   description: cards of numbers
-  presentations: quiz_game
+  presentation: quiz_game
 
 number_board:
   name: Number Board
   price: 15.00
   description: put a card onto it
-  presentations: quiz_game
+  presentation: quiz_game
 
 animal_cards:
   name: Animal Cards
   price: 20.00
   description: cards of animal
-  presentations: quiz_game
+  presentation: quiz_game
 
 flamingo:
   name: Flamingo
