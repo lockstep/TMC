@@ -2,8 +2,13 @@ line_item_cards:
   product: number_cards
   order: cards_order
 
-line_item_cards_completed:
+line_item_cards_completed_1:
   product: animal_cards
+  order: cards_order_completed
+
+line_item_cards_completed_2:
+  # this line item has no downloadable
+  product: number_cards
   order: cards_order_completed
 
 unassigned_order_items:

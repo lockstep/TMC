@@ -3,7 +3,7 @@ class Users::MaterialsController < ApplicationController
 
   def index
     authorize! :show, @user
-    @products = @user.purchased_products
+    @products = @user.purchased_products.with_downloadables
   end
 
   private

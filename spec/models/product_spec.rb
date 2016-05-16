@@ -36,4 +36,15 @@ describe Product, type: :model do
       expect(Product.featured).to include @featured
     end
   end
+
+  describe '#with_downloadables' do
+    before do
+      @without_downloadable = products(:flamingo)
+      @with_downloadable = products(:animal_cards)
+    end
+    it 'returns an array of products with downloadables' do
+      expect(Product.with_downloadables.size).to eq 1
+      expect(Product.with_downloadables).to include @with_downloadable
+    end
+  end
 end

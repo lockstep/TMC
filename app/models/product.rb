@@ -7,6 +7,9 @@ class Product < ActiveRecord::Base
   belongs_to :presentation
   has_one :downloadable
   scope :featured, -> { where(featured: true) }
+  scope :with_downloadables, -> {
+    where("products.id IN (SELECT product_id FROM downloadables)")
+  }
 
   delegate :download_url, to: :downloadable
 

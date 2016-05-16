@@ -1,5 +1,6 @@
 describe 'Manage user account', :devise do
   fixtures :users
+  fixtures :line_items
   fixtures :downloadables
 
   let(:user) { users(:michelle) }
@@ -19,7 +20,7 @@ describe 'Manage user account', :devise do
 
     context 'materials' do
       before do
-        allow_any_instance_of(Product).to receive(:download_url)
+        allow_any_instance_of(Downloadable).to receive(:download_url)
           .and_return('my_downloadable_file.pdf')
       end
       it 'can see materials' do
