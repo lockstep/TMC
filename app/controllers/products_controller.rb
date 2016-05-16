@@ -21,10 +21,10 @@ class ProductsController < ApplicationController
   end
 
   def show
-    session[:recently_viewed] ||= []
-    session[:recently_viewed].delete(@product.id)
-    session[:recently_viewed].unshift(@product.id)
-    session[:recently_viewed] = session[:recently_viewed].take(5)
+    update_session
+    if @product.presentation
+      @topics = Topic.where(id: @product.topic.related_topic_ids)
+    end
   end
 
   private
@@ -47,6 +47,13 @@ class ProductsController < ApplicationController
       @order = Order.create(state: :active)
     end
     session[:order_id] = @order.id
+  end
+
+  def update_session
+    session[:recently_viewed] ||= []
+    session[:recently_viewed].delete(@product.id)
+    session[:recently_viewed].unshift(@product.id)
+    session[:recently_viewed] = session[:recently_viewed].take(5)
   end
 
   def search_query

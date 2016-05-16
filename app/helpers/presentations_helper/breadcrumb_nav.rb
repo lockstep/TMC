@@ -6,6 +6,7 @@ module PresentationsHelper
     end
 
     def html
+      return unless @topics
       breadcrumb
     end
 

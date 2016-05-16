@@ -27,18 +27,31 @@ RSpec.describe PresentationsHelper, type: :helper do
   end
 
   describe "#breadcrumb_nav" do
-    before(:all) do
-      assign(:topics, Topic.where(id: [Topic.first.id, Topic.last.id]))
+    context 'topics are found' do
+      before(:all) do
+        assign(:topics, Topic.where(id: [Topic.first.id, Topic.last.id]))
+      end
+
+      subject { helper.breadcrumb_nav }
+
+      it 'include name in parent topics' do
+        is_expected.to include(Topic.first.name)
+      end
+
+      it 'include name in child topics' do
+        is_expected.to include(Topic.last.name)
+      end
     end
+    context 'product has no presentation' do
+      before do
+        assign(:topics, nil)
+      end
 
-    subject { helper.breadcrumb_nav }
+      subject { helper.breadcrumb_nav }
 
-    it 'include name in parent topics' do
-      is_expected.to include(Topic.first.name)
-    end
-
-    it 'include name in child topics' do
-      is_expected.to include(Topic.last.name)
+      it 'does not return breadcrumbs' do
+        is_expected.to be_nil
+      end
     end
   end
 end

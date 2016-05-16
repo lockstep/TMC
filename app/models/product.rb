@@ -12,6 +12,7 @@ class Product < ActiveRecord::Base
   }
 
   delegate :download_url, to: :downloadable
+  delegate :topic, to: :presentation
 
   def search_data
     {
