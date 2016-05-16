@@ -12,7 +12,7 @@ describe 'Manage user account', :devise do
     it 'can see and edit user details' do
       visit user_path(user)
       expect(page).to have_content user.email
-      click_link 'Edit'
+      click_link 'My Details'
       fill_in_user_form
       expect(page).to have_content user.email
       expect(page).to have_content 'have been updated'

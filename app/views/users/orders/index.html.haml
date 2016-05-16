@@ -1,8 +1,11 @@
 - content_for :title, 'My Orders'
+- @active = 'orders'
 
 .container
   .row
-    .col-sm-12
+    .col-sm-3
+      = render 'users/shared/sidebar'
+    .col-sm-9
       %h3 My Orders
       %ul
         - @orders.each do |order|

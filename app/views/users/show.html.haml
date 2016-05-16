@@ -1,14 +1,11 @@
 - content_for :title, 'My Home'
+- @active = 'dashboard'
 
 .container
   .row
-    .col-sm-12
+    .col-sm-3
+      = render 'users/shared/sidebar'
+    .col-sm-9
       %h3
         = "Hello, #{@user.email}!"
-      %ul
-        %li
-          = link_to 'Edit', edit_user_path(@user)
-        %li
-          = link_to 'My Orders', user_orders_path(@user)
-        %li
-          = link_to 'My Materials', user_materials_path(@user)
+      %p Something adorable goes here

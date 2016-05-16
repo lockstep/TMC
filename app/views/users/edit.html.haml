@@ -1,6 +1,11 @@
+- content_for :title, 'My Details'
+- @active = 'details'
+
 .container
   .row
-    .col-sm-offset-3.col-sm-6
+    .col-sm-3
+      = render 'users/shared/sidebar'
+    .col-sm-9
       = form_for(@user) do |f|
         = render 'users/shared/error_messages'
 

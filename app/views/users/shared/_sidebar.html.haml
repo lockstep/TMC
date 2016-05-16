@@ -1,0 +1,9 @@
+%ul.nav.home-sidebar
+  %li{ class: @active == 'dashboard' ? 'active' : '' }
+    = link_to 'Dashboard', user_path(@user)
+  %li{ class: @active == 'orders' ? 'active' : '' }
+    = link_to 'My Orders', user_orders_path(@user)
+  %li{ class: @active == 'materials' ? 'active' : '' }
+    = link_to 'My Materials', user_materials_path(@user)
+  %li{ class: @active == 'details' ? 'active' : '' }
+    = link_to 'My Details', edit_user_path(@user)
