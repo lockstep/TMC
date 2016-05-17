@@ -1,8 +1,9 @@
 module PresentationsHelper
   class TopicsNav
-    def initialize(view:, topics:)
+    def initialize(view:, controller:)
       @view = view
-      @topics = topics
+      @topics = Topic.where(parent_id: nil)
+      @controller = controller
     end
 
     def html
@@ -13,11 +14,11 @@ module PresentationsHelper
 
     private
 
-    attr_accessor :view, :topics
+    attr_accessor :view
     delegate :link_to, :content_tag, :safe_join, :concat, to: :view
 
     def nav_content
-      topics.collect do |topic|
+      @topics.collect do |topic|
         concat(main_topic(topic))
       end
     end
@@ -29,14 +30,14 @@ module PresentationsHelper
     end
 
     def main_topic_link(main_topic)
-      link_to(content_tag(:h4, main_topic.name),
-              controller: :presentations,
+      link_to(content_tag(:span, main_topic.name, class: 'name'),
+              controller: @controller,
               topic_ids: main_topic.id
              )
     end
 
     def child_topics(children)
-      content_tag :ul do
+      content_tag :ul, class: 'category' do
         children.collect do |child_topic|
           concat(child_link(child_topic))
         end
@@ -46,7 +47,7 @@ module PresentationsHelper
     def child_link(child_topic)
       content_tag :li do
         link_to(child_topic.name,
-                controller: :presentations,
+                controller: @controller,
                 topic_ids: child_topic.id,
                )
       end

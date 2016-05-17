@@ -18,6 +18,7 @@ class Product < ActiveRecord::Base
     {
       name: name,
       description: description,
+      topic_ids: topic.related_topic_ids,
       created_at: created_at,
       price: price
     }

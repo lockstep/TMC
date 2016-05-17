@@ -3,9 +3,7 @@ describe "presentations/index" do
   fixtures :topics
 
   before do
-    assign(:topics_nav, Topic.includes(:children).where(parent_id: nil))
     assign(:presentations, Presentation.all.page(1))
-
     render
   end
 

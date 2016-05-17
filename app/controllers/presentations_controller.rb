@@ -1,6 +1,5 @@
 class PresentationsController < ApplicationController
   before_action :set_presentation, only: [:show]
-  before_action :set_topics_nav, only: [:show, :index]
 
   def index
     if params[:topic_ids].nil?
@@ -57,9 +56,5 @@ class PresentationsController < ApplicationController
 
   def set_presentation
     @presentation = Presentation.find(params[:id])
-  end
-
-  def set_topics_nav
-    @topics_nav = Topic.includes(:children).where(parent_id: nil)
   end
 end

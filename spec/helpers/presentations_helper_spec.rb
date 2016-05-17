@@ -7,10 +7,6 @@ RSpec.describe PresentationsHelper, type: :helper do
   let(:child_topics)  { Topic.where.not(parent_id: nil) }
 
   describe "#topics_nav" do
-    before(:all) do
-      assign(:topics_nav, Topic.includes(:children).where(parent_id: nil))
-    end
-
     subject { helper.topics_nav }
 
     it 'include all names in parent topics' do

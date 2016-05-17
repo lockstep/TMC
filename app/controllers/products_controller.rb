@@ -8,7 +8,8 @@ class ProductsController < ApplicationController
       misspellings: { edit_distance: 2 },
       fields: [:name, :description],
       where: {
-        price: price_range.split(';')[0]..price_range.split(';')[1]
+        price: price_range.split(';')[0]..price_range.split(';')[1],
+        topic_ids: [params[:topic_ids]]
       },
       order: sort_by,
       page: page,

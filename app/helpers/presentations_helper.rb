@@ -1,6 +1,6 @@
 module PresentationsHelper
-  def topics_nav
-    TopicsNav.new(view: self, topics: @topics_nav).html
+  def topics_nav(controller: :presentations)
+    TopicsNav.new(view: self, controller: controller).html
   end
 
   def breadcrumb_nav
