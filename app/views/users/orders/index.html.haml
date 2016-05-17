@@ -1,12 +1,19 @@
 - content_for :title, 'My Orders'
 - @active = 'orders'
 
-.container
+.container#account
   .row
     .col-sm-3
       = render 'users/shared/sidebar'
     .col-sm-9
       %h3 My Orders
-      %ul
-        - @orders.each do |order|
-          = render( partial: 'users/orders/order', locals: { order: order } )
+      %table.table.table-hover
+        %thead
+          %tr
+            %th Order #
+            %th Purchased On
+            %th Items
+            %th Total
+        %tbody
+          - @orders.each do |order|
+            = render 'users/orders/order', order: order

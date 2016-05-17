@@ -1,18 +1,22 @@
 - content_for :title, 'My Details'
 - @active = 'details'
 
-.container
+.container#account
   .row
     .col-sm-3
       = render 'users/shared/sidebar'
     .col-sm-9
+      %h3 My Details
       = form_for(@user) do |f|
         = render 'users/shared/error_messages'
-
-        = f.label :password
-        = f.password_field :password, class: 'form-control'
-
-        = f.label :password_confirmation, "Confirmation"
-        = f.password_field :password_confirmation, class: 'form-control'
-
-        = f.submit "Save changes", class: "btn btn-primary"
+        .form-group
+          = f.label :first_name, class: 'form-label'
+          = f.text_field :first_name, class: 'form-control'
+        .form-group
+          = f.label :password, class: 'form-label'
+          = f.password_field :password, class: 'form-control'
+        .form-group
+          = f.label :password_confirmation, class: 'form-label'
+          = f.password_field :password_confirmation, class: 'form-control'
+        .form-group
+          = f.submit "Save changes", class: "btn btn-primary"

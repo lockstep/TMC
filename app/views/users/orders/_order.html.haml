@@ -1,13 +1,9 @@
-%li
-  .row
-    .col-sm-1
-      .order_id
-        ID:
-        = link_to order.id, user_order_path(order.user, order)
-    .col-sm-2
-      .order_price
-        $
-        = order.total_price
-    .col-sm-2
-      = link_to 'detail', user_order_path(@user, order),
-        class: 'btn btn-info order_detail'
+%tr
+  %th{scope: 'row'}
+    = link_to order.id, user_order_path(order.user, order)
+  %td
+    = time_tag order.created_at
+  %td
+    = order.line_items.count
+  %td
+    = number_to_currency(order.total_price, precision: 1)

@@ -1,12 +1,25 @@
 - content_for :title, 'My Materials'
 - @active = 'materials'
 
-.container
+.container#account
   .row
     .col-sm-3
       = render 'users/shared/sidebar'
     .col-sm-9
       %h3 My Materials
-      %ul
-        - @products.each do |product|
-          %li= link_to product.name, product.download_url
+      %table.table.table-hover
+        %thead
+          %tr
+            %th Product
+            %th Presentation
+            %th Download
+        %tbody
+          - @products.each do |product|
+            %tr
+              %th{scope: 'row'}
+                = link_to product.name, product_path(product)
+              %td
+                = link_to product.presentation.name,
+                  presentation_path(product.presentation)
+              %td
+                = link_to 'Download', product.download_url

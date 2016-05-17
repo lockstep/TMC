@@ -1,14 +1,17 @@
 - content_for :title, 'Your Order'
+- @active = 'orders'
 
 .container#cart
-  %h3.text-xs-center
-    Your Order
   .row
-    .col-sm-8.col-sm-offset-2
+    .col-sm-3
+      = render 'users/shared/sidebar'
+    .col-sm-9#user-order
+      .navigation
+        .back &lt;
+        = link_to 'Back to My Orders', user_orders_path(@user)
+      %h3 Order ##{@order.id}
       #cart-contents.list-group
         = render @order.line_items
-  .row
-    .col-sm-8.col-sm-offset-2
       .details.text-xs-left
         .time
           Created on:

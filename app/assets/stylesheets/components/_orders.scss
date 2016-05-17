@@ -2,6 +2,19 @@
   h3 {
     margin-bottom: 40px;
   }
+
+  .navigation {
+    margin-bottom: 15px;
+
+    .back {
+      display: inline-block;
+      margin-right: 5px;
+    }
+  }
+}
+
+#user-order {
+  padding: 0 50px;
 }
 
 .order-line-item {
