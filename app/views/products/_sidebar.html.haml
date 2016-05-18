@@ -1,5 +1,7 @@
 %h1 Product Categories
-= topics_nav(controller: :products)
+#product-categories
+  = topics_nav(controller: :products)
+  = hidden_field_tag 'topic_ids', @topic_id
 
 %h1 Looking for something?
 .query-container

@@ -63,6 +63,14 @@ TMC.define_component('product index page', function() {
   $('#sort').change(function() {
     $('#product-search-form').submit();
   });
+
+  // make sidebar link clicks submit the form
+  $('#sidebar #product-categories a').click(function(e) {
+    e.preventDefault();
+    var topicId = $(this).data('topic-id');
+    $("#topic_ids").val(topicId);
+    $('#product-search-form').submit();
+  });
 });
 
   TMC.setup = function() {

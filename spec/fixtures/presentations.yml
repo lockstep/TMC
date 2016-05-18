@@ -3,3 +3,9 @@ quiz_game:
   summary: This is a summary of Quiz game
   description: This is not a game you're looking for
   topic: memory_quiz
+
+birds:
+  name: Birds presentation
+  summary: This presenation talks about birds.
+  description: It has all kinds of cards explaining vocabulary.
+  topic: birds

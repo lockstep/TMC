@@ -21,3 +21,10 @@ flamingo:
   price: 20.00
   description: Hand-painted flamingo card
   featured: true
+
+ostrich:
+  name: Ostrich
+  price: 25.00
+  description: Hand-painted ostrich card
+  featured: false
+  presentation: birds

@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
     @recent_products = recently_viewed
     @query = search_query == '*' ? '' : search_query
     @price_range = price_range
+    @topic_id = params[:topic_ids]
     @sort_by = params[:sort] || 'price:asc'
   end
 
@@ -71,11 +72,9 @@ class ProductsController < ApplicationController
 
   def sort_by
     return { price: :asc } unless params[:sort].present?
-    attribute = params[:sort].split(':')[0]
-    direction = params[:sort].split(':')[1]
-    result = {}
-    result[attribute] = direction
-    result
+    {}.tap do |result|
+      result[params[:sort].split(':')[0]] = params[:sort].split(':')[1]
+    end
   end
 
   def page

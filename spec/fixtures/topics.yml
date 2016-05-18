@@ -11,3 +11,7 @@ memory_puzzle:
   name: Puzzle
   description: This is Description
   parent: memory_game
+
+birds:
+  name: Birds
+  description: Birds cards

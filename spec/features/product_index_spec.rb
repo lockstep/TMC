@@ -2,6 +2,7 @@ describe 'Product search page', type: :feature do
   fixtures :users
   fixtures :products
   fixtures :orders
+  fixtures :topics
 
   before do
     @product = products(:number_board)
@@ -46,6 +47,22 @@ describe 'Product search page', type: :feature do
         click_link Topic.first.name
         # the product with no presentation is not shown
         expect(page).not_to have_content @no_presentation.name
+      end
+      context 'other options are set' do
+        before do
+          @birds = topics(:birds)
+          @ostrich = products(:ostrich)
+          @cards = products(:number_cards)
+        end
+        it 'persists topic selection when other options are set' do
+          visit products_path
+          click_link @birds.name
+          expect(page).to have_content @ostrich.name
+          select('Price: lowest first', :from => 'sort')
+          expect(page).to have_content @ostrich.name
+          # topic stays narrowed down to Birds
+          expect(page).not_to have_content @cards.name
+        end
       end
     end
   end
