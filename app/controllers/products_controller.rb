@@ -7,10 +7,7 @@ class ProductsController < ApplicationController
       search_query,
       misspellings: { edit_distance: 2 },
       fields: [:name, :description],
-      where: {
-        price: price_range.split(';')[0]..price_range.split(';')[1],
-        topic_ids: [params[:topic_ids]]
-      },
+      where: search_options,
       order: sort_by,
       page: page,
       per_page: 10
@@ -59,6 +56,13 @@ class ProductsController < ApplicationController
 
   def search_query
     params[:q].present? ? params[:q] : '*'
+  end
+
+  def search_options
+    {}.tap do |options|
+      options[:price] = price_range.split(';')[0]..price_range.split(';')[1]
+      options[:topic_ids] = [params[:topic_ids]] if params[:topic_ids].present?
+    end
   end
 
   def price_range

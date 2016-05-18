@@ -36,6 +36,18 @@ describe 'Product search page', type: :feature do
         expect(page).not_to have_content 'Number Cards'.upcase
       end
     end
+    context 'search by topics' do
+      before do
+        @no_presentation = products(:flamingo)
+      end
+      it 'shows all products without search options' do
+        visit products_path
+        expect(page).to have_content @no_presentation.name
+        click_link Topic.first.name
+        # the product with no presentation is not shown
+        expect(page).not_to have_content @no_presentation.name
+      end
+    end
   end
 
   context 'recently viewed' do

@@ -12,13 +12,13 @@ class Product < ActiveRecord::Base
   }
 
   delegate :download_url, to: :downloadable
-  delegate :topic, to: :presentation
+  delegate :topic, to: :presentation, allow_nil: true
 
   def search_data
     {
       name: name,
       description: description,
-      topic_ids: topic.related_topic_ids,
+      topic_ids: topic.nil? ? [] : topic.related_topic_ids,
       created_at: created_at,
       price: price
     }
