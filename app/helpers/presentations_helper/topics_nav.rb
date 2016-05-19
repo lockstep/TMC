@@ -32,7 +32,7 @@ module PresentationsHelper
     def main_topic_link(main_topic)
       link_to(content_tag(:span, main_topic.name, class: 'name'),
               { controller: @controller, topic_ids: main_topic.id },
-              { data: { topic_id: main_topic.id } }
+              data: { topic_id: main_topic.id }
              )
     end
 
@@ -48,7 +48,7 @@ module PresentationsHelper
       content_tag :li do
         link_to(child_topic.name,
                 { controller: @controller, topic_ids: child_topic.id, },
-                { data: { topic_id: child_topic.id } }
+                data: { topic_id: child_topic.id }
                )
       end
     end

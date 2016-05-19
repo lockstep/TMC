@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show], controller: 'users/orders'
     resources :materials, only: [:index], controller: 'users/materials'
   end
-  resources :orders do
+  resources :orders, only: :show do
     get 'success', on: :member
     resources :line_items, only: [:create, :destroy]
     resources :charges, only: [:create]
