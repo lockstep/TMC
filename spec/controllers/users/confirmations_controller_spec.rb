@@ -8,8 +8,9 @@ RSpec.describe Users::ConfirmationsController, type: :controller do
 
   describe '#show' do
     before do
+      @token = new_guy.confirmation_token
       @request.env["devise.mapping"] = Devise.mappings[:user]
-      get :show, confirmation_token: new_guy.confirmation_token
+      get :show, confirmation_token: @token
     end
 
     context 'welcome_email was sent' do
