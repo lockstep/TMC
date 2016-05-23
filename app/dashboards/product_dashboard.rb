@@ -35,8 +35,9 @@ class ProductDashboard < Administrate::BaseDashboard
     :name,
     :presentation,
     :featured,
-    :price,
-    :images
+    :downloadable,
+    :images,
+    :price
   ]
 
   # SHOW_PAGE_ATTRIBUTES
