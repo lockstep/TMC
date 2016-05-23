@@ -9,7 +9,7 @@ describe Users::MaterialsController, type: :controller do
       before do
         get :index, user_id: user.id
       end
-      it { is_expected.to redirect_to(error_403_path) }
+      it { is_expected.to redirect_to(new_user_session_path) }
     end
     context 'signed in' do
       before do

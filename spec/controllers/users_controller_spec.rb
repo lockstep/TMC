@@ -28,7 +28,7 @@ describe UsersController, type: :controller do
         get :show, id: michelle.id
       end
 
-      it { is_expected.to redirect_to(error_403_path) }
+      it { is_expected.to redirect_to(new_user_session_path) }
     end
   end
 end

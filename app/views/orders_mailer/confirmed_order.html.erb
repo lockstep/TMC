@@ -1,0 +1,71 @@
+<% content_for :preheader, 'Thank you for your order!' %>
+
+<tr>
+  <td>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 30px;" class="padding-copy">Thank you!</td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 20px 0 25px 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+          <p>Your order is complete. Here's a quick recap:</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td align="center" valign="top">
+    <table width="100%" border="0" cellspacing="0" cellpadding="10" bgcolor="#f4f4f4" style="border:1px solid #dedede">
+      <tr>
+        <td align="left" valign="top">
+          <table align="center" width="100%" border="0" cellspacing="0" cellpadding="10">
+            <% @order.line_items.each_with_index do |item, index| %>
+              <% style = index == 0 ? "" : "border-top:1px dotted #dedede" %>
+              <tr align="center">
+                <td align="left" valign="top" width="75%" style="<%= style %>">
+                  <span style="margin:0;font-size:15px;line-height:21px;font-family:'Helvetica',Arial,sans-serif;color:#333333">
+                    <%= item.name %>
+                  </span>
+                </td>
+                <td align="right" valign="top" width="25%" style="<%= style %>">
+                  <span style="margin:0;font-size:15px;line-height:21px;font-family:'Helvetica',Arial,sans-serif;color:#333333">
+                    <%= number_to_currency(item.price, precision: 2) %>
+                  </span>
+                </td>
+              </tr>
+            <% end %>
+            <tr align="center">
+              <td align="left" valign="top" width="75%" style="border-top:1px dotted #dedede">
+                <strong style="margin:0;font-size:15px;line-height:21px;font-family:'Helvetica',Arial,sans-serif;color:#333333">
+                  Total charge to card:
+                </strong>
+              </td>
+              <td align="right" valign="top" width="25%" style="border-top:1px dotted #dedede">
+                <strong style="margin:0;font-size:15px;line-height:21px;font-family:'Helvetica',Arial,sans-serif;color:#333333">
+                  <%= number_to_currency(@order.total_price, precision: 2) %>
+                </strong>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="center" style="padding: 20px 0 10px 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+          <p>You can access your materials any time from within your account on The Montessori Company:</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<%= render 'shared/mailers/button', cta: 'Download Now',
+  url: user_materials_url(@order.user) %>

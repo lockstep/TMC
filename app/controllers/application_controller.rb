@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to error_403_path
+    if current_user
+      redirect_to error_403_path
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -12,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    session[:after_sign_in_path] || root_path
+    session[:after_sign_in_path] || stored_location_for(resource) || root_path
   end
 
   def after_sign_out_path_for(resource)

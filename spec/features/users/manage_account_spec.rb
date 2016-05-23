@@ -36,6 +36,15 @@ describe 'Manage user account', :devise do
     end
   end
 
+  context 'not signed in' do
+    it 'takes the user to the materials page after signing in' do
+      visit user_materials_path(user)
+      expect(page).to have_content "Welcome Back"
+      signin(user.email, 'qawsedrf')
+      expect(page).to have_content "My Materials"
+    end
+  end
+
   def fill_in_user_form
     fill_in 'user[first_name]', with: 'DJ Shadow'
     fill_in 'user[password]', with: 'password'

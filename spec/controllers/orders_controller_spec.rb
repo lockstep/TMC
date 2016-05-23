@@ -59,7 +59,7 @@ describe OrdersController, type: :controller do
           get :show, id: other_order.id
         end
 
-        it { expect(response).to redirect_to(error_403_path) }
+        it { expect(response).to redirect_to(new_user_session_path) }
       end
       context 'not signed in and viewing their session order' do
         before do
@@ -104,7 +104,7 @@ describe OrdersController, type: :controller do
       before do
         get :success, id: own_order_paid.id
       end
-      it { is_expected.to redirect_to(error_403_path) }
+      it { is_expected.to redirect_to(new_user_session_path) }
     end
   end
 end

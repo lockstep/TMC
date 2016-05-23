@@ -17,7 +17,7 @@ RSpec.describe OrdersMailer, type: :mailer do
     it_behaves_like "sending_email" do
       let(:sender)     { ['hello@themontessoricompany.com'] }
       let(:recipients) { [ michelle.email] }
-      let(:subject)    { "Confirmed Order ##{cards_order.id}" }
+      let(:subject)    { "Your order is ready!" }
     end
   end
 end

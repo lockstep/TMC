@@ -34,7 +34,7 @@ RSpec.describe Users::OrdersController, type: :controller do
     context 'user\'s not signed in' do
       before { get :index, user_id: paul.id }
 
-      it { expect(response).to redirect_to(error_403_path) }
+      it { expect(response).to redirect_to(new_user_session_path) }
     end
   end
 
@@ -62,7 +62,7 @@ RSpec.describe Users::OrdersController, type: :controller do
         get :show, user_id: paul.id, id: animal_cards_order.id
       end
 
-      it { expect(response).to redirect_to(error_403_path) }
+      it { expect(response).to redirect_to(new_user_session_path) }
     end
   end
 end

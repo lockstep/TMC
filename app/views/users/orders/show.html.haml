@@ -18,4 +18,4 @@
           = time_tag @order.created_at
         .price
           Order total:
-          = number_to_currency(@order.total_price, precision: 1)
+          = number_to_currency(@order.total_price, precision: 2)
