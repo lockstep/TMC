@@ -129,38 +129,6 @@
 </head>
 <body style="margin: 0; padding: 0;">
 
-<!-- HEADER -->
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-    <tr>
-        <td bgcolor="#ffffff">
-            <div align="center" style="padding: 0px 15px 0px 15px;">
-                <table border="0" cellpadding="0" cellspacing="0" width="500" class="wrapper">
-                    <!-- LOGO/PREHEADER TEXT -->
-                    <tr>
-                        <td style="padding: 20px 0px 30px 0px;" class="logo">
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                <tr>
-                                    <td bgcolor="#ffffff" width="100" align="left"><a href="http://themontessoricompany.com" target="_blank"><img src="https://s3.amazonaws.com/lockstep-public-assets/tmc/tmc-secondary-logo.jpg" width="120" height="120" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 16px;" border="0"></a></td>
-                                    <td bgcolor="#ffffff" width="400" align="right" class="mobile-hide">
-                                        <table border="0" cellpadding="0" cellspacing="0">
-                                            <tr>
-                                              <td align="right" style="padding: 0 0 5px 0; font-size: 14px; font-family: Arial, sans-serif; color: #666666; text-decoration: none;">
-            <span style="color: #666666; text-decoration: none;">
-              <%= yield :preheader %>
-            </span></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </td>
-    </tr>
-</table>
-
 <!-- ONE COLUMN SECTION -->
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
@@ -179,7 +147,10 @@
                                                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                           <tr>
                                                               <td>
-                                                                  <a href="http://themontessoricompany.com" target="_blank"><img src="https://s3.amazonaws.com/lockstep-public-assets/tmc/Alternate-Logo-Web.png" width="500" height="193" border="0" alt="Can an email really be responsive?" style="display: block; padding: 0; color: #666666; text-decoration: none; font-family: Helvetica, arial, sans-serif; font-size: 16px; width: 500px; height: 200px;" class="img-max"></a>
+                                                                <a href="http://themontessoricompany.com" target="_blank">
+                                                                  <img src="https://s3.amazonaws.com/lockstep-public-assets/tmc/tmc-primary-logo.png"
+                                                                       width="500" height="273" border="0" alt="<%= yield :preheader %>"
+                                                                       style="display: block; padding: 0; color: #666666; text-decoration: none; font-family: Helvetica, arial, sans-serif; font-size: 16px; width: 500px; height: 273px;" class="img-max"></a>
                                                               </td>
                                                             </tr>
                                                         </table>
