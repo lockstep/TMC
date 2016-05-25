@@ -8,7 +8,7 @@
         = link_to product.name,
           product_url(product), class: 'name'
         .price
-          = number_to_currency(product.price, precision: 1)
+          = number_to_currency(product.price, precision: 2)
         .add-to-cart
           - unless is_in_cart?(@order, product)
             = add_to_cart(product)

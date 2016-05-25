@@ -7,11 +7,6 @@
     #hero
       .row
         .col-sm-4
-          .section-tile.grey#presentations
-            = link_to presentations_url do
-              .content
-                .line-one View our
-                .line-two presentations
           .section-tile.green#products
             = link_to products_url do
               .content
@@ -22,6 +17,11 @@
               .content
                 .line-one Read our
                 .line-two blog
+          .section-tile.grey#presentations
+            = link_to page_path(:about) do
+              .content
+                .line-one Read our
+                .line-two story
         .col-sm-8.no-left-gutter
           .hero-container
             .tagline
@@ -59,7 +59,7 @@
             = link_to product.name,
               product_url(product), class: 'name'
             .price
-              = number_to_currency(product.price, precision: 1)
+              = number_to_currency(product.price, precision: 2)
 
 %section#testimonials
   .container
