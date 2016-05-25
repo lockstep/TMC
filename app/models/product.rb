@@ -5,14 +5,15 @@ class Product < ActiveRecord::Base
   searchkick text_middle: [:name, :description]
 
   belongs_to :presentation
+  belongs_to :topic
   has_one :downloadable
+
   scope :featured, -> { where(featured: true) }
   scope :with_downloadables, -> {
     where("products.id IN (SELECT product_id FROM downloadables)")
   }
 
   delegate :download_url, to: :downloadable
-  delegate :topic, to: :presentation, allow_nil: true
 
   def search_data
     {

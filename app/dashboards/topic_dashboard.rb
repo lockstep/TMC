@@ -11,10 +11,12 @@ class TopicDashboard < Administrate::BaseDashboard
     parent: Field::BelongsTo.with_options(class_name: "Topic"),
     children: Field::HasMany.with_options(class_name: "Topic"),
     presentations: Field::HasMany,
+    products: Field::HasMany,
     id: Field::Number,
     name: Field::String,
     description: Field::Text,
     parent_id: Field::Number,
+    position: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }
@@ -25,19 +27,23 @@ class TopicDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
+    :position,
     :name,
     :parent,
     :children,
     :presentations,
+    :products,
     :id,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
+    :position,
     :parent,
     :children,
     :presentations,
+    :products,
     :id,
     :name,
     :description,
@@ -50,6 +56,7 @@ class TopicDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :position,
     :parent,
     :children,
     :presentations,

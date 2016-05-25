@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517044107) do
+ActiveRecord::Schema.define(version: 20160525082636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,10 +130,12 @@ ActiveRecord::Schema.define(version: 20160517044107) do
     t.string   "slug"
     t.boolean  "featured",        default: false
     t.integer  "presentation_id"
+    t.integer  "topic_id"
   end
 
   add_index "products", ["presentation_id"], name: "index_products_on_presentation_id", using: :btree
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true, using: :btree
+  add_index "products", ["topic_id"], name: "index_products_on_topic_id", using: :btree
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
@@ -142,6 +144,7 @@ ActiveRecord::Schema.define(version: 20160517044107) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "slug"
+    t.integer  "position"
   end
 
   add_index "topics", ["parent_id"], name: "index_topics_on_parent_id", using: :btree
@@ -179,4 +182,5 @@ ActiveRecord::Schema.define(version: 20160517044107) do
   add_foreign_key "orders", "users"
   add_foreign_key "presentations", "topics"
   add_foreign_key "products", "presentations"
+  add_foreign_key "products", "topics"
 end

@@ -2,6 +2,7 @@ describe Product, type: :model do
   fixtures :products
   fixtures :presentations
   fixtures :images
+  fixtures :topics
 
   let(:quiz_game)        { presentations(:quiz_game) }
   let(:number_cards)     { products(:number_cards) }
@@ -11,6 +12,15 @@ describe Product, type: :model do
   describe '#presentation' do
     it 'returns the presentation it belongs to' do
       expect(number_cards.presentation).to eq quiz_game
+    end
+  end
+
+  describe '#topic' do
+    before do
+      @topic = topics(:memory_quiz)
+    end
+    it 'returns the topic it belongs to' do
+      expect(number_cards.topic).to eq @topic
     end
   end
 

@@ -8,6 +8,7 @@ class ProductDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    topic: Field::BelongsTo,
     presentation: Field::BelongsTo,
     images: Field::HasMany,
     downloadable: Field::HasOne,
@@ -33,7 +34,7 @@ class ProductDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
-    :presentation,
+    :topic,
     :featured,
     :downloadable,
     :images,
@@ -44,6 +45,7 @@ class ProductDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
+    :topic,
     :presentation,
     :images,
     :downloadable,
@@ -59,6 +61,7 @@ class ProductDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :topic,
     :presentation,
     :images,
     :name,
