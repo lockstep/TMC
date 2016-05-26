@@ -8,6 +8,20 @@ describe 'Product search page', type: :feature do
     @product = products(:number_board)
   end
 
+  context 'topics list' do
+    before do
+      @topic_1 = topics(:birds)
+      @topic_2 = topics(:memory_game)
+      @child_topic_1 = topics(:memory_quiz)
+      @child_topic_2 = topics(:memory_puzzle)
+    end
+    it 'shows parent and children topics in the right order' do
+      visit products_path
+      expect(@topic_1.name).to appear_before @topic_2.name
+      expect(@child_topic_1.name).to appear_before @child_topic_2.name
+    end
+  end
+
   context 'adding a product to cart' do
     it 'takes the user to the cart summary' do
       visit products_path

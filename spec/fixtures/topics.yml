@@ -1,11 +1,13 @@
 memory_game:
   name: Memory Game
   description: This is Description
+  position: 2
 
 memory_quiz:
   name: Memory Quiz
   description: This is Description
   parent: memory_game
+  position: 100
 
 memory_puzzle:
   name: Puzzle
@@ -15,3 +17,4 @@ memory_puzzle:
 birds:
   name: Birds
   description: Birds cards
+  position: 1

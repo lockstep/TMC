@@ -18,7 +18,7 @@ module PresentationsHelper
     delegate :link_to, :content_tag, :safe_join, :concat, to: :view
 
     def nav_content
-      @topics.collect do |topic|
+      ordered(@topics).collect do |topic|
         concat(main_topic(topic))
       end
     end
@@ -29,28 +29,39 @@ module PresentationsHelper
       end
     end
 
-    def main_topic_link(main_topic)
-      link_to(content_tag(:span, main_topic.name, class: 'name'),
-              { controller: @controller, topic_ids: main_topic.id },
-              data: { topic_id: main_topic.id }
-             )
+    def main_topic_link(topic)
+      link_to(content_tag(:span, link_text(topic), class: 'name'),
+              { controller: @controller, topic_ids: topic.id },
+              data: { topic_id: topic.id })
     end
 
     def child_topics(children)
       content_tag :ul, class: 'category' do
-        children.collect do |child_topic|
+        ordered(children).collect do |child_topic|
           concat(child_link(child_topic))
         end
       end
     end
 
-    def child_link(child_topic)
-      content_tag :li do
-        link_to(child_topic.name,
-                { controller: @controller, topic_ids: child_topic.id, },
-                data: { topic_id: child_topic.id }
-               )
+    def child_link(topic)
+      if topic.children.empty?
+        content_tag :li do
+          link_to(link_text(topic),
+                  { controller: @controller, topic_ids: topic.id, },
+                  data: { topic_id: topic.id })
+        end
+      else
+        main_topic(topic)
       end
+    end
+
+    def link_text(topic)
+      count = Product.search(where: { topic_ids: [topic.id] }).count
+      "#{topic.name} (#{count})"
+    end
+
+    def ordered(topics)
+      topics.sort_by { |topic| [topic.position ? 0 : 1, topic.position] }
     end
   end
 end

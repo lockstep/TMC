@@ -76,6 +76,8 @@
 }
 
 #sidebar {
+  $category-left-margin: 24px;
+
   font-size: 10pt;
   text-transform: uppercase;
 
@@ -97,7 +99,7 @@
     li {
       list-style-type: none;
       color: $green-medium;
-      margin-left: 32px;
+      margin-left: $category-left-margin;
     }
   }
 
@@ -109,6 +111,10 @@
   .category {
     .name {
       cursor: pointer;
+    }
+
+    .well {
+      margin-left: $category-left-margin;
     }
 
     &.active {

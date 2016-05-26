@@ -37,6 +37,7 @@ gem 'stripe', '~> 1.36.1'
 
 group :test do
   gem 'stripe-ruby-mock', require: 'stripe_mock'
+  gem 'orderly'
 end
 
 group :development, :test do
