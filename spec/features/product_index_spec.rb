@@ -20,6 +20,18 @@ describe 'Product search page', type: :feature do
       expect(@topic_1.name).to appear_before @topic_2.name
       expect(@child_topic_1.name).to appear_before @child_topic_2.name
     end
+    it 'shows product counts next to Topic names' do
+      products_count = Product.search(where: { topic_ids: [@topic_2.id] }).count
+      visit products_path
+      expect(page).to have_link "#{@topic_2.name} (#{products_count})"
+    end
+    it 'opens the tree node for active topic and highlights it', js: true do
+      visit products_path
+      expect(page).not_to have_content @child_topic_2.name
+      click_link @topic_2.name
+      expect(page).to have_content @child_topic_2.name.upcase
+      expect(page).to have_selector('a.active', text: @topic_2.name.upcase)
+    end
   end
 
   context 'adding a product to cart' do

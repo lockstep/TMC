@@ -71,6 +71,9 @@ TMC.define_component('product index page', function() {
     $("#topic_ids").val(topicId);
     $('#product-search-form').submit();
   });
+
+  // open active topic tree node
+  $('div.well:has(.active)').addClass('expanded');
 });
 
   TMC.setup = function() {

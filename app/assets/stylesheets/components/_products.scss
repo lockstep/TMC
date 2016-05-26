@@ -108,7 +108,33 @@
     transition: all 0.3s ease-in-out;
   }
 
+  .well {
+    .category {
+      display: none;
+    }
+
+    &.expanded {
+      > .category {
+        display: block;
+      }
+    }
+  }
+
+  #product-categories {
+    margin-bottom: 20px;
+
+    nav > .well {
+      margin-bottom: 15px;
+    }
+
+    .active {
+      color: $blue;
+    }
+  }
+
   .category {
+    margin-top: 5px;
+
     .name {
       cursor: pointer;
     }

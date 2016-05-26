@@ -1,6 +1,6 @@
 %h1 Product Categories
 #product-categories
-  = topics_nav(controller: :products)
+  = topics_nav(controller: :products, active_topic_id: @topic_id)
   = hidden_field_tag 'topic_ids', @topic_id
 
 %h1 Looking for something?
