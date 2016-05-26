@@ -1,6 +1,7 @@
 %h1 Product Categories
 #product-categories
-  = topics_nav(controller: :products, active_topic_id: @topic_id)
+  - cache cache_key_for_products do
+    = topics_nav(controller: :products)
   = hidden_field_tag 'topic_ids', @topic_id
 
 %h1 Looking for something?

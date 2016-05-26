@@ -73,7 +73,11 @@ TMC.define_component('product index page', function() {
   });
 
   // open active topic tree node
-  $('div.well:has(.active)').addClass('expanded');
+  var activeTopic = $("#topic_ids").val();
+  if (activeTopic) {
+    $('a[data-topic-id=' + activeTopic + ']').addClass('active');
+    $('div.well:has(.active)').addClass('expanded');
+  }
 });
 
   TMC.setup = function() {

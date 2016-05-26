@@ -1,10 +1,9 @@
 module PresentationsHelper
   class TopicsNav
-    def initialize(view:, controller:, active_topic_id:)
+    def initialize(view:, controller:)
       @view = view
       @topics = Topic.where(parent_id: nil)
       @controller = controller
-      @active_topic_id = active_topic_id
     end
 
     def html
@@ -34,8 +33,7 @@ module PresentationsHelper
       link_to(
         content_tag(:span, link_text(topic), class: 'name'),
         { controller: @controller, topic_ids: topic.id },
-        { data: { topic_id: topic.id },
-          class: "topic #{topic.id == @active_topic_id.to_i ? 'active' : ''}" }
+        data: { topic_id: topic.id }
       )
     end
 
@@ -52,9 +50,7 @@ module PresentationsHelper
         content_tag :li do
           link_to(link_text(topic),
                   { controller: @controller, topic_ids: topic.id, },
-                  { data: { topic_id: topic.id },
-                    class: "topic #{topic.id == @active_topic_id.to_i ?
-                    'active' : ''}" })
+                  data: { topic_id: topic.id })
         end
       else
         main_topic(topic)
