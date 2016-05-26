@@ -18,7 +18,7 @@ a {
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 
-  &:hover {
+  &:hover, &:active, &:focus {
     color: $green-dark;
     text-decoration: none;
   }
