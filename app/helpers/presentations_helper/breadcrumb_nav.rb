@@ -1,12 +1,14 @@
 module PresentationsHelper
   class BreadcrumbNav
-    def initialize(view:, topics:)
+    def initialize(view:, product:)
       @view = view
-      @topics = topics
+      @product = product
     end
 
     def html
-      return unless @topics
+      return unless @product
+      return unless @product.topic
+      @topics = Topic.where(id: @product.topic.related_topic_ids)
       breadcrumb
     end
 
@@ -23,7 +25,7 @@ module PresentationsHelper
         links = @topics.collect do |topic|
           breadcrumb_item_link(topic.name, topic.id)
         end
-        safe_join(links.unshift(breadcrumb_item_link('Presentations', 0)))
+        safe_join(links)
       end
     end
 

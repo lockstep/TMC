@@ -21,9 +21,6 @@ class ProductsController < ApplicationController
 
   def show
     update_session
-    if @product.presentation
-      @topics = Topic.where(id: @product.topic.related_topic_ids)
-    end
   end
 
   private
