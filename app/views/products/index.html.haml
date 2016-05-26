@@ -1,12 +1,10 @@
 - content_for :title, 'Products'
 
 %section#products
-  = form_tag products_path, id: 'product-search-form', method: :get do
-    .container
-      .row
-        .col-sm-4#sidebar
-          = render 'sidebar'
-        .col-sm-8#products-list
-          = render 'sort_bar'
-          = render 'products_list'
-
+  .container
+    .row
+      .col-sm-4#sidebar
+        = render 'sidebar'
+      .col-sm-8#products-list
+        = render 'sort_bar'
+        = render 'products_list'

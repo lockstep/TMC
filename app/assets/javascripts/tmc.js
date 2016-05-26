@@ -60,7 +60,8 @@ TMC.define_component('product index page', function() {
     prefix: "$"
   });
 
-  $('#sort').change(function() {
+  $('#sort-select').change(function() {
+    $("#sort").val($(this).val());
     $('#product-search-form').submit();
   });
 

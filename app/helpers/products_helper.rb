@@ -17,7 +17,7 @@ module ProductsHelper
       options_for_select(
         SORT_OPTONS.collect{ |o| [o[:name], o[:value]] },
         @sort_by
-      ), prompt: 'Please select'
+      ), prompt: 'Please select', id: 'sort-select'
   end
 
   # cache the Topics list in product search

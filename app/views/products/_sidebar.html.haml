@@ -1,33 +1,27 @@
 %h1 Product Categories
-#product-categories
-  - cache cache_key_for_products do
-    = topics_nav(controller: :products)
-  = hidden_field_tag 'topic_ids', @topic_id
+= form_tag products_path, id: 'product-search-form', method: :get do
+  #product-categories
+    - cache cache_key_for_products do
+      = topics_nav(controller: :products)
+    = hidden_field_tag 'topic_ids', @topic_id
 
-%h1 Looking for something?
-.query-container
-  = text_field_tag :q, @query, id: 'query', class: "form-control"
-  %span.icon
-    = fa_icon 'search'
-%ul.category
-  %span.name#refine
-    Refine
-  = fa_icon 'caret-right'
-  .content
-    = text_field_tag :price_range, @price_range,
-      id: "price-range", class: "form-control"
-  = submit_tag "Search", id: 'search-button',
-    class: "btn btn-green form-control"
+  %h1 Looking for something?
+  .query-container
+    = text_field_tag :q, @query, id: 'query', class: "form-control"
+    %span.icon
+      = fa_icon 'search'
+  %ul.category
+    %span.name#refine
+      Refine
+    = fa_icon 'caret-right'
+    .content
+      = text_field_tag :price_range, @price_range,
+        id: "price-range", class: "form-control"
+    = submit_tag "Search", id: 'search-button',
+      class: "btn btn-green form-control"
 
-%h1 Recently viewed
-= render 'recently_viewed'
+  %h1 Recently viewed
+  = render 'recently_viewed'
 
-%h1 Be the first to know
-%form#newsletter
-  %input{type: "text", name: "first_name", class: "form-control",
-    placeholder: "your name"}
-  %input{type: "email", name: "email", class: "form-control",
-    placeholder: "your email address"}
-  %input{type: "submit", value: "Submit",
-    class: "btn btn-green form-control"}
+  = hidden_field_tag 'sort', @sort_by
 
