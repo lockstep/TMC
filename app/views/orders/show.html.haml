@@ -34,7 +34,7 @@
   :javascript
     var handler = StripeCheckout.configure({
       key: "#{ENV.fetch('STRIPE_KEY')}",
-      image: "#{image_url 'stripe_cover.png'}",
+      image: "https://s3.amazonaws.com/lockstep-public-assets/tmc/stripe-cover.png",
       locale: 'auto',
       token: function(token) {
         $("#stripeToken").val(token.id);
