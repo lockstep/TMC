@@ -6,9 +6,11 @@ module PresentationsHelper
     end
 
     def html
-      return unless @product
-      return unless @product.topic
-      @topics = Topic.where(id: @product.topic.related_topic_ids)
+      if @product.try(:topic)
+        @topics = Topic.where(id: @product.topic.related_topic_ids)
+      else
+        @topics = []
+      end
       breadcrumb
     end
 
@@ -25,7 +27,7 @@ module PresentationsHelper
         links = @topics.collect do |topic|
           breadcrumb_item_link(topic.name, topic.id)
         end
-        safe_join(links)
+        safe_join(links.unshift(breadcrumb_item_link('Products', 0)))
       end
     end
 
@@ -33,11 +35,11 @@ module PresentationsHelper
       content_tag :li do
         unless topic_id == 0
           link_to(topic_name,
-                  controller: :presentations,
+                  controller: :products,
                   topic_ids: topic_id,
                  )
         else
-          link_to(topic_name, controller: :presentations)
+          link_to(topic_name, controller: :products)
         end
       end
     end

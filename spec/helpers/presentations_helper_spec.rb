@@ -25,7 +25,7 @@ describe PresentationsHelper, type: :helper do
     context 'no product given' do
       subject { helper.breadcrumb_nav }
       it 'does not break' do
-        is_expected.to be_nil
+        is_expected.to include 'Products'
       end
     end
 
@@ -48,8 +48,8 @@ describe PresentationsHelper, type: :helper do
 
       subject { helper.breadcrumb_nav(product: @flamingo) }
 
-      it 'does not return breadcrumbs' do
-        is_expected.to be_nil
+      it 'does returns Products link' do
+        is_expected.to include 'Products'
       end
     end
   end

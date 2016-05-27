@@ -12,6 +12,12 @@ number_board:
   presentation: quiz_game
   topic: memory_quiz
 
+memory_puzzle_card:
+  name: Memory Puzzle Card
+  price: 5.00
+  description: a single card for this game
+  topic: memory_puzzle
+
 animal_cards:
   name: Animal Cards
   price: 20.00
