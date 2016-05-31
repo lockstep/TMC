@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  PAGES = ['home', 'about']
+  PAGES = ['home', 'about', 'terms', 'privacy']
 
   def show
     if !params[:page].blank? && PAGES.include?(params[:page])

@@ -35,7 +35,7 @@ RSpec.describe SocialsHelper::MetaTags, type: :helper do
     context 'object doesn\'t have image(s)' do
       subject { helper.object_image(number_board) }
 
-      it { is_expected.to eq('https://themontessori.com/default.jpg') }
+      it { is_expected.to eq SocialsHelper::DEFAULT_IMAGE }
     end
   end
 end
