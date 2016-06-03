@@ -15,11 +15,11 @@
         = link_to 'Back to search', products_url
     .row
       .col-md-7
-        = image_tag @product.primary_image.url,
+        = image_tag @product.primary_image.url(:medium),
           alt: @product.name, id: 'primary-image', class: 'img-fluid'
         .images-container
           - @product.images.each do |image|
-            = image_tag image.image.url
+            = image_tag image.image.url(:medium)
       .col-md-5
         %h1.name
           = @product.name

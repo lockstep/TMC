@@ -2,7 +2,7 @@
   - @results.each do |product|
     .col-md-4.product-tile
       = link_to product_url(product) do
-        = image_tag product.primary_image.url,
+        = image_tag product.primary_image.url(:medium),
           alt: product.name, class: 'img-fluid'
       .details
         = link_to product.name,
