@@ -29,7 +29,7 @@ RSpec.describe SocialsHelper::MetaTags, type: :helper do
     context 'object has image(s)' do
       subject { helper.object_image(number_cards) }
 
-      it { is_expected.to eq(number_cards.primary_image.image.url) }
+      it { is_expected.to eq(number_cards.primary_image.image.url(:medium)) }
     end
 
     context 'object doesn\'t have image(s)' do
