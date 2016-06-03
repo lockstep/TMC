@@ -25,6 +25,11 @@ birds:
   position: 1
   parent: animals
 
+birds_of_prey:
+  name: Big majestic animals
+  description: Birds of prey cards
+  parent: birds
+
 cards:
   name: Animal cards
   description: All the animal cards in our shop

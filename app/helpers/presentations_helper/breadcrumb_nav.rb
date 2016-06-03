@@ -7,7 +7,7 @@ module PresentationsHelper
 
     def html
       if @product.try(:topics).present?
-        @topics = Topic.where(id: @product.topics[0].related_topic_ids)
+        @topics = sorted_topics
       else
         @topics = []
       end
@@ -42,6 +42,12 @@ module PresentationsHelper
           link_to(topic_name, controller: :products)
         end
       end
+    end
+
+    def sorted_topics
+      topic_ids = @product.topics[0].related_topic_ids
+      topics = Topic.find(topic_ids).group_by(&:id)
+      topic_ids.map { |i| topics[i].first }
     end
   end
 end

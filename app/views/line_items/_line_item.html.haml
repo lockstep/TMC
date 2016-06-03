@@ -1,6 +1,6 @@
 .list-group-item.order-line-item.row
   .col-sm-3
-    = image_tag line_item.product.primary_image.url,
+    = image_tag line_item.product.primary_image.url(:medium),
       alt: line_item.product.name, class: 'cart-thumb'
   .col-sm-9
     = form_for [@order, line_item], method: :delete do |f|
@@ -12,5 +12,5 @@
     %span.product-price
       = "$#{line_item.product.price}"
     %p.product-description
-      = line_item.product.description
+      = line_item.product.description.html_safe
 %hr.hidden-sm-up

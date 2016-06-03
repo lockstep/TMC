@@ -47,10 +47,22 @@ describe Topic, type: :model do
   describe '#related_topic_ids' do
     subject { memory_quiz.related_topic_ids }
 
-    it 'return self and parent if in type of array' do
+    it 'returns self and parent' do
       is_expected.to be_kind_of Array
       is_expected.to include memory_quiz.id
       is_expected.to include memory_quiz.parent.id
+    end
+
+    context 'proper order' do
+      before do
+        @parent = topics(:animals)
+        @level1 = topics(:birds)
+        @level2 = topics(:birds_of_prey)
+      end
+      it 'returns the array in the right order' do
+        expect(@level2.related_topic_ids)
+          .to eq [@parent.id, @level1.id, @level2.id]
+      end
     end
   end
 end

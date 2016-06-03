@@ -15,7 +15,6 @@ class Topic < ActiveRecord::Base
   def ancestor_ids(topic: self, parent_ids: [])
     return parent_ids if topic.parent.nil?
     ancestor_ids(topic: topic.parent,
-                 parent_ids: parent_ids << topic.parent.id,
-                )
+                 parent_ids: parent_ids.unshift(topic.parent.id))
   end
 end
