@@ -23,7 +23,7 @@ module SocialsHelper::MetaTags
     if object.images.empty?
       SocialsHelper::DEFAULT_IMAGE
     else
-      object.primary_image.image.url
+      object.primary_image.image.url(:medium)
     end
   end
 
