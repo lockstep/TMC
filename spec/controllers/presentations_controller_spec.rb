@@ -2,6 +2,10 @@ describe PresentationsController, type: :controller do
   fixtures :presentations
   fixtures :topics
 
+  before(:all) do
+    Presentation.reindex
+  end
+
   describe '#index' do
     before { get :index }
 

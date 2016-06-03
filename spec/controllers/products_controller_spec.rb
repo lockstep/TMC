@@ -2,6 +2,10 @@ describe ProductsController, type: :controller do
   fixtures :products
   fixtures :orders
 
+  before(:all) do
+    Product.reindex
+  end
+
   let(:number_cards)  { products(:number_cards) }
   let(:cards_order)  { orders(:cards_order) }
   let(:cards_order_completed)  { orders(:cards_order_completed) }
