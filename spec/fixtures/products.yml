@@ -3,27 +3,27 @@ number_cards:
   price: 10.00
   description: cards of numbers
   presentation: quiz_game
-  topic: memory_quiz
+  topics: memory_quiz
 
 number_board:
   name: Number Board
   price: 15.00
   description: put a card onto it
   presentation: quiz_game
-  topic: memory_quiz
+  topics: memory_quiz
 
 memory_puzzle_card:
   name: Memory Puzzle Card
   price: 5.00
   description: a single card for this game
-  topic: memory_puzzle
+  topics: memory_puzzle
 
 animal_cards:
   name: Animal Cards
   price: 20.00
   description: cards of animal
   presentation: quiz_game
-  topic: memory_quiz
+  topics: memory_quiz
 
 flamingo:
   name: Flamingo
@@ -38,4 +38,4 @@ ostrich:
   description: Hand-painted ostrich card
   featured: false
   presentation: birds
-  topic: birds
+  topics: birds, cards

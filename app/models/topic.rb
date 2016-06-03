@@ -6,7 +6,7 @@ class Topic < ActiveRecord::Base
   has_many :children, class_name: 'Topic', foreign_key: 'parent_id'
 
   has_many :presentations
-  has_many :products
+  has_and_belongs_to_many :products
 
   def related_topic_ids
     ancestor_ids << id

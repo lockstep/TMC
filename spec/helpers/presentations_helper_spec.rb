@@ -37,7 +37,7 @@ describe PresentationsHelper, type: :helper do
       subject { helper.breadcrumb_nav(product: @product) }
 
       it 'includes parent topic name' do
-        is_expected.to include @product.topic.name
+        is_expected.to include @product.topics[0].name
       end
     end
 

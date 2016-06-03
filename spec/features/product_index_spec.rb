@@ -21,7 +21,9 @@ describe 'Product search page', type: :feature do
       expect(@child_topic_1.name).to appear_before @child_topic_2.name
     end
     it 'shows product counts next to Topic names' do
-      products_count = Product.search(where: { topic_ids: [@topic_2.id] }).count
+      products_count = Product.search(
+        where: { topic_ids: [@topic_2.id] }
+      ).count
       visit products_path
       expect(page).to have_link "#{@topic_2.name} (#{products_count})"
     end

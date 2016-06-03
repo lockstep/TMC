@@ -6,8 +6,8 @@ module PresentationsHelper
     end
 
     def html
-      if @product.try(:topic)
-        @topics = Topic.where(id: @product.topic.related_topic_ids)
+      if @product.try(:topics).present?
+        @topics = Topic.where(id: @product.topics[0].related_topic_ids)
       else
         @topics = []
       end

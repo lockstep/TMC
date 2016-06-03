@@ -14,7 +14,18 @@ memory_puzzle:
   description: This is Description
   parent: memory_game
 
+animals:
+  name: Animals
+  description: All the animals cards
+  position: 1
+
 birds:
   name: Birds
   description: Birds cards
   position: 1
+  parent: animals
+
+cards:
+  name: Animal cards
+  description: All the animal cards in our shop
+  parent: animals

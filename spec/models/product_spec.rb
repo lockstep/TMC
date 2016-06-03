@@ -15,12 +15,12 @@ describe Product, type: :model do
     end
   end
 
-  describe '#topic' do
+  describe '#topics' do
     before do
       @topic = topics(:memory_quiz)
     end
     it 'returns the topic it belongs to' do
-      expect(number_cards.topic).to eq @topic
+      expect(number_cards.topics).to include @topic
     end
   end
 
@@ -55,6 +55,21 @@ describe Product, type: :model do
     it 'returns an array of products with downloadables' do
       expect(Product.with_downloadables.size).to eq 1
       expect(Product.with_downloadables).to include @with_downloadable
+    end
+  end
+
+  describe '#topic_ids_array' do
+    before do
+      @product = products(:ostrich)
+      @parent_topic = topics(:animals)
+      @child_topic1 = topics(:birds)
+      @child_topic2 = topics(:cards)
+    end
+    it 'returns an array of numbers without duplicates' do
+      expect(@product.topic_ids_array.size).to eq 3
+      expect(@product.topic_ids_array).to include @parent_topic.id
+      expect(@product.topic_ids_array).to include @child_topic1.id
+      expect(@product.topic_ids_array).to include @child_topic2.id
     end
   end
 end

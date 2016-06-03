@@ -5,7 +5,7 @@ class Product < ActiveRecord::Base
   searchkick text_middle: [:name, :description]
 
   belongs_to :presentation
-  belongs_to :topic
+  has_and_belongs_to_many :topics
   has_one :downloadable
 
   scope :featured, -> { where(featured: true) }
@@ -19,10 +19,15 @@ class Product < ActiveRecord::Base
     {
       name: name,
       description: description,
-      topic_ids: topic.nil? ? [] : topic.related_topic_ids,
+      topic_ids: topic_ids_array,
       created_at: created_at,
       price: price
     }
+  end
+
+  def topic_ids_array
+    topics.blank? ?
+      [] : topics.inject([]) { |arr, t| arr | t.related_topic_ids }
   end
 
   private
