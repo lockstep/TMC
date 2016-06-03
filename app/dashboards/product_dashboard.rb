@@ -21,7 +21,7 @@ class ProductDashboard < Administrate::BaseDashboard
       decimals: 1,
     ),
     featured: Field::Boolean,
-    description: Field::Text,
+    description: WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }
