@@ -24,6 +24,14 @@ a {
   }
 }
 
+h1.script {
+  text-align: center;
+  font-family: 'Script';
+  color: $blue;
+  font-size: 2.5rem;
+  margin-bottom: 45px;
+}
+
 input,
 select,
 textarea {
@@ -63,7 +71,7 @@ hr {
 
 .spacer {
   text-align: center;
-  margin: 20px 0;
+  margin: 25px 0 35px;
 
   img {
     width: 65px;

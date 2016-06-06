@@ -81,14 +81,6 @@
 
 #featured-products {
   margin-bottom: 70px;
-
-  h1 {
-    text-align: center;
-    font-family: 'Script';
-    color: $blue;
-    font-size: 2.5rem;
-    margin-bottom: 45px;
-  }
 }
 
 #testimonials {
@@ -126,7 +118,7 @@
 
     .image {
       display: table-cell;
-      background: url(kids.jpg) no-repeat right;
+      background: url(testimonial.jpg) no-repeat right;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;

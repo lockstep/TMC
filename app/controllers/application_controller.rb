@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  force_ssl if: :ssl_configured?
 
   rescue_from CanCan::AccessDenied do |exception|
     if current_user
@@ -21,5 +22,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(resource)
     request.referrer
+  end
+
+  def ssl_configured?
+    Rails.env.production?
   end
 end

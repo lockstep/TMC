@@ -7,48 +7,32 @@
     #hero
       .row
         .col-sm-4
-          .section-tile.green#products
-            = link_to products_url do
+          = link_to products_url do
+            .section-tile.green#products
               .content
                 .line-one Shop our
                 .line-two products
-          .section-tile.beige#blog
-            = link_to posts_url do
+          = link_to posts_url do
+            .section-tile.beige#blog
               .content
                 .line-one Read our
                 .line-two blog
-          .section-tile.grey#presentations
-            = link_to page_path(:about) do
+          = link_to page_path(:about) do
+            .section-tile.grey#presentations
               .content
                 .line-one Learn our
                 .line-two story
         .col-sm-8.no-left-gutter
           .hero-container
             .tagline
-              %p Beautiful Montessori resources.
+              %p Beautiful Montessori resources,
               %p Lovingly crafted by an AMI Montessori guide.
     .spacer
       = image_tag 'leaf.png', alt: 'The Montessori Company leaf'
 
-%section#newsletter
-  .container
-    .body
-      %h1 Join our mailing list
-      %form
-        .row
-          .col-sm-4
-            %input{type: "text", name: "first_name", class: "form-control",
-            placeholder: "First Name"}
-          .col-sm-4
-            %input{type: "email", name: "email", class: "form-control",
-            placeholder: "Email"}
-          .col-sm-4
-            %input{type: "submit", value: "Submit",
-            class: "btn btn-primary form-control"}
-
 %section#featured-products
   .container
-    %h1 featured products
+    %h1.script featured products
     .row
       - @featured_products.each do |product|
         .col-sm-3
@@ -68,17 +52,15 @@
         %h1 praise for our products
         .testimonial
           .text
-            Lorizzle da bomb dolor ma nizzle things, dawg adipiscing owned.
-            Rizzle sapizzle velizzle, gangsta volutpizzle, suscipizzle quizzle,
-            mofo vizzle, arcu. Pellentesque daahng dawg tortizzle.
-            Sizzle erizzle.
+            I absolutely love these materials, I finally have hand-drawn
+            illustrations in my classroom!
             %p.author
-              \- Author of Testimonial
+              \- Sara at IBA Montessori
           .image.hidden-md-down
       .col-sm-4
         %h1 meet michelle
-        = image_tag 'blonde.jpg', alt: 'Michelle', class: 'img-fluid'
+        = image_tag 'michelle.jpg', alt: 'Michelle', class: 'img-fluid'
         .about
-          Lorizzle da bomb dolor ma nizzle things, dawg adipiscing owned.
-          Rizzle sapizzle velizzle, gangsta volutpizzle, suscipizzle quizzle.
+          Michelle is a certified primary and elementary AMI guide. She is
+          passionate about creating truly beautiful Montessori environments.
         = link_to 'Read More', page_url('about'), class: 'btn btn-primary'
