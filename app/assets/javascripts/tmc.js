@@ -66,7 +66,7 @@ TMC.define_component('product index page', function() {
   });
 
   // make sidebar link clicks submit the form
-  $('#sidebar #product-categories a').click(function(e) {
+  $('#sidebar #product-categories a').bind('vclick', function(e) {
     e.preventDefault();
     var topicId = $(this).data('topic-id');
     $("#topic_ids").val(topicId);

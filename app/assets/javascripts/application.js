@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.mobile.just-touch
 //= require jquery_ujs
 //= require turbolinks
 //= require turbolinks-compatibility
