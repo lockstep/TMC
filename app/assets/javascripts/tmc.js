@@ -81,14 +81,23 @@ TMC.define_component('product index page', function() {
   }
 });
 
-  TMC.setup = function() {
-    for (var c in TMC.components) {
-      var component = TMC.components[c];
-      component.setup();
-    }
-  };
-
-  document.addEventListener("turbolinks:load", function() {
-    TMC.setup();
+TMC.define_component('product show page', function() {
+  $('#product .images-container img').click(function() {
+    var src = $(this).attr('src');
+    $('#product #primary-image').fadeTo(300, 0.10, function() {
+      $('#product #primary-image').attr('src', src);
+    }).fadeTo(300, 1);
   });
+});
+
+TMC.setup = function() {
+  for (var c in TMC.components) {
+    var component = TMC.components[c];
+    component.setup();
+  }
+};
+
+document.addEventListener("turbolinks:load", function() {
+  TMC.setup();
+});
 

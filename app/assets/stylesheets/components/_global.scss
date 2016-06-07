@@ -69,6 +69,12 @@ hr {
   }
 }
 
+.clear {
+  @media (max-width: 768px) {
+    clear: both;
+  }
+}
+
 .spacer {
   text-align: center;
   margin: 25px 0 35px;
