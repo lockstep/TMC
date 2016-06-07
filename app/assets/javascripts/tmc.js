@@ -82,7 +82,7 @@ TMC.define_component('product index page', function() {
 });
 
 TMC.define_component('product show page', function() {
-  $('#product .images-container img').click(function() {
+  $('#product .images-container img').bind('vclick', function() {
     var src = $(this).attr('src');
     $('#product #primary-image').fadeTo(300, 0.10, function() {
       $('#product #primary-image').attr('src', src);
