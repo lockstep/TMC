@@ -38,7 +38,7 @@
         .col-sm-3
           .product-tile
             = link_to product_url(product) do
-              = image_tag product.primary_image.url,
+              = image_tag product.primary_image.url(:medium),
                 alt: product.name, class: 'img-fluid'
             = link_to product.name,
               product_url(product), class: 'name'
