@@ -3,6 +3,14 @@ describe 'Ordering process', type: :feature do
   fixtures :products
   fixtures :orders
 
+  context 'my cart' do
+    it 'the link is always displayed' do
+      visit root_url
+      click_link 'My Cart'
+      expect(page).to have_content 'cart is empty'
+    end
+  end
+
   context 'adding a product to cart' do
     before do
       @product = products(:number_board)
@@ -16,6 +24,8 @@ describe 'Ordering process', type: :feature do
       click_button 'Add to Cart'
       expect(page).to have_content 'Your Cart'
       expect(page).to have_css('h5', text: @product.name)
+      expect(page).to have_content 'Order total'
+      expect(page).to have_css('.order-total', text: @product.price)
       # check we can't add it again, instead show the right message
       click_link @product.name
       expect(page).not_to have_button 'Add to Cart'

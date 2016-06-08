@@ -13,6 +13,9 @@
           = render @order.line_items
       #checkout-container.text-xs-center
         - unless @order.line_items.empty?
+          .order-total.text-xs-center
+            Order total:
+            = number_to_currency(@order.total_price, precision: 2)
           .prompt
             - if current_user
               = link_to 'Checkout', '#', id: 'checkout-button',

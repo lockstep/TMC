@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show]
-  before_action :find_or_create_order, only: [:show, :index]
 
   def index
     @results = Product.search(
@@ -33,16 +32,6 @@ class ProductsController < ApplicationController
     return [] if session[:recently_viewed].nil?
     products = Product.find(Array(session[:recently_viewed])).group_by(&:id)
     session[:recently_viewed].map { |i| products[i].first }
-  end
-
-  def find_or_create_order
-    if session[:order_id].present?
-      @order = Order.find(session[:order_id]).active? ?
-        Order.find(session[:order_id]) : Order.create(state: :active)
-    else
-      @order = Order.create(state: :active)
-    end
-    session[:order_id] = @order.id
   end
 
   def update_session

@@ -22,4 +22,7 @@
         - else
           %li.nav-item.pull-sm-right
             = link_to 'Login', new_user_session_path, class: 'nav-link'
+        %li.nav-item.pull-sm-right
+          = link_to 'My Cart', order_url(@order), class: 'my-cart',
+            data: { turbolinks: false }
 = render 'shared/header'

@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   force_ssl if: :ssl_configured?
 
+  before_action :find_or_create_order
+
   rescue_from CanCan::AccessDenied do |exception|
     if current_user
       redirect_to error_403_path
@@ -26,5 +28,15 @@ class ApplicationController < ActionController::Base
 
   def ssl_configured?
     Rails.env.production?
+  end
+
+  def find_or_create_order
+    if session[:order_id].present?
+      @order = Order.find(session[:order_id]).active? ?
+        Order.find(session[:order_id]) : Order.create(state: :active)
+    else
+      @order = Order.create(state: :active)
+    end
+    session[:order_id] = @order.id
   end
 end
