@@ -2,5 +2,39 @@
 - content_for :meta_tags do
   = meta_tags(title: 'About Us')
 
-.container
-  %h1.script About
+%section#about-us
+  .container
+    %h1.script About
+    .row
+      .col-sm-12
+        %p
+          Michelle received her MEd at Loyola University and was trained as an
+          AMI elementary guide by Kay Baker in the Washington Montessori
+          Institute. She taught in an elementary classroom in Chicago and helped
+          to organize a new Montessori environment in Switzerland before moving
+          to Puebla, Mexico for her primary training under Coral Ruiz. For the
+          past two years Michelle has been a primary guide at the Montessori
+          Academy Bangkok International School in Thailand. She is now back
+          in Denver, CO studying as an Assistant to Infancy.
+        %p
+          While in Thailand Michelle joined forces with the amazing illustrator
+          = link_to 'Erik Rempen',
+            'https://www.linkedin.com/in/erik-rempen-93a30645',
+            target: '_blank'
+          (a former Montessori student) and the talented internet
+          aficionado
+          = link_to 'Jan Klimo',
+            'https://th.linkedin.com/in/janklimo', target: '_blank'
+          in an effort to bring beautiful Montessori
+          materials into the homes and classrooms of Montessorians around the
+          world. The Montessori Company is dedicated to ensuring the beauty and
+          philosophical consistency of Montessori environments everywhere,
+          making it easy for parents and guides to buy hand-crafted products
+          designed to follow Maria Montessori's style of learning.
+        %p
+          We hope that you enjoy our materials! If you need help navigating the
+          website or have suggestions for materials we should create, please
+          don't hesitate to reach out directly to
+          = succeed '.' do
+            = mail_to 'support@locksteplabs.com',
+              'support@locksteplabs.com', subject: 'Hey team!'
