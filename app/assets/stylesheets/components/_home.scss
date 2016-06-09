@@ -100,14 +100,14 @@
     display: table;
     margin-bottom: 40px;
 
-    .text {
+    .left-cell {
       display: table-cell;
       text-align: center;
       font-style: italic;
       color: darken($beige, 50%);
       height: 100%;
       width: 50%;
-      padding: 60px 50px;
+      padding: 120px 50px 0;
     }
 
     .author {
@@ -116,7 +116,7 @@
       color: darken($green, 20%);
     }
 
-    .image {
+    .right-cell {
       display: table-cell;
       background: url(testimonial.jpg) no-repeat right;
       -webkit-background-size: cover;
