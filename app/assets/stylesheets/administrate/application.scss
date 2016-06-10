@@ -1,6 +1,9 @@
 @charset "utf-8";
 
-@import "normalize-rails";
+@import "variables/vars";
+@import "mixins";
+@import "frameworks_and_overrides";
+
 @import "bourbon";
 @import "neat";
 

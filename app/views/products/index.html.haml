@@ -8,3 +8,5 @@
       .col-sm-8#products-list
         = render 'sort_bar'
         = render 'products_list'
+        .pagination-container
+          = paginate @results

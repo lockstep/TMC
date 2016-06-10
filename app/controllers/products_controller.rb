@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
       where: search_options,
       order: sort_by,
       page: page,
-      per_page: 10
+      per_page: 12
     )
     @recent_products = recently_viewed
     @query = search_query == '*' ? '' : search_query
