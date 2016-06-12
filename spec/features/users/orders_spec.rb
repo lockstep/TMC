@@ -12,7 +12,7 @@ describe 'Manage orders', :devise do
       @paid_order = orders(:cards_order_completed)
     end
     it 'can see completed orders' do
-      visit user_path(@user)
+      visit user_materials_path(@user)
       click_link 'My Orders'
       find_link(@paid_order.id).click
       # make sure this view is different than checkout

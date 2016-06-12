@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
   include Devise::Controllers::UrlHelpers
-  default from: 'hello@themontessoricompany.com'
+  default from: 'michelle@themontessoricompany.com'
   layout 'mailer'
 end

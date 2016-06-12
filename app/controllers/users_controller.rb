@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       flash[:notice] = 'Your preferences have been updated.'
       sign_in(@user, bypass: true)
-      redirect_to @user
+      redirect_to user_materials_path(@user)
     else
       render 'edit'
     end

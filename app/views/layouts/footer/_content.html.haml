@@ -1,23 +1,25 @@
 .container#footer
-  = image_tag 'submark.jpg', alt: 'The Montessori Company', class: 'submark'
+  = link_to root_path do
+    = image_tag 'submark.jpg', alt: 'The Montessori Company', class: 'submark'
   .row.navbar
     .col-sm-12.navbar-light
       %ul.nav.navbar-nav
-        %li.nav-item
-          = link_to 'Presentations', presentations_url, class: 'nav-link'
+        -# %li.nav-item
+        -#   = link_to 'Presentations', presentations_url, class: 'nav-link'
         %li.nav-item
           = link_to 'Products', products_url, class: 'nav-link'
         %li.nav-item
           = link_to "Terms &amp; Conditions".html_safe,
             page_path(:terms), class: 'nav-link'
-        %li.nav-item
-          %a.nav-link{href: "#"}
-            FAQ
+        -# %li.nav-item
+        -#   %a.nav-link{href: "#"}
+        -#     FAQ
         %li.nav-item
           = link_to 'Privacy Policy', page_path(:privacy), class: 'nav-link'
         %li.nav-item
-          %a.nav-link{href: "#"}
-            Contact Us
+          = mail_to 'michelle@themontessoricompany.com',
+            'Contact Us', subject: 'Hi TMC!',
+            class: 'nav-link'
 
       %ul.social-icons
         %li
@@ -25,6 +27,8 @@
             target: '_blank' do
             = fa_icon 'facebook'
         %li
-          = fa_icon 'instagram'
+          = link_to 'https://www.instagram.com/themontessoricompany/',
+            target: '_blank' do
+            = fa_icon 'instagram'
         %li
           = fa_icon 'pinterest'

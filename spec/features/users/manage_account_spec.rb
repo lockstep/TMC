@@ -12,11 +12,9 @@ describe 'Manage user account', :devise do
       signin(user.email, 'qawsedrf')
     end
     it 'can see and edit user details' do
-      visit user_path(user)
-      expect(page).to have_content user.email
+      visit user_materials_path(user)
       click_link 'My Details'
       fill_in_user_form
-      expect(page).to have_content 'DJ Shadow'
       expect(page).to have_content 'have been updated'
     end
 
@@ -26,8 +24,7 @@ describe 'Manage user account', :devise do
           .and_return('my_downloadable_file.pdf')
       end
       it 'can see materials' do
-        visit user_path(user)
-        click_link 'My Materials'
+        visit user_materials_path(user)
         expect(page).to have_link('Download', href: /my_downloadable_file/)
         expect(page).to have_link(cards.name, href: product_path(cards))
         expect(page).to have_link(cards.presentation.name,
