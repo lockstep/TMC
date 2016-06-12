@@ -1,0 +1,2 @@
+#!/bin/sh
+HEROKU_APP=themontessoricompany-staging HKAPP=themontessoricompany-staging exec "${HEROKU_COMMAND:-heroku}" "$@"
