@@ -8,7 +8,7 @@
       #cart-contents.list-group
         - if @order.line_items.empty?
           .text-xs-center
-            Your cart is empty :(
+            Your cart is empty.
         - else
           = render @order.line_items
       #checkout-container.text-xs-center
