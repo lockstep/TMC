@@ -6,7 +6,9 @@ describe 'Product search page', type: :feature do
 
   before do
     @product = products(:number_board)
+    # RSpec needs both reindex and refresh
     Product.reindex
+    Product.searchkick_index.refresh
   end
 
   context 'topics list' do
