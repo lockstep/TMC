@@ -8,7 +8,8 @@ shared_examples 'sending_email' do
   end
 
   it 'have correct sender' do
-    expect(ActionMailer::Base.deliveries.first.from).to eq(sender)
+    expect(ActionMailer::Base.deliveries.first.header['from'].value)
+      .to eq 'The Montessori Company <michelle@themontessoricompany.com>'
   end
 
   it 'have correct subject' do

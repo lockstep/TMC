@@ -12,7 +12,7 @@ Devise.setup do |config|
   SECRET
 
   config.parent_mailer = 'ApplicationMailer'
-  config.mailer_sender = 'michelle@themontessoricompany.com'
+  config.mailer_sender = 'The Montessori Company <michelle@themontessoricompany.com>'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

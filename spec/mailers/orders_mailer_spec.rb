@@ -1,6 +1,4 @@
-require "rails_helper"
-
-RSpec.describe OrdersMailer, type: :mailer do
+describe OrdersMailer, type: :mailer do
   include_context 'before_after_mailer'
   fixtures :users
   fixtures :orders
