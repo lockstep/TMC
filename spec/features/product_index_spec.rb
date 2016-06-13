@@ -6,6 +6,7 @@ describe 'Product search page', type: :feature do
 
   before do
     @product = products(:number_board)
+    Product.reindex
   end
 
   context 'topics list' do
@@ -21,11 +22,8 @@ describe 'Product search page', type: :feature do
       expect(@child_topic_1.name).to appear_before @child_topic_2.name
     end
     it 'shows product counts next to Topic names' do
-      products_count = Product.search(
-        where: { topic_ids: [@topic_2.id] }
-      ).count
       visit products_path
-      expect(page).to have_link "#{@topic_2.name} (#{products_count})"
+      expect(page).to have_link "#{@topic_2.name} (2)"
     end
     it 'opens the tree node for active topic and highlights it', js: true do
       visit products_path
@@ -52,6 +50,10 @@ describe 'Product search page', type: :feature do
   end
 
   context 'search' do
+    it 'does not show products without a pdf' do
+      visit products_path
+      expect(page).not_to have_content 'Number Cards'
+    end
     context 'price range' do
       it 'persists the setting and shows the correct results', js: true do
         visit products_path

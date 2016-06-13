@@ -58,7 +58,11 @@ module PresentationsHelper
     end
 
     def link_text(topic)
-      count = Product.search(where: { topic_ids: [topic.id] }).count
+      count = Product.search(
+        where: {
+          topic_ids: [topic.id],
+          downloadable_id: { not: nil }
+        }).count
       "#{topic.name} (#{count})"
     end
 

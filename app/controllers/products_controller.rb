@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   def index
     @results = Product.search(
       search_query,
-      misspellings: { edit_distance: 2 },
+      misspellings: { edit_distance: 1 },
       fields: [:name, :description],
       where: search_options,
       order: sort_by,
@@ -49,6 +49,7 @@ class ProductsController < ApplicationController
     {}.tap do |options|
       options[:price] = price_range.split(';')[0]..price_range.split(';')[1]
       options[:topic_ids] = [params[:topic_ids]] if params[:topic_ids].present?
+      options[:downloadable_id] = { not: nil }
     end
   end
 

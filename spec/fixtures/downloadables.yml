@@ -1,2 +1,11 @@
-number_cards_pdf:
+animal_cards_pdf:
   product: animal_cards
+
+number_board_pdf:
+  product: number_board
+
+flamingo_pdf:
+  product: flamingo
+
+ostrich_pdf:
+  product: ostrich
