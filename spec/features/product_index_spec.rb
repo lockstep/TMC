@@ -3,6 +3,7 @@ describe 'Product search page', type: :feature do
   fixtures :products
   fixtures :orders
   fixtures :topics
+  fixtures :downloadables
 
   before do
     @product = products(:number_board)
