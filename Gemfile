@@ -26,6 +26,8 @@ gem 'omniauth', '~> 1.3.1'
 gem 'omniauth-facebook', '~> 3.0.0'
 gem 'administrate', '~> 0.1.2'
 gem 'kaminari', '~> 0.16.2'
+gem 'sitemap_generator'
+gem 'fog-aws'
 
 gem 'searchkick', '~> 1.2.1'
 gem 'typhoeus'

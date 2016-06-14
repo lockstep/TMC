@@ -19,7 +19,7 @@
           alt: @product.name, id: 'primary-image', class: 'img-fluid'
         .images-container
           - @product.images.each do |image|
-            = image_tag image.image.url(:medium)
+            = image_tag image.url(:medium)
       .col-sm-7.clear
         %h1.name
           = @product.name
