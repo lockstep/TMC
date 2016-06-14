@@ -31,7 +31,7 @@
 
 = form_for [@order, Charge.new], html: { id: 'checkout-form' } do |f|
   = hidden_field_tag 'stripeToken'
-  = hidden_field_tag 'stripeEmail'
+  = hidden_field_tag 'stripeEmail', current_user.try(:email)
 
 - content_for :javascript do
   :javascript
@@ -39,6 +39,7 @@
       key: "#{ENV.fetch('STRIPE_KEY')}",
       image: "https://s3.amazonaws.com/lockstep-public-assets/tmc/stripe-cover.png",
       locale: 'auto',
+      email: $("#stripeEmail").val(),
       token: function(token) {
         $("#stripeToken").val(token.id);
         $("#stripeEmail").val(token.email);

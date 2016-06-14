@@ -33,12 +33,23 @@ describe 'Ordering process', type: :feature do
     end
   end
 
+  context 'checkout button' do
+    before do
+      @user = users(:michelle)
+      @order = orders(:cards_order)
+      signin(@user.email, 'qawsedrf')
+    end
+    it 'prepopulates the email field' do
+      visit order_path @order
+      expect(find('#stripeEmail', visible: false).value).to eq @user.email
+    end
+  end
+
   context 'removing product from cart' do
     before do
       @michelle = users(:michelle)
       @product = products(:number_cards)
       @order = orders(:cards_order)
-
       signin(@michelle.email, 'qawsedrf')
     end
     it 'removes the line item from cart' do
