@@ -41,4 +41,8 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+  def remember_me
+    true
+  end
 end
