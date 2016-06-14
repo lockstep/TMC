@@ -8,8 +8,10 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     if current_user
+      flash[:alert] = "Access to that page has been denied."
       redirect_to error_403_path
     else
+      flash[:notice] = "Please log in to access that page."
       redirect_to new_user_session_path
     end
   end
@@ -38,5 +40,9 @@ class ApplicationController < ActionController::Base
       @order = Order.create(state: :active)
     end
     session[:order_id] = @order.id
+  end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user, session)
   end
 end

@@ -26,6 +26,6 @@ describe 'Sign in', :devise do
     click_button('Log in')
 
     expect(page).to have_content(I18n.t('devise.sessions.signed_in'))
-    expect(page).to have_current_path(order_path(unassigned_order))
+    expect(page).to have_current_path '/'
   end
 end

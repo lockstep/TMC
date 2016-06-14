@@ -48,26 +48,32 @@ describe OrdersController, type: :controller do
           before do
             get :show, id: other_order_paid.id
           end
-          it { expect(response).to redirect_to(error_403_path) }
+          it 'denies access' do
+            expect(flash[:alert]).to match 'denied'
+            expect(response).to redirect_to(error_403_path)
+          end
         end
       end
     end
 
     context 'not signed in' do
-      context 'not signed in and not viewing their own order' do
+      context 'not signed in and no session data' do
         before do
           get :show, id: other_order.id
         end
-
-        it { expect(response).to redirect_to(new_user_session_path) }
+        it 'does not allow access' do
+          expect(flash[:notice]).to match 'Please log in'
+          expect(response).to redirect_to(new_user_session_path)
+        end
       end
       context 'not signed in and viewing their session order' do
         before do
-          @request.session[:order_id] = unassigned_order.id
+          @request.session[:order_id] = own_order_unfinished.id
           get :show, id: @request.session[:order_id]
         end
-
-        it { expect(response).to render_template('orders/show') }
+        it 'shows the order' do
+          expect(response).to render_template('orders/show')
+        end
       end
     end
   end

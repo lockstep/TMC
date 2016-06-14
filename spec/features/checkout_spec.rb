@@ -20,6 +20,17 @@ describe 'Order checkout', type: :feature do
       expect(page).to have_content number_board.description
       expect(page).to have_link 'Checkout'
     end
+
+    it 'can sign out and still see their cart' do
+      add_product_and_checkout
+      click_link 'Logout'
+      expect(page).to have_content 'Signed out successfully'
+      click_link 'My Cart'
+      expect(page).to have_content number_board.description
+      expect(page).not_to have_content 'is empty'
+      expect(page).to have_content 'Log in to check out'
+      expect(page).to have_current_path order_path(Order.last)
+    end
   end
 
   context 'guest user' do
