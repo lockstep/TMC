@@ -1,6 +1,7 @@
 .sort-bar
   %span.status
-    Showing all products
+    Showing
+    = pluralize(@results.size, 'result')
   .sort
     Sort by:
     #sort-by
