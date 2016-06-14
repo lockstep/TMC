@@ -68,7 +68,7 @@ Rails.application.configure do
     :address =>        'smtp.sendgrid.net',
     :user_name =>      ENV['SENDGRID_USERNAME'],
     :password =>       ENV['SENDGRID_PASSWORD'],
-    :domain =>         ENV['HOST_NAME'],
+    :domain =>         "mailer.#{ENV['HOST_NAME']}",
     :authentication => :plain,
     :enable_starttls_auto => true,
     :openssl_verify_mode => 'none'
