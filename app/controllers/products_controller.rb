@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
     @query = search_query == '*' ? '' : search_query
     @price_range = price_range
     @topic_id = params[:topic_ids]
-    @sort_by = params[:sort] || 'price:asc'
+    @sort_by = params[:sort] || 'created_at:desc'
   end
 
   def show

@@ -47,6 +47,13 @@ describe 'Product search page', type: :feature do
     end
   end
 
+  context 'sorting' do
+    it 'sorts by newest first by default' do
+      visit products_path
+      expect(find('#sort-select').value).to eq 'created_at:desc'
+    end
+  end
+
   context 'adding a product to cart' do
     it 'takes the user to the cart summary' do
       visit products_path
