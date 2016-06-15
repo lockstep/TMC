@@ -17,31 +17,27 @@ describe ChargesController, type: :controller do
     before { StripeMock.start }
     after { StripeMock.stop }
 
-    context 'completed order' do
+    context 'signed in user' do
       before do
-        post :create, order_id: cards_order.id, params: stripe_params
+        sign_in michelle
+        post :create, order_id: unassigned_order.id, params: stripe_params
+      end
+      it 'assigns the order to the user' do
+        expect(unassigned_order.reload.user).to eq michelle
       end
       it 'changes order from active to paid' do
-        expect(Order.find(cards_order.id)).to be_paid
+        expect(unassigned_order.reload).to be_paid
       end
-      it 'redirects to order success page' do
-        expect(response).to redirect_to success_order_path(cards_order)
+      it 'redirects to user materials page' do
+        expect(response).to redirect_to user_materials_path(michelle)
+        expect(flash[:notice]).to match 'Thank you'
       end
       it 'charges the right amount' do
         charge = Stripe::Charge.all[:data][0][:amount]
-        expect(charge).to eq cards_order.total_price*100
+        expect(charge).to eq unassigned_order.total_price*100
       end
       it 'sends out a confirmation email' do
         expect(ActionMailer::Base.deliveries.count).to eq(1)
-      end
-      context 'signed in user' do
-        before do
-          sign_in michelle
-          post :create, order_id: unassigned_order.id, params: stripe_params
-        end
-        it 'assigns the order to the user' do
-          expect(unassigned_order.reload.user).to eq michelle
-        end
       end
     end
 

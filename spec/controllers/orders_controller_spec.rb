@@ -77,40 +77,4 @@ describe OrdersController, type: :controller do
       end
     end
   end
-
-  describe '#success' do
-    context 'signed in' do
-      before do
-        sign_in michelle
-      end
-      context 'viewing own order' do
-        context 'unfinished order' do
-          before do
-            get :success, id: own_order_unfinished.id
-          end
-          it { is_expected.to redirect_to(error_403_path) }
-        end
-        context 'paid order' do
-          before do
-            get :success, id: own_order_paid.id
-          end
-          it 'renders the success page' do
-            expect(response).to render_template('success')
-          end
-        end
-      end
-      context "trying to view some other user's order" do
-        before do
-          get :success, id: other_order.id
-        end
-        it { is_expected.to redirect_to(error_403_path) }
-      end
-    end
-    context 'not signed in' do
-      before do
-        get :success, id: own_order_paid.id
-      end
-      it { is_expected.to redirect_to(new_user_session_path) }
-    end
-  end
 end

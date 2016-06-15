@@ -6,6 +6,10 @@ cards_order_completed:
   state: <%= Order.states[:paid] %>
   user: michelle
 
+birds_order_completed:
+  state: <%= Order.states[:paid] %>
+  user: michelle
+
 unassigned_order:
   state: <%= Order.states[:active] %>
 

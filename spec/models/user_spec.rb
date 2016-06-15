@@ -13,7 +13,7 @@ describe User, type: :model do
 
   describe '#purchased_products' do
     it 'returns an array of purchased products' do
-      expect(michelle.purchased_products.size).to eq 2
+      expect(michelle.purchased_products.size).to eq 3
       expect(michelle.purchased_products.first).to eq purchased_product
     end
   end

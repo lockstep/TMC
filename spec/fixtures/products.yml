@@ -29,7 +29,6 @@ flamingo:
   name: Flamingo
   price: 20.00
   description: Hand-painted flamingo card
-  presentation: birds
   featured: true
 
 ostrich:

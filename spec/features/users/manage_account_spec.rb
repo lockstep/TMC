@@ -6,6 +6,7 @@ describe 'Manage user account', :devise do
 
   let(:user)  { users(:michelle) }
   let(:cards) { products(:animal_cards) }
+  let(:bird)  { products(:flamingo) }
 
   context 'signed in' do
     before do
@@ -27,8 +28,7 @@ describe 'Manage user account', :devise do
         visit user_materials_path(user)
         expect(page).to have_link('Download', href: /my_downloadable_file/)
         expect(page).to have_link(cards.name, href: product_path(cards))
-        expect(page).to have_link(cards.presentation.name,
-                                  href: presentation_path(cards.presentation))
+        expect(page).to have_link(bird.name, href: product_path(bird))
       end
     end
   end

@@ -1,16 +1,12 @@
 class OrdersController < ApplicationController
   after_action :set_after_sign_in_path, only: [:show]
-  before_action :set_order, only: [:show, :success]
+  before_action :set_order, only: [:show]
 
   def show
     authorize! :show, @order
     if @order.paid?
       redirect_to user_order_path(current_user, @order)
     end
-  end
-
-  def success
-    authorize! :review, @order
   end
 
   private

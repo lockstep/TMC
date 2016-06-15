@@ -18,3 +18,7 @@ unassigned_order_items:
 line_item_animal:
   product: animal_cards
   order: animal_cards_order
+
+line_item_birds:
+  product: flamingo
+  order: birds_order_completed

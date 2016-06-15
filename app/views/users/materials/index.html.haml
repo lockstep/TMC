@@ -10,16 +10,16 @@
       %table.table.table-hover
         %thead
           %tr
+            %th Preview
             %th Product
-            %th Presentation
             %th Download
         %tbody
           - @products.each do |product|
             %tr
-              %th{scope: 'row'}
-                = link_to product.name, product_path(product)
               %td
-                = link_to product.presentation.name,
-                  presentation_path(product.presentation)
+                = image_tag product.primary_image.url(:medium),
+                  alt: product.name, class: 'product-preview'
+              %td
+                = link_to product.name, product_path(product)
               %td
                 = link_to 'Download', product.download_url
