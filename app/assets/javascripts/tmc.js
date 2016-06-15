@@ -32,34 +32,28 @@ TMC.define_component('social buttons', function() {
 });
 
 TMC.define_component('product index page', function() {
-  $('#sidebar .category .name').click(function() {
-    $(this).closest('.category').toggleClass('active');
-    $(this).closest('.category').find('.content').slideToggle('slow');
-  });
-
+  // prepopulate price range slider
   var range = $('#price-range').val();
-  var from, to;
+  var from, to, min, max;
   if (range) {
-    from = range.split(';')[0];
-    to = range.split(';')[1];
-  }
-
-  // show if the user set custom values
-  if (from != 1 || to != 49) {
-    $('#sidebar #refine').click();
+    min = range.split(';')[0];
+    from = range.split(';')[1];
+    to = range.split(';')[2];
+    max = range.split(';')[3];
   }
 
   $("#price-range").ionRangeSlider({
     type: "double",
     grid: true,
-    min: 0,
-    max: 70,
+    min: min,
+    max: max,
     from: from,
     to: to,
     step: 0.1,
     prefix: "$"
   });
 
+  // submit form on select change
   $('#sort-select').change(function() {
     $("#sort").val($(this).val());
     $('#product-search-form').submit();

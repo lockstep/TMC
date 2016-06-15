@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
   end
 
   def price_range
-    params[:price_range].present? ? params[:price_range] : '1;49'
+    params[:price_range].present? ? params[:price_range] : "1;9"
   end
 
   def sort_by
