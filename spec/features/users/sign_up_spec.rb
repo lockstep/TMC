@@ -1,8 +1,8 @@
 describe 'Sign up', :feature do
   include_context 'before_after_mailer'
 
-  context 'confirmation email' do
-    it 'is sent' do
+  context 'confirming user email' do
+    it 'sends the email and logs in the user after confirmation' do
       visit new_user_registration_path
       fill_in 'user[email]', with: 'my@email.com'
       fill_in 'user[password]', with: 'password'
@@ -11,6 +11,9 @@ describe 'Sign up', :feature do
       expect(ActionMailer::Base.deliveries.count).to eq(1)
       token = User.last.confirmation_token
       expect(ActionMailer::Base.deliveries.last.encoded).to match token
+      visit "/users/confirmation?confirmation_token=#{token}"
+      expect(page).to have_link 'Logout'
+      expect(ActionMailer::Base.deliveries.count).to eq(2)
     end
   end
 end
