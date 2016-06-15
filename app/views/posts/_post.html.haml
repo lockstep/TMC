@@ -1,9 +1,7 @@
-%h2
-  = link_to(post.title, post)
-%p
-  = fa_icon 'clock-o'
-  Posted on
-  = time_tag post.created_at
-%p
-  = post.summary
-%hr
+.post
+  %h2
+    = link_to(post.title, post)
+  .body
+    = truncate(strip_tags(post.body), separator: ' ', length: 300) do
+      = link_to ' continue', post_url(post)
+  %hr

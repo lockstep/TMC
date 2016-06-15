@@ -1,16 +1,13 @@
 - content_for :title, @post.title
 - content_for :meta_tags do
   = meta_tags(title: @post.title,
-              description: @post.summary)
+    description: truncate(strip_tags(@post.body),
+    separator: ' ', length: 300))
 .container
   %h1.script Blog
   .row
     .col-sm-8.col-sm-offset-2
       %h1
         = @post.title
-      %p
-        = fa_icon 'clock-o'
-        Posted on
-        = time_tag @post.created_at
       %hr/
       = @post.body.html_safe

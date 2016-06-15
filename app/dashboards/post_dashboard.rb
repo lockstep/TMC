@@ -10,7 +10,6 @@ class PostDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
-    summary: Field::String,
     body: WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -25,7 +24,6 @@ class PostDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :title,
-    :summary,
     :created_at,
   ]
 
@@ -35,7 +33,6 @@ class PostDashboard < Administrate::BaseDashboard
     :id,
     :title,
     :slug,
-    :summary,
     :body,
     :created_at,
     :updated_at,
@@ -46,7 +43,6 @@ class PostDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :title,
-    :summary,
     :body,
   ]
 
@@ -54,6 +50,6 @@ class PostDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(post)
-    "Post ##{post.id}"
+    post.title
   end
 end
