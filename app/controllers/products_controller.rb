@@ -13,7 +13,6 @@ class ProductsController < ApplicationController
     )
     @recent_products = recently_viewed
     @query = search_query == '*' ? '' : search_query
-    @price_range = price_range
     @topic_id = params[:topic_ids]
     @sort_by = params[:sort] || 'created_at:desc'
   end
@@ -47,14 +46,9 @@ class ProductsController < ApplicationController
 
   def search_options
     {}.tap do |options|
-      options[:price] = price_range.split(';')[0]..price_range.split(';')[1]
       options[:topic_ids] = [params[:topic_ids]] if params[:topic_ids].present?
       options[:downloadable_id] = { not: nil }
     end
-  end
-
-  def price_range
-    params[:price_range].present? ? params[:price_range] : '1;49'
   end
 
   def sort_by

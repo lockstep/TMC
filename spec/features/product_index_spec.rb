@@ -74,7 +74,7 @@ describe 'Product search page', type: :feature do
       visit products_path
       expect(page).not_to have_content 'Number Cards'
     end
-    context 'price range' do
+    xcontext 'price range' do
       it 'persists the setting and shows the correct results', js: true do
         visit products_path
         page.execute_script("$('#price-range').val('11;33');")

@@ -10,15 +10,8 @@
     = text_field_tag :q, @query, id: 'query', class: "form-control"
     %span.icon
       = fa_icon 'search'
-  %ul.category
-    %span.name#refine
-      Refine
-    = fa_icon 'caret-right'
-    .content
-      = text_field_tag :price_range, @price_range,
-        id: "price-range", class: "form-control"
-    = submit_tag "Search", id: 'search-button',
-      class: "btn btn-green form-control"
+  = submit_tag "Search", id: 'search-button',
+    class: "btn btn-green form-control"
 
   %h1 Recently viewed
   = render 'recently_viewed'
