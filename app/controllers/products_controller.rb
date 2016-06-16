@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show]
 
+  DEFAULT_SORT = { created_at: :desc }
+
   def index
     @results = Product.search(
       search_query,
@@ -14,7 +16,8 @@ class ProductsController < ApplicationController
     @recent_products = recently_viewed
     @query = search_query == '*' ? '' : search_query
     @topic_id = params[:topic_ids]
-    @sort_by = params[:sort] || 'created_at:desc'
+    @sort_by =
+      params[:sort] || "#{DEFAULT_SORT.keys[0]}:#{DEFAULT_SORT.values[0]}"
   end
 
   def show
@@ -52,7 +55,7 @@ class ProductsController < ApplicationController
   end
 
   def sort_by
-    return { price: :asc } unless params[:sort].present?
+    return DEFAULT_SORT unless params[:sort].present?
     {}.tap do |result|
       result[params[:sort].split(':')[0]] = params[:sort].split(':')[1]
     end
