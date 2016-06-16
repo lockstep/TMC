@@ -1,7 +1,7 @@
 .sort-bar
   %span.status
     Showing
-    = pluralize(@results.size, 'result')
+    = pluralize(@results.total_count, 'result')
   .sort
     Sort by:
     #sort-by
