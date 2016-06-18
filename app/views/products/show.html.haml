@@ -3,7 +3,7 @@
   = meta_tags(title: @product.name,
               type: 'product',
               image: object_image(@product),
-              description: @product.description,
+              description: strip_tags(@product.description),
               amount: @product.price)
 
 %section#product
@@ -26,9 +26,10 @@
         %h4.price
           = "$#{@product.price}"
         .social
-          = pin_it(image: object_image(@product))
-          = tweet(text: @product.name)
           = facebook_like
+          = pin_it(image: object_image(@product),
+            description: strip_tags(@product.description))
+          = tweet(text: @product.name)
         %h5.section-title
           Description
         .section

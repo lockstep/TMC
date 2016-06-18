@@ -3,6 +3,6 @@ module SocialsHelper
   DEFAULT_AUTHOR = 'The Montessori Company'
   DEFAULT_DESCRIPTION = 'Beautiful Montessori resources, lovingly crafted
   by an AMI Montessori guide.'
-  FB_PAGE = 'fb_page_here'
-  TWITTER_ACCOUNT = '@twitter_account'
+  TWITTER_ACCOUNT = '@themontessorico'
+  FB_PAGE = 'https://www.facebook.com/themontessoricompany/'
 end

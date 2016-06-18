@@ -1,4 +1,3 @@
-//= require social_sdks/tweet
 //= require social_sdks/facebook
 //= require social_sdks/pinterest
 
@@ -14,16 +13,17 @@ TMC.define_component = function(name, fn) {
 };
 
 TMC.define_component('social buttons', function() {
-  loadTwitterSDK().done(function(script, status) {
-    if (!twttr_events_bound) {
-      bindTwitterEventHandlers();
-    }
-  });
-
   loadFacebookSDK();
   if (!window.fbEventsBound) {
     bindFacebookEvents();
   }
+
+  $('#facebook-button').bind('vclick', function(e) {
+    FB.ui({
+      method: 'share',
+      href: window.location.href,
+    }, function(response){});
+  });
 
   Pinterest.load();
   if (!window.pinterest_events_bound) {

@@ -20,8 +20,14 @@
   }
 
   .social-icons {
+    margin-top: 22px;
+
     li:not(:last-child) {
       margin-right: 15px;
+    }
+
+    img {
+      height: 28px;
     }
   }
 }

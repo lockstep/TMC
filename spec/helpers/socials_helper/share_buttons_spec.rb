@@ -16,12 +16,6 @@ RSpec.describe SocialsHelper::ShareButtons, type: :helper do
     it { is_expected.to include(test_text) }
   end
 
-  describe '#facebook_like' do
-    subject { helper.facebook_like(url: test_url) }
-
-    it { is_expected.to include(test_url) }
-  end
-
   describe '#tweet' do
     subject { helper.tweet(text: test_text, url: test_url) }
 

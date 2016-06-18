@@ -1,36 +1,33 @@
 module SocialsHelper::ShareButtons
   def pin_it(url: current_full_url, image:, description: '')
     <<-PIN.html_safe
-      <div id="pin-it"></div>
       <a data-pin-do="buttonPin"
-         data-pin-color="red"
-         href="https://www.pinterest.com/pin/create/button/?url=#{url}
-               &media=#{image}&description=#{description}">
+         data-pin-custom="true"
+         data-pin-url="#{url}"
+         data-pin-description="#{description}"
+         data-pin-media="#{image}"
+         href="https://www.pinterest.com/pin/create/button/">
+        #{image_tag('pinterest_button', alt: 'Pinterest button')}
       </a>
     PIN
   end
 
-  def facebook_like(url: current_full_url)
-    <<-LIKE.html_safe
-      <div class="fb-like"
-        data-href="#{url}"
-        data-layout="standard"
-        data-action="like"
-        data-show-faces="true">
-      </div>
-    LIKE
+  def tweet(text:, url: current_full_url)
+    hashtags = "montessori,handmade,teaching,education,learning"
+    helpers.link_to("https://twitter.com/share?url=#{url}&text=#{text}&" \
+                    "hashtags=#{hashtags}", target: '_blank') do
+      helpers.image_tag('twitter_button', alt: 'Twitter button')
+    end
   end
 
-  def tweet(text:, url: current_full_url, size: 'small')
-    <<-TWEET.html_safe
-      <a class="twitter-share-button"
-        href="https://twitter.com/intent/tweet"
-        data-text="#{text}"
-        data-url="#{url}"
-        data-via="#{SocialsHelper::TWITTER_ACCOUNT}"
-        data-size="#{size}">
-        Tweet
-      </a>
-    TWEET
+  def facebook_like
+    helpers.image_tag('facebook_button', alt: 'Facebook button',
+                     id: 'facebook-button')
+  end
+
+  private
+
+  def helpers
+    ActionController::Base.helpers
   end
 end

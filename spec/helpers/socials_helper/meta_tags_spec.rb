@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe SocialsHelper::MetaTags, type: :helper do
+describe SocialsHelper::MetaTags, type: :helper do
   fixtures :products
   fixtures :images
 
@@ -29,7 +27,7 @@ RSpec.describe SocialsHelper::MetaTags, type: :helper do
     context 'object has image(s)' do
       subject { helper.object_image(number_cards) }
 
-      it { is_expected.to eq(number_cards.primary_image.image.url(:medium)) }
+      it { is_expected.to eq(number_cards.primary_image.url(:medium)) }
     end
 
     context 'object doesn\'t have image(s)' do

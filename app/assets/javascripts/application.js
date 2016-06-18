@@ -14,7 +14,6 @@
 //= require jquery.mobile.just-touch
 //= require jquery_ujs
 //= require turbolinks
-//= require turbolinks-compatibility
 //= require tether
 //= require ion.rangeSlider
 //= require bootstrap
