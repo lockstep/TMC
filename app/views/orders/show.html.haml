@@ -3,6 +3,16 @@
 .container#cart
   %h3.text-xs-center
     Your Cart
+  - unless @order.line_items.empty? || user_signed_in?
+    .row
+      .col-sm-8.col-sm-offset-2
+        .row.save-cart-warning
+          .col-sm-12
+            Make sure you save your cart! Please
+            = link_to 'sign in', new_user_session_path
+            or
+            = link_to 'register', new_registration_path('user')
+            to save your items for later.
   .row
     .col-sm-8.col-sm-offset-2
       #cart-contents.list-group
