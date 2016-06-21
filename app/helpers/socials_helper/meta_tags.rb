@@ -23,7 +23,7 @@ module SocialsHelper::MetaTags
     if object.images.empty?
       SocialsHelper::DEFAULT_IMAGE
     else
-      object.primary_image.url(:medium)
+      object.primary_image.url
     end
   end
 
@@ -35,8 +35,8 @@ module SocialsHelper::MetaTags
       <meta property='og:type' content='#{type}'/>
 
       <meta property='og:image' content='#{image}'/>
-      <meta property="og:image:width" content="400"/>
-      <meta property="og:image:height" content="400"/>
+      <meta property="og:image:width" content="1800"/>
+      <meta property="og:image:height" content="1800"/>
       <meta property='og:url' content='#{url}'/>
 
       <meta property='og:site_name' content='#{t(:site_name)}'/>
