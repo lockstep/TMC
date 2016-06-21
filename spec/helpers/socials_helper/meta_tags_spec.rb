@@ -27,7 +27,7 @@ describe SocialsHelper::MetaTags, type: :helper do
     context 'object has image(s)' do
       subject { helper.object_image(number_cards) }
 
-      it { is_expected.to eq(number_cards.primary_image.url(:medium)) }
+      it { is_expected.to eq(number_cards.primary_image.url) }
     end
 
     context 'object doesn\'t have image(s)' do
