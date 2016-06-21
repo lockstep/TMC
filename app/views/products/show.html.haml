@@ -41,3 +41,16 @@
           = succeed "." do
             = link_to 'your cart', order_url(@order),
               data: { turbolinks: false }
+
+- if ENV['ENABLE_TRACKING']
+  - content_for :fb_tracking do
+    :javascript
+      fbq('track', 'ViewContent', {
+        content_name: '#{@product.name}',
+        content_category: 'Digital Products',
+        value: #{@product.price},
+        currency: 'USD',
+        referrer: document.referrer,
+        userAgent: navigator.userAgent,
+        language: navigator.language
+      });
