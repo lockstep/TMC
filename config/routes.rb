@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   resources :pages, param: :page, only: [:show]
 
   get '/403', to: 'pages#show', page: 'home', as: 'error_403'
-  get '/404', to: 'pages#show', page: 'home', as: 'error_404'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

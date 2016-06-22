@@ -53,6 +53,15 @@ describe OrdersController, type: :controller do
             expect(response).to redirect_to(error_403_path)
           end
         end
+        context 'order does not exist' do
+          before do
+            get :show, id: 0
+          end
+          it 'redirects home with an alert' do
+            expect(flash[:alert]).to match 'does not exist'
+            expect(response).to redirect_to root_path
+          end
+        end
       end
     end
 

@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
-    redirect_to error_404_path
+    redirect_to '/', alert: 'Record does not exist.'
   end
 
   def after_sign_in_path_for(resource)
@@ -34,8 +34,16 @@ class ApplicationController < ActionController::Base
 
   def find_or_create_order
     if session[:order_id].present?
-      @order = Order.find(session[:order_id]).active? ?
-        Order.find(session[:order_id]) : Order.create(state: :active)
+      session_order = Order.find_by_id(session[:order_id])
+
+      unless session_order
+        @order = Order.create(state: :active)
+        session[:order_id] = @order.id
+        return
+      end
+
+      @order = session_order.active? ?
+        session_order : Order.create(state: :active)
     else
       @order = Order.create(state: :active)
     end

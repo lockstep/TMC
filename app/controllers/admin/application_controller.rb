@@ -9,14 +9,10 @@ module Admin
     before_action :authenticate_admin
 
     def authenticate_admin
-      raise_404 unless is_current_user_admin?
+      redirect_to '/', alert: 'Not authorized.' unless is_current_user_admin?
     end
 
     private
-
-    def raise_404
-      raise ActionController::RoutingError, 'Not Found'
-    end
 
     def is_current_user_admin?
       if current_user
@@ -25,10 +21,5 @@ module Admin
         false
       end
     end
-    # Override this value to specify the number of elements to display at a time
-    # on index pages. Defaults to 20.
-    # def records_per_page
-    #   params[:per_page] || 20
-    # end
   end
 end

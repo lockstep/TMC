@@ -20,3 +20,7 @@ animal_cards_order:
 paid_animal_cards_order:
   state: <%= Order.states[:paid] %>
   user: paul
+
+no_line_items:
+  state: <%= Order.states[:active] %>
+  user: paul

@@ -20,11 +20,19 @@ RSpec.describe Admin::UsersController, type: :controller do
       context 'user\'s signed in as a user' do
         before { sign_in paul }
 
-        it { expect{ get :index }.to raise_error(ActionController::RoutingError) }
+        it 'redirects home with a flash alert' do
+          get :index
+          expect(response).to redirect_to root_url
+          expect(flash[:alert]).to eq 'Not authorized.'
+        end
       end
 
       context 'user\'s not signed in' do
-        it { expect{ get :index }.to raise_error(ActionController::RoutingError) }
+        it 'redirects home with a flash alert' do
+          get :index
+          expect(response).to redirect_to root_url
+          expect(flash[:alert]).to eq 'Not authorized.'
+        end
       end
     end
   end
