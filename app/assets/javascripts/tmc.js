@@ -69,6 +69,21 @@ TMC.define_component('product index page', function() {
     $('a[data-topic-id=' + activeTopic + ']').addClass('active');
     $('div.well:has(.active)').addClass('expanded');
   }
+
+  // FB: track AddToCart if tracking is enabled
+  // tracks buttons on both product index and show
+  $('input.btn-cart[type=submit]').bind('vclick', function(e) {
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'AddToCart', {
+        content_name: $(this).data('name'),
+        content_category: 'Digital Products',
+        content_ids: [$(this).data('id')],
+        content_type: 'product',
+        value: parseFloat($(this).data('value')),
+        currency: 'USD'
+      });
+    }
+  });
 });
 
 TMC.define_component('product show page', function() {

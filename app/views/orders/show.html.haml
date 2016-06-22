@@ -64,5 +64,17 @@
         description: 'from The Montessori Company',
         amount: #{@order.total_price*100}
       });
+
+      // FB: track InitiateCheckout if tracking is enabled
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+          content_category: 'Digital Products',
+          content_type: 'product',
+          content_ids: #{@order.line_items.map { |li| li.id.to_s }},
+          num_items: #{@order.line_items.size},
+          value: #{@order.total_price},
+          currency: 'USD'
+        });
+      }
     });
 

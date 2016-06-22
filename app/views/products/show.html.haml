@@ -42,9 +42,9 @@
             = link_to 'your cart', order_url(@order),
               data: { turbolinks: false }
 
-- if ENV['ENABLE_TRACKING']
-  - content_for :fb_tracking do
-    :javascript
+- content_for :fb_tracking do
+  :javascript
+    if (typeof fbq !== 'undefined') {
       fbq('track', 'ViewContent', {
         content_name: '#{@product.name}',
         content_category: 'Digital Products',
@@ -54,3 +54,4 @@
         userAgent: navigator.userAgent,
         language: navigator.language
       });
+    }
