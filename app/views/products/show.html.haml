@@ -3,7 +3,7 @@
   = meta_tags(title: @product.name,
               type: 'product',
               image: object_image(@product),
-              description: strip_tags(@product.description),
+              description: strip_tags(@product.description).gsub("'", %q(\\\')),
               amount: @product.price)
 
 %section#product
@@ -28,7 +28,7 @@
         .social
           = facebook_like
           = pin_it(image: object_image(@product),
-            description: strip_tags(@product.description))
+            description: strip_tags(@product.description).gsub("'", %q(\\\')))
           = tweet(text: @product.name)
         %h5.section-title
           Description

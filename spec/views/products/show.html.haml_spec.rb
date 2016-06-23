@@ -14,6 +14,7 @@ describe "products/show" do
 
     it "displays product's name correctly" do
       expect(rendered).to match number_cards.name
+      expect(rendered).to match(/card\\'s/)
     end
   end
 end

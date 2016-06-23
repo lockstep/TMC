@@ -2,7 +2,7 @@
 - content_for :meta_tags do
   = meta_tags(title: @post.title,
     description: truncate(strip_tags(@post.body),
-    separator: ' ', length: 300))
+    separator: ' ', length: 300).gsub("'", %q(\\\')))
 .container
   %h1.script Blog
   .row
