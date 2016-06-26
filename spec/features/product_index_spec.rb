@@ -123,7 +123,7 @@ describe 'Product search page', type: :feature do
       visit products_path
       expect(page).to have_content 'None yet.'
       visit product_path @product
-      click_link 'Back to search'
+      visit products_path
       within('#recently-viewed') do
         expect(page).to have_content @product.name
       end
