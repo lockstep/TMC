@@ -49,15 +49,19 @@ class ProductsController < ApplicationController
 
   def search_options
     {}.tap do |options|
-      options[:topic_ids] = [params[:topic_ids]] if params[:topic_ids].present?
+      options[:topic_ids] = [params[:topic_ids]] if params[:topic_ids].to_i > 0
       options[:downloadable_id] = { not: nil }
     end
   end
 
   def sort_by
-    return DEFAULT_SORT unless params[:sort].present?
+    return DEFAULT_SORT if params[:sort].blank?
+    key = params[:sort].split(':')[0]
+    value = params[:sort].split(':')[1]
+    return DEFAULT_SORT unless %W(created_at price).include?(key) &&
+      %W(desc asc).include?(value)
     {}.tap do |result|
-      result[params[:sort].split(':')[0]] = params[:sort].split(':')[1]
+      result[key] = value
     end
   end
 
