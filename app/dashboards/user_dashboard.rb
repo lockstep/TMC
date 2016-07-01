@@ -9,7 +9,7 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    role: Field::String,
+    role: Enum,
     email: Field::String,
     orders: Field::HasMany,
     encrypted_password: Field::String,

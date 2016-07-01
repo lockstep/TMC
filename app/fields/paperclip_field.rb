@@ -1,4 +1,4 @@
-require "administrate/fields/base"
+require "administrate/field/base"
 
 class PaperclipField < Administrate::Field::Base
   def url

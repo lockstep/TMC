@@ -1,4 +1,4 @@
-require "administrate/fields/base"
+require "administrate/field/base"
 
 class WysiwygField < Administrate::Field::Text
   def to_s
