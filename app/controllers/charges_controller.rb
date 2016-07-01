@@ -12,6 +12,7 @@ class ChargesController < ApplicationController
                          currency: 'usd',
                         )
     @order.update(state: :paid)
+    session[:new_order] = true
     redirect_to success_order_path(@order)
   rescue Stripe::CardError => e
     flash[:error] = e.message

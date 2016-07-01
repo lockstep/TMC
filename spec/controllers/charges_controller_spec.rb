@@ -29,6 +29,7 @@ describe ChargesController, type: :controller do
         expect(unassigned_order.reload).to be_paid
       end
       it 'redirects to order success page' do
+        expect(session[:new_order]).to eq true
         expect(response).to redirect_to success_order_path(unassigned_order)
       end
       it 'charges the right amount' do
