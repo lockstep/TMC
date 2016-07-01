@@ -1,10 +1,33 @@
+- content_for :title, 'Thank You!'
+
 .container
   .row
     .col-sm-12
-      %h3 You're the Best!
-      %p
-        Thank you so much for your order! Your materials are ready for
-        download:
-      %ul
-        - @order.line_items.each do |item|
-          %li= link_to item.name, item.download_url
+      .leader-img-container
+        = image_tag 'thank_you', alt: 'Thank you!',
+          class: 'img-fluid'
+      .text-xs-center
+        .leader-img-explanation
+          %p
+            Thank you for your order! Your materials are ready.
+        = link_to 'Go to my materials', user_materials_path(current_user),
+          class: 'btn btn-secondary'
+
+- content_for :tracking do
+  :javascript
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Purchase', {
+        content_type: 'product',
+        content_ids: #{@order.line_items.map { |li| li.id.to_s }},
+        num_items: #{@order.line_items.size},
+        order_id: #{@order.id},
+        value: #{@order.total_price},
+        currency: 'USD'
+      });
+    }
+
+    if (typeof ga !== 'undefined') {
+      #{get_transaction_js(@order)}
+      #{get_items_js(@order)}
+      ga('ecommerce:send');
+    }

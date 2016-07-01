@@ -31,6 +31,10 @@ class Product < ActiveRecord::Base
       [] : topics.inject([]) { |arr, t| arr | t.related_topic_ids }
   end
 
+  def topic_name
+    topics[0].try(:name) || 'Digital Products'
+  end
+
   private
 
   def slug_candidates

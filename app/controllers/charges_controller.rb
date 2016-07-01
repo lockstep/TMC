@@ -12,8 +12,7 @@ class ChargesController < ApplicationController
                          currency: 'usd',
                         )
     @order.update(state: :paid)
-    flash[:notice] = 'Thank you for your order! Your materials are ready.'
-    redirect_to user_materials_path(current_user)
+    redirect_to success_order_path(@order)
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to @order

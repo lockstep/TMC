@@ -31,7 +31,7 @@ module SocialsHelper::MetaTags
 
   def og(title:, url:, type: , image:, description:, author:, amount: 0)
     <<-META
-      <meta property='og:title' content='#{title}'/>
+      <meta property='og:title' content="#{title}"/>
       <meta property='og:type' content='#{type}'/>
 
       <meta property='og:image' content='#{image}'/>
@@ -40,12 +40,12 @@ module SocialsHelper::MetaTags
       <meta property='og:url' content='#{url}'/>
 
       <meta property='og:site_name' content='#{t(:site_name)}'/>
-      <meta property='og:description' content='#{description}'/>
+      <meta property='og:description' content="#{description}"/>
 
       <meta property='article:author' content='#{SocialsHelper::FB_PAGE}' />
 
       <meta name='author' content='#{author}'/>
-      <meta name='description' content='#{description}'/>
+      <meta name='description' content="#{description}"/>
 
       <meta property="og:brand" content="The Montessori Company"/>
       <meta property="og:price:amount" content="#{amount}"/>

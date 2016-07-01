@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
-    redirect_to '/', alert: 'Record does not exist.'
+    redirect_to error_404_path
   end
 
   def after_sign_in_path_for(resource)

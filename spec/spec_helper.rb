@@ -18,6 +18,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require 'rack_session_access/capybara'
 
 # don't pollute the spec output with JS console messages
 module FakePoltergeistLogger

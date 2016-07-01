@@ -72,4 +72,17 @@ describe Product, type: :model do
       expect(@product.topic_ids_array).to include @child_topic2.id
     end
   end
+
+  describe '#topic_name' do
+    before do
+      @product_with_topic = products(:animal_cards)
+      @product_without_topic = products(:flamingo)
+    end
+    it 'returns topic name if topic is present' do
+      expect(@product_with_topic.topic_name).to eq 'Memory Quiz'
+    end
+    it 'defaults to Digital Products' do
+      expect(@product_without_topic.topic_name).to eq 'Digital Products'
+    end
+  end
 end

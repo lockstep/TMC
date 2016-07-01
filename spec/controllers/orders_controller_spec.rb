@@ -57,9 +57,8 @@ describe OrdersController, type: :controller do
           before do
             get :show, id: 0
           end
-          it 'redirects home with an alert' do
-            expect(flash[:alert]).to match 'does not exist'
-            expect(response).to redirect_to root_path
+          it 'redirects to 404' do
+            expect(response).to redirect_to error_404_path
           end
         end
       end
@@ -83,6 +82,36 @@ describe OrdersController, type: :controller do
         it 'shows the order' do
           expect(response).to render_template('orders/show')
         end
+      end
+    end
+  end
+
+  describe '#success' do
+    context 'signed in user' do
+      before do
+        sign_in michelle
+      end
+      context 'newly paid order' do
+        before do
+          session[:new_order] = true
+        end
+        it 'renders the success page' do
+          get :success, id: own_order_paid.id
+          expect(response).to render_template('success')
+          expect(session[:new_order]).to be_nil
+        end
+      end
+      context 'repeated access to success page' do
+        it 'takes the user to the materials page' do
+          get :success, id: own_order_paid.id
+          expect(response).to redirect_to user_materials_path(michelle)
+        end
+      end
+    end
+    context 'guest user' do
+      it 'prompts user to log in' do
+        get :success, id: own_order_paid.id
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end

@@ -28,9 +28,8 @@ describe ChargesController, type: :controller do
       it 'changes order from active to paid' do
         expect(unassigned_order.reload).to be_paid
       end
-      it 'redirects to user materials page' do
-        expect(response).to redirect_to user_materials_path(michelle)
-        expect(flash[:notice]).to match 'Thank you'
+      it 'redirects to order success page' do
+        expect(response).to redirect_to success_order_path(unassigned_order)
       end
       it 'charges the right amount' do
         charge = Stripe::Charge.all[:data][0][:amount]

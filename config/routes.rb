@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :pages, param: :page, only: [:show]
 
   get '/403', to: 'pages#show', page: 'home', as: 'error_403'
+  get '/uhoh', to: 'errors#error_404', as: 'error_404'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -25,8 +26,11 @@ Rails.application.routes.draw do
     resources :materials, only: [:index], controller: 'users/materials'
   end
   resources :orders, only: :show do
+    get 'success', on: :member
     resources :line_items, only: [:create, :destroy]
     resources :charges, only: [:create]
   end
   resources :posts, only: [:index, :show]
+
+  get '*unmatched_route', to: 'errors#error_404'
 end

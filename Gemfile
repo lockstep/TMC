@@ -40,6 +40,7 @@ gem 'stripe', '~> 1.36.1'
 group :test do
   gem 'stripe-ruby-mock', require: 'stripe_mock'
   gem 'orderly'
+  gem 'rack_session_access'
 end
 
 group :development, :test do

@@ -42,12 +42,12 @@
             = link_to 'your cart', order_url(@order),
               data: { turbolinks: false }
 
-- content_for :fb_tracking do
+- content_for :tracking do
   :javascript
     if (typeof fbq !== 'undefined') {
       fbq('track', 'ViewContent', {
         content_name: '#{@product.name}',
-        content_category: 'Digital Products',
+        content_category: '#{@product.topic_name}',
         value: #{@product.price},
         currency: 'USD',
         referrer: document.referrer,
