@@ -1,0 +1,18 @@
+= favicon_link_tag
+= favicon_link_tag "touch-icon-192x192.png",
+  rel: 'icon',
+  type: 'image/png',
+  sizes: "192x192"
+
+- %w(180 167 152 144 120 114 76 72).each do |size|
+  = favicon_link_tag "apple-touch-icon-#{size}x#{size}.png",
+    rel: 'apple-touch-icon-precomposed',
+    type: 'image/png',
+    sizes: "#{size}x#{size}"
+
+= favicon_link_tag "apple-touch-icon-precomposed.png",
+  rel: 'apple-touch-icon-precomposed'
+
+/ specify a startup image that is displayed while the app launches
+= favicon_link_tag "apple-touch-startup-image.png",
+  rel: 'apple-touch-startup-image'

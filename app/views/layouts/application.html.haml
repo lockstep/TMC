@@ -4,12 +4,15 @@
     %meta{:charset => "UTF-8"}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
     %meta{name: "p:domain_verify", content: "3e773564bcfc7dd093e8086b28023b53"}
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}
+    %meta{:content => "yes", :name => "mobile-web-app-capable"}
 
     = yield(:meta_tags)
     %title
       != "#{yield(:title)} | #{t(:site_name)}"
-    = favicon_link_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = render "layouts/favicon"
+    = stylesheet_link_tag 'application', media: 'all',
+      'data-turbolinks-track' => true
     = javascript_include_tag 'https://checkout.stripe.com/checkout.js',
       'data-turbolinks-track' => false
     = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato:300'
