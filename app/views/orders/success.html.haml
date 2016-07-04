@@ -21,7 +21,7 @@
         content_ids: #{@order.line_items.map { |li| li.id.to_s }},
         num_items: #{@order.line_items.size},
         order_id: #{@order.id},
-        value: #{@order.total_price},
+        value: #{@order.total},
         currency: 'USD'
       });
     }

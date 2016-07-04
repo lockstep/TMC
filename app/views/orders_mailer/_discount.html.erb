@@ -1,0 +1,15 @@
+<% return unless @order.adjustment %>
+<tr align="center">
+  <td align="left" valign="top" width="75%"
+    style="border-top:1px dotted #dedede">
+    <span style="margin:0;font-size:15px;line-height:21px;font-family:'Helvetica',Arial,sans-serif;color:#5d9cec">
+      Discount (<%= @order.promotion_code.upcase %>)
+    </span>
+  </td>
+  <td align="right" valign="top" width="25%"
+    style="border-top:1px dotted #dedede">
+    <span style="margin:0;font-size:15px;line-height:21px;font-family:'Helvetica',Arial,sans-serif;color:#5d9cec">
+      <%= number_to_currency(@order.adjustment_total*-1, precision: 2) %>
+    </span>
+  </td>
+</tr>

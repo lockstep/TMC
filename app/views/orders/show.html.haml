@@ -23,9 +23,32 @@
           = render @order.line_items
       #checkout-container.text-xs-center
         - unless @order.line_items.empty?
-          .order-total.text-xs-center
-            Order total:
-            = number_to_currency(@order.total_price, precision: 2)
+          = form_tag order_path(@order), method: :patch,
+            id: 'promo-code-form', class: 'form-inline' do
+            .form-group
+              = label_tag :code, 'Promo code', class: 'form-label'
+              = text_field_tag :code, nil, class: 'form-control'
+            = submit_tag 'Apply', class: 'btn btn-primary'
+          .order-summary.text-xs-left
+            - if @order.adjustment
+              .row
+                .col-xs-6
+                  Subtotal
+                .col-xs-6.subtotal
+                  = number_to_currency(@order.item_total, precision: 2)
+              .row
+                .col-xs-6
+                  Discount (#{@order.promotion_code.upcase})
+                .col-xs-6.discount
+                  = number_to_currency(@order.adjustment_total*-1, precision: 2)
+              .row
+                .col-xs-12.description
+                  = @order.promotion_description
+            .row.order-total
+              .col-xs-6
+                Order Total
+              .col-xs-6
+                = number_to_currency(@order.total, precision: 2)
           .prompt
             - if current_user
               = link_to 'Checkout', '#', id: 'checkout-button',
@@ -62,7 +85,7 @@
       handler.open({
         name: 'Your order',
         description: 'from The Montessori Company',
-        amount: #{@order.total_price*100}
+        amount: #{@order.total*100}
       });
 
       // FB: track InitiateCheckout if tracking is enabled
@@ -72,7 +95,7 @@
           content_type: 'product',
           content_ids: #{@order.line_items.map { |li| li.id.to_s }},
           num_items: #{@order.line_items.size},
-          value: #{@order.total_price},
+          value: #{@order.total},
           currency: 'USD'
         });
       }

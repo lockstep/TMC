@@ -22,3 +22,7 @@ line_item_animal:
 line_item_birds:
   product: flamingo
   order: birds_order_completed
+
+more_birds:
+  product: flamingo
+  order: birds_order_active

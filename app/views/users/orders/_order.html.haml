@@ -6,4 +6,4 @@
   %td
     = order.line_items.count
   %td
-    = number_to_currency(order.total_price, precision: 1)
+    = number_to_currency(order.item_total, precision: 1)

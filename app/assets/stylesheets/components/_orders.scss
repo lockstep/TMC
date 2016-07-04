@@ -56,8 +56,8 @@
 #checkout-container {
   margin-top: 45px;
 
-  .order-total {
-    margin-bottom: 35px;
+  .order-summary {
+    margin: 45px 0;
   }
 
   hr {
@@ -75,6 +75,26 @@
 
   .prompt {
     margin-bottom: 35px;
+  }
+
+  .description {
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  .order-total {
+    font-size: 18px;
+    font-weight: bold;
+    color: $blue;
+  }
+}
+
+#promo-code-form {
+  text-align: left;
+  margin-bottom: 30px;
+
+  label, input[type=text] {
+    margin-right: 12px;
   }
 }
 

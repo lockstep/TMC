@@ -1,2 +1,9 @@
 en:
   site_name: The Montessori Company
+  helpers:
+    label:
+      order:
+        item_total: Subtotal
+        adjustment_total: Discount
+        promotion_code: Discount Code
+        total: Order Total

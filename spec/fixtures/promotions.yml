@@ -1,0 +1,13 @@
+welcome:
+  code: welcome
+  percent: 10
+  description: 10% discount promotion for new users.
+
+sale:
+  code: springsale
+  percent: 50
+
+inactive:
+  code: inactive
+  percent: 90
+  expires_at: <%= 1.day.ago %>

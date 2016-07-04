@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615091759) do
+ActiveRecord::Schema.define(version: 20160704103105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adjustments", force: :cascade do |t|
+    t.integer  "order_id"
+    t.float    "amount"
+    t.integer  "promotion_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "adjustments", ["order_id"], name: "index_adjustments_on_order_id", using: :btree
+  add_index "adjustments", ["promotion_id"], name: "index_adjustments_on_promotion_id", using: :btree
 
   create_table "charges", force: :cascade do |t|
     t.integer  "amount"
@@ -142,6 +153,18 @@ ActiveRecord::Schema.define(version: 20160615091759) do
   add_index "products_topics", ["product_id", "topic_id"], name: "index_products_topics_on_product_id_and_topic_id", using: :btree
   add_index "products_topics", ["topic_id", "product_id"], name: "index_products_topics_on_topic_id_and_product_id", using: :btree
 
+  create_table "promotions", force: :cascade do |t|
+    t.string   "code"
+    t.string   "description"
+    t.datetime "starts_at"
+    t.datetime "expires_at"
+    t.integer  "percent"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "promotions", ["code"], name: "index_promotions_on_code", unique: true, using: :btree
+
   create_table "topics", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -179,6 +202,8 @@ ActiveRecord::Schema.define(version: 20160615091759) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "adjustments", "orders"
+  add_foreign_key "adjustments", "promotions"
   add_foreign_key "charges", "orders"
   add_foreign_key "downloadables", "products"
   add_foreign_key "identities", "users"

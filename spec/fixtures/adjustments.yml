@@ -1,0 +1,9 @@
+cards_order_adjustment:
+  promotion: welcome
+  order: cards_order
+  amount: 1
+
+birds_order_adjustment:
+  promotion: sale
+  order: birds_order_completed
+  amount: 10

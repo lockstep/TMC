@@ -13,9 +13,25 @@
       #cart-contents.list-group
         = render @order.line_items
       .details.text-xs-left
-        .time
-          Created on:
-          = time_tag @order.created_at
-        .price
-          Order total:
-          = number_to_currency(@order.total_price, precision: 2)
+        .row
+          .col-xs-6
+            Created on:
+          .col-xs-6.time
+            = time_tag @order.created_at
+        - if @order.adjustment
+          .row
+            .col-xs-6
+              Subtotal
+            .col-xs-6.subtotal
+              = number_to_currency(@order.item_total, precision: 2)
+          .row
+            .col-xs-6
+              Discount (#{@order.promotion_code.upcase})
+            .col-xs-6.discount
+              = number_to_currency(@order.adjustment_total*-1, precision: 2)
+        .row.order-total
+          .col-xs-6
+            Order Total:
+          .col-xs-6
+            .price
+              = number_to_currency(@order.total, precision: 2)

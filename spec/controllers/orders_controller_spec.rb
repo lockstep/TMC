@@ -3,6 +3,8 @@ describe OrdersController, type: :controller do
   fixtures :orders
   fixtures :line_items
   fixtures :products
+  fixtures :promotions
+  fixtures :adjustments
 
   let(:michelle)               { users(:michelle) }
   let(:paul)                   { users(:paul) }
@@ -111,6 +113,91 @@ describe OrdersController, type: :controller do
     context 'guest user' do
       it 'prompts user to log in' do
         get :success, id: own_order_paid.id
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe '#update' do
+    context 'signed in user' do
+      before do
+        sign_in michelle
+      end
+      context 'promotion not found' do
+        before do
+          @order = orders(:birds_order_active)
+        end
+        it 'redirects to order page with a message' do
+          patch :update, id: @order.id, code: 'ha'
+          expect(response).to redirect_to order_path @order
+          expect(flash[:alert]).to match 'does not exist'
+          expect(@order.adjustment).to be_nil
+        end
+      end
+      context 'promotion inactive' do
+        before do
+          @order = orders(:birds_order_active)
+        end
+        it 'redirects to order page with a message' do
+          patch :update, id: @order.id, code: promotions(:inactive).code
+          expect(response).to redirect_to order_path @order
+          expect(flash[:alert]).to match 'not active'
+          expect(@order.adjustment).to be_nil
+        end
+      end
+      context 'promotion exists' do
+        before do
+          @promotion = promotions(:welcome)
+        end
+        context 'order does not have an existing adjustment' do
+          before do
+            @order = orders(:birds_order_active)
+          end
+          it 'creates a new adjustment' do
+            patch :update, id: @order.id, code: @promotion.code
+            expect(flash[:notice]).to match 'has been applied'
+            expect(@order.adjustment_amount).to eq 2
+            expect(response).to redirect_to order_path @order
+          end
+          it 'understands a code with wrong case' do
+            patch :update, id: @order.id, code: @promotion.code.upcase
+            expect(flash[:notice]).to match 'has been applied'
+            expect(@order.adjustment_amount).to eq 2
+            expect(response).to redirect_to order_path @order
+          end
+        end
+        context 'order has an existing adjustment' do
+          before do
+            @order = orders(:cards_order)
+          end
+          context 'the user enters the same code again' do
+            it 'does nothing and shows a message' do
+              patch :update, id: @order.id, code: 'welcome'
+              expect(@order.reload.promotion).to eq promotions(:welcome)
+              expect(flash[:notice]).to match 'has already been applied'
+              expect(response).to redirect_to order_path @order
+            end
+          end
+          context 'a different code is inserted' do
+            before do
+              @promotion = promotions(:sale)
+            end
+            it 'updates the adjustment' do
+              expect(@order.promotion).to eq promotions(:welcome)
+              expect(@order.adjustment_amount).to eq 1
+              patch :update, id: @order.id, code: @promotion.code
+              expect(@order.reload.promotion).to eq @promotion
+              expect(@order.reload.adjustment_amount).to eq 5
+              expect(flash[:notice]).to match 'has been applied'
+              expect(response).to redirect_to order_path @order
+            end
+          end
+        end
+      end
+    end
+    context 'guest user' do
+      it 'prompts user to log in' do
+        patch :update, id: own_order_unfinished.id
         expect(response).to redirect_to new_user_session_path
       end
     end

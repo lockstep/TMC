@@ -2,6 +2,10 @@ cards_order:
   state: <%= Order.states[:active] %>
   user: michelle
 
+birds_order_active:
+  state: <%= Order.states[:active] %>
+  user: michelle
+
 cards_order_completed:
   state: <%= Order.states[:paid] %>
   user: michelle

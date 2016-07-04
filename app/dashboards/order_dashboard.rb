@@ -5,12 +5,22 @@ class OrderDashboard < Administrate::BaseDashboard
     id: Field::Number,
     user: Field::BelongsTo,
     state: Enum,
-    total_price: Field::Number.with_options(
-      title: "Order Total",
+    item_total: Field::Number.with_options(
       prefix: "$",
       multiplier: 0.01,
-      decimals: 1,
+      decimals: 1
     ),
+    adjustment_total: Field::Number.with_options(
+      prefix: "$",
+      multiplier: 0.01,
+      decimals: 1
+    ),
+    total: Field::Number.with_options(
+      prefix: "$",
+      multiplier: 0.01,
+      decimals: 1
+    ),
+    promotion_code: Field::String,
     products: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -21,7 +31,7 @@ class OrderDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :user,
-    :total_price,
+    :item_total,
     :state,
     :created_at,
     :updated_at
@@ -34,7 +44,10 @@ class OrderDashboard < Administrate::BaseDashboard
     :user,
     :state,
     :products,
-    :total_price,
+    :item_total,
+    :promotion_code,
+    :adjustment_total,
+    :total,
     :created_at,
     :updated_at
   ]

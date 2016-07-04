@@ -45,7 +45,9 @@ RSpec.describe Users::OrdersController, type: :controller do
         get :show, user_id: paul.id, id: paid_animal_cards_order.id
       end
 
-      it { expect(response).to render_template('users/orders/show') }
+      it 'shows the order receipt' do
+        expect(response).to render_template('users/orders/show')
+      end
     end
 
     context 'user\'s signed in but not order\'s owner' do

@@ -1,4 +1,6 @@
 class Users::OrdersController < ApplicationController
+  # TODO: this sets the @order which is used by My cart,
+  # so the user is not taken to the cart but stays on the same page
   before_action :set_order, only: [:show]
   before_action :set_user, only: [:show, :index]
   before_action :authorize_order, only: [:show]

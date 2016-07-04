@@ -3,7 +3,7 @@ class ChargesController < ApplicationController
 
   def create
     @order.update(user: current_user) unless @order.user
-    @amount = (@order.total_price*100).to_i
+    @amount = (@order.total*100).to_i
 
     stripe_processing
 

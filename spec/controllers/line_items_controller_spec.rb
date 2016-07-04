@@ -3,6 +3,8 @@ describe LineItemsController, type: :controller do
   fixtures :orders
   fixtures :line_items
   fixtures :users
+  fixtures :promotions
+  fixtures :adjustments
 
   let(:cards_order)     { orders(:cards_order) }
   let(:unassigned_order){ orders(:unassigned_order) }

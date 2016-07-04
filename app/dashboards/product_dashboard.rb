@@ -15,7 +15,6 @@ class ProductDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     price: Field::Number.with_options(
-      title: "Order Total",
       prefix: "$",
       multiplier: 0.01,
       decimals: 1,

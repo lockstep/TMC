@@ -4,7 +4,7 @@ module GoogleAnalyticsHelper
       ga('ecommerce:addTransaction', {
         'id': '#{order.id}',
         'affiliation': 'The Montessori Company',
-        'revenue': '#{order.total_price}'
+        'revenue': '#{order.total}'
       });
     JS
   end
