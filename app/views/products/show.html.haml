@@ -28,7 +28,7 @@
         .social
           = facebook_like
           = pin_it(image: object_image(@product),
-            description: strip_tags(@product.description).gsub("'", %q(\\\')))
+                   description: @product.description)
           = tweet(text: @product.name)
         %h5.section-title
           Description

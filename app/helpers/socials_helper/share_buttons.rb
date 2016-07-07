@@ -4,7 +4,7 @@ module SocialsHelper::ShareButtons
       <a data-pin-do="buttonPin"
          data-pin-custom="true"
          data-pin-url="#{url}"
-         data-pin-description="#{description}"
+         data-pin-description="#{cleanup(description)}"
          data-pin-media="#{image}"
          href="https://www.pinterest.com/pin/create/button/">
         #{image_tag('pinterest_button', alt: 'Pinterest button')}
@@ -29,5 +29,9 @@ module SocialsHelper::ShareButtons
 
   def helpers
     ActionController::Base.helpers
+  end
+
+  def cleanup(text)
+    strip_tags(text).gsub('"', "&#34;")
   end
 end

@@ -31,7 +31,7 @@ module SocialsHelper::MetaTags
 
   def og(title:, url:, type: , image:, description:, author:, amount: 0)
     <<-META
-      <meta property='og:title' content="#{title}"/>
+      <meta property='og:title' content="#{cleanup(title)}"/>
       <meta property='og:type' content="#{type}"/>
 
       <meta property='og:image' content="#{image}"/>
@@ -40,12 +40,12 @@ module SocialsHelper::MetaTags
       <meta property='og:url' content="#{url}"/>
 
       <meta property='og:site_name' content="#{t(:site_name)}"/>
-      <meta property='og:description' content="#{strip_tags(description)}"/>
+      <meta property='og:description' content="#{cleanup(description)}"/>
 
       <meta property='article:author' content="#{SocialsHelper::FB_PAGE}" />
 
       <meta name='author' content="#{author}"/>
-      <meta name='description' content="#{strip_tags(description)}"/>
+      <meta name='description' content="#{cleanup(description)}"/>
 
       <meta property="og:brand" content="The Montessori Company"/>
       <meta property="og:price:amount" content="#{amount}"/>
@@ -58,9 +58,13 @@ module SocialsHelper::MetaTags
       <meta name='twitter:card' content="#{type}">
       <meta name='twitter:site' content="#{SocialsHelper::TWITTER_ACCOUNT}">
       <meta name='twitter:creator' content="#{SocialsHelper::TWITTER_ACCOUNT}">
-      <meta name='twitter:title' content="#{title}">
-      <meta name='twitter:description' content="#{strip_tags(description)}">
+      <meta name='twitter:title' content="#{cleanup(title)}">
+      <meta name='twitter:description' content="#{cleanup(description)}">
       <meta name='twitter:image:src' content="#{image}">
     META
+  end
+
+  def cleanup(text)
+    strip_tags(text).gsub('"', "&#34;")
   end
 end
