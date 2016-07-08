@@ -18,7 +18,7 @@ database:
 ## Customize test commands
 test:
   override:
-    - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
+    - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml:
         environment:
           AIRBRAKE_PROJECT_ID: 123456
           AIRBRAKE_API_KEY: my_secret_api_key
