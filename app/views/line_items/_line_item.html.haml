@@ -3,7 +3,7 @@
     = image_tag line_item.product.primary_image.url(:medium),
       alt: line_item.product.name, class: 'cart-thumb'
   .col-sm-9
-    = form_for [@order, line_item], method: :delete do |f|
+    = form_for line_item, method: :delete do |f|
       = f.button class: 'btn btn-danger pull-xs-right' do
         = fa_icon 'trash'
     = link_to product_url(line_item.product) do

@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   force_ssl if: :ssl_configured?
 
-  before_action :find_or_create_order
-
   rescue_from CanCan::AccessDenied do |exception|
     if current_user
       flash[:alert] = "Access to that page has been denied."
@@ -32,20 +30,23 @@ class ApplicationController < ActionController::Base
     Rails.env.production?
   end
 
-  def find_or_create_order
+  def set_current_order(options = {})
+    options[:create_order_if_necessary] ||= false
+    method = options[:create_order_if_necessary] ? :create : :new
+
     if session[:order_id].present?
-      session_order = Order.find_by_id(session[:order_id])
+      session_order = Order.find_by(id: session[:order_id])
 
       unless session_order
-        @order = Order.create(state: :active)
+        @order = Order.send(method, state: :active)
         session[:order_id] = @order.id
         return
       end
 
       @order = session_order.active? ?
-        session_order : Order.create(state: :active)
+        session_order : Order.send(method, state: :active)
     else
-      @order = Order.create(state: :active)
+      @order = Order.send(method, state: :active)
     end
     session[:order_id] = @order.id
   end

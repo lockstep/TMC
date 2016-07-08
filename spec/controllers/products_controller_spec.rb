@@ -1,5 +1,6 @@
 describe ProductsController, type: :controller do
   fixtures :products
+  fixtures :orders
 
   before(:all) do
     Product.reindex
@@ -10,6 +11,8 @@ describe ProductsController, type: :controller do
   describe '#index' do
     before { get :index }
     it {expect(response).to render_template('products/index')}
+
+    it_behaves_like 'it sets current order instance'
 
     context 'invalid sort param' do
       it 'falls back to the default setting' do
@@ -26,6 +29,7 @@ describe ProductsController, type: :controller do
   end
 
   describe '#show' do
+    it_behaves_like 'it sets current order instance'
     it 'renders the correct template' do
       get :show, id: number_cards.id
       expect(response).to render_template('products/show')

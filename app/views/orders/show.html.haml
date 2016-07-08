@@ -62,7 +62,7 @@
             .or or
         = link_to 'Keep shopping', products_path, class: 'btn btn-secondary'
 
-= form_for [@order, Charge.new], html: { id: 'checkout-form' } do |f|
+= form_for Charge.new, html: { id: 'checkout-form' } do |f|
   = hidden_field_tag 'stripeToken'
   = hidden_field_tag 'stripeEmail', current_user.try(:email)
 

@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :set_current_order, only: [:show, :index]
   before_action :set_product, only: [:show]
 
   DEFAULT_SORT = { created_at: :desc }

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/403', to: 'pages#show', page: 'home', as: 'error_403'
   get '/uhoh', to: 'errors#error_404', as: 'error_404'
 
+  get '/cart', to: 'carts#my_cart', as: 'cart'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     confirmations: 'users/confirmations',
@@ -27,9 +29,9 @@ Rails.application.routes.draw do
   end
   resources :orders, only: [:show, :update] do
     get 'success', on: :member
-    resources :line_items, only: [:create, :destroy]
-    resources :charges, only: [:create]
   end
+  resources :line_items, only: [:create, :destroy]
+  resources :charges, only: [:create]
   resources :posts, only: [:index, :show]
 
   get '*unmatched_route', to: 'errors#error_404'

@@ -29,7 +29,7 @@ describe 'Order checkout', type: :feature do
       expect(page).to have_content number_board.description
       expect(page).not_to have_content 'is empty'
       expect(page).to have_content 'Log in to check out'
-      expect(page).to have_current_path order_path(Order.last)
+      expect(page).to have_current_path cart_path
     end
   end
 

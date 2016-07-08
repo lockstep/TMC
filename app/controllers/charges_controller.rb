@@ -1,5 +1,5 @@
 class ChargesController < ApplicationController
-  before_action :set_order, only: [:create]
+  before_action :set_current_order, only: [:create]
 
   def create
     @order.update(user: current_user) unless @order.user
@@ -20,10 +20,6 @@ class ChargesController < ApplicationController
   end
 
   private
-
-  def set_order
-    @order = Order.find(params[:order_id])
-  end
 
   def stripe_processing
     create_stripe_customer

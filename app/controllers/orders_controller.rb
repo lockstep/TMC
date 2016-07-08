@@ -1,11 +1,10 @@
 class OrdersController < ApplicationController
-  skip_before_action :find_or_create_order
-
   before_action :set_order, only: [:show, :success, :update]
   after_action :set_after_sign_in_path, only: [:show]
 
   def show
     authorize! :show, @order
+    session[:order_id] = @order.id
     if @order.paid?
       redirect_to user_order_path(current_user, @order)
     end

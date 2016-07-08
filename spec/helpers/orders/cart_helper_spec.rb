@@ -14,10 +14,6 @@ describe Orders::CartHelper, type: :helper do
 
     subject { helper.add_to_cart }
 
-    it 'contain order_id' do
-      is_expected.to include(cards_order.id.to_s)
-    end
-
     it 'contain product_id' do
       is_expected.to include(number_cards.id.to_s)
     end

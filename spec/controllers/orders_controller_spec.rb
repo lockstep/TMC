@@ -78,8 +78,8 @@ describe OrdersController, type: :controller do
       end
       context 'not signed in and viewing their session order' do
         before do
-          @request.session[:order_id] = own_order_unfinished.id
-          get :show, id: @request.session[:order_id]
+          session[:order_id] = own_order_unfinished.id
+          get :show, id: session[:order_id]
         end
         it 'shows the order' do
           expect(response).to render_template('orders/show')

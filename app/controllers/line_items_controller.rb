@@ -1,7 +1,6 @@
 class LineItemsController < ApplicationController
-  before_action :set_order, only: [:create, :destroy]
-
   def create
+    set_current_order(create_order_if_necessary: true)
     @order.line_items.create(line_item_params)
     if !@order.user && current_user
       @order.update(user: current_user)
@@ -10,15 +9,12 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
+    set_current_order
     @order.line_items.destroy(params[:id])
     redirect_to @order
   end
 
   private
-
-  def set_order
-    @order = Order.find(params[:order_id])
-  end
 
   def line_item_params
     params.require(:line_item).permit(:product_id)
