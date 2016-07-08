@@ -28,9 +28,9 @@ describe 'Product search page', type: :feature do
       visit products_path
       link = "#{@topic_1.name} (1)"
       expect(page).to have_link link
-      click_link link
+      first(:link, link).click
       within '.status' do
-        expect(page).to have_content 'Showing 1 result'
+        expect(page).to have_content '1 result'
         expect(page).not_to have_content 'results'
       end
     end
@@ -94,7 +94,7 @@ describe 'Product search page', type: :feature do
       it 'shows all products without search options' do
         visit products_path
         expect(page).to have_content @no_presentation.name
-        click_link Topic.first.name
+        first(:link, Topic.first.name).click
         # the product with no presentation is not shown
         expect(page).not_to have_content @no_presentation.name
       end
@@ -106,7 +106,7 @@ describe 'Product search page', type: :feature do
         end
         it 'persists topic selection when other options are set' do
           visit products_path
-          click_link @birds.name
+          first(:link, @birds.name).click
           expect(page).to have_content @ostrich.name
           select('Price: lowest first', :from => 'sort')
           expect(page).to have_content @ostrich.name

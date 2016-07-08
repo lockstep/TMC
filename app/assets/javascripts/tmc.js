@@ -50,13 +50,29 @@ TMC.define_component('product index page', function() {
   //   prefix: "$"
   // });
 
+  // mobile slide menu
+  $('#mobile-menu-open').bind('vclick', function(e) {
+    var element = document.getElementById('mobile-slide-menu');
+    element.style.width = '100%';
+    element.style.padding = '50px';
+    $('#mobile-slide-menu .product-categories')[0].style.opacity = '1';
+  });
+
+  $('#mobile-menu-close').bind('vclick', function(e) {
+    e.preventDefault();
+    var element = document.getElementById('mobile-slide-menu');
+    element.style.width = '0';
+    element.style.padding = '50px 0 0 0';
+    $('#mobile-slide-menu .product-categories')[0].style.opacity = '0';
+  });
+
   $('#sort-select').change(function() {
     $("#sort").val($(this).val());
     $('#product-search-form').submit();
   });
 
   // make sidebar link clicks submit the form
-  $('#sidebar #product-categories a').bind('vclick', function(e) {
+  $('#sidebar .product-categories a').bind('vclick', function(e) {
     e.preventDefault();
     var topicId = $(this).data('topic-id');
     $("#topic_ids").val(topicId);

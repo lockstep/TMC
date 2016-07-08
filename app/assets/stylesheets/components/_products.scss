@@ -86,7 +86,7 @@
   }
 }
 
-#sidebar {
+#sidebar, #mobile-slide-menu {
   $category-left-margin: 24px;
 
   font-size: 10pt;
@@ -131,7 +131,7 @@
     }
   }
 
-  #product-categories {
+  .product-categories {
     margin-bottom: 20px;
 
     nav > .well {
