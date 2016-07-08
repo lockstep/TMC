@@ -41,6 +41,7 @@ group :test do
   gem 'stripe-ruby-mock', require: 'stripe_mock'
   gem 'orderly'
   gem 'rack_session_access'
+  gem 'rspec_junit_formatter', '0.2.2'
 end
 
 group :development, :test do
