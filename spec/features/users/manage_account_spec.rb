@@ -17,6 +17,15 @@ describe 'Manage user account', :devise do
       click_link 'My Details'
       fill_in_user_form
       expect(page).to have_content 'have been updated'
+      expect(page).to have_content 'My Details'
+    end
+    it 'can edit email alone' do
+      visit user_materials_path(user)
+      click_link 'My Details'
+      fill_in 'user[email]', with: 'jon@snow.com'
+      click_button 'Save changes'
+      expect(page).to have_content 'have been updated'
+      expect(page).to have_field 'user[email]', with: 'jon@snow.com'
     end
 
     context 'materials' do
@@ -43,7 +52,7 @@ describe 'Manage user account', :devise do
   end
 
   def fill_in_user_form
-    fill_in 'user[first_name]', with: 'DJ Shadow'
+    fill_in 'user[email]', with: 'dj@shadow.com'
     fill_in 'user[password]', with: 'password'
     fill_in 'user[password_confirmation]', with: 'password'
     click_button 'Save changes'

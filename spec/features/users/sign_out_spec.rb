@@ -16,6 +16,6 @@ describe 'Sign out', :devise do
     click_on('Logout')
 
     expect(page).to have_content(I18n.t('devise.sessions.signed_out'))
-    expect(page).to have_current_path(referrer)
+    expect(page).to have_current_path root_path
   end
 end

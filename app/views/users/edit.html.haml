@@ -10,8 +10,8 @@
       = form_for(@user) do |f|
         = render 'users/shared/error_messages'
         .form-group
-          = f.label :first_name, class: 'form-label'
-          = f.text_field :first_name, class: 'form-control'
+          = f.label :email, class: 'form-label'
+          = f.email_field :email, class: 'form-control'
         .form-group
           = f.label :password, class: 'form-label'
           = f.password_field :password, class: 'form-control'
