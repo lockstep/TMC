@@ -48,7 +48,7 @@
       fbq('track', 'ViewContent', {
         content_name: '#{@product.name}',
         content_category: '#{@product.topic_name}',
-        value: #{@product.price},
+        value: #{(@product.price * Constants::VIEW_CONTENT_WEIGHT).round(2)},
         currency: 'USD',
         referrer: document.referrer,
         userAgent: navigator.userAgent,

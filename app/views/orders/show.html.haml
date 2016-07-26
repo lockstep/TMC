@@ -95,7 +95,7 @@
           content_type: 'product',
           content_ids: #{@order.line_items.map { |li| li.id.to_s }},
           num_items: #{@order.line_items.size},
-          value: #{@order.total},
+          value: #{(@order.total * Constants::INITIATE_CHECKOUT_WEIGHT).round(2)},
           currency: 'USD'
         });
       }

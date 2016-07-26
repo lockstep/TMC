@@ -95,7 +95,7 @@ TMC.define_component('product index page', function() {
         content_category: 'Digital Products',
         content_ids: [$(this).data('id')],
         content_type: 'product',
-        value: parseFloat($(this).data('value')),
+        value: parseFloat($(this).data('value')) * <%= Constants::ADD_TO_CART_WEIGHT %>,
         currency: 'USD'
       });
     }
