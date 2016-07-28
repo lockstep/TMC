@@ -22,6 +22,7 @@ gem 'actionmailer_inline_css'
 gem 'active_model_serializers', '~> 0.10.0rc4'
 gem 'sidekiq', '~> 4.1.0'
 gem 'devise', '~> 3.5.6'
+gem 'devise-async'
 gem 'omniauth', '~> 1.3.1'
 gem 'omniauth-facebook', '~> 3.0.0'
 gem 'administrate', '~> 0.2.2'
@@ -42,6 +43,7 @@ group :test do
   gem 'orderly'
   gem 'rack_session_access'
   gem 'rspec_junit_formatter', '0.2.2'
+  gem 'database_cleaner'
 end
 
 group :development, :test do

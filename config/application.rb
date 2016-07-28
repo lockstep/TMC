@@ -33,5 +33,8 @@ module TMC
     config.active_record.raise_in_transactional_callbacks = true
 
     config.autoload_paths << Rails.root.join('lib')
+
+    # Use Sidekiq as our Active Job adapter
+    config.active_job.queue_adapter = :sidekiq
   end
 end

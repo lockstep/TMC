@@ -1,7 +1,9 @@
 describe 'Sign up', :feature do
   include_context 'before_after_mailer'
 
-  context 'confirming user email' do
+  before { Sidekiq::Testing.inline!  }
+
+  context 'confirming user email', js: true do
     it 'sends the email and logs in the user after confirmation' do
       visit new_user_registration_path
       fill_in 'user[email]', with: 'my@email.com'

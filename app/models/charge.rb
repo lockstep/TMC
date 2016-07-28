@@ -1,13 +1,9 @@
 class Charge < ActiveRecord::Base
   belongs_to :order
 
-  after_create :send_confirmed_emails
-
-  def send_confirmed_emails
-    send_order_confirmation
-  end
+  after_create :send_order_confirmation
 
   def send_order_confirmation
-    OrdersMailer.confirmed_order(order.id).deliver_now
+    OrderConfirmationWorker.perform_async(order.id)
   end
 end

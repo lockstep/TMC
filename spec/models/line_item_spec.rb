@@ -1,7 +1,9 @@
 describe LineItem, type: :model do
   fixtures :orders
+  fixtures :line_items
   fixtures :adjustments
   fixtures :products
+  fixtures :promotions
 
   describe 'hooks' do
     before do

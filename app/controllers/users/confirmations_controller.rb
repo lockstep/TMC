@@ -4,7 +4,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if resource.errors.empty?
-      UsersMailer.welcome_new_user(resource.id).deliver_now
+      WelcomeNewUserWorker.perform_async(resource.id)
       sign_in(resource, bypass: true)
       set_flash_message(:notice, :confirmed)
       respond_with_navigational(resource){ redirect_to after_confirmation_path_for(resource_name, resource) }

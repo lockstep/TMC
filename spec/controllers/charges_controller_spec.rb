@@ -54,6 +54,7 @@ describe ChargesController, type: :controller do
         end
       end
       context 'confirmation mailer' do
+        before { Sidekiq::Testing.inline!  }
         it 'has no mention of discount for orders with no discount' do
           session[:order_id] = unassigned_order.id
           post :create, params: stripe_params

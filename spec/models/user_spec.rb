@@ -3,6 +3,7 @@ describe User, type: :model do
   fixtures :users
   fixtures :orders
   fixtures :products
+  fixtures :line_items
 
   let(:michelle)              { users(:michelle) }
   let(:purchased_product)     { products(:animal_cards) }

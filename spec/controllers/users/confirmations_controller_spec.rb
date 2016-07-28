@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe Users::ConfirmationsController, type: :controller do
+describe Users::ConfirmationsController, type: :controller do
   include_context 'before_after_mailer'
   fixtures :users
 
@@ -8,6 +6,7 @@ RSpec.describe Users::ConfirmationsController, type: :controller do
 
   describe '#show' do
     before do
+      Sidekiq::Testing.inline!
       @token = new_guy.confirmation_token
       @request.env["devise.mapping"] = Devise.mappings[:user]
       get :show, confirmation_token: @token

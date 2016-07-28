@@ -1,6 +1,7 @@
 describe Product, type: :model do
   fixtures :products
   fixtures :presentations
+  fixtures :downloadables
   fixtures :images
   fixtures :topics
 

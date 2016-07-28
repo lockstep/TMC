@@ -19,6 +19,7 @@
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'rack_session_access/capybara'
+require 'sidekiq/testing'
 
 # don't pollute the spec output with JS console messages
 module FakePoltergeistLogger
