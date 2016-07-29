@@ -4,6 +4,7 @@ describe OrdersMailer, type: :mailer do
   fixtures :orders
   fixtures :charges
   fixtures :line_items
+  fixtures :products
 
   let(:michelle)      { users(:michelle) }
   let(:cards_order)   { orders(:cards_order) }

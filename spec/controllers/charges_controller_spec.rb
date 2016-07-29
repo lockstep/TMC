@@ -16,7 +16,10 @@ describe ChargesController, type: :controller do
   describe '#create' do
     include_context 'before_after_mailer'
 
-    before { StripeMock.start }
+    before do
+      StripeMock.start
+      allow(NotifySlackWorker).to receive(:perform_async)
+    end
     after { StripeMock.stop }
 
     context 'signed in user' do

@@ -22,7 +22,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
         it 'redirects home with a flash alert' do
           get :index
-          expect(response).to redirect_to root_url
+          expect(response).to redirect_to root_path
           expect(flash[:alert]).to eq 'Not authorized.'
         end
       end
@@ -30,7 +30,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       context 'user\'s not signed in' do
         it 'redirects home with a flash alert' do
           get :index
-          expect(response).to redirect_to root_url
+          expect(response).to redirect_to root_path
           expect(flash[:alert]).to eq 'Not authorized.'
         end
       end

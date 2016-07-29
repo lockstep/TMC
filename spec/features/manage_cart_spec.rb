@@ -1,7 +1,10 @@
 describe 'Ordering process', type: :feature do
   fixtures :users
   fixtures :products
+  fixtures :line_items
   fixtures :orders
+  fixtures :promotions
+  fixtures :adjustments
 
   context 'my cart' do
     it 'the link is always displayed' do

@@ -38,9 +38,12 @@ Rails.application.configure do
   config.active_support.deprecation = :stderr
 
   config.action_mailer.default_url_options = { host: ENV['HOST_NAME'] }
-  # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
 
   # add the ability to change session in tests
   config.middleware.use RackSessionAccess::Middleware
+
+  config.after_initialize do
+    Rails.application.routes.default_url_options =
+      config.action_mailer.default_url_options
+  end
 end

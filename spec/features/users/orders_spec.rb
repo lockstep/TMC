@@ -1,6 +1,8 @@
 describe 'Manage orders', :devise do
   fixtures :users
   fixtures :orders
+  fixtures :line_items
+  fixtures :products
   fixtures :promotions
   fixtures :adjustments
 

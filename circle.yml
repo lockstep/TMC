@@ -24,6 +24,7 @@ test:
           AIRBRAKE_API_KEY: my_secret_api_key
           STRIPE_SECRET: my_stripe_secret
           STRIPE_KEY: my_stripe_key
+          SLACK_WEBHOOK_URL: my_url
 
 deployment:
   staging:
