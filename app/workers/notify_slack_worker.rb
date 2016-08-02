@@ -9,7 +9,7 @@ class NotifySlackWorker
       username: 'cashbot'
     )
 
-    text = "<!channel>\t :tada::tada::tada:  *New order!*  :tada::tada::tada:"
+    text = "<!channel> :tada::tada:  *New order!*  :tada::tada:"
     attachment = {
       "title": "Order #{charge.order_id}",
       "title_link": url_helpers.admin_order_url(charge.order_id),
@@ -33,6 +33,7 @@ class NotifySlackWorker
         }
       ],
       "thumb_url": "https://s3.amazonaws.com/lockstep-public-assets/tmc/slack_thumb_icon.png",
+      "footer": "TMC",
       "footer_icon": "https://s3.amazonaws.com/lockstep-public-assets/tmc/slack_footer_icon.png",
       "ts": Time.now.to_i
     }
