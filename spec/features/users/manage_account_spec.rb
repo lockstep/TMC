@@ -1,6 +1,7 @@
-describe 'Manage user account', :devise do
+describe 'Manage user account', :feature do
   fixtures :users
   fixtures :products
+  fixtures :orders
   fixtures :line_items
   fixtures :downloadables
 
