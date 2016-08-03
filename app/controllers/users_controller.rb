@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
 
+  def show
+    redirect_to user_materials_path @user
+  end
+
   def update
-    @user.skip_reconfirmation!
     if @user.update_attributes(user_params)
       flash[:notice] = 'Your preferences have been updated.'
       sign_in(@user, bypass: true)

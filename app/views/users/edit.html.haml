@@ -7,7 +7,7 @@
       = render 'users/shared/sidebar'
     .col-sm-9
       %h3 My Details
-      = form_for(@user) do |f|
+      = form_for @user do |f|
         = render 'users/shared/error_messages'
         .form-group
           = f.label :email, class: 'form-label'

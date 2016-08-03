@@ -1,14 +1,29 @@
 describe UsersController, type: :controller do
   fixtures :users
 
-  describe '#update' do
-    before do
-      @user = users(:michelle)
-    end
+  before do
+    @user = users(:michelle)
+  end
+
+  describe '#show' do
     context 'signed in user' do
-      before do
-        sign_in @user
+      before { sign_in @user }
+      it 'redirects to user materials' do
+        get :show, id: @user.id
+        expect(response).to redirect_to user_materials_path(@user)
       end
+    end
+    context 'guest' do
+      it 'redirects to safety' do
+        get :show, id: @user.id
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe '#update' do
+    context 'signed in user' do
+      before { sign_in @user }
       context 'changing password' do
         context 'passwords match' do
           it 'updates the user' do

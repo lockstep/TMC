@@ -1,7 +1,6 @@
 default: &default
   sign_in_count: 14
   encrypted_password: <%= User.new.send(:password_digest, 'qawsedrf') %>
-  confirmed_at: <%= Time.zone.now %>
 
 michelle:
   email: mich@tmc.com
@@ -17,5 +16,3 @@ new_guy:
   email: new@tmc.com
   encrypted_password: <%= User.new.send(:password_digest, 'qawsedrf') %>
   role: <%= User.roles[:user] %>
-  confirmation_token: this_is_a_token
-  confirmed_at:

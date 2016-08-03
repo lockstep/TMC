@@ -3,19 +3,19 @@ describe 'Sign up', :feature do
 
   before { Sidekiq::Testing.inline!  }
 
-  context 'confirming user email', js: true do
-    it 'sends the email and logs in the user after confirmation' do
+  context 'registration', js: true do
+    it 'sends the welcome email and logs in the user' do
       visit new_user_registration_path
       fill_in 'user[email]', with: 'my@email.com'
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
       click_button 'Sign up'
-      expect(ActionMailer::Base.deliveries.count).to eq(1)
-      token = User.last.confirmation_token
-      expect(ActionMailer::Base.deliveries.last.encoded).to match token
-      visit "/users/confirmation?confirmation_token=#{token}"
+      expect(page).to have_content 'Welcome! You have signed up'
+      expect(ActionMailer::Base.deliveries.count).to eq 1
+      email = ActionMailer::Base.deliveries.first
+      expect(email.subject).to eq 'Welcome to The Montessori Company'
+      visit root_path
       expect(page).to have_link 'Logout'
-      expect(ActionMailer::Base.deliveries.count).to eq(2)
     end
   end
 end

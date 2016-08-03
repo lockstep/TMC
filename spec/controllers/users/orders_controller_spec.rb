@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe Users::OrdersController, type: :controller do
+describe Users::OrdersController, type: :controller do
   fixtures :users
   fixtures :orders
   fixtures :line_items
