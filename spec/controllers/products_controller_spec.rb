@@ -1,6 +1,7 @@
 describe ProductsController, type: :controller do
   fixtures :products
   fixtures :orders
+  fixtures :downloadables
 
   before(:all) do
     Product.reindex
