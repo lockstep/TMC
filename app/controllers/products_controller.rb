@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_current_order, only: [:show, :index]
   before_action :set_product, only: [:show]
 
-  DEFAULT_SORT = { created_at: { order: :desc, unmapped_type: 'long' } }
+  DEFAULT_SORT = { created_at: :desc }
 
   def index
     @results = Product.search(
@@ -17,8 +17,8 @@ class ProductsController < ApplicationController
     @recent_products = recently_viewed
     @query = search_query == '*' ? '' : search_query
     @topic_id = params[:topic_ids]
-    @sort_by = params[:sort] ||
-      "#{DEFAULT_SORT.keys[0]}:#{DEFAULT_SORT.values[0][:order]}"
+    @sort_by =
+      params[:sort] || "#{DEFAULT_SORT.keys[0]}:#{DEFAULT_SORT.values[0]}"
   end
 
   def show
@@ -61,9 +61,7 @@ class ProductsController < ApplicationController
     value = params[:sort].split(':')[1]
     return DEFAULT_SORT unless %W(created_at price).include?(key) &&
       %W(desc asc).include?(value)
-    {}.tap do |result|
-      result[key] = { order: value, unmapped_type: 'long' }
-    end
+    {}.tap { |result| result[key] = value }
   end
 
   def page

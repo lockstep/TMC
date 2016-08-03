@@ -1,13 +1,10 @@
 describe ProductsController, type: :controller do
   fixtures :products
   fixtures :orders
-  fixtures :downloadables
-
-  before(:all) do
-    Product.reindex
-  end
 
   let(:number_cards)  { products(:number_cards) }
+
+  before { Product.reindex }
 
   describe '#index' do
     before { get :index }
