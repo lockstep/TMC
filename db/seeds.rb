@@ -1,6 +1,5 @@
 # create user
 user = User.new(email: 'user@email.com', password: 'password')
-user.skip_confirmation!
 user.save!
 
 # generate topics

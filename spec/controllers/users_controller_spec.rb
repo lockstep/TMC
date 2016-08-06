@@ -1,6 +1,8 @@
 describe UsersController, type: :controller do
   fixtures :users
 
+  include_context 'before_after_mailer'
+
   before do
     @user = users(:michelle)
   end
@@ -32,6 +34,7 @@ describe UsersController, type: :controller do
               password: 'abc123456', password_confirmation: 'abc123456'
             }
             expect(@user.reload.encrypted_password).not_to eq old_password
+            expect(ActionMailer::Base.deliveries.count).to eq 0
           end
         end
         context 'passwords do not match' do

@@ -1,8 +1,6 @@
 describe 'Sign up', :feature do
   include_context 'before_after_mailer'
 
-  before { Sidekiq::Testing.inline!  }
-
   context 'registration', js: true do
     it 'sends the welcome email and logs in the user' do
       visit new_user_registration_path

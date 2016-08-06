@@ -5,11 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   after_initialize :set_default_role, :if => :new_record?
+  after_create :send_welcome_email
 
   has_many :orders
   has_many :completed_orders, -> { paid }, class_name: 'Order'
   has_many :line_items, through: :completed_orders
   has_many :purchased_products, through: :line_items, source: :product
+  has_many :identities
 
   enum role: [:user, :admin]
 
@@ -25,7 +27,6 @@ class User < ActiveRecord::Base
       user = User.where(email: auth.info.email).first_or_initialize
       unless user.persisted?
         user.password = Devise.friendly_token[0,20]
-        user.skip_confirmation!
         user.save!
       end
     end
@@ -49,5 +50,9 @@ class User < ActiveRecord::Base
     end
     return true if new_record?
     password.present? || password_confirmation.present?
+  end
+
+  def send_welcome_email
+    WelcomeNewUserWorker.perform_async(self.id)
   end
 end
