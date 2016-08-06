@@ -1,3 +1,5 @@
+require 'airbrake/sidekiq/error_handler'
+
 # Airbrake is an online tool that provides robust exception tracking in your Rails
 # applications. In doing so, it allows you to easily review errors, tie an error
 # to an individual piece of code, and trace the cause back to recent

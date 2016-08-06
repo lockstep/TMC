@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   force_ssl if: :ssl_configured?
 
+  rescue_from StandardError do |exception|
+    redirect_to error_500_path
+    notify_airbrake exception
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     if current_user
       flash[:alert] = "Access to that page has been denied."

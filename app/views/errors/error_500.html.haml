@@ -1,0 +1,22 @@
+- content_for :title, 'Uh Oh!'
+- content_for :meta_tags do
+  = meta_tags(title: 'Something went wrong',
+    image: asset_url('500'),
+      description: "Like this error page? You\'ll love our products!")
+
+.container
+  .row
+    .col-sm-12
+      .leader-img-container
+        = image_tag '500', alt: 'Something went wrong',
+          class: 'img-fluid'
+      .text-xs-center
+        .leader-img-explanation
+          %p
+            Oops, something went wrong :(
+          %p
+            A team of highly trained monkeys has been dispatched to deal with
+            this situation. We'll have it fixed as fast as we can!
+          %p
+            Why not explore the rest of our site in the meantime?
+        = link_to "Let's go", products_path, class: 'btn btn-secondary'

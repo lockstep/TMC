@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get '/403', to: 'pages#show', page: 'home', as: 'error_403'
   get '/uhoh', to: 'errors#error_404', as: 'error_404'
+  get '/oops', to: 'errors#error_500', as: 'error_500'
 
   get '/cart', to: 'carts#my_cart', as: 'cart'
 
