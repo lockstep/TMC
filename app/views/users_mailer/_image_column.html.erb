@@ -9,7 +9,8 @@
               <td align="center" bgcolor="#ffffff" valign="middle">
                 <%= link_to product_url(result), target: '_blank' do %>
                   <%= image_tag result.primary_image.url(:medium),
-                    width: 240, height: 240, style: "display: block; color: #666666; font-family: Helvetica, arial, sans-serif; font-size: 13px; width: 240px; height: 240px;",
+                    width: 240, height: 240,
+                    style: "display: block; width: 240px; height: 240px;",
                     alt: result.name, border: "0", class: "img-max" %>
                 <% end %>
               </td>
