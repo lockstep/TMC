@@ -1,12 +1,9 @@
 class Charge < ActiveRecord::Base
   belongs_to :order
+  has_many :line_items, through: :order
+  has_many :products, through: :line_items
 
-  after_create :send_notifications
-
-  def send_notifications
-    OrderConfirmationWorker.perform_async(order.id)
-    NotifySlackWorker.perform_async(self.id) if ENV['ENABLE_TRACKING']
-  end
+  after_create :send_notifications, :reindex_products
 
   def self.monthly_sales(time: Time.now)
     Charge
@@ -16,5 +13,16 @@ class Charge < ActiveRecord::Base
 
   def self.total_sales
     Charge.sum(:amount)
+  end
+
+  private
+
+  def send_notifications
+    OrderConfirmationWorker.perform_async(order.id)
+    NotifySlackWorker.perform_async(self.id) if ENV['ENABLE_TRACKING']
+  end
+
+  def reindex_products
+    ReindexProductsWorker.perform_async(products.map(&:id))
   end
 end

@@ -2,6 +2,7 @@ module ProductsHelper
   include SocialsHelper::ShareButtons
 
   SORT_OPTONS = [
+    { name: 'Best-selling first', value: 'times_sold:desc' },
     { name: 'Date: oldest first', value: 'created_at:asc' },
     { name: 'Date: newest first', value: 'created_at:desc' },
     { name: 'Price: lowest first', value: 'price:asc' },

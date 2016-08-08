@@ -1,6 +1,8 @@
 describe Charge, type: :model do
   fixtures :charges
   fixtures :orders
+  fixtures :line_items
+  fixtures :products
 
   describe 'hooks' do
     before do
@@ -29,6 +31,30 @@ describe Charge, type: :model do
           Charge.create!(amount: 1000, order: @order)
           expect(NotifySlackWorker).not_to have_received(:perform_async)
         end
+      end
+    end
+    describe 'reindexing products' do
+      before do
+        allow(ReindexProductsWorker).to receive(:perform_async)
+      end
+      it 'calls the worker with IDs array' do
+        product = products(:number_cards)
+        Charge.create!(amount: 1000, order: @order)
+        expect(ReindexProductsWorker)
+          .to have_received(:perform_async).with([product.id])
+      end
+    end
+  end
+
+  describe 'associations' do
+    describe 'products' do
+      it 'returns products for that charge' do
+        charge = charges(:cards_charge)
+        product_1 = products(:number_cards)
+        product_2 = products(:animal_cards)
+        expect(charge.products.count).to eq 2
+        expect(charge.products).to include product_1
+        expect(charge.products).to include product_2
       end
     end
   end

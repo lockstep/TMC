@@ -22,7 +22,8 @@ class Product < ActiveRecord::Base
       topic_ids: topic_ids_array,
       downloadable_id: downloadable.try(:id),
       created_at: created_at,
-      price: price
+      price: price,
+      times_sold: times_sold
     }
   end
 
@@ -33,6 +34,10 @@ class Product < ActiveRecord::Base
 
   def topic_name
     topics[0].try(:name) || 'Digital Products'
+  end
+
+  def times_sold
+    LineItem.joins(:order).merge(Order.paid).where(product: self).count
   end
 
   private

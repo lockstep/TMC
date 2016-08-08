@@ -2,7 +2,7 @@ cards_charge:
   amount: 20
   currency: usd
   email: hello@charge.tmc
-  order: cards_order
+  order: cards_order_completed
 
 big_payment:
   amount: 800

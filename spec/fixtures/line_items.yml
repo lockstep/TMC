@@ -26,3 +26,11 @@ line_item_birds:
 more_birds:
   product: flamingo
   order: birds_order_active
+
+mixed_paid_order_birds:
+  product: flamingo
+  order: mixed_paid_order
+
+mixed_paid_order_cards:
+  product: memory_puzzle_card
+  order: mixed_paid_order

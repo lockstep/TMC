@@ -4,12 +4,11 @@ describe 'Product search page', type: :feature do
   fixtures :orders
   fixtures :topics
   fixtures :downloadables
+  fixtures :line_items
 
   before do
     @product = products(:number_board)
-    # RSpec needs both reindex and refresh
     Product.reindex
-    Product.searchkick_index.refresh
   end
 
   context 'topics list' do
@@ -48,9 +47,14 @@ describe 'Product search page', type: :feature do
   end
 
   context 'sorting' do
-    it 'sorts by newest first by default' do
+    it 'sorts by most popular first by default' do
+      flamingo = products(:flamingo)
+      ostrich = products(:ostrich)
       visit products_path
-      expect(find('#sort-select').value).to eq 'created_at:desc'
+      expect(find('#sort-select').value).to eq 'times_sold:desc'
+      expect(flamingo.name).to appear_before ostrich.name
+      visit "#{products_path}?sort=price%3Adesc"
+      expect(ostrich.name).to appear_before flamingo.name
     end
   end
 

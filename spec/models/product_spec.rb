@@ -4,6 +4,8 @@ describe Product, type: :model do
   fixtures :downloadables
   fixtures :images
   fixtures :topics
+  fixtures :line_items
+  fixtures :orders
 
   let(:quiz_game)        { presentations(:quiz_game) }
   let(:number_cards)     { products(:number_cards) }
@@ -84,6 +86,15 @@ describe Product, type: :model do
     end
     it 'defaults to Digital Products' do
       expect(@product_without_topic.topic_name).to eq 'Digital Products'
+    end
+  end
+
+  describe '#times_sold' do
+    it 'returns the right value' do
+      has_sales = products(:flamingo)
+      no_sales = products(:ostrich)
+      expect(has_sales.times_sold).to eq 2
+      expect(no_sales.times_sold).to eq 0
     end
   end
 end
