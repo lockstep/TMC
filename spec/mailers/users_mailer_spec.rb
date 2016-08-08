@@ -19,10 +19,11 @@ describe UsersMailer, type: :mailer do
     end
 
     it 'renders best-sellers correctly' do
+      utm = "utm_source=3DTMC"
       flamingo = products(:flamingo)
       email = ActionMailer::Base.deliveries.last.encoded
       expect(email).to match flamingo.name
-      expect(email).to match product_url(flamingo)
+      expect(email).to include "#{product_url(flamingo)}?#{utm}"
     end
   end
 end
