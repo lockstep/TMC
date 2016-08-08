@@ -1,0 +1,62 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td bgcolor="#ffffff" align="center" style="padding: 70px 15px 10px 15px;" class="section-padding">
+        <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
+          <tbody>
+            <tr>
+              <td>
+                <!-- TITLE SECTION AND COPY -->
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                      <td align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">Our Best-Sellers</td>
+                    </tr>
+                    <tr>
+                      <td align="center" style="padding: 20px 0 20px 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+                        Get inspired by our all-time most popular products!
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <!-- TWO COLUMNS -->
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                  <tbody>
+                    <tr>
+                      <td valign="top" style="padding: 0;" class="mobile-wrapper">
+                        <!-- LEFT COLUMN -->
+                        <%= render 'image_column', align: :left, result: @results.first %>
+                        <!-- RIGHT COLUMN -->
+                        <%= render 'image_column', align: :right, result: @results.second %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <!-- TWO COLUMNS -->
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                  <tbody>
+                    <tr>
+                      <td valign="top" style="padding: 0;" class="mobile-wrapper">
+                        <!-- LEFT COLUMN -->
+                        <%= render 'image_column', align: :left, result: @results.third %>
+                        <!-- RIGHT COLUMN -->
+                        <%= render 'image_column', align: :right, result: @results.fourth %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
