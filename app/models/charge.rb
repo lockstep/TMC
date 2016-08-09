@@ -3,7 +3,7 @@ class Charge < ActiveRecord::Base
   has_many :line_items, through: :order
   has_many :products, through: :line_items
 
-  after_create :send_notifications, :reindex_products
+  after_commit :send_notifications, :reindex_products
 
   def self.monthly_sales(time: Time.now)
     Charge

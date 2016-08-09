@@ -11,7 +11,8 @@
                   <%= image_tag result.primary_image.url(:medium),
                     width: 240, height: 240,
                     style: "display: block; width: 240px; height: 240px;",
-                    alt: result.name, border: "0", class: "img-max" %>
+                    alt: "#{result.name.gsub('"', '')}",
+                    border: "0", class: "img-max" %>
                 <% end %>
               </td>
             </tr>

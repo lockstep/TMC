@@ -45,6 +45,7 @@ group :test do
   gem 'rack_session_access'
   gem 'rspec_junit_formatter', '0.2.2'
   gem 'database_cleaner'
+  gem 'test_after_commit'
 end
 
 group :development, :test do

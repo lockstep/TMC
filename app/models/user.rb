@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   after_initialize :set_default_role, :if => :new_record?
-  after_create :send_welcome_email
+  after_commit :send_welcome_email, on: :create
 
   has_many :orders
   has_many :completed_orders, -> { paid }, class_name: 'Order'
