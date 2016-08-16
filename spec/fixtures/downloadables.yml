@@ -9,3 +9,6 @@ flamingo_pdf:
 
 ostrich_pdf:
   product: ostrich
+
+panda_pdf:
+  product: panda

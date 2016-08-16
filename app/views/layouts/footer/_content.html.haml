@@ -4,16 +4,15 @@
   .row.navbar
     .col-sm-12.navbar-light
       %ul.nav.navbar-nav
-        -# %li.nav-item
-        -#   = link_to 'Presentations', presentations_url, class: 'nav-link'
         %li.nav-item
           = link_to 'Products', products_url, class: 'nav-link'
         %li.nav-item
+          = link_to 'Free Materials',
+            page_path('free-montessori-materials-printables'),
+            class: 'nav-link'
+        %li.nav-item
           = link_to "Terms &amp; Conditions".html_safe,
             page_path(:terms), class: 'nav-link'
-        -# %li.nav-item
-        -#   %a.nav-link{href: "#"}
-        -#     FAQ
         %li.nav-item
           = link_to 'Privacy Policy', page_path(:privacy), class: 'nav-link'
         %li.nav-item

@@ -1,0 +1,39 @@
+- content_for :title, 'Free Montessori Materials Printables'
+- content_for :meta_tags do
+  = meta_tags(title: 'Free Montessori Materials Printables')
+
+%section#free
+  .container
+    %h1.script Free Montessori Materials
+    %p.text-xs-center.intro
+      Download our free samples of printable Montessori materials for
+      your environment
+    .row
+      - if user_signed_in?
+        .list
+          - @free_products.each do |product|
+            .col-md-4.product-tile
+              = link_to product_url(product) do
+                = image_tag product.primary_image.url(:medium),
+                  alt: product.name, class: 'img-fluid'
+              .details
+                .product-name
+                  = link_to product.name,
+                    product_url(product), class: 'name'
+                .price-container
+                  .price
+                    = number_to_currency(product.price, precision: 2)
+                  .free-label
+                    FREE
+                .add-to-cart
+                  = link_to 'Download', product.download_url,
+                    class: 'btn btn-cart'
+      - else
+        .col-sm-12
+          %p.text-xs-center
+            Please
+            = link_to 'sign in', new_user_session_path
+            or
+            = link_to 'register', new_registration_path('user')
+            to download these free Montessori printables. It only takes
+            10 seconds!

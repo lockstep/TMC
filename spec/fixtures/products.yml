@@ -38,3 +38,9 @@ ostrich:
   featured: false
   presentation: birds
   topics: birds, cards
+
+panda:
+  name: Panda
+  price: 99.00
+  description: A free panda card
+  free: true

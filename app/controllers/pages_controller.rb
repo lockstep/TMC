@@ -1,10 +1,14 @@
 class PagesController < ApplicationController
-  PAGES = ['home', 'about', 'terms', 'privacy']
+  PAGES = ['home', 'about', 'terms', 'privacy',
+           'free-montessori-materials-printables']
 
   def show
     if !params[:page].blank? && PAGES.include?(params[:page])
-      if params[:page] == 'home'
+      case params[:page]
+      when 'home'
         @featured_products = Product.featured.limit(4)
+      when 'free-montessori-materials-printables'
+        @free_products = Product.free
       end
       render template: "pages/#{params[:page]}"
     else

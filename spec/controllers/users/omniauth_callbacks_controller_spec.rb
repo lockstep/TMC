@@ -1,7 +1,9 @@
 describe Users::OmniauthCallbacksController do
   fixtures :users
+  fixtures :products
 
   include_context 'before_after_mailer'
+  before { Product.reindex }
 
   describe "new user" do
     before do

@@ -20,6 +20,7 @@ class ProductDashboard < Administrate::BaseDashboard
       decimals: 1,
     ),
     featured: Field::Boolean,
+    free: Field::Boolean,
     description: WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -51,6 +52,7 @@ class ProductDashboard < Administrate::BaseDashboard
     :name,
     :price,
     :featured,
+    :free,
     :description,
     :created_at,
     :updated_at,
@@ -66,7 +68,8 @@ class ProductDashboard < Administrate::BaseDashboard
     :name,
     :price,
     :description,
-    :featured
+    :featured,
+    :free
   ]
 
   # Overwrite this method to customize how products are displayed

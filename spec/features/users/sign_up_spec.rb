@@ -1,5 +1,9 @@
 describe 'Sign up', :feature do
+  fixtures :products
+
   include_context 'before_after_mailer'
+
+  before { Product.reindex }
 
   context 'registration', js: true do
     it 'sends the welcome email and logs in the user' do

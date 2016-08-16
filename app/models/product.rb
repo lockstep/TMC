@@ -9,6 +9,7 @@ class Product < ActiveRecord::Base
   has_one :downloadable
 
   scope :featured, -> { where(featured: true) }
+  scope :free, -> { where(free: true) }
   scope :with_downloadables, -> {
     where("products.id IN (SELECT product_id FROM downloadables)")
   }

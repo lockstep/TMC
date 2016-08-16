@@ -50,13 +50,23 @@ describe Product, type: :model do
     end
   end
 
+  describe '#free' do
+    before do
+      @free = products(:panda)
+    end
+    it 'returns an array of featured products' do
+      expect(Product.free.size).to eq 1
+      expect(Product.free).to include @free
+    end
+  end
+
   describe '#with_downloadables' do
     before do
       @without_downloadable = products(:flamingo)
       @with_downloadable = products(:animal_cards)
     end
     it 'returns an array of products with downloadables' do
-      expect(Product.with_downloadables.size).to eq 4
+      expect(Product.with_downloadables.size).to eq 5
       expect(Product.with_downloadables).to include @with_downloadable
     end
   end

@@ -1,0 +1,20 @@
+#free {
+  .intro {
+    margin-bottom: 50px;
+  }
+
+  .price-container {
+    margin-bottom: 20px;
+
+    .price {
+      text-decoration: line-through;
+      display: inline;
+    }
+
+    .free-label {
+      display: inline;
+      margin-left: 10px;
+      color: $blue;
+    }
+  }
+}
