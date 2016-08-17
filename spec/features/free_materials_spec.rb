@@ -4,6 +4,8 @@ describe 'Free materials', type: :feature do
   fixtures :users
 
   before do
+    allow_any_instance_of(Downloadable).to receive(:download_url)
+      .and_return('my_downloadable_file.pdf')
     @free = products(:panda)
     @user = users(:michelle)
   end
@@ -32,13 +34,13 @@ describe 'Free materials', type: :feature do
       end
       expect(page).to have_content 'Free Montessori Materials'
       expect(page).to have_content 'It only takes 10 seconds'
+      expect(page).to have_content @free.name
+      expect(page).not_to have_link('Download', href: /my_downloadable_file/)
     end
   end
 
   context 'signed in user' do
     before do
-      allow_any_instance_of(Downloadable).to receive(:download_url)
-        .and_return('my_downloadable_file.pdf')
       signin(@user.email, 'qawsedrf')
     end
     it 'shows free products with signed download URLs' do
@@ -47,6 +49,7 @@ describe 'Free materials', type: :feature do
         click_link 'Free Materials'
       end
       expect(page).to have_content 'Free Montessori Materials'
+      expect(page).not_to have_content 'It only takes 10 seconds'
       expect(page).to have_content @free.name
       expect(page).to have_link('Download', href: /my_downloadable_file/)
     end

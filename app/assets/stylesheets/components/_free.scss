@@ -3,6 +3,10 @@
     margin-bottom: 50px;
   }
 
+  .product-tile {
+    font-size: 0.8rem;
+  }
+
   .price-container {
     margin-bottom: 20px;
 
@@ -16,5 +20,10 @@
       margin-left: 10px;
       color: $blue;
     }
+  }
+
+  .add-to-cart .prompt {
+    text-transform: none;
+    font-size: 13px;
   }
 }
