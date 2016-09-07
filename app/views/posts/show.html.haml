@@ -15,3 +15,33 @@
         = @post.created_at.strftime("%B %d, %Y")
       %hr/
       = @post.body.html_safe
+
+      .spacer
+        = image_tag 'leaf.png', alt: 'The Montessori Company leaf'
+
+      #disqus_thread
+
+:javascript
+  if(typeof DISQUS === "undefined"){
+    var disqus_shortname = "#{ENV.fetch('DISQUS_SHORTNAME')}";
+
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = "//" + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  } else {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.url = "#{post_url(@post)}";
+        this.page.identifier = "#{@post.id}";
+      }
+    });
+  }
+
+%noscript
+  Please enable JavaScript to view the
+  %a{href: "https://disqus.com/?ref_noscript"}
+    comments powered by Disqus.
