@@ -3,7 +3,7 @@
   = meta_tags(title: @post.title,
     description: truncate(strip_tags(@post.body),
     separator: ' ', length: 300).gsub("'", %q(\\\')))
-.container
+.container.post
   %h1.script Blog
   .row
     .col-sm-8.col-sm-offset-2

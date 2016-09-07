@@ -7,4 +7,16 @@ class Post < ActiveRecord::Base
       :title,
     ]
   end
+
+  def stripped_body
+    doc = Nokogiri::XML(body)
+    doc.xpath("//figcaption").remove
+    helpers.strip_tags(doc.text)
+  end
+
+  private
+
+  def helpers
+    ActionController::Base.helpers
+  end
 end

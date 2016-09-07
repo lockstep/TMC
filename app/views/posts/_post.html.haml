@@ -1,4 +1,4 @@
-.post
+.post-preview
   %h2
     = link_to(post.title, post)
   %p
@@ -6,6 +6,6 @@
     Posted on
     = post.created_at.strftime("%B %d, %Y")
   .body
-    = truncate(strip_tags(post.body), separator: ' ', length: 300) do
+    = truncate(post.stripped_body, separator: ' ', length: 300) do
       = link_to ' continue', post_url(post)
   %hr

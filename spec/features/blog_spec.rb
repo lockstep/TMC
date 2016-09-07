@@ -9,6 +9,7 @@ describe 'Blog', type: :feature do
     visit posts_path
     expect(page).to have_content @post.title
     expect(page).not_to have_content '<div>'
+    expect(page).not_to have_content 'strip this'
     first(:link, 'continue').click
     expect(page).to have_content @post.title
   end
