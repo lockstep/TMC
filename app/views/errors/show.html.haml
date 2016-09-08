@@ -1,0 +1,44 @@
+- content_for :title, 'Uh Oh!'
+- content_for :meta_tags do
+  - if @status == 404
+    = meta_tags(title: 'Are you lost?',
+      image: asset_url('404'),
+      description: "Like our Page Not Found? You\'ll love our products!")
+  - else
+    = meta_tags(title: 'Something went wrong',
+      image: asset_url('500'),
+      description: "Like this error page? You\'ll love our products!")
+
+.container
+  .row
+    .col-sm-12
+      - if @status == 404
+        .leader-img-container
+          = image_tag '404', alt: 'Page not found',
+            class: 'img-fluid'
+        .text-xs-center
+          .leader-img-explanation
+            %p
+              The page you're looking for does not exist.
+            %p
+              If you're having a technical problem with our site, please
+              = succeed '.' do
+                = mail_to 'michelle@themontessoricompany.com', 'let us know',
+                  subject: 'Something is broken'
+            %p
+              Maybe it was a typo? In that case, have fun exploring!
+          = link_to 'Keep shopping', products_path, class: 'btn btn-secondary'
+      - else
+        .leader-img-container
+          = image_tag '500', alt: 'Something went wrong',
+            class: 'img-fluid'
+        .text-xs-center
+          .leader-img-explanation
+            %p
+              Oops, something went wrong :(
+            %p
+              A team of highly trained monkeys has been dispatched to deal with
+              this situation. We'll have it fixed as fast as we can!
+            %p
+              Why not explore the rest of our site in the meantime?
+          = link_to "Let's go", products_path, class: 'btn btn-secondary'

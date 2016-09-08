@@ -36,5 +36,9 @@ module TMC
 
     # Use Sidekiq as our Active Job adapter
     config.active_job.queue_adapter = :sidekiq
+
+    config.exceptions_app = -> (env) {
+      ErrorsController.action(:show).call(env)
+    }
   end
 end

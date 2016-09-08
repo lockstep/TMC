@@ -55,14 +55,6 @@ describe OrdersController, type: :controller do
             expect(response).to redirect_to(error_403_path)
           end
         end
-        context 'order does not exist' do
-          before do
-            get :show, id: 0
-          end
-          it 'redirects to 404' do
-            expect(response).to redirect_to error_404_path
-          end
-        end
       end
     end
 

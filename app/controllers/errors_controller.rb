@@ -1,9 +1,16 @@
 class ErrorsController < ApplicationController
-  def error_404
-    render status: 404
+  respond_to :json, :js, :html
+  before_action :set_status
+
+  def show
+    respond_with @status
   end
 
-  def error_500
-    render status: 500
+  private
+
+  def set_status
+    @exception  = env['action_dispatch.exception']
+    @status  = ActionDispatch::ExceptionWrapper
+      .new(env, @exception).status_code
   end
 end

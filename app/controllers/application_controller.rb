@@ -4,11 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   force_ssl if: :ssl_configured?
 
-  rescue_from StandardError do |exception|
-    redirect_to error_500_path
-    notify_airbrake exception
-  end
-
   rescue_from CanCan::AccessDenied do |exception|
     if current_user
       flash[:alert] = "Access to that page has been denied."
@@ -17,10 +12,6 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Please log in to access that page."
       redirect_to new_user_session_path
     end
-  end
-
-  rescue_from ActiveRecord::RecordNotFound do |exception|
-    redirect_to error_404_path
   end
 
   def after_sign_in_path_for(resource)

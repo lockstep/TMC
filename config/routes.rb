@@ -11,9 +11,6 @@ Rails.application.routes.draw do
   resources :pages, param: :page, only: [:show]
 
   get '/403', to: 'pages#show', page: 'home', as: 'error_403'
-  get '/uhoh', to: 'errors#error_404', as: 'error_404'
-  get '/oops', to: 'errors#error_500', as: 'error_500'
-
   get '/cart', to: 'carts#my_cart', as: 'cart'
 
   devise_for :users, controllers: {
@@ -33,6 +30,4 @@ Rails.application.routes.draw do
   resources :line_items, only: [:create, :destroy]
   resources :charges, only: [:create]
   resources :posts, only: [:index, :show]
-
-  get '*unmatched_route', to: 'errors#error_404'
 end
