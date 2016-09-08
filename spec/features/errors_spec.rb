@@ -24,6 +24,14 @@ describe 'Error pages', type: :feature do
       expect(Airbrake).not_to have_received(:notify)
     end
   end
+  context 'file not found' do
+    it 'does not notify Airbrake' do
+      allow(Airbrake).to receive(:notify)
+      visit '/non_existent_stylesheet.css'
+      expect(page).to have_content 'does not exist'
+      expect(Airbrake).not_to have_received(:notify)
+    end
+  end
   context '500' do
     before do
       allow_any_instance_of(OrdersController).to receive(:set_order)
