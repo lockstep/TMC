@@ -14,7 +14,8 @@
         Posted on
         = @post.created_at.strftime("%B %d, %Y")
       %hr/
-      = @post.body.html_safe
+      .body
+        = @post.body.html_safe
 
       .spacer
         = image_tag 'leaf.png', alt: 'The Montessori Company leaf'

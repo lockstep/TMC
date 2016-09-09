@@ -7,6 +7,26 @@
 }
 
 .post {
+  font-family: 'Montserrat-ExtraLight', sans-serif;
+  line-height: 1.85rem;
+  font-size: 17px;
+
+  h1, h2, h3, b, strong {
+    font-family: 'Montserrat-Regular', sans-serif;
+  }
+
+  h1 {
+    font-size: 40px;
+    line-height: 3rem;
+  }
+
+  blockquote {
+    font-style: italic;
+    color: gray;
+    border-left: 4px solid $blue;
+    padding: 15px;
+  }
+
   figcaption {
     color: #7d7d7d;
     display: none;
@@ -23,5 +43,12 @@
 
   .spacer {
     margin: 45px 0 55px;
+  }
+
+  .body {
+    h1 {
+      font-size: 24px;
+      line-height: 2rem;
+    }
   }
 }

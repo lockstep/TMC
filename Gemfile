@@ -3,14 +3,13 @@ ruby '2.3.0'
 
 gem 'rails', '4.2.5'
 gem 'pg', '~> 0.15'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0.6'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 
 gem 'jquery-rails'
-# gem 'turbolinks', '~> 5.0.0.beta2'
 gem 'bootstrap', '~> 4.0.0.alpha3'
-gem 'trix'
+gem 'trix', '~> 0.9.9'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml', '~> 4.0.7'
 gem 'font-awesome-rails'

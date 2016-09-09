@@ -1,5 +1,4 @@
 $(function() {
-
   document.addEventListener("trix-attachment-add", function(event) {
     var attachment;
     attachment = event.attachment;
