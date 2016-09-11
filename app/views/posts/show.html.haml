@@ -4,18 +4,35 @@
     description: truncate(strip_tags(@post.body),
     separator: ' ', length: 300).gsub("'", %q(\\\')))
 .container.post
-  %h1.script Blog
+  %h1.script
+    = link_to posts_path do
+      Blog
   .row
     .col-sm-8.col-sm-offset-2
-      %h1
-        = @post.title
-      %p
-        = fa_icon 'clock-o'
-        Posted on
-        = @post.created_at.strftime("%B %d, %Y")
-      %hr/
-      .body
+      .post-meta
+        = @post.created_at.strftime("%b %d, %Y")
+        »
+        .category= @post.category
+      .post-title
+        %h1
+          = @post.title
+        - if @post.user
+          .post-author
+            = image_tag @post.user.avatar_url(:medium), class: 'avatar'
+            %em by
+            .name= @post.user.full_name
+      .post-body
         = @post.body.html_safe
+      - if @post.user
+        #author-info.text-xs-center.text-sm-left
+          .row
+            .col-sm-4.text-xs-center
+              = image_tag @post.user.avatar_url(:medium), class: 'avatar'
+            .col-sm-8
+              .author-info-content
+                %p.author-name
+                  = @post.user.full_name
+                = @post.user.bio.html_safe
 
       .spacer
         = image_tag 'leaf.png', alt: 'The Montessori Company leaf'

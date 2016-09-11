@@ -28,6 +28,20 @@
   }
 }
 
+.btn-blog {
+  background: white;
+  color: $blue;
+  font-size: 10pt;
+  border: 1px $blue solid;
+  width: 100%;
+
+  &:hover {
+    background: $blog-green;
+    border: 1px $blog-green solid;
+    color: white;
+  }
+}
+
 .btn-secondary {
   background: white;
   color: darken($grey, 40%);

@@ -3,8 +3,11 @@ require "administrate/base_dashboard"
 class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    first_name: Field::String,
+    last_name: Field::String,
     role: Enum,
     email: Field::String,
+    bio: WysiwygField,
     orders: Field::HasMany,
     encrypted_password: Field::String,
     reset_password_token: Field::String,
@@ -18,7 +21,8 @@ class UserDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     password: Field::String,
-    password_confirmation: Field::String
+    password_confirmation: Field::String,
+    avatar: PaperclipField
   }
 
   COLLECTION_ATTRIBUTES = [
@@ -30,6 +34,10 @@ class UserDashboard < Administrate::BaseDashboard
 
   SHOW_PAGE_ATTRIBUTES = [
     :id,
+    :first_name,
+    :last_name,
+    :avatar,
+    :bio,
     :role,
     :email,
     :orders,
@@ -41,7 +49,15 @@ class UserDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :email,
     :role,
+    :first_name,
+    :last_name,
+    :avatar,
+    :bio,
     :password,
     :password_confirmation
   ]
+
+  def display_resource(user)
+    user.last_name ? user.full_name : "User ##{user.id}"
+  end
 end

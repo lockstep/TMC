@@ -111,6 +111,14 @@ TMC.define_component('product show page', function() {
   });
 });
 
+TMC.define_component('blog', function() {
+  $('.post .author .name').bind('vclick', function() {
+    $('html, body').animate({
+        scrollTop: $('#author-info').offset().top
+    }, 1200);
+  });
+});
+
 TMC.setup = function() {
   for (var c in TMC.components) {
     var component = TMC.components[c];

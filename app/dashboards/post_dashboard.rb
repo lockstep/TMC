@@ -10,10 +10,13 @@ class PostDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
+    category: Field::String,
+    user: Field::BelongsTo,
     body: WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     slug: Field::String,
+    cover: PaperclipField
   }
 
   # COLLECTION_ATTRIBUTES
@@ -24,6 +27,7 @@ class PostDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :title,
+    :category,
     :created_at,
   ]
 
@@ -32,6 +36,9 @@ class PostDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :title,
+    :cover,
+    :category,
+    :user,
     :slug,
     :body,
     :created_at,
@@ -43,7 +50,10 @@ class PostDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :title,
+    :category,
+    :user,
     :body,
+    :cover
   ]
 
   # Overwrite this method to customize how posts are displayed

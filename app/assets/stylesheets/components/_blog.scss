@@ -1,8 +1,109 @@
+.posts-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 .post-preview {
   margin-bottom: 30px;
+  font-family: 'Montserrat-ExtraLight', sans-serif;
+  border-bottom: 1px solid #e4eaef;
+  padding-bottom: 35px;
 
-  .body {
-    margin: 20px 0 25px;
+  .post-head {
+    .post-title {
+      font-family: 'Montserrat-Light', sans-serif;
+      font-size: 26px;
+      line-height: 2.1rem;
+      margin-bottom: 15px;
+
+      a {
+        color: $black;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          color: $blog-green;
+        }
+      }
+    }
+
+    .post-author {
+      .avatar {
+        width: 50px;
+      }
+
+      .name {
+        cursor: initial;
+      }
+
+      .name-container {
+        display: inline-block;
+        position: relative;
+        top: -8px;
+      }
+    }
+
+    .post-meta {
+      position: relative;
+      bottom: auto;
+      right: auto;
+      display: block;
+      padding-left: 60px;
+      top: -21px;
+    }
+  }
+
+  .post-body {
+    padding: 20px 0;
+    margin-bottom: 15px;
+
+    .post-image {
+      margin-bottom: 20px;
+    }
+  }
+
+  .post-foot {
+    position: relative;
+
+    .btn-blog {
+      width: 35%;
+      position: absolute;
+      bottom: -8px;
+      right: 0;
+    }
+  }
+}
+
+.post-meta {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: $blog-grey;
+
+  .category {
+    display: inline;
+    color: $blog-green;
+  }
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.post-author {
+  .avatar {
+    width: 60px;
+    margin-right: 5px;
+  }
+
+  em {
+    color: $blog-grey;
+    margin-right: 5px;
+  }
+
+  .name {
+    font-family: 'Montserrat-Light', sans-serif;
+    display: inline;
+    color: $blog-green;
+    cursor: pointer;
   }
 }
 
@@ -10,6 +111,10 @@
   font-family: 'Montserrat-ExtraLight', sans-serif;
   line-height: 1.85rem;
   font-size: 17px;
+
+  a {
+    color: $blog-green;
+  }
 
   h1, h2, h3 {
     font-family: 'Montserrat-Regular', sans-serif;
@@ -28,13 +133,13 @@
   blockquote {
     font-style: italic;
     font-size: 19px;
-    color: gray;
+    color: $blog-grey;
     border-left: 4px solid $blue;
     padding: 15px;
   }
 
   figcaption {
-    color: #7d7d7d;
+    color: $blog-grey;
     display: none;
 
     &.caption-edited {
@@ -51,10 +156,63 @@
     margin: 45px 0 55px;
   }
 
-  .body {
+  .post-title {
+    margin-bottom: 30px;
+  }
+
+  .post-body {
     h1 {
       font-size: 22px;
       line-height: 2rem;
     }
+  }
+
+  #author-info {
+    margin: 40px 0 50px;
+    font-size: 15px;
+    color: $blog-grey;
+
+    .avatar {
+      max-width: 120px;
+    }
+
+    .author-name {
+      font-family: 'Montserrat-Light', sans-serif;
+      font-size: 17px;
+      color: $blog-green;
+      margin-bottom: 5px;
+    }
+
+    .author-info-content {
+      display: inline;
+    }
+  }
+}
+
+.posts-container article.post-preview:last-child {
+  border: none;
+}
+
+@media (max-width: 34em) {
+  .posts-container {
+    padding: 0 15px;
+  }
+
+  .post-preview {
+    border: none;
+
+    .post-body {
+      margin-bottom: 25px;
+    }
+
+    .post-foot .btn-blog {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 34em) {
+  .post-preview .post-head .post-author .name-container {
+    top: 0;
   }
 }

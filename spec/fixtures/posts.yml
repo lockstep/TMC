@@ -1,6 +1,13 @@
+announcement:
+  title: New products in our store
+  slug: new-hot
+  body: Go check them out!
+
 hello_tmc:
   title: Hello The Montessori Company
   slug: hello-the-montessori-company
+  category: Living Montessori
+  user: michelle
   body: <div>Montessori education is an educational approach developed by
     Italian physician and educator Maria Montessori based on her extensive
     research <figcaption>strip this</figcaption> with "phrenasthenic" or

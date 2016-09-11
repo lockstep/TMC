@@ -1,8 +1,6 @@
 - content_for :title, 'Blog'
 
-.container
-  %h1.script Blog
-  .row
-    .col-sm-8.col-sm-offset-2
-      = render @posts
-      = paginate @posts
+%h1.script Blog
+.posts-container
+  = render @posts
+  = paginate @posts

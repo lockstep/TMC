@@ -12,6 +12,10 @@ describe User, type: :model do
     it { expect(michelle.email).to eq 'mich@tmc.com' }
   end
 
+  describe '#full_name' do
+    it { expect(michelle.full_name).to eq 'Michelle TMC' }
+  end
+
   describe '#purchased_products' do
     it 'returns an array of purchased products' do
       expect(michelle.purchased_products.size).to eq 3

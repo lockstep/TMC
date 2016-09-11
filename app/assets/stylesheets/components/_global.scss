@@ -46,6 +46,11 @@ body {
   font-family: 'Lato';
 }
 
+.turbolinks-progress-bar {
+  height: 3px;
+  background-color: $blue;
+}
+
 a {
   color: $green-medium;
   text-decoration: none;
@@ -63,6 +68,14 @@ h1.script {
   color: $blue;
   font-size: 2.5rem;
   margin-bottom: 45px;
+
+  a {
+    color: $blue;
+
+    &:hover {
+      color: darken($blue, 10%);
+    }
+  }
 }
 
 input,
