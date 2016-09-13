@@ -112,7 +112,7 @@ TMC.define_component('product show page', function() {
 });
 
 TMC.define_component('blog', function() {
-  $('.post .author .name').bind('vclick', function() {
+  $('.post .post-author .name').bind('vclick', function() {
     $('html, body').animate({
         scrollTop: $('#author-info').offset().top
     }, 1200);
