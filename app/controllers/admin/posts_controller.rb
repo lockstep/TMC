@@ -11,5 +11,9 @@ module Admin
         acl: 'public-read'
       ).where(:content_type).starts_with("image/")
     end
+
+    def find_resource(param)
+      resource_class.friendly.find(param)
+    end
   end
 end
