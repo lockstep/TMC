@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :slug_candidates, use: [:slugged, :finders]
+  friendly_id :title, use: :history
 
   belongs_to :user
 
@@ -24,10 +24,6 @@ class Post < ActiveRecord::Base
   validates_attachment_content_type :cover,
     content_type: /\Aimage\/.*\Z/
 
-  def slug_candidates
-    [ :title ]
-  end
-
   def stripped_body
     doc = Nokogiri::XML(body)
     doc.xpath("//figcaption").remove
@@ -38,5 +34,9 @@ class Post < ActiveRecord::Base
 
   def helpers
     ActionController::Base.helpers
+  end
+
+  def should_generate_new_friendly_id?
+    title_changed?
   end
 end
