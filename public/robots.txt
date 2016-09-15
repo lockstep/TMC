@@ -2,6 +2,6 @@
 Sitemap: http://lockstep-sitemaps.s3-website-us-east-1.amazonaws.com/tmc/sitemap.xml.gz
 
 User-agent: *
-Disallow: /order/
+Disallow: /orders/
 Disallow: /cart/
 Disallow: /users/
