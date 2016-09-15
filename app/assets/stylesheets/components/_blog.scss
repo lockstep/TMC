@@ -153,7 +153,7 @@
   }
 
   .spacer {
-    margin: 45px 0 55px;
+    padding: 15px 0 20px;
   }
 
   .post-title {
@@ -168,7 +168,7 @@
   }
 
   #author-info {
-    margin: 40px 0 50px;
+    margin: 20px 0 50px;
     font-size: 15px;
     color: $blog-grey;
 
@@ -193,6 +193,51 @@
   border: none;
 }
 
+#social-icons-floating-desktop {
+  position: fixed;
+  left: 0;
+  top: 140px;
+  padding: 25px;
+  width: 100px;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+
+  .icon {
+    height: 35px;
+    display: block;
+    margin: 0 auto 20px;
+    cursor: pointer;
+  }
+}
+
+#social-icons-floating-mobile {
+  position: fixed;
+  bottom: 0;
+  background: white;
+  border-top: 1px solid lighten($blog-grey, 40%);
+  padding: 3px 0;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .icon-container {
+    margin: 0;
+  }
+}
+
+.social-icons-post-footer {
+  padding: 30px 0 40px;
+
+  img {
+    cursor: pointer;
+  }
+}
+
 @media (max-width: 34em) {
   .posts-container {
     padding: 0 15px;
@@ -214,5 +259,11 @@
 @media (min-width: 34em) {
   .post-preview .post-head .post-author .name-container {
     top: 0;
+  }
+
+  .social-icons-post-footer {
+    img {
+      height: 55px;
+    }
   }
 }

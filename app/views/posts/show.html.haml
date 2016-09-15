@@ -1,8 +1,8 @@
 - content_for :title, @post.title
 - content_for :meta_tags do
   = meta_tags(title: @post.title,
-    description: truncate(strip_tags(@post.body),
-    separator: ' ', length: 300).gsub("'", %q(\\\')))
+    description: truncate(strip_tags(@post.body), separator: ' ', length: 300).gsub("'", %q(\\\')),
+    image: @post.cover_url)
 .container.post
   %h1.script
     = link_to posts_path do
@@ -23,6 +23,8 @@
             .name= @post.user.full_name
       .post-body
         = @post.body.html_safe
+      .social-icons-post-footer
+        = render 'horizontal_social_icons'
       - if @post.user
         #author-info.text-xs-center.text-sm-left
           .row
@@ -38,6 +40,15 @@
         = image_tag 'leaf.png', alt: 'The Montessori Company leaf'
 
       #disqus_thread
+
+#social-icons-floating-desktop.hidden-xs-down
+  = facebook_like(icon: 'fb_logo_blog.png')
+  = tweet(icon: 'twitter_logo_blog.png', text: @post.title)
+  = pin_it(icon: 'pinterest_logo_blog.png', image: @post.cover_url,
+           description: truncate(@post.stripped_body, separator: ' ', length: 300))
+
+#social-icons-floating-mobile.hidden-sm-up
+  = render 'horizontal_social_icons'
 
 :javascript
   if(typeof DISQUS === "undefined"){

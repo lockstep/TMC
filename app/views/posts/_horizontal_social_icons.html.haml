@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-xs-4.text-xs-center.text-sm-right.icon-container
+      = facebook_like
+    .col-xs-4.text-xs-center.icon-container
+      = tweet(text: @post.title)
+    .col-xs-4.text-xs-center.text-sm-left.icon-container
+      = pin_it(image: @post.cover_url,
+        description: truncate(@post.stripped_body,
+        separator: ' ', length: 300))

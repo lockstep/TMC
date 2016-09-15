@@ -18,7 +18,7 @@ TMC.define_component('social buttons', function() {
     bindFacebookEvents();
   }
 
-  $('#facebook-button').bind('vclick', function(e) {
+  $('.facebook-button').bind('vclick', function(e) {
     FB.ui({
       method: 'share',
       href: window.location.href,
@@ -116,6 +116,20 @@ TMC.define_component('blog', function() {
     $('html, body').animate({
         scrollTop: $('#author-info').offset().top
     }, 1200);
+  });
+
+  // social sharing - float menu on the left toggle when scrolling
+  var $containerDesktop = $('#social-icons-floating-desktop');
+  var $containerMobile = $('#social-icons-floating-mobile');
+  $(window).scroll(function() {
+    if ($(window).scrollTop() > 600) {
+      $containerDesktop.css('opacity', '1');
+      $containerMobile.css('opacity', '1');
+    }
+    else {
+      $containerDesktop.css('opacity', '0');
+      $containerMobile.css('opacity', '0');
+    }
   });
 });
 
