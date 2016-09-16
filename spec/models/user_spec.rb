@@ -8,6 +8,16 @@ describe User, type: :model do
   let(:michelle)              { users(:michelle) }
   let(:purchased_product)     { products(:animal_cards) }
 
+  describe 'callbacks' do
+    it 'subscribes the user to Mailchimp after create' do
+      allow(MailchimpSubscriberWorker).to receive(:perform_async)
+      user = User.create(email: 'erik@tmc.com', password: 'mypassword',
+                        password_confirmation: 'mypassword')
+      expect(MailchimpSubscriberWorker).to have_received(:perform_async)
+        .with(user.id)
+    end
+  end
+
   describe '#email' do
     it { expect(michelle.email).to eq 'mich@tmc.com' }
   end

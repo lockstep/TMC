@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   after_initialize :set_default_role, :if => :new_record?
-  after_commit :send_welcome_email, on: :create
+  after_commit :send_welcome_email, :subscribe_to_mailchimp, on: :create
 
   has_many :orders
   has_many :posts
@@ -79,5 +79,9 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     WelcomeNewUserWorker.perform_async(self.id)
+  end
+
+  def subscribe_to_mailchimp
+    MailchimpSubscriberWorker.perform_async(self.id)
   end
 end

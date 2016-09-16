@@ -3,7 +3,11 @@ describe Users::OmniauthCallbacksController do
   fixtures :products
 
   include_context 'before_after_mailer'
-  before { Product.reindex }
+
+  before do
+    Product.reindex
+    allow(MailchimpSubscriberWorker).to receive(:perform_async)
+  end
 
   describe "new user" do
     before do
@@ -12,7 +16,7 @@ describe Users::OmniauthCallbacksController do
       @user = User.find_by(email: "user@email.com")
     end
 
-    it 'creates the user 'do
+    it 'creates the user'do
       expect(@user).not_to be_nil
     end
 
@@ -31,6 +35,11 @@ describe Users::OmniauthCallbacksController do
       expect(ActionMailer::Base.deliveries.count).to eq 1
       email = ActionMailer::Base.deliveries.first
       expect(email.subject).to eq 'Welcome to The Montessori Company'
+    end
+
+    it 'subscribes the user to Mailchimp' do
+      expect(MailchimpSubscriberWorker).to have_received(:perform_async)
+        .with(@user.id)
     end
   end
 

@@ -3,7 +3,10 @@ describe 'Sign up', :feature do
 
   include_context 'before_after_mailer'
 
-  before { Product.reindex }
+  before do
+    Product.reindex
+    allow(MailchimpSubscriberWorker).to receive(:perform_async)
+  end
 
   context 'registration', js: true do
     it 'sends the welcome email and logs in the user' do
@@ -14,6 +17,8 @@ describe 'Sign up', :feature do
       click_button 'Sign up'
       expect(page).to have_content 'Welcome! You have signed up'
       expect(ActionMailer::Base.deliveries.count).to eq 1
+      expect(MailchimpSubscriberWorker).to have_received(:perform_async)
+        .with(User.last.id)
       email = ActionMailer::Base.deliveries.first
       expect(email.subject).to eq 'Welcome to The Montessori Company'
       visit root_path
@@ -31,6 +36,7 @@ describe 'Sign up', :feature do
       expect(page).to have_content "doesn't match"
       expect(page).not_to have_content 'prohibited this user'
       expect(ActionMailer::Base.deliveries.count).to eq 0
+      expect(MailchimpSubscriberWorker).not_to have_received(:perform_async)
     end
   end
 end

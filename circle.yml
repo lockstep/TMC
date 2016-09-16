@@ -26,6 +26,8 @@ test:
           STRIPE_KEY: my_stripe_key
           SLACK_WEBHOOK_URL: my_url
           DISQUS_SHORTNAME: my_disqus
+          MAILCHIMP_API_KEY: 200e3000795e57499c6cfedebacf5f7c-us11
+          MAILCHIMP_LIST_ID: 57fc12c58e
 
 deployment:
   staging:

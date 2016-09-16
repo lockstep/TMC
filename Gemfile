@@ -28,6 +28,7 @@ gem 'administrate', '~> 0.2.2'
 gem 'kaminari', '~> 0.16.2'
 gem 'sitemap_generator'
 gem 'fog-aws'
+gem 'mailchimp-api', require: 'mailchimp'
 
 gem 'searchkick', '~> 1.2.1'
 gem 'typhoeus'
