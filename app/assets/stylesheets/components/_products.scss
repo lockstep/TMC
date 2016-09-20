@@ -49,9 +49,22 @@
     clear: both;
   }
 
-  .price {
-    color: $green-medium;
-    font-size: 18pt;
+  .price-container {
+    .price {
+      color: $green-medium;
+      font-size: 18pt;
+    }
+  }
+
+  .free {
+    .price {
+      text-decoration: line-through;
+      font-size: 16px;
+    }
+
+    .free-label {
+      font-size: 20px;
+    }
   }
 
   .section-title {
@@ -70,7 +83,7 @@
 
 .product-tile {
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
 
   img {

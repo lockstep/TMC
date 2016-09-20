@@ -119,6 +119,31 @@ describe 'Product search page', type: :feature do
         end
       end
     end
+    context 'free products' do
+      before do
+        allow_any_instance_of(Downloadable).to receive(:download_url)
+          .and_return('my_downloadable_file.pdf')
+      end
+      context 'guest' do
+        it 'is prompted to sign in' do
+          visit products_path
+          expect(page).to have_content 'Please sign in or register'
+          expect(page).not_to have_link('Download',
+                                        href: /my_downloadable_file/)
+        end
+      end
+      context 'signed in user' do
+        before do
+          @user = users(:michelle)
+          signin(@user.email, 'qawsedrf')
+        end
+        it 'shows download button' do
+          visit products_path
+          expect(page).not_to have_content 'Please sign in or register'
+          expect(page).to have_link('Download', href: /my_downloadable_file/)
+        end
+      end
+    end
   end
 
   context 'recently viewed' do

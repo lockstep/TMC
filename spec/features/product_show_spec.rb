@@ -1,6 +1,8 @@
 describe 'Product show page', type: :feature do
   fixtures :products
   fixtures :topics
+  fixtures :downloadables
+  fixtures :users
 
   context 'product without a topic' do
     before do
@@ -31,6 +33,33 @@ describe 'Product show page', type: :feature do
           .to appear_before products_path(topic_ids: @parent_topic.id)
         expect(products_path(topic_ids: @parent_topic.id))
           .to appear_before products_path(topic_ids: @child_topic.id)
+      end
+    end
+  end
+
+  context 'free products' do
+    before do
+      @product = products(:panda)
+      allow_any_instance_of(Downloadable).to receive(:download_url)
+        .and_return('my_downloadable_file.pdf')
+    end
+    context 'guest' do
+      it 'is prompted to sign in' do
+        visit product_path @product
+        expect(page).to have_content 'Please sign in or register'
+        expect(page).not_to have_link('Download',
+                                      href: /my_downloadable_file/)
+      end
+    end
+    context 'signed in user' do
+      before do
+        @user = users(:michelle)
+        signin(@user.email, 'qawsedrf')
+      end
+      it 'shows download button' do
+        visit product_path @product
+        expect(page).not_to have_content 'Please sign in or register'
+        expect(page).to have_link('Download', href: /my_downloadable_file/)
       end
     end
   end

@@ -5,16 +5,36 @@
         = image_tag product.primary_image.url(:medium),
           alt: product.name, class: 'img-fluid'
       .details
-        = link_to product.name,
-          product_url(product), class: 'name'
-        .price
-          = number_to_currency(product.price, precision: 2)
-        .add-to-cart
-          - unless is_in_cart?(@order, product)
-            = add_to_cart(product)
-          - else
-            .in-cart
-              Already in
-              = succeed "." do
-                = link_to 'your cart', order_url(@order),
-                  data: { turbolinks: false }
+        .product-name
+          = link_to product.name,
+            product_url(product), class: 'name'
+        - if product.free
+          .free
+            .price-container
+              .price
+                = number_to_currency(product.price, precision: 2)
+              .free-label
+                FREE
+            .add-to-cart
+              - if user_signed_in?
+                = link_to 'Download', product.download_url,
+                  class: 'btn btn-cart'
+              - else
+                .prompt
+                  Please
+                  = link_to 'sign in', new_user_session_path
+                  or
+                  = link_to 'register', new_registration_path('user')
+                  to download
+        - else
+          .price
+            = number_to_currency(product.price, precision: 2)
+          .add-to-cart
+            - unless is_in_cart?(@order, product)
+              = add_to_cart(product)
+            - else
+              .in-cart
+                Already in
+                = succeed "." do
+                  = link_to 'your cart', order_url(@order),
+                    data: { turbolinks: false }

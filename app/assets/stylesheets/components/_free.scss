@@ -1,10 +1,6 @@
-#free {
+.free {
   .intro {
     margin-bottom: 50px;
-  }
-
-  .product-tile {
-    font-size: 0.8rem;
   }
 
   .price-container {
@@ -19,6 +15,7 @@
       display: inline;
       margin-left: 10px;
       color: $blue;
+      text-transform: uppercase;
     }
   }
 
