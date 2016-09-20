@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
   end
 
   def set_after_sign_in_path
-    session[:after_sign_in_path] = order_path(@order)
+    store_location_for(:user, order_path(@order))
   end
 
   def save_or_update_adjustment(promotion)

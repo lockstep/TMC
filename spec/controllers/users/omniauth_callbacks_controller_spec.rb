@@ -9,6 +9,22 @@ describe Users::OmniauthCallbacksController do
     allow(MailchimpSubscriberWorker).to receive(:perform_async)
   end
 
+  describe 'user does not share their email' do
+    before do
+      stub_env_for_omniauth(nil)
+      get :facebook
+    end
+
+    it 'does not create a user Identity' do
+      expect(Identity.count).to eq 0
+    end
+
+    it 'redirects back to sign up form with a message' do
+      expect(response).to redirect_to new_user_registration_path
+      expect(flash[:alert]).to match 'using the form below'
+    end
+  end
+
   describe "new user" do
     before do
       stub_env_for_omniauth('user@email.com')

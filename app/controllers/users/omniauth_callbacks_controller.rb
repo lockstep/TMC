@@ -2,11 +2,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.find_for_oauth(env["omniauth.auth"], current_user)
 
-    if @user.persisted?
+    if @user.present?
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
     else
-      session["devise.facebook_data"] = env["omniauth.auth"]
+      unless env["omniauth.auth.info.email"]
+        flash[:alert] = "Signing up with Facebok only works when you provide " \
+          "an email address. Please sign up using the form below."
+      end
       redirect_to new_user_registration_url
     end
   end

@@ -9,6 +9,7 @@ class PagesController < ApplicationController
         @featured_products = Product.featured.limit(4)
       when 'free-montessori-materials-printables'
         @free_products = Product.free
+        store_location_for(:user, request.url)
       end
       render template: "pages/#{params[:page]}"
     else

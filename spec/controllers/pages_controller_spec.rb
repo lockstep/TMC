@@ -19,5 +19,13 @@ describe PagesController, type: :controller do
         it { is_expected.to redirect_to(root_path) }
       end
     end
+
+    describe 'free materials page' do
+      it 'stores the location for user' do
+        get :show, page: 'free-montessori-materials-printables'
+        expect(session["user_return_to"])
+          .to eq '/pages/free-montessori-materials-printables'
+      end
+    end
   end
 end
