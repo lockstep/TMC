@@ -21,7 +21,8 @@ class OrderDashboard < Administrate::BaseDashboard
       decimals: 1
     ),
     promotion_code: Field::String,
-    products: Field::HasMany,
+    # make sure all of the line items are shown on order show page
+    products: Field::HasMany.with_options(limit: 80),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }
