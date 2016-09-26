@@ -22,6 +22,8 @@
   background: $grey;
   color: darken($grey, 40%);
   font-size: 9pt;
+  height: 38px;
+  line-height: 24px;
 
   &:hover {
     background: darken($grey, 20%);

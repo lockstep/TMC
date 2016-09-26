@@ -3,9 +3,14 @@
     margin-bottom: 50px;
   }
 
-  .price-container {
-    margin-bottom: 20px;
+  .add-to-cart {
+    .prompt {
+      text-transform: none;
+      font-size: 13px;
+    }
+  }
 
+  .price-container {
     .price {
       text-decoration: line-through;
       display: inline;
@@ -18,9 +23,10 @@
       text-transform: uppercase;
     }
   }
+}
 
-  .add-to-cart .prompt {
-    text-transform: none;
-    font-size: 13px;
+#free-materials {
+  .add-to-cart {
+    margin-top: 20px;
   }
 }
