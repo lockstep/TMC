@@ -6,3 +6,31 @@
     color: white;
   }
 }
+
+@mixin sidebar-btn {
+  width: 100%;
+  display: inline-block;
+  background-image: none;
+  border: 1px solid transparent;
+  user-select: none;
+  border-radius: 0;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+  font-weight: normal;
+  vertical-align: middle;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  padding: 0.375rem 1rem;
+}
+
+@mixin sidebar-subcategory-btn {
+  @include sidebar-btn;
+  background: #dbe0e3;
+  color: #6a7d88;
+  font-size: 9pt;
+  height: 38px;
+  line-height: 24px;
+  padding-left: 0px;
+  padding-right: 0px;
+}

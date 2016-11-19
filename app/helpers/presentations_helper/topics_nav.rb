@@ -63,7 +63,8 @@ module PresentationsHelper
           topic_ids: [topic.id],
           downloadable_id: { not: nil }
         }).count
-      "#{topic.name} (#{count})"
+      return topic.name if count == 0
+      "• #{topic.name}"
     end
 
     def sorted(topics)

@@ -106,14 +106,18 @@
   text-transform: uppercase;
 
   h1 {
-    background: $beige;
-    color: darken($light-blue, 10%);
-    letter-spacing: 1px;
-    font-size: 11pt;
+    text-transform: none;
+    font-size: 21pt;
     padding: 14px;
     text-align: center;
-    font-weight: 500;
     margin-bottom: 18px;
+    margin-top: 18px;
+    &.intro-header {
+      padding-top: 0px;
+      padding-bottom: 2px;
+      font-size: 35px;
+      margin-top: 0px;
+    }
   }
 
   ul {
@@ -144,27 +148,62 @@
     }
   }
 
+  .category {
+    margin-top: 5px;
+    .name {
+      cursor: pointer;
+    }
+    .well {
+      margin-left: $category-left-margin;
+    }
+  }
+
   .product-categories {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 
     nav > .well {
       margin-bottom: 15px;
+
+      > a {
+        @include sidebar-btn;
+        background-color: $beige;
+        color: darken($light-blue, 10%);
+        font-size: 1rem;
+        line-height: 1.5;
+        letter-spacing: 2px;
+      }
+
+      > .category {
+        margin-top: 10px;
+        > li {
+          margin-left: 0px;
+          margin-bottom: 10px;
+          a {
+            @include sidebar-subcategory-btn;
+          }
+        }
+        > .well {
+          margin-left: 0;
+
+          > a {
+            @include sidebar-subcategory-btn;
+          }
+
+          > .category {
+            > li {
+              margin-left: 8px;
+            }
+            > .well {
+              margin-left: 8px;
+            }
+          }
+        }
+      }
+
     }
 
     .active {
       color: $blue;
-    }
-  }
-
-  .category {
-    margin-top: 5px;
-
-    .name {
-      cursor: pointer;
-    }
-
-    .well {
-      margin-left: $category-left-margin;
     }
   }
 
@@ -176,6 +215,7 @@
     vertical-align: middle;
     white-space: nowrap;
     position: relative;
+    height: 50px;
 
     #query {
       font-size: 10pt;
