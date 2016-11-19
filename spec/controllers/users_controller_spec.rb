@@ -42,7 +42,7 @@ describe UsersController, type: :controller do
             old_password = @user.encrypted_password
             patch :update, id: @user, user: {
               password: 'a', password_confirmation: ''
-            }
+            }, commit: 'save'
             expect(@user.reload.encrypted_password).to eq old_password
           end
         end

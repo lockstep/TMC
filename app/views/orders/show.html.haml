@@ -44,15 +44,26 @@
               .row
                 .col-xs-12.description
                   = @order.promotion_description
+            - if @order.shipping_costs_calculated?
+              .row
+                .col-xs-6
+                  Shipping Total
+                .col-xs-6.subtotal
+                  = number_to_currency(@order.shipping_total, precision: 2)
             .row.order-total
               .col-xs-6
                 Order Total
               .col-xs-6
                 = number_to_currency(@order.total, precision: 2)
           .prompt
-            - if current_user
-              = link_to 'Checkout', '#', id: 'checkout-button',
-                class: 'btn btn-checkout'
+            - if user_signed_in?
+              - if @order.shipping_costs_calculated?
+                = link_to 'Checkout', '#', id: 'checkout-button',
+                  class: 'btn btn-checkout'
+              - else
+                = link_to 'Calculate Shipping',
+                  cart_url(calculate_shipping: true),
+                  class: 'btn btn-checkout'
             - else
               Please
               = link_to 'Log in', new_user_session_path

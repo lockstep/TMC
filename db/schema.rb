@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119114939) do
+ActiveRecord::Schema.define(version: 20161126043414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,8 +91,9 @@ ActiveRecord::Schema.define(version: 20161119114939) do
   create_table "line_items", force: :cascade do |t|
     t.integer  "product_id"
     t.integer  "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "shipping_cost_cents"
   end
 
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
@@ -141,18 +142,27 @@ ActiveRecord::Schema.define(version: 20161119114939) do
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.float    "price"
     t.string   "slug"
-    t.boolean  "featured",        default: false
+    t.boolean  "featured",                default: false
     t.integer  "presentation_id"
-    t.boolean  "free",            default: false, null: false
-    t.boolean  "live",            default: false
+    t.boolean  "free",                    default: false, null: false
+    t.boolean  "live",                    default: false
+    t.boolean  "fulfill_via_shipment",    default: false
+    t.integer  "vendor_id"
+    t.float    "weight"
+    t.float    "length"
+    t.float    "width"
+    t.float    "height"
+    t.integer  "min_shipping_cost_cents"
+    t.integer  "max_shipping_cost_cents"
   end
 
   add_index "products", ["presentation_id"], name: "index_products_on_presentation_id", using: :btree
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true, using: :btree
+  add_index "products", ["vendor_id"], name: "index_products_on_vendor_id", using: :btree
 
   create_table "products_topics", id: false, force: :cascade do |t|
     t.integer "product_id", null: false
@@ -208,6 +218,12 @@ ActiveRecord::Schema.define(version: 20161119114939) do
     t.string   "first_name"
     t.string   "last_name"
     t.text     "bio"
+    t.string   "address_line_one"
+    t.string   "address_line_two"
+    t.string   "address_city"
+    t.string   "address_state"
+    t.string   "address_postal_code"
+    t.string   "address_country"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -12,6 +12,16 @@ describe Product, type: :model do
   let(:primary_image)    { images(:primary) }
   let(:secondary_image)  { images(:secondary) }
 
+  it 'validates min and max shipping if fulfilled via shipment' do
+    p = Product.new
+    expect(p).to be_valid
+    p.fulfill_via_shipment = true
+    expect(p).not_to be_valid
+    p.min_shipping_cost_cents = 1
+    p.max_shipping_cost_cents = 2
+    expect(p).to be_valid
+  end
+
   describe '#presentation' do
     it 'returns the presentation it belongs to' do
       expect(number_cards.presentation).to eq quiz_game

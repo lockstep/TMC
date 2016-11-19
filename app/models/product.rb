@@ -5,8 +5,11 @@ class Product < ActiveRecord::Base
   searchkick text_middle: [:name, :description]
 
   belongs_to :presentation
+  belongs_to :vendor, class_name: 'User'
   has_and_belongs_to_many :topics
   has_one :downloadable
+  validates_presence_of :min_shipping_cost_cents, :max_shipping_cost_cents,
+    if: :fulfill_via_shipment?
 
   scope :featured, -> { where(featured: true) }
   scope :free, -> { where(free: true) }
@@ -15,6 +18,7 @@ class Product < ActiveRecord::Base
   }
 
   delegate :download_url, to: :downloadable
+  delegate :active_shipping_location, to: :vendor
 
   def search_data
     {
@@ -26,6 +30,14 @@ class Product < ActiveRecord::Base
       price: price,
       times_sold: times_sold
     }
+  end
+
+  def seller_mandated_shipping_cost?
+    min_shipping_cost_cents == max_shipping_cost_cents
+  end
+
+  def dimensions
+    [ length, width, height ]
   end
 
   def topic_ids_array

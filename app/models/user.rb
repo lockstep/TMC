@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
   has_many :purchased_products, through: :line_items, source: :product
   has_many :identities
 
+  attr_accessor :editing_address
+  validates_presence_of :first_name, :last_name, :address_line_one,
+    :address_city, :address_postal_code, :address_country,
+    if: :editing_address
+
   enum role: [:user, :admin]
 
   delegate :url, to: :avatar, prefix: true
@@ -42,6 +47,21 @@ class User < ActiveRecord::Base
 
   def set_default_role
     self.role ||= :user
+  end
+
+  def address_complete?
+    [
+      :address_line_one, :address_city, :address_postal_code,
+      :address_country
+    ].all? { |attr| send(attr).present? }
+  end
+
+  def active_shipping_location
+    ActiveShipping::Location.new(
+      address1: address_line_one, address2: address_line_two,
+      country: address_country, state: address_state, city: address_city,
+      zip: address_postal_code
+    )
   end
 
   def self.find_for_oauth(auth, signed_in_resource = nil)

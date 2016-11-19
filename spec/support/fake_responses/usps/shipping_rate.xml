@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<RateV4Response>
+  <Package ID="0">
+    <ZipOrigination>
+      80538
+    </ZipOrigination>
+    <ZipDestination>
+      80538
+    </ZipDestination>
+    <Pounds>
+      0
+    </Pounds>
+    <Ounces>
+      3.5
+    </Ounces>
+    <Size>
+      LARGE
+    </Size>
+    <Machinable>
+      FALSE
+    </Machinable>
+    <Zone>
+      1
+    </Zone>
+    <Postage CLASSID="3">
+      <MailService>
+        Priority Mail Express 2-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt;
+      </MailService>
+      <Rate>
+        22.95
+      </Rate>
+    </Postage>
+    <Postage CLASSID="2">
+      <MailService>
+        Priority Mail Express 2-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Hold For Pickup
+      </MailService>
+      <Rate>
+        22.95
+      </Rate>
+    </Postage>
+    <Postage CLASSID="1">
+      <MailService>
+        Priority Mail 2-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt;
+      </MailService>
+      <Rate>
+        6.45
+      </Rate>
+    </Postage>
+    <Postage CLASSID="0">
+      <MailService>
+        First-Class Mail&amp;lt;sup&amp;gt;&amp;#174;&amp;lt;/sup&amp;gt; Parcel
+      </MailService>
+      <Rate>
+        2.64
+      </Rate>
+    </Postage>
+    <Postage CLASSID="6">
+      <MailService>
+        Media Mail Parcel
+      </MailService>
+      <Rate>
+        2.61
+      </Rate>
+    </Postage>
+    <Postage CLASSID="7">
+      <MailService>
+        Library Mail Parcel
+      </MailService>
+      <Rate>
+        2.48
+      </Rate>
+    </Postage>
+  </Package>
+</RateV4Response>

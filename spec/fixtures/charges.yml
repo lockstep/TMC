@@ -4,6 +4,12 @@ cards_charge:
   email: hello@charge.tmc
   order: cards_order_completed
 
+mobile_charge:
+  amount: 20
+  currency: usd
+  email: hello@charge.tmc
+  order: mobile_order_completed
+
 big_payment:
   amount: 800
   currency: usd

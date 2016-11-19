@@ -22,4 +22,7 @@
               %td
                 = link_to product.name, product_path(product)
               %td
-                = link_to 'Download', product.download_url
+                - if product.fulfill_via_shipment?
+                  Shipped
+                - else
+                  = link_to 'Download', product.download_url

@@ -20,6 +20,8 @@ require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'rack_session_access/capybara'
 require 'sidekiq/testing'
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
 
 # don't pollute the spec output with JS console messages
 module FakePoltergeistLogger
@@ -64,6 +66,12 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.before(:each) do
+    stub_request(:any, /production.shippingapis.com/).to_rack(FakeUspsServer)
+    stub_request(
+      :post, /.+\.api.mailchimp.com\/2.0\/lists\/subscribe.json/
+    ).to_return(:status => 200, :body => "{}", :headers => {})
+  end
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin

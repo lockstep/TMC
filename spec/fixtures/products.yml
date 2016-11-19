@@ -51,3 +51,17 @@ panda:
   description: A free panda card
   free: true
   live: true
+
+mobile:
+  name: Mobile
+  price: 99.00
+  description: A shippable mobile
+  live: true
+  fulfill_via_shipment: true
+  max_shipping_cost_cents: 1000000
+  min_shipping_cost_cents: 0.0001
+  weight: 100
+  length: 70
+  width: 50
+  height: 20
+  vendor: shipper

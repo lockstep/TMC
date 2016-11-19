@@ -13,9 +13,26 @@ michelle:
 paul:
   email: paul@tmc.com
   role: <%= User.roles[:user] %>
+  address_line_one: '3108 Bent Drive'
+  address_city: 'Loveland'
+  address_state: 'CO'
+  address_postal_code: '80538'
+  address_country: 'US'
   <<: *default
 
 new_guy:
   email: new@tmc.com
   encrypted_password: <%= User.new.send(:password_digest, 'qawsedrf') %>
   role: <%= User.roles[:user] %>
+
+shipper:
+  email: shipper@tmc.com
+  encrypted_password: <%= User.new.send(:password_digest, 'qawsedrf') %>
+  role: <%= User.roles[:user] %>
+  first_name: Michelle
+  last_name: TMC
+  address_line_one: '100 Main St'
+  address_city: 'NYC'
+  address_state: 'NY'
+  address_postal_code: '80538'
+  address_country: 'US'

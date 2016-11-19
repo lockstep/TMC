@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_current_order, only: [:show, :index]
-  before_action :set_product, only: [:show]
+  before_action :set_current_order, only: [:show, :index, :shipping]
+  before_action :set_product, only: [:show, :shipping]
 
   DEFAULT_SORT = { times_sold: :desc }
 
@@ -23,6 +23,20 @@ class ProductsController < ApplicationController
 
   def show
     update_session
+  end
+
+  def shipping
+    authenticate_user!
+    if current_user.address_complete?
+      @shipping_cost = Shipper.get_lowest_cost(
+        current_user, @product
+      )
+      session.delete(:calculating_shipping_for_product)
+      render 'show'
+    else
+      session[:calculating_shipping_for_product] = @product.id
+      redirect_to edit_address_user_path(current_user)
+    end
   end
 
   private

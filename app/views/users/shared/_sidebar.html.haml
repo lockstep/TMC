@@ -5,3 +5,5 @@
     = link_to 'My Orders', user_orders_path(@user)
   %li{ class: @active == 'details' ? 'active' : '' }
     = link_to 'My Details', edit_user_path(@user)
+  %li{ class: @active == 'address' ? 'active' : '' }
+    = link_to 'My Address', edit_address_user_path(@user)

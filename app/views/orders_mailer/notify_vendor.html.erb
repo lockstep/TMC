@@ -1,0 +1,37 @@
+<% content_for :preheader, 'New Sale on The Marketplace!' %>
+
+<tr>
+  <td>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 30px;" class="padding-copy">Thank you!</td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 20px 0 25px 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+          <p>Hi <%= @vendor.first_name %>,</p>
+          <p>
+            You have a new sale on The Marketplace! Please forward your
+            shipping confirmation/tracking information to Michelle (cc'ed)
+            when you have it. If for some reason you cannot ship the
+            product immediately please let us know as soon as possible
+            so we can coordinate with the buyer. Thank you!
+          </p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td align="center" valign="top">
+    <table width="100%" border="0" cellspacing="0" cellpadding="10" bgcolor="#f4f4f4" style="border:1px solid #dedede">
+      <tr>
+        <td align="left" valign="top">
+          <table align="center" width="100%" border="0" cellspacing="0" cellpadding="10">
+            <%= render 'order_items' %>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>

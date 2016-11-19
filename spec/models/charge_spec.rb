@@ -61,7 +61,7 @@ describe Charge, type: :model do
 
   describe '#monthly_sales' do
     it "returns the sum of this month's charges" do
-      expect(Charge.monthly_sales).to eq 820
+      expect(Charge.monthly_sales).to be_within(20).of 820
     end
     it 'handles months with no sales' do
       expect(Charge.monthly_sales(time: 1.year.ago)).to eq 0
@@ -73,7 +73,7 @@ describe Charge, type: :model do
 
   describe '#total_sales' do
     it "returns the sum of all charges" do
-      expect(Charge.total_sales).to eq 1020
+      expect(Charge.total_sales).to be_within(20).of 1020
     end
   end
 end

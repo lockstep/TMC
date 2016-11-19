@@ -17,7 +17,7 @@ describe 'Manage user account', :feature do
       visit user_materials_path(user)
       click_link 'My Details'
       fill_in_user_form
-      expect(page).to have_content 'have been updated'
+      expect(page).to have_content 'has been updated'
       expect(page).to have_content 'My Details'
     end
     it 'can edit email alone' do
@@ -25,7 +25,7 @@ describe 'Manage user account', :feature do
       click_link 'My Details'
       fill_in 'user[email]', with: 'jon@snow.com'
       click_button 'Save changes'
-      expect(page).to have_content 'have been updated'
+      expect(page).to have_content 'has been updated'
       expect(page).to have_field 'user[email]', with: 'jon@snow.com'
     end
 
@@ -39,6 +39,19 @@ describe 'Manage user account', :feature do
         expect(page).to have_link('Download', href: /my_downloadable_file/)
         expect(page).to have_link(cards.name, href: product_path(cards))
         expect(page).to have_link(bird.name, href: product_path(bird))
+      end
+      context 'product is fulfilled via shipping' do
+        before do
+          Product.update_all(fulfill_via_shipment: true)
+        end
+        it 'can see materials but on download link' do
+          # TODO: Show tracking info instead
+          visit user_materials_path(user)
+          expect(page).to have_content 'Shipped'
+          expect(page).not_to have_link('Download', href: /my_downloadable_file/)
+          expect(page).to have_link(cards.name, href: product_path(cards))
+          expect(page).to have_link(bird.name, href: product_path(bird))
+        end
       end
     end
   end

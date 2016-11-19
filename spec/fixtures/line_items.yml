@@ -34,3 +34,7 @@ mixed_paid_order_birds:
 mixed_paid_order_cards:
   product: memory_puzzle_card
   order: mixed_paid_order
+
+mobile_order_lines:
+  product: mobile
+  order: mobile_order_completed

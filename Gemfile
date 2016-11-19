@@ -29,6 +29,7 @@ gem 'kaminari', '~> 0.16.2'
 gem 'sitemap_generator'
 gem 'fog-aws'
 gem 'mailchimp-api', require: 'mailchimp'
+gem 'active_shipping'
 
 gem 'searchkick', '~> 1.2.1'
 gem 'typhoeus'
@@ -38,6 +39,7 @@ gem 'friendly_id', '~> 5.1.0'
 
 gem 'stripe', '~> 1.36.1'
 gem 'slack-notifier'
+gem 'country_select'
 
 group :test do
   gem 'stripe-ruby-mock', require: 'stripe_mock'
@@ -46,6 +48,8 @@ group :test do
   gem 'rspec_junit_formatter', '0.2.2'
   gem 'database_cleaner'
   gem 'test_after_commit'
+  gem 'webmock'
+  gem 'sinatra'
 end
 
 group :development, :test do

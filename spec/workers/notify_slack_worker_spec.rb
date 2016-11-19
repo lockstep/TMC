@@ -19,9 +19,9 @@ describe NotifySlackWorker do
       order_total = att[:fields][0]
       expect(order_total[:value]).to eq '$8.00'
       monthly_sales = att[:fields][1]
-      expect(monthly_sales[:value]).to eq '$8.20'
+      expect(monthly_sales[:value]).to match /8\.\d0/
       total_sales = att[:fields][2]
-      expect(total_sales[:value]).to eq '$10.20'
+      expect(total_sales[:value]).to match /10\.\d0/
     end
     NotifySlackWorker.perform_async(@charge.id)
   end

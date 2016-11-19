@@ -1,4 +1,4 @@
-<% @order.line_items.each_with_index do |item, index| %>
+<% @line_items.each_with_index do |item, index| %>
   <% style = index == 0 ? "" : "border-top:1px dotted #dedede" %>
   <tr align="center">
     <td align="left" valign="top" width="75%" style="<%= style %>">

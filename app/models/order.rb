@@ -21,7 +21,30 @@ class Order < ActiveRecord::Base
     adjustment_amount.to_f
   end
 
+  def retrieve_all_shipping_costs!(recipient)
+    line_items.includes(:product)
+      .where(products: { fulfill_via_shipment: true })
+      .each do |line_item|
+        shipping_cost = Shipper.get_lowest_cost(
+          recipient, line_item.product
+        )
+        line_item.update(shipping_cost_cents: shipping_cost.price_cents)
+    end
+  end
+
+  def shipping_total
+    line_items.inject(0) do |sum, line_item|
+      sum + line_item.shipping_cost_cents.to_i
+    end / 100.0
+  end
+
+  def shipping_costs_calculated?
+    line_items.all? do |line_item|
+      !line_item.fulfill_via_shipment? || line_item.shipping_cost_cents.to_i > 0
+    end
+  end
+
   def total
-    item_total - adjustment_total
+    item_total - adjustment_total + shipping_total
   end
 end

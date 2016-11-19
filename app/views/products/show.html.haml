@@ -51,13 +51,18 @@
               = link_to 'register', new_registration_path('user')
               to download
         - else
-          - unless is_in_cart?(@order, @product)
-            = add_to_cart
-          - else
+          - if is_in_cart?(@order, @product)
             This product is already in
             = succeed "." do
               = link_to 'your cart', order_url(@order),
                 data: { turbolinks: false }
+          - else
+            - if @shipping_cost
+              Shipping: #{ number_to_currency(@shipping_cost.price_cents / 100.0) }
+            - elsif @product.fulfill_via_shipment?
+              = link_to 'Calculate Shipping',
+                shipping_product_path(@product)
+            = add_to_cart(@product, @shipping_cost.try(:price_cents))
 
 - content_for :tracking do
   :javascript

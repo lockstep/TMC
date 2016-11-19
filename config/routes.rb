@@ -19,8 +19,15 @@ Rails.application.routes.draw do
   }
   resources :presentations, only: [:index, :show]
 
-  resources :products, only: [:show, :index]
+  resources :products, only: [:show, :index] do
+    member do
+      get :shipping
+    end
+  end
   resources :users, only: [:show, :edit, :update] do
+    member do
+      get :edit_address
+    end
     resources :orders, only: [:index, :show], controller: 'users/orders'
     resources :materials, only: [:index], controller: 'users/materials'
   end
