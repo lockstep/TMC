@@ -23,9 +23,9 @@ describe 'Product search page', type: :feature do
       expect(@topic_1.name).to appear_before @topic_2.name
       expect(@child_topic_1.name).to appear_before @child_topic_2.name
     end
-    it 'shows results count' do
+    it 'shows results indicator' do
       visit products_path
-      link = "#{@topic_1.name} (1)"
+      link = "• #{@topic_1.name}"
       expect(page).to have_link link
       first(:link, link).click
       within '.status' do
@@ -33,9 +33,9 @@ describe 'Product search page', type: :feature do
         expect(page).not_to have_content 'results'
       end
     end
-    it 'shows product counts next to Topic names' do
+    it 'shows product presence indicator next to Topic names' do
       visit products_path
-      expect(page).to have_link "#{@topic_2.name} (2)"
+      expect(page).to have_link "• #{@topic_2.name}"
     end
     it 'opens the tree node for active topic and highlights it', js: true do
       visit products_path
