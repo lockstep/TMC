@@ -51,7 +51,7 @@ class ProductsController < ApplicationController
   def search_options
     {}.tap do |options|
       options[:topic_ids] = [params[:topic_ids]] if params[:topic_ids].to_i > 0
-      options[:downloadable_id] = { not: nil }
+      options[:live] = true
     end
   end
 

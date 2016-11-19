@@ -4,6 +4,7 @@ number_cards:
   description: card's of numbers
   presentation: quiz_game
   topics: memory_quiz
+  live: false
 
 number_board:
   name: Number Board
@@ -11,12 +12,14 @@ number_board:
   description: put a card onto it
   presentation: quiz_game
   topics: memory_quiz
+  live: true
 
 memory_puzzle_card:
   name: Memory Puzzle Card
   price: 5.00
   description: a single card for this game
   topics: memory_puzzle
+  live: true
 
 animal_cards:
   name: Animal Cards
@@ -24,12 +27,14 @@ animal_cards:
   description: cards of animal
   presentation: quiz_game
   topics: memory_quiz
+  live: true
 
 flamingo:
   name: Flamingo
   price: 20.00
   description: Hand-painted flamingo card
   featured: true
+  live: true
 
 ostrich:
   name: Ostrich
@@ -38,9 +43,11 @@ ostrich:
   featured: false
   presentation: birds
   topics: birds, cards
+  live: true
 
 panda:
   name: Panda
   price: 99.00
   description: A free panda card
   free: true
+  live: true

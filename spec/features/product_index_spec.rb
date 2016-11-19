@@ -83,7 +83,7 @@ describe 'Product search page', type: :feature do
   end
 
   context 'search' do
-    it 'does not show products without a pdf' do
+    it 'does not show products that are not live' do
       visit products_path
       expect(page).not_to have_content 'Number Cards'
     end

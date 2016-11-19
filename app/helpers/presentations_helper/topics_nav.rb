@@ -61,7 +61,7 @@ module PresentationsHelper
       count = Product.search(
         where: {
           topic_ids: [topic.id],
-          downloadable_id: { not: nil }
+          live: true
         }).count
       return topic.name if count == 0
       "• #{topic.name}"

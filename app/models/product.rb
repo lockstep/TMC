@@ -21,7 +21,7 @@ class Product < ActiveRecord::Base
       name: name,
       description: description,
       topic_ids: topic_ids_array,
-      downloadable_id: downloadable.try(:id),
+      live: live,
       created_at: created_at,
       price: price,
       times_sold: times_sold
