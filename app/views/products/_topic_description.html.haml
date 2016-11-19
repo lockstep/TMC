@@ -1,0 +1,17 @@
+- if @topic && @topic.description.present?
+  .topic-description
+    %h2.text-xs-center= @topic.name
+    %p= @topic.description
+- elsif @topic.blank? && @query.blank?
+  .topic-description
+    %h2.text-xs-center Welcome!
+    %p
+      The Marketplace is a new venture by The Montessori Company dedicated
+      to helping Montessori artisans showcase and sell their products.
+      Our vendors share our love for beautiful environments and we are
+      delighted to make their work available to guides and parents everywhere.
+      %br
+      %br
+      Join us in creating a marketplace completely dedicated to the Montessori
+      world. Enjoy browsing and please recommend Montessori vendors
+      that may be interested in collaborating!

@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
     )
     @recent_products = recently_viewed
     @query = search_query == '*' ? '' : search_query
-    @topic_id = params[:topic_ids]
+    @topic = Topic.find_by(id: params[:topic_ids])
     @sort_by =
       params[:sort] || "#{DEFAULT_SORT.keys[0]}:#{DEFAULT_SORT.values[0]}"
   end

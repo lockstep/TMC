@@ -4,9 +4,9 @@
       %h1.script.intro-header The Marketplace
     - cache cache_key_for_products do
       = topics_nav(controller: :products)
-    = hidden_field_tag 'topic_ids', @topic_id
+    = hidden_field_tag 'topic_ids', @topic.try(:id)
 
-  %h1.hidden-xs-down.script Looking for something?
+  %h1.hidden-xs-down.script Looking for Something?
   .query-container
     = text_field_tag :q, @query, id: 'query', class: "form-control"
     %span.icon
@@ -18,7 +18,7 @@
       = fa_icon 'filter'
       Filters
   .hidden-xs-down
-    %h1.script Recently viewed
+    %h1.script Recently Viewed
     = render 'recently_viewed'
 
   = hidden_field_tag 'sort', @sort_by
