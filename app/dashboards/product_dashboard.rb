@@ -21,6 +21,7 @@ class ProductDashboard < Administrate::BaseDashboard
     ),
     featured: Field::Boolean,
     free: Field::Boolean,
+    live: Field::Boolean,
     description: WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
