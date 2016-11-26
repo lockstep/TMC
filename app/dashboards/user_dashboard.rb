@@ -22,6 +22,12 @@ class UserDashboard < Administrate::BaseDashboard
     updated_at: Field::DateTime,
     password: Field::String,
     password_confirmation: Field::String,
+    address_line_one: Field::String,
+    address_line_two: Field::String,
+    address_city: Field::String,
+    address_state: Field::String,
+    address_postal_code: Field::String,
+    address_country: Field::String,
     avatar: PaperclipField
   }
 
@@ -54,7 +60,13 @@ class UserDashboard < Administrate::BaseDashboard
     :avatar,
     :bio,
     :password,
-    :password_confirmation
+    :password_confirmation,
+    :address_line_one,
+    :address_line_two,
+    :address_city,
+    :address_state,
+    :address_postal_code,
+    :address_country
   ]
 
   def display_resource(user)
