@@ -59,9 +59,13 @@
           - else
             - if @shipping_cost
               Shipping: #{ number_to_currency(@shipping_cost.price_cents / 100.0) }
+              %br
+              %br
             - elsif @product.fulfill_via_shipment?
               = link_to 'Calculate Shipping',
                 shipping_product_path(@product)
+              %br
+              %br
             = add_to_cart(@product, @shipping_cost.try(:price_cents))
 
 - content_for :tracking do

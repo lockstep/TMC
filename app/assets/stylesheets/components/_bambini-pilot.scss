@@ -1,0 +1,18 @@
+#bambini-pilot {
+  p {
+    font-size: 20px;
+  }
+  a {
+    color: $blue;
+  }
+  .form-wrapper {
+    padding: 60px;
+    background-color: $pearl;
+  }
+  .btn-primary {
+    background: $blue;
+    &:hover {
+      background: darken($blue, 10%);
+    }
+  }
+}

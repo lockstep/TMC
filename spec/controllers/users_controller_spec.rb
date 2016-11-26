@@ -32,7 +32,7 @@ describe UsersController, type: :controller do
             old_password = @user.encrypted_password
             patch :update, id: @user, user: {
               password: 'abc123456', password_confirmation: 'abc123456'
-            }
+            }, commit: 'Save'
             expect(@user.reload.encrypted_password).not_to eq old_password
             expect(ActionMailer::Base.deliveries.count).to eq 0
           end
@@ -49,9 +49,19 @@ describe UsersController, type: :controller do
       end
       context 'changing email address' do
         it 'updates the user' do
-          patch :update, id: @user, user: { email: 'bill@murray.com' }
+          patch :update, id: @user, user: { email: 'bill@murray.com' },
+            commit: 'Save'
           expect(@user.reload.email).to eq 'bill@murray.com'
           expect(ActionMailer::Base.deliveries.count).to eq 0
+        end
+      end
+      context 'signing up for bambini pilot' do
+        it 'sends the user to mailchimp' do
+          request.env["HTTP_REFERER"] = root_path
+          expect(MailchimpSubscriberWorker)
+            .to receive(:perform_async).with(@user.id, 'c94cda6346')
+          patch :update, id: @user, user: { email: 'bill@murray.com' },
+            commit: 'Join Pilot'
         end
       end
     end

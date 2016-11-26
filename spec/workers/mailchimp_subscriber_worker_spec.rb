@@ -9,7 +9,7 @@ describe MailchimpSubscriberWorker do
 
   it 'calls the subscriber with the user instance' do
     expect_any_instance_of(MailchimpSubscriber).to receive(:subscribe)
-      .with(@user)
+      .with(@user, nil)
     MailchimpSubscriberWorker.perform_async(@user.id)
   end
 end

@@ -9,14 +9,38 @@ feature 'Bambini pilot registration' do
   let(:number_cards)  { products(:number_cards) }
   let(:number_board)  { products(:number_board) }
   context 'all info provided' do
-    xscenario 'user registers successfully' do
+    scenario 'user registers successfully' do
       visit root_path
       click_link 'Bambini Pilot'
+      fill_in('Email', with: user.email)
+      fill_in('Password', with: 'qawsedrf')
+      click_button('Log in')
+      expect(page).not_to have_content 'new adventure'
+      fill_in 'user[first_name]', with: 'Tom'
+      fill_in 'user[last_name]', with: 'Hanks'
+      fill_in 'user[school_name]', with: 'TMC'
+      select 'Teacher', from: 'user[position]'
+      click_on 'Join Pilot'
+      expect(page).to have_content 'new adventure'
     end
   end
   context 'missing values' do
-    xscenario 'user needs to add all values then may register' do
-
+    scenario 'user needs to add all values then may register' do
+      visit root_path
+      click_link 'Bambini Pilot'
+      fill_in('Email', with: user.email)
+      fill_in('Password', with: 'qawsedrf')
+      click_button('Log in')
+      expect(page).not_to have_content 'new adventure'
+      fill_in 'user[first_name]', with: 'Tom'
+      click_on 'Join Pilot'
+      expect(page).to have_content 'are required'
+      fill_in 'user[first_name]', with: 'Tom'
+      fill_in 'user[last_name]', with: 'Hanks'
+      fill_in 'user[school_name]', with: 'TMC'
+      select 'Teacher', from: 'user[position]'
+      click_on 'Join Pilot'
+      expect(page).to have_content 'new adventure'
     end
   end
 end

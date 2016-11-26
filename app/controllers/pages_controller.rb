@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
-  PAGES = ['home', 'about', 'terms', 'privacy',
-           'free-montessori-materials-printables']
+  PAGES = [
+    'home', 'about', 'terms', 'privacy',
+    'free-montessori-materials-printables', 'bambini-pilot'
+  ]
 
   def show
     if !params[:page].blank? && PAGES.include?(params[:page])
@@ -10,6 +12,9 @@ class PagesController < ApplicationController
       when 'free-montessori-materials-printables'
         @free_products = Product.free
         store_location_for(:user, request.url)
+      when 'bambini-pilot'
+        authenticate_user!
+        @user = current_user
       end
       render template: "pages/#{params[:page]}"
     else

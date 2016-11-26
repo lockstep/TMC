@@ -1,0 +1,62 @@
+- content_for :title, 'Bambini Pilot'
+- content_for :meta_tags do
+  = meta_tags(title: 'Bambini Pilot')
+
+%section#bambini-pilot
+  .container
+    %h1.script Bambini
+    - unless @user.bambini_pilot_participant?
+      .row
+        .col-sm-8.col-sm-offset-2
+          %p
+            Welcome to the Bambini pilot! We are very excited about
+            helping guides, teachers and daycares share their most precious
+            moments with parents in a safe and secure space.
+          %p
+            As a member of the Bambini pilot group you will have access to
+            Bambini for FREE for six months starting immediately
+            after we launch the first version. You will be instrumental in
+            helping us craft the first set of features to optimize the
+            experience for both educators and parents.
+          %p
+            Since Bambini will be a long-term and expensive project we're using
+            pilot registrations as a general measure of interest. If you know
+            anyone who may be interested in joining please share the concept
+            and this webpage! We will only proceed with the pilot if we
+            receive enough sign-ups. Thank you and we look forward to working
+            with you!
+          %br
+    .row
+      .col-sm-8.col-sm-offset-2.form-wrapper
+        - if @user.bambini_pilot_participant?
+          %p
+            Thank you for joining us on this new adventure! You've been
+            added to the Bambini pilot group. If you have any questions
+            please do not hesitate to reach out to Michelle directly
+            at
+            = succeed '.' do
+              = mail_to 'michelle@themontessoricompany.com', 'michelle@themontessoricompany.com'
+            We're so excited to work with you!
+        - else
+          = form_for @user do |f|
+            = f.hidden_field :bambini_pilot_participant, value: true
+            = render 'users/shared/error_messages'
+            .form-group
+              = f.label :first_name, 'First Name', class: 'form-label'
+              = f.text_field :first_name, class: 'form-control'
+            .form-group
+              = f.label :last_name, 'Last Name', class: 'form-label'
+              = f.text_field :last_name, class: 'form-control'
+            .form-group
+              = f.label :school_name, 'School Name', class: 'form-label'
+              = f.text_field :school_name, class: 'form-control'
+            .form-group
+              = f.label :position, class: 'form-label'
+              = f.select :position, User::POSITIONS,
+                { include_blank: 'Select Position' },
+                { class: 'form-control' }
+            %br
+            .row
+              .col-sm-8.col-sm-offset-2
+                .form-group
+                  = f.submit "Join Pilot", class: "btn btn-primary btn-block"

@@ -19,9 +19,19 @@ class User < ActiveRecord::Base
     :address_city, :address_postal_code, :address_country,
     if: :editing_address
 
+  validates_presence_of :first_name, :last_name, :school_name,
+    :position, if: :bambini_pilot_participant?
+
   enum role: [:user, :admin]
 
   delegate :url, to: :avatar, prefix: true
+
+  POSITIONS = [
+    'Montessori Guide', 'Montessori Head of School',
+    'Montessori Administrator', 'Teacher',
+    'Principal', 'School Administrator', 'Daycare Provider',
+    'Parent', 'Other'
+  ]
 
   has_attached_file :avatar,
     url: ':s3_domain_url',

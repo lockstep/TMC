@@ -17,12 +17,19 @@ class UsersController < ApplicationController
         )
       elsif session[:calculating_shipping_for_cart].present?
         redirect_to cart_path(calculate_shipping: true)
+      elsif params['commit'].match 'Pilot'
+        MailchimpSubscriberWorker.perform_async(@user.id, 'c94cda6346')
+        redirect_to :back
       else
         flash[:notice] = 'Your account has been updated.'
         render 'edit'
       end
     else
-      render params['commit'].match('address') ? 'edit_address' : 'edit'
+      if params['commit'].match 'Pilot'
+        redirect_to :back, alert: 'Sorry, all fields are required!'
+      else
+        render params['commit'].match('address') ? 'edit_address' : 'edit'
+      end
     end
   end
 
@@ -32,7 +39,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(
       :email, :password, :password_confirmation, :address_line_one,
       :address_line_two, :address_city, :address_state, :address_postal_code,
-      :address_country, :editing_address, :first_name, :last_name
+      :address_country, :editing_address, :first_name, :last_name,
+      :position, :school_name, :bambini_pilot_participant
     )
   end
 end
