@@ -12,6 +12,7 @@ class ProductDashboard < Administrate::BaseDashboard
     presentation: Field::BelongsTo,
     images: Field::HasMany,
     downloadable: Field::HasOne,
+    vendor: Field::BelongsTo,
     id: Field::Number,
     name: Field::String,
     price: Field::Number.with_options(
@@ -22,6 +23,13 @@ class ProductDashboard < Administrate::BaseDashboard
     featured: Field::Boolean,
     free: Field::Boolean,
     live: Field::Boolean,
+    weight: Field::Number,
+    width: Field::Number,
+    height: Field::Number,
+    length: Field::Number,
+    fulfill_via_shipment: Field::Boolean,
+    min_shipping_cost_cents: Field::Number,
+    max_shipping_cost_cents: Field::Number,
     description: WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -35,10 +43,10 @@ class ProductDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
-    :topics,
     :featured,
     :downloadable,
     :images,
+    :live,
     :price
   ]
 
@@ -57,6 +65,15 @@ class ProductDashboard < Administrate::BaseDashboard
     :description,
     :created_at,
     :updated_at,
+    :live,
+    :fulfill_via_shipment,
+    :vendor,
+    :weight,
+    :width,
+    :height,
+    :length,
+    :min_shipping_cost_cents,
+    :max_shipping_cost_cents
   ]
 
   # FORM_ATTRIBUTES
@@ -66,11 +83,20 @@ class ProductDashboard < Administrate::BaseDashboard
     :topics,
     :presentation,
     :images,
+    :vendor,
     :name,
     :price,
     :description,
     :featured,
-    :free
+    :free,
+    :live,
+    :fulfill_via_shipment,
+    :weight,
+    :width,
+    :height,
+    :length,
+    :min_shipping_cost_cents,
+    :max_shipping_cost_cents
   ]
 
   # Overwrite this method to customize how products are displayed
