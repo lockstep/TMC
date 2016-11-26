@@ -12,7 +12,7 @@ class ProductDashboard < Administrate::BaseDashboard
     presentation: Field::BelongsTo,
     images: Field::HasMany,
     downloadable: Field::HasOne,
-    vendor: Field::BelongsTo,
+    vendor: Field::BelongsTo.with_options(class_name: "User"),
     id: Field::Number,
     name: Field::String,
     price: Field::Number.with_options(
