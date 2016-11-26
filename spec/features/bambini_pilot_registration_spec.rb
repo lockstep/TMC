@@ -9,13 +9,13 @@ feature 'Bambini pilot registration' do
   let(:number_cards)  { products(:number_cards) }
   let(:number_board)  { products(:number_board) }
   context 'all info provided' do
-    scenario 'user registers successfully' do
+    xscenario 'user registers successfully' do
       visit root_path
       click_link 'Bambini Pilot'
     end
   end
   context 'missing values' do
-    scenario 'user needs to add all values then may register' do
+    xscenario 'user needs to add all values then may register' do
 
     end
   end
