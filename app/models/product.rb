@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
     where("products.id IN (SELECT product_id FROM downloadables)")
   }
 
-  delegate :download_url, to: :downloadable
+  delegate :download_url, to: :downloadable, allow_nil: true
   delegate :active_shipping_location, to: :vendor
 
   def search_data

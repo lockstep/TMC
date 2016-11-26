@@ -4,7 +4,7 @@ class Users::MaterialsController < ApplicationController
   def index
     store_location_for(:user, user_materials_url(@user))
     authorize! :show, @user
-    @products = @user.purchased_products.with_downloadables
+    @products = @user.purchased_products
   end
 
   private
