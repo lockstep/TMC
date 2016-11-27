@@ -9,7 +9,7 @@ class NotifySlackWorker
       username: 'cashbot'
     )
 
-    text = "<!channel> :tada::tada:  *New order!*  :tada::tada:"
+    text = "<!channel> :tada:  *New order!*  :tada:"
     attachment = {
       "title": "Order #{charge.order_id}",
       "title_link": url_helpers.admin_order_url(charge.order_id),
