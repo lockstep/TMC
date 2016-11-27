@@ -1,6 +1,11 @@
 #bambini-pilot {
   p {
     font-size: 20px;
+    &.fine-print {
+      font-size: 13px;
+      margin-top: 20px;
+      margin-bottom: 0px;
+    }
   }
   a {
     color: $blue;
