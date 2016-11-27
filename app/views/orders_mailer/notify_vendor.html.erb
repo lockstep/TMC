@@ -16,6 +16,21 @@
             product immediately please let us know as soon as possible
             so we can coordinate with the buyer. Thank you!
           </p>
+
+          <p><b>Shipping Details:</b></p>
+          <p>
+            <%= @buyer.full_name %><br />
+            <%= @buyer.address_line_one %><br />
+            <% if @buyer.address_line_two.present? %>
+              <%= @buyer.address_line_two %><br />
+            <% end %>
+            <%= "#{@buyer.address_city}, " %>
+            <% if @buyer.address_state.present? %>
+              <%= "#{@buyer.address_state}, " %>
+            <% end %>
+            <%= "#{@buyer.address_postal_code}" %><br />
+            <%= "#{@buyer.address_country}" %>
+          </p>
         </td>
       </tr>
     </table>
