@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   POSITIONS = [
     'Montessori Guide', 'Montessori Head of School',
     'Montessori Administrator', 'Teacher',
-    'Principal', 'School Administrator', 'Daycare Provider',
+    'Principal', 'School Administrator', 'Day Care Provider',
     'Parent', 'Other'
   ]
 
