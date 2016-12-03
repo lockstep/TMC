@@ -36,6 +36,10 @@ class Product < ActiveRecord::Base
     min_shipping_cost_cents == max_shipping_cost_cents
   end
 
+  def sold_externally?
+    recommended_vendor_url.present? || recommended_budget_vendor_url.present?
+  end
+
   def dimensions
     [ length, width, height ]
   end

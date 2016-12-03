@@ -80,6 +80,20 @@ describe 'Product search page', type: :feature do
       expect(page).not_to have_css "#add-product-#{@product.id}"
       expect(page).to have_content 'Already in your cart'
     end
+
+    context 'product is not sold by TMC' do
+      before do
+        @product.update(recommended_vendor_url: 'test.product.com')
+      end
+      it 'takes the user to the cart summary' do
+        visit products_path
+        expect(page).to have_content @product.name
+        expect(page).to have_content @product.price
+        expect(page).not_to have_css "#add-product-#{@product.id}"
+        click_link "Shop Now"
+        expect(page).to have_content 'Until we can offer'
+      end
+    end
   end
 
   context 'search' do

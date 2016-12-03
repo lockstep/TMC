@@ -52,6 +52,13 @@ panda:
   free: true
   live: true
 
+tractor:
+  name: Tractor
+  price: 40
+  description: A tractor
+  recommended_vendor_url: 'http://tractors.example.com'
+  recommended_budget_vendor_url: 'http://budget_tractors.example.com'
+
 mobile:
   name: Mobile
   price: 99.00

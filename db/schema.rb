@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126134301) do
+ActiveRecord::Schema.define(version: 20161203033332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,15 +142,15 @@ ActiveRecord::Schema.define(version: 20161126134301) do
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.float    "price"
     t.string   "slug"
-    t.boolean  "featured",                default: false
+    t.boolean  "featured",                      default: false
     t.integer  "presentation_id"
-    t.boolean  "free",                    default: false, null: false
-    t.boolean  "live",                    default: false
-    t.boolean  "fulfill_via_shipment",    default: false
+    t.boolean  "free",                          default: false, null: false
+    t.boolean  "live",                          default: false
+    t.boolean  "fulfill_via_shipment",          default: false
     t.integer  "vendor_id"
     t.float    "weight"
     t.float    "length"
@@ -158,6 +158,8 @@ ActiveRecord::Schema.define(version: 20161126134301) do
     t.float    "height"
     t.integer  "min_shipping_cost_cents"
     t.integer  "max_shipping_cost_cents"
+    t.text     "recommended_vendor_url"
+    t.text     "recommended_budget_vendor_url"
   end
 
   add_index "products", ["presentation_id"], name: "index_products_on_presentation_id", using: :btree

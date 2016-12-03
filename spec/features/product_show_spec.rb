@@ -63,4 +63,21 @@ describe 'Product show page', type: :feature do
       end
     end
   end
+
+  context 'external product' do
+    before do
+      @product = products(:tractor)
+    end
+    it 'shows external links and not card/shipping' do
+      visit product_path @product
+      expect(page).to have_content 'Until we can offer'
+      expect(page).not_to have_content 'Add to Cart'
+      expect(page).to have_link(
+        "Recommended Vendor", href: "http://tractors.example.com"
+      )
+      expect(page).to have_link(
+        "Budget Option", href: "http://budget_tractors.example.com"
+      )
+    end
+  end
 end

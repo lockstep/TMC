@@ -33,6 +33,8 @@ class ProductDashboard < Administrate::BaseDashboard
     description: WysiwygField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    recommended_vendor_url: Field::String,
+    recommended_budget_vendor_url: Field::String,
   }
 
   # COLLECTION_ATTRIBUTES
@@ -73,7 +75,9 @@ class ProductDashboard < Administrate::BaseDashboard
     :height,
     :length,
     :min_shipping_cost_cents,
-    :max_shipping_cost_cents
+    :max_shipping_cost_cents,
+    :recommended_vendor_url,
+    :recommended_budget_vendor_url
   ]
 
   # FORM_ATTRIBUTES
@@ -96,7 +100,9 @@ class ProductDashboard < Administrate::BaseDashboard
     :height,
     :length,
     :min_shipping_cost_cents,
-    :max_shipping_cost_cents
+    :max_shipping_cost_cents,
+    :recommended_vendor_url,
+    :recommended_budget_vendor_url
   ]
 
   # Overwrite this method to customize how products are displayed

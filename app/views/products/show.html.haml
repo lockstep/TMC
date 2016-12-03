@@ -39,7 +39,14 @@
         .section
           = @product.description.html_safe
 
-        - if @product.free
+        - if @product.sold_externally?
+          .btn-toolbar
+            = link_to "Recommended Vendor", @product.recommended_vendor_url,
+              target: "_blank", class: 'btn btn-cart'
+            - if @product.recommended_budget_vendor_url.present?
+              = link_to "Budget Option", @product.recommended_budget_vendor_url,
+                target: "_blank", class: 'btn btn-cart'
+        - elsif @product.free
           .add-to-cart
             - if user_signed_in?
               = link_to 'Download', @product.download_url,
@@ -67,6 +74,15 @@
               %br
               %br
             = add_to_cart(@product, @shipping_cost.try(:price_cents))
+        - if @product.sold_externally?
+          %hr
+          %p
+            Until we can offer this product directly from The Montessori
+            Company we are recommending the vendor above. If you don't have
+            an AMAZING experience with their product or if our
+            pricing information is no longer accurate please
+            = mail_to 'michelle@themontessoricompany.com', 'let us know'
+            so we can update our recommendation appropriately.
 
 - content_for :tracking do
   :javascript
