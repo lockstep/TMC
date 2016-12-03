@@ -67,6 +67,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
+    ActionMailer::Base.deliveries.clear
     stub_request(:any, /production.shippingapis.com/).to_rack(FakeUspsServer)
     stub_request(
       :post, /.+\.api.mailchimp.com\/2.0\/lists\/subscribe.json/

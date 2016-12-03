@@ -6,4 +6,9 @@ class UsersMailer < ApplicationMailer
     @results = Product.search('*', order: { times_sold: :desc }).first(4)
     mail(to: @user.email, subject: "Welcome to The Montessori Company")
   end
+
+  def bad_link(product)
+    @product = product
+    mail(to: ADMIN_EMAILS, subject: "Bad Link Found on TMC")
+  end
 end
