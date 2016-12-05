@@ -2,11 +2,8 @@ module Admin
   class ImagesController < Admin::ApplicationController
     def create
       image = Image.new(adjusted_params)
-      if image.save
-        redirect_to admin_image_path(image)
-      else
-        redirect_to new_admin_image_path
-      end
+      image.save!
+      redirect_to admin_image_path(image)
     end
 
     def update
