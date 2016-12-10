@@ -10,7 +10,7 @@
       %h5.product-name
         = line_item.product.name
     %span.product-price
-      = "$#{line_item.product.price}"
+      = number_to_currency(line_item.product.price, precision: 2)
     %p.product-description
       = line_item.product.description.html_safe
 %hr.hidden-sm-up

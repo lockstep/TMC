@@ -25,7 +25,7 @@
           = @product.name
         .price-container
           %h4.price
-            = "$#{@product.price}"
+            = number_to_currency(@product.price, precision: 2)
           - if @product.free
             .free-label
               free
