@@ -17,9 +17,10 @@
       .col-sm-5
         = image_tag @product.primary_image.url(:medium),
           alt: @product.name, id: 'primary-image', class: 'img-fluid'
-        .images-container
-          - @product.images.each do |image|
-            = image_tag image.url(:medium)
+        - if @product.images.size > 1
+          .images-container
+            - @product.images.each do |image|
+              = image_tag image.url(:medium)
       .col-sm-7.clear{class: @product.free ? 'free' : ''}
         %h1.name
           = @product.name
