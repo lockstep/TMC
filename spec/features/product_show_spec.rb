@@ -18,6 +18,19 @@ describe 'Product show page', type: :feature do
     end
   end
 
+  context 'product has a related product' do
+    before do
+      @product = products(:memory_puzzle_card).reload
+      @related_product = products(:flamingo).reload
+      @product.related_products << @related_product
+    end
+    it 'shows breadcrumbs in the right order' do
+      expect(@product.reload.related_products).to include @related_product.reload
+      visit product_path(@product)
+      expect(page).to have_content @related_product.name
+    end
+  end
+
   context 'product belongs to a topic' do
     before do
       @product = products(:memory_puzzle_card)

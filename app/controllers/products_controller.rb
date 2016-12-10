@@ -43,6 +43,7 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
+    @results = @product.related_products
   end
 
   def recently_viewed

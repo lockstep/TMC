@@ -1,6 +1,9 @@
 class Product < ActiveRecord::Base
   include Imageable
   extend FriendlyId
+  has_and_belongs_to_many :related_products, class_name: 'Product',
+    join_table: :related_products, foreign_key: :left_product_id,
+    association_foreign_key: :right_product_id
   friendly_id :slug_candidates, use: [:slugged, :finders]
   searchkick text_middle: [:name, :description]
 

@@ -15,12 +15,23 @@
         = link_to 'Back to search', 'javascript:history.back();'
     .row
       .col-sm-5
-        = image_tag @product.primary_image.url(:medium),
-          alt: @product.name, id: 'primary-image', class: 'img-fluid'
-        - if @product.images.size > 1
-          .images-container
-            - @product.images.each do |image|
-              = image_tag image.url(:medium)
+        .row
+          .col-xs-12.col-xl-10.col-xl-offset-1
+            = image_tag @product.primary_image.url(:medium),
+              alt: @product.name, id: 'primary-image', class: 'img-fluid'
+            - if @product.images.size > 1
+              .images-container
+                - @product.images.each do |image|
+                  .col-xs-4
+                    = image_tag image.url(:medium), class: 'img-fluid'
+        -# Didn't want to mess with localizing the products_list products
+        -# variable so @results here is the products related_products.
+        - if @results.size > 0
+          .row.hidden-xs-down
+            .col-xs-12
+              %h5.section-title.text-xs-center Related Products
+              %br
+              = render 'products_list'
       .col-sm-7.clear{class: @product.free ? 'free' : ''}
         %h1.name
           = @product.name
@@ -84,6 +95,31 @@
             pricing information is no longer accurate please
             = mail_to 'michelle@themontessoricompany.com', 'let us know'
             so we can update our recommendation appropriately.
+    - if @product.purpose.present? || @product.youtube_url.present? || @product.presentation_summary.present?
+      .row
+        .col-xs-12
+          %hr
+          .row
+            .col-xs-12.col-md-5
+              - if @product.purpose.present?
+                %h5.section-title
+                  Purpose
+                .section
+                  = @product.purpose.html_safe
+              - if @product.youtube_url.present?
+                %h5.section-title
+                  Video Demonstration
+                .section
+                  .youtube-embed-container
+                    %iframe{ src: @product.youtube_url,
+                      frameborder: '0', allowFullScreen: true }
+            .col-xs-12.col-md-7
+              - if @product.presentation_summary.present?
+                %h5.section-title
+                  Presentation
+                .section
+                  = @product.presentation_summary.html_safe
+
 
 - content_for :tracking do
   :javascript

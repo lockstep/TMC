@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203033332) do
+ActiveRecord::Schema.define(version: 20161210144716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,9 @@ ActiveRecord::Schema.define(version: 20161203033332) do
     t.integer  "max_shipping_cost_cents"
     t.text     "recommended_vendor_url"
     t.text     "recommended_budget_vendor_url"
+    t.text     "purpose"
+    t.text     "presentation_summary"
+    t.text     "youtube_url"
   end
 
   add_index "products", ["presentation_id"], name: "index_products_on_presentation_id", using: :btree
@@ -185,6 +188,11 @@ ActiveRecord::Schema.define(version: 20161203033332) do
   end
 
   add_index "promotions", ["code"], name: "index_promotions_on_code", unique: true, using: :btree
+
+  create_table "related_products", id: false, force: :cascade do |t|
+    t.integer "left_product_id",  null: false
+    t.integer "right_product_id", null: false
+  end
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"

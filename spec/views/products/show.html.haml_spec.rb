@@ -9,6 +9,7 @@ describe "products/show" do
     before do
       assign(:order, Order.find(cards_order.id))
       assign(:product, Product.find(number_cards.id))
+      assign(:results, Product.all)
       render
     end
 

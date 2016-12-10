@@ -10,6 +10,7 @@ class ProductDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     topics: Field::HasMany,
     presentation: Field::BelongsTo,
+    related_products: Field::HasMany.with_options(class_name: "Product"),
     images: Field::HasMany,
     downloadable: Field::HasOne,
     vendor: Field::BelongsTo.with_options(class_name: "User"),
@@ -35,6 +36,9 @@ class ProductDashboard < Administrate::BaseDashboard
     updated_at: Field::DateTime,
     recommended_vendor_url: Field::String,
     recommended_budget_vendor_url: Field::String,
+    purpose: WysiwygField,
+    youtube_url: Field::String,
+    presentation_summary: WysiwygField
   }
 
   # COLLECTION_ATTRIBUTES
@@ -86,6 +90,7 @@ class ProductDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :topics,
     :presentation,
+    :related_products,
     :images,
     :vendor,
     :name,
@@ -102,7 +107,10 @@ class ProductDashboard < Administrate::BaseDashboard
     :min_shipping_cost_cents,
     :max_shipping_cost_cents,
     :recommended_vendor_url,
-    :recommended_budget_vendor_url
+    :recommended_budget_vendor_url,
+    :purpose,
+    :youtube_url,
+    :presentation_summary
   ]
 
   # Overwrite this method to customize how products are displayed

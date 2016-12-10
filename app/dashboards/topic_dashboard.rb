@@ -71,6 +71,6 @@ class TopicDashboard < Administrate::BaseDashboard
   #   "Topic ##{topic.id}"
   # end
   def display_resource(topic)
-    "#{topic.name}"
+    "#{topic.name} (#{topic.id})"
   end
 end
