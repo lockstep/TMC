@@ -184,6 +184,7 @@
         }
         > .well {
           margin-left: 0;
+          margin-bottom: 10px;
 
           > a {
             @include sidebar-subcategory-btn;
