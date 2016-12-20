@@ -18,7 +18,7 @@ SitemapGenerator::Sitemap.create do
   # products
   add products_path, priority: 0.8, changefreq: 'daily'
   Product.find_each do |product|
-    next unless product.downloadable
+    next unless product.live?
     add product_path(product), lastmod: product.updated_at, priority: 0.8,
       changefreq: 'daily',
       images: product.images.map { |i| { loc: i.url(:medium) } }
