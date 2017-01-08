@@ -2,8 +2,8 @@
   - @results.each do |product|
     .product-tile{ class: "col-md-#{colspan}" }
       = link_to product_url(product) do
-        = image_tag product.primary_image.url(:medium),
-          alt: product.name, class: 'img-fluid'
+
+        .product-image{ style: "background-image: url('#{product.primary_image.url(:medium)}')" }
       .details
         .product-name
           = link_to product.name,

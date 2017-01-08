@@ -4,10 +4,7 @@
   }
 
   .images-container {
-    .col-xs-4 {
-      padding: 0px;
-    }
-    img {
+    .product-image {
       cursor: pointer;
     }
   }
@@ -75,16 +72,27 @@
   }
 }
 
+.product-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+
+  &:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+}
+
 .product-tile {
   text-align: center;
   font-size: 0.8rem;
   text-transform: uppercase;
 
-  img {
-    margin: 0 auto 20px;
-  }
 
   .name {
+    margin-top: 15px;
     margin-bottom: 3px;
     font-size: 0.8rem !important;
   }

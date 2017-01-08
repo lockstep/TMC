@@ -103,10 +103,10 @@ TMC.define_component('product index page', function() {
 });
 
 TMC.define_component('product show page', function() {
-  $('#product .images-container img').bind('vclick', function() {
-    var src = $(this).attr('src');
+  $('#product .images-container .product-image').bind('vclick', function() {
+    var bgImg = $(this).css('background-image');
     $('#product #primary-image').fadeTo(300, 0.10, function() {
-      $('#product #primary-image').attr('src', src);
+      $('#product #primary-image').css('background-image', bgImg);
     }).fadeTo(300, 1);
   });
 });

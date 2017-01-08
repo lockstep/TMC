@@ -16,14 +16,13 @@
     .row
       .col-sm-5
         .row
-          .col-xs-12.col-xl-10.col-xl-offset-1
-            = image_tag @product.primary_image.url(:medium),
-              alt: @product.name, id: 'primary-image', class: 'img-fluid'
+          .col-xs-12
+            #primary-image.product-image{ style: "background-image: url('#{@product.primary_image.url(:medium)}')" }
             - if @product.images.size > 1
-              .images-container
+              .row.images-container
                 - @product.images.each do |image|
                   .col-xs-4
-                    = image_tag image.url(:medium), class: 'img-fluid'
+                    .product-image{ style: "background-image: url('#{image.url(:medium)}')" }
         -# Didn't want to mess with localizing the products_list products
         -# variable so @results here is the products related_products.
         - if @results.size > 0
