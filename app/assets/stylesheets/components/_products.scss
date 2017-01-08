@@ -91,10 +91,12 @@
   text-transform: uppercase;
 
 
-  .name {
+  .product-name {
     margin-top: 15px;
     margin-bottom: 3px;
-    font-size: 0.8rem !important;
+    .name {
+      font-size: 0.8rem !important;
+    }
   }
 
   .details {
