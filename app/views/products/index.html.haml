@@ -8,6 +8,6 @@
       .col-sm-8#products-list
         = render 'topic_description'
         = render 'sort_bar'
-        = render 'products_list'
+        = render 'products_list', colspan: 4
         .pagination-container
           = paginate @results

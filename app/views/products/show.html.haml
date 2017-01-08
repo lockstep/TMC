@@ -31,7 +31,8 @@
             .col-xs-12
               %h5.section-title.text-xs-center Related Products
               %br
-              = render 'products_list'
+              #products-list
+                = render 'products_list', colspan: 6
       .col-sm-7.clear{class: @product.free ? 'free' : ''}
         %h1.name
           = @product.name
