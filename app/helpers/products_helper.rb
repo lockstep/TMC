@@ -10,6 +10,7 @@ module ProductsHelper
   ]
 
   def is_in_cart?(order, product)
+    return false if order.blank?
     order.line_items.any? { |item| item.product_id == product.id }
   end
 

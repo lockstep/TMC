@@ -1,5 +1,5 @@
 .row.list
-  - @results.each do |product|
+  - products.each do |product|
     .product-tile{ class: "col-md-#{colspan}" }
       = link_to product_url(product) do
 

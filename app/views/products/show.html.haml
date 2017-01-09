@@ -23,15 +23,13 @@
                 - @product.images.each do |image|
                   .col-xs-4
                     .product-image{ style: "background-image: url('#{image.url(:medium)}')" }
-        -# Didn't want to mess with localizing the products_list products
-        -# variable so @results here is the products related_products.
         - if @results.size > 0
           .row.hidden-xs-down
             .col-xs-12
               %h5.section-title.text-xs-center Related Products
               %br
               #products-list
-                = render 'products_list', colspan: 6
+                = render 'products_list', colspan: 6, products: @results
       .col-sm-7.clear{class: @product.free ? 'free' : ''}
         %h1.name
           = @product.name
