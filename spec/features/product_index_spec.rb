@@ -85,13 +85,30 @@ describe 'Product search page', type: :feature do
       before do
         @product.update(recommended_vendor_url: 'test.product.com')
       end
-      it 'takes the user to the cart summary' do
+      it 'takes the user to the show page' do
         visit products_path
         expect(page).to have_content @product.name
         expect(page).to have_content @product.price
         expect(page).not_to have_css "#add-product-#{@product.id}"
         click_link "Shop Now"
         expect(page).to have_content 'Until we can offer'
+      end
+    end
+
+    context 'product is an external resource' do
+      before do
+        @product.update(
+          external_resource_url: 'test.external.com',
+          list_cta_text: 'Heyro', show_cta_text: 'works'
+        )
+      end
+      it 'takes the user to the show page' do
+        visit products_path
+        expect(page).to have_content @product.name
+        expect(page).to have_content @product.price
+        expect(page).not_to have_css "#add-product-#{@product.id}"
+        click_link "Heyro"
+        expect(page).to have_content 'works'
       end
     end
   end

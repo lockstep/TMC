@@ -49,7 +49,11 @@
         .section
           = @product.description.html_safe
 
-        - if @product.sold_externally?
+        - if @product.external_resource?
+          = link_to @product.show_cta_text_with_default,
+            @product.external_resource_url, target: "_blank",
+            class: 'btn btn-cart'
+        - elsif @product.sold_externally?
           .btn-toolbar
             = link_to "Recommended Vendor", @product.recommended_vendor_url,
               target: "_blank", class: 'btn btn-cart'

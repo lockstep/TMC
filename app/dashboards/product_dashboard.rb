@@ -36,6 +36,9 @@ class ProductDashboard < Administrate::BaseDashboard
     updated_at: Field::DateTime,
     recommended_vendor_url: Field::String,
     recommended_budget_vendor_url: Field::String,
+    external_resource_url: Field::String,
+    show_cta_text: Field::String,
+    list_cta_text: Field::String,
     purpose: WysiwygField,
     youtube_url: Field::String,
     presentation_summary: WysiwygField
@@ -81,7 +84,10 @@ class ProductDashboard < Administrate::BaseDashboard
     :min_shipping_cost_cents,
     :max_shipping_cost_cents,
     :recommended_vendor_url,
-    :recommended_budget_vendor_url
+    :recommended_budget_vendor_url,
+    :external_resource_url,
+    :show_cta_text,
+    :list_cta_text
   ]
 
   # FORM_ATTRIBUTES
@@ -108,6 +114,9 @@ class ProductDashboard < Administrate::BaseDashboard
     :max_shipping_cost_cents,
     :recommended_vendor_url,
     :recommended_budget_vendor_url,
+    :external_resource_url,
+    :show_cta_text,
+    :list_cta_text,
     :purpose,
     :youtube_url,
     :presentation_summary

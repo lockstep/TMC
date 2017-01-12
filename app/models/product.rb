@@ -43,6 +43,20 @@ class Product < ActiveRecord::Base
     recommended_vendor_url.present? || recommended_budget_vendor_url.present?
   end
 
+  def external_resource?
+    external_resource_url.present?
+  end
+
+  def show_cta_text_with_default
+    return show_cta_text if show_cta_text.present?
+    "Go To Resource"
+  end
+
+  def list_cta_text_with_default
+    return list_cta_text if list_cta_text.present?
+    "More Info"
+  end
+
   def dimensions
     [ length, width, height ]
   end

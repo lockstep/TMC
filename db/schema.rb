@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161210144716) do
+ActiveRecord::Schema.define(version: 20170112133549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,9 @@ ActiveRecord::Schema.define(version: 20161210144716) do
     t.text     "purpose"
     t.text     "presentation_summary"
     t.text     "youtube_url"
+    t.text     "external_resource_url"
+    t.string   "show_cta_text"
+    t.string   "list_cta_text"
   end
 
   add_index "products", ["presentation_id"], name: "index_products_on_presentation_id", using: :btree

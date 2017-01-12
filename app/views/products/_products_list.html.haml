@@ -8,7 +8,12 @@
         .product-name
           = link_to product.name,
             product_url(product), class: 'name'
-        -if product.sold_externally?
+        -if product.external_resource?
+          .price
+            = number_to_currency(product.price, precision: 2)
+          = link_to product.list_cta_text_with_default,
+            product_url(product), class: 'btn btn-cart'
+        -elsif product.sold_externally?
           .price
             = number_to_currency(product.price, precision: 2)
           = link_to "Shop Now", product_url(product), class: 'btn btn-cart'

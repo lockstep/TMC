@@ -59,6 +59,14 @@ tractor:
   recommended_vendor_url: 'http://tractors.example.com'
   recommended_budget_vendor_url: 'http://budget_tractors.example.com'
 
+consultant:
+  name: Consultant
+  price: 40
+  description: A consultant
+  external_resource_url: 'http://consultant.example.com'
+  show_cta_text: Hire me
+  list_cta_text: More info
+
 mobile:
   name: Mobile
   price: 99.00

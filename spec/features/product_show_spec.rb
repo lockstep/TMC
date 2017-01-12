@@ -93,4 +93,15 @@ describe 'Product show page', type: :feature do
       )
     end
   end
+
+  context 'external resource' do
+    before { @product = products(:consultant) }
+    it 'shows the resource url with a custom button text' do
+      visit product_path @product
+      expect(page).not_to have_content 'Add to Cart'
+      expect(page).to have_link(
+        "Hire me", href: "http://consultant.example.com"
+      )
+    end
+  end
 end
