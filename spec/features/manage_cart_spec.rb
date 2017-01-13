@@ -84,6 +84,24 @@ describe 'Ordering process', type: :feature do
     end
   end
 
+  context 'multiple products in cart' do
+    before do
+      @michelle = users(:michelle)
+      @product = products(:number_cards)
+      @product.update(description: 'desc1')
+      @product2 = products(:number_board)
+      @product2.update(description: 'desc2')
+      @order = orders(:cards_order)
+      @order.line_items.create(product: @product2)
+      signin(@michelle.email, 'qawsedrf')
+    end
+    it 'shows both products' do
+      visit order_path @order
+      expect(page).to have_content @product.name
+      expect(page).to have_content @product2.name
+    end
+  end
+
   context 'removing product from cart' do
     before do
       @michelle = users(:michelle)

@@ -11,6 +11,4 @@
         = line_item.product.name
     %span.product-price
       = number_to_currency(line_item.product.price, precision: 2)
-    %p.product-description
-      = truncate(line_item.product.description, length: 150, escape: false)
 %hr.hidden-sm-up

@@ -17,7 +17,11 @@ describe 'Order checkout', type: :feature do
     it 'displays checkout button' do
       add_product_and_checkout
       expect(page).to have_content 'Your Cart'
-      expect(page).to have_content number_board.description
+      # NOTE: Removed description because full html_safe version was too long
+      # and truncated version caused weird styling problems that were
+      # hiding line items.
+      # expect(page).to have_content number_board.description
+      expect(page).to have_content number_board.name
       expect(page).to have_link 'Checkout'
     end
 
@@ -26,7 +30,8 @@ describe 'Order checkout', type: :feature do
       click_link 'Logout'
       expect(page).to have_content 'Signed out successfully'
       click_link 'My Cart'
-      expect(page).to have_content number_board.description
+      # expect(page).to have_content number_board.description
+      expect(page).to have_content number_board.name
       expect(page).not_to have_content 'is empty'
       expect(page).to have_content 'Log in to check out'
       expect(page).to have_current_path cart_path
@@ -37,7 +42,8 @@ describe 'Order checkout', type: :feature do
     it 'prompts user to sign in' do
       add_product_and_checkout
       expect(page).to have_content 'Your Cart'
-      expect(page).to have_content number_board.description
+      # expect(page).to have_content number_board.description
+      expect(page).to have_content number_board.name
       expect(page).not_to have_link 'Checkout'
       expect(page).to have_link 'Log in'
     end
