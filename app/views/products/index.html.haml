@@ -1,4 +1,11 @@
-- content_for :title, 'The Marketplace'
+- if @topic
+  - content_for :title, @topic.name
+  - if @topic.visual_exploration
+    - content_for :meta_tags do
+      = meta_tags(title: @topic.name,
+        image: @topic.visual_exploration.image.url)
+- else
+  - content_for :title, 'The Marketplace'
 
 %section#products
   .container
