@@ -34,7 +34,7 @@
         %h1.name
           = @product.name
         .price-container
-          %h4.price
+          %h4.price{ class: ("hidden-xs-up" if @product.priceless?) }
             = number_to_currency(@product.price, precision: 2)
           - if @product.free
             .free-label

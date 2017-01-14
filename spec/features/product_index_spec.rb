@@ -44,12 +44,12 @@ describe 'Product search page', type: :feature do
       expect(page).to have_content @child_topic_2.name.upcase
       expect(page).to have_selector('a.active', text: @topic_2.name.upcase)
     end
-    context 'the topic has a description', :js do
+    context 'the topic has a description' do
       before { @topic_2.update(description: 'This is my topic') }
       it 'shows the topic description when clicked' do
         visit products_path
         expect(page).not_to have_content @topic_2.description
-        click_link @topic_2.name
+        first('a', text: @topic_2.name).click
         expect(page).to have_content @topic_2.description
       end
     end

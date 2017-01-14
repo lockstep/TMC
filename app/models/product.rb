@@ -47,6 +47,12 @@ class Product < ActiveRecord::Base
     external_resource_url.present?
   end
 
+  # This is reserved for cases where content is not "priced" and "free" but
+  # in fact never has a price (e.g. products as "resources" pointing to blogs).
+  def priceless?
+    price == 0
+  end
+
   def show_cta_text_with_default
     return show_cta_text if show_cta_text.present?
     "Go To Resource"
