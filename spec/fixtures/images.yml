@@ -11,3 +11,6 @@ secondary:
   imageable: number_cards (Product)
   caption: My secondary image.
   primary: false
+
+exploration:
+  imageable: room (VisualExploration)

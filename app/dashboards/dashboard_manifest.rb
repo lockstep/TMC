@@ -18,7 +18,9 @@ class DashboardManifest
     :images,
     :downloadables,
     :posts,
-    :promotions
+    :promotions,
+    :visual_explorations,
+    :explorable_locations
   ]
 
   # `ROOT_DASHBOARD`

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112133549) do
+ActiveRecord::Schema.define(version: 20170114045153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,20 @@ ActiveRecord::Schema.define(version: 20170112133549) do
   end
 
   add_index "downloadables", ["product_id"], name: "index_downloadables_on_product_id", using: :btree
+
+  create_table "explorable_locations", force: :cascade do |t|
+    t.integer  "explorable_id"
+    t.string   "explorable_type"
+    t.integer  "visual_exploration_id"
+    t.string   "label"
+    t.float    "x"
+    t.float    "y"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "explorable_locations", ["explorable_type", "explorable_id"], name: "index_explorable_locations_on_explorable_type_and_explorable_id", using: :btree
+  add_index "explorable_locations", ["visual_exploration_id"], name: "index_explorable_locations_on_visual_exploration_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -201,14 +215,16 @@ ActiveRecord::Schema.define(version: 20170112133549) do
     t.string   "name"
     t.text     "description"
     t.integer  "parent_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "slug"
     t.integer  "position"
+    t.integer  "visual_exploration_id"
   end
 
   add_index "topics", ["parent_id"], name: "index_topics_on_parent_id", using: :btree
   add_index "topics", ["slug"], name: "index_topics_on_slug", unique: true, using: :btree
+  add_index "topics", ["visual_exploration_id"], name: "index_topics_on_visual_exploration_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                     default: "",    null: false
@@ -245,10 +261,17 @@ ActiveRecord::Schema.define(version: 20170112133549) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "visual_explorations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "adjustments", "orders"
   add_foreign_key "adjustments", "promotions"
   add_foreign_key "charges", "orders"
   add_foreign_key "downloadables", "products"
+  add_foreign_key "explorable_locations", "visual_explorations"
   add_foreign_key "identities", "users"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
@@ -256,4 +279,5 @@ ActiveRecord::Schema.define(version: 20170112133549) do
   add_foreign_key "posts", "users"
   add_foreign_key "presentations", "topics"
   add_foreign_key "products", "presentations"
+  add_foreign_key "topics", "visual_explorations"
 end

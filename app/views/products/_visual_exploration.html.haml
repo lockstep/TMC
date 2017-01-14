@@ -1,0 +1,9 @@
+- return if visual_exploration.blank?
+.visual-exploration
+  = image_tag visual_exploration.images.first.url, class: 'img-fluid'
+  - visual_exploration.explorable_locations.each do |explorable_location|
+    = link_to explorable_location.label,
+      explorable_link_path(explorable_location.explorable),
+      class: 'hotspot',
+      style: "left: #{explorable_location.x}%; top: #{explorable_location.y}%",
+      data: explorable_link_data(explorable_location.explorable)

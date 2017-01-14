@@ -5,6 +5,9 @@ describe 'Product search page', type: :feature do
   fixtures :topics
   fixtures :downloadables
   fixtures :line_items
+  fixtures :images
+  fixtures :visual_explorations
+  fixtures :explorable_locations
 
   before do
     @product = products(:number_board)
@@ -51,6 +54,22 @@ describe 'Product search page', type: :feature do
         expect(page).not_to have_content @topic_2.description
         first('a', text: @topic_2.name).click
         expect(page).to have_content @topic_2.description
+      end
+    end
+
+    context 'the topic has a visual exploration' do
+      before do
+        @visual_exploration = visual_explorations(:room)
+        @explorable_location = explorable_locations(:flamingo_in_room)
+        @explorable_location2 = explorable_locations(:topic_in_room)
+        @room_product = @explorable_location.explorable
+        @topic_2.update(visual_exploration: @visual_exploration)
+      end
+      it 'shows the exploration when clicked' do
+        visit products_path
+        expect(page).not_to have_link('1', href: product_path(@room_product))
+        first('a', text: @topic_2.name).click
+        expect(page).to have_link('1', href: product_path(@room_product))
       end
     end
   end

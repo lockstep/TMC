@@ -7,6 +7,8 @@
         = render 'sidebar'
       .col-sm-8#products-list
         = render 'topic_description'
+        = render 'visual_exploration',
+          visual_exploration: @topic.try(:visual_exploration)
         = render 'sort_bar'
         = render 'products_list', colspan: 4, products: @results
         .pagination-container

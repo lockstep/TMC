@@ -10,6 +10,7 @@ class TopicDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     parent: Field::BelongsTo.with_options(class_name: "Topic"),
     children: Field::HasMany.with_options(class_name: "Topic"),
+    visual_exploration: Field::BelongsTo,
     presentations: Field::HasMany,
     products: Field::HasMany,
     id: Field::Number,
@@ -62,6 +63,7 @@ class TopicDashboard < Administrate::BaseDashboard
     :presentations,
     :name,
     :description,
+    :visual_exploration
   ]
 
   # Overwrite this method to customize how topics are displayed

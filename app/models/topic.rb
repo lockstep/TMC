@@ -3,6 +3,7 @@ class Topic < ActiveRecord::Base
   friendly_id :name, use: [:slugged, :finders]
 
   belongs_to :parent, class_name: 'Topic', foreign_key: 'parent_id'
+  belongs_to :visual_exploration
   has_many :children, class_name: 'Topic', foreign_key: 'parent_id'
 
   has_many :presentations

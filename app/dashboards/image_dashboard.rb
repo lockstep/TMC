@@ -5,6 +5,8 @@ class ImageDashboard < Administrate::BaseDashboard
     id: Field::Number,
     image: PaperclipField,
     product: Field::BelongsTo.with_options(class_name: "Product"),
+    # imageable_id: Field::Number,
+    # imageable_type: Field::Select.with_options(collection: ['Product', 'VisualExploration']),
     primary: Field::Boolean,
     caption: Field::String
   }
@@ -38,6 +40,8 @@ class ImageDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :image,
     :product,
+    # :imageable_id,
+    # :imageable_type,
     :primary,
     :caption
   ]

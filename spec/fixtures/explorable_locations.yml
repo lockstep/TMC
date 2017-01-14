@@ -1,0 +1,13 @@
+flamingo_in_room:
+  explorable: flamingo (Product)
+  visual_exploration: room
+  label: 1
+  x: 0
+  y: 0
+
+topic_in_room:
+  explorable: birds (Topic)
+  visual_exploration: room
+  label: 2
+  x: 20
+  y: 20

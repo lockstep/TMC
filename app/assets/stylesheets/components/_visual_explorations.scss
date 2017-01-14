@@ -1,0 +1,27 @@
+.visual-exploration {
+  position: relative;
+  margin-bottom: 20px;
+
+  a.hotspot {
+    position: absolute;
+    height: 30px;
+    width:  30px;
+    background-color: $blue;
+    border-radius:         15px;
+    -moz-border-radius:    15px;
+    -webkit-border-radius: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    border: solid 2px $blue-light;
+    line-height: 26px;
+
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow:    0px 0px 2px 0px rgba(0,0,0,0.75);
+    box-shadow:         0px 0px 2px 0px rgba(0,0,0,0.75);
+
+    &:hover {
+      border-color: white;
+    }
+  }
+}
