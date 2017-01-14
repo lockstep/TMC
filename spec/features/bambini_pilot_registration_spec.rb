@@ -1,4 +1,4 @@
-feature 'Bambini pilot registration' do
+xfeature 'Bambini pilot registration' do
   fixtures :users
   fixtures :orders
   fixtures :products
