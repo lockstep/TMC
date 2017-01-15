@@ -10,6 +10,7 @@ class RecommendedVendorLinkMonitor
       begin
         check_url(product.recommended_vendor_url)
         check_url(product.recommended_budget_vendor_url)
+        check_url(product.external_resource_url)
       rescue => e
         send_notification(product, e)
       end
