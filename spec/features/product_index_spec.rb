@@ -216,5 +216,22 @@ describe 'Product search page', type: :feature do
         expect(page).to have_content @product.name
       end
     end
+
+    context 'the recently viewed product no longer exists' do
+      before do
+        @tractor = products(:tractor)
+      end
+      it 'only lists the existing recently viewed' do
+        visit products_path
+        expect(page).to have_content 'None yet.'
+        visit product_path @tractor
+        @tractor.destroy
+        visit product_path @product
+        visit products_path
+        within('#recently-viewed') do
+          expect(page).to have_content @product.name
+        end
+      end
+    end
   end
 end

@@ -48,8 +48,11 @@ class ProductsController < ApplicationController
 
   def recently_viewed
     return [] if session[:recently_viewed].nil?
-    products = Product.find(Array(session[:recently_viewed])).group_by(&:id)
-    session[:recently_viewed].map { |i| products[i].first }
+    products = Product.where(id: session[:recently_viewed])
+    persisted_recently_viewed = session[:recently_viewed]
+      .map { |id| products.find { |p| p.id == id } }.compact
+    session[:recently_viewed] = persisted_recently_viewed.map { |p| p.id }
+    persisted_recently_viewed
   end
 
   def update_session
