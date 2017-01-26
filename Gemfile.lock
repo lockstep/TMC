@@ -64,9 +64,9 @@ GEM
       rails (~> 4.2)
       sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
-    airbrake (5.0.5)
-      airbrake-ruby (~> 1.0)
-    airbrake-ruby (1.0.4)
+    airbrake (5.6.1)
+      airbrake-ruby (~> 1.6)
+    airbrake-ruby (1.7.0)
     arel (6.0.3)
     autoprefixer-rails (6.3.1)
       execjs
@@ -451,7 +451,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0rc4)
   active_shipping
   administrate (~> 0.2.2)
-  airbrake (~> 5.0)
+  airbrake (~> 5.6)
   aws-sdk
   better_errors
   binding_of_caller
@@ -509,4 +509,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.13.6
+   1.13.7
