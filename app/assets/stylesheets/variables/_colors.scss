@@ -1,4 +1,6 @@
 $light-pink: rgb(248, 176, 180);
+$pink: darken($light-pink, 20%);
+$dark-pink: darken($pink, 10%);
 $pearl: rgb(247, 240, 232);
 $light-yellow: rgb(242, 233, 170);
 $light-blue: rgb(162, 204, 222);
@@ -6,7 +8,8 @@ $light-turquoise: rgb(199, 227, 225);
 
 $grey: #dbe0e3;
 $black: #373a3c;
-$green: #cbd8ce;
+$green-light: #cbd8ce;
+$green: #74967c;
 $green-medium: darken($green, 10%);
 $green-dark: darken($green, 30%);
 $beige: #eee9e5;

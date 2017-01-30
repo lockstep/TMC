@@ -47,7 +47,7 @@
     }
 
     &#products {
-      @include hero-tile($green);
+      @include hero-tile($green-light);
     }
 
     &#blog {
