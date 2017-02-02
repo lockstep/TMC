@@ -1,0 +1,54 @@
+- content_for :title, 'My Address'
+- @active = 'profile'
+
+.container#account
+  .row
+    .col-sm-3
+      = render 'users/shared/sidebar'
+    .col-sm-9
+      %h3.m-b-3 My Profile
+      #profile
+        .show
+          .row
+            .col-sm-12
+              .pull-right
+                = link_to 'Edit', edit_profile_user_path
+          .row
+            .col-sm-3#avatar
+              - image_url = @user.avatar.exists? ? @user.avatar.url : 'avatar_missing'
+              = image_tag image_url, class: 'avatar'
+              %div{style: "background-image:url(#{@user.avatar.url})" }
+            .col-sm-9.p-l-3
+              %h3
+                = "#{@user.first_name} #{@user.last_name}"
+              .section
+                %small POSITION
+                %div
+                  = @user.position
+                  %small &nbsp;AT&nbsp;
+                  %span
+                    = @user.school_name
+              .section
+                %small LOCATION
+                %div
+                  = "#{@user.address_city}, #{@user.address_country}"
+          .row
+            .col-sm-12
+              %hr
+              - if @user.bio.present?
+                .section
+                  %small BIOGRAPHY
+                  %div
+                    = @user.bio.html_safe
+          .row
+            .col-sm-6
+              .section
+                %small INTERESTS
+                %div
+                  = user_interests(@user)
+            .col-sm-6
+              .section
+                %small TRAININGS &amp; CERTIFICATIONS
+                %div
+                  = user_certifications(@user)
+

@@ -1,5 +1,6 @@
 describe UsersController, type: :controller do
   fixtures :users
+  fixtures :interests
 
   include_context 'before_after_mailer'
 
@@ -62,6 +63,46 @@ describe UsersController, type: :controller do
             .to receive(:perform_async).with(@user.id, 'c94cda6346')
           patch :update, id: @user, user: { email: 'bill@murray.com' },
             commit: 'Join Pilot'
+        end
+      end
+      context 'with interests' do
+        before do
+          @interest = interests(:peace)
+        end
+        context 'public interest' do
+          it 'updates a user with the interest' do
+            patch :update, id: @user, user: {
+              email: 'bill@murray.com',
+              interests: ['Peace']
+            }, commit: 'Save'
+            expect(@user.reload.interests.pluck(:name).include?('Peace'))
+              .to eq true
+          end
+        end
+        context 'not public interest' do
+          before do
+            @interest.update(public: false)
+          end
+          it 'does not add the interest to user interest list' do
+            patch :update, id: @user, user: {
+              email: 'bill@murray.com',
+              interests: ['Peace']
+            }, commit: 'Save'
+            expect(@user.reload.interests.pluck(:name).include?('Peace'))
+              .to eq false
+          end
+        end
+        context 'no interest' do
+          before do
+            @interest.update(public: false)
+          end
+          it 'does not add the interest to user interest list' do
+            patch :update, id: @user, user: {
+              email: 'bill@murray.com',
+              interests: []
+            }, commit: 'Save'
+            expect(@user.reload.interests.blank?).to eq true
+          end
         end
       end
     end

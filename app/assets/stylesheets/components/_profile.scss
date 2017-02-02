@@ -1,0 +1,38 @@
+#profile {
+  line-height: 1.5em;
+  font-size: 18px;
+  h3 {
+    font-weight: bold;
+  }
+  small {
+    color: $blog-grey;
+    font-size: 0.7em;
+  }
+  .section {
+    margin-bottom: 1em;
+  }
+  textarea {
+    height: initial;
+  }
+  input[type='checkbox'] {
+    display: initial;
+    height: initial;
+    margin-right: 0.5em;
+  }
+  input[type='file'] {
+    display: none;
+  }
+  hr {
+    margin: 2em 0;
+  }
+}
+
+#avatar {
+  text-align: center;
+  img.avatar {
+    width: 100%;
+  }
+  .info {
+    font-size: 0.8em;
+  }
+}
