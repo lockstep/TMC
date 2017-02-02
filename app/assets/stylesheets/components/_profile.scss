@@ -17,13 +17,21 @@
   input[type='checkbox'] {
     display: initial;
     height: initial;
-    margin-right: 0.5em;
+    margin-top: 0.35em;
   }
   input[type='file'] {
     display: none;
   }
   hr {
     margin: 2em 0;
+  }
+  section.interest,
+  section.certification {
+    .custom {
+      .btn {
+        font-size: initial;
+      }
+    }
   }
 }
 

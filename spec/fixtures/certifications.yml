@@ -1,5 +1,5 @@
-peace:
-  name: 'Peace'
+ami:
+  name: 'AMI'
   public: true
 private:
   name: 'Private'
