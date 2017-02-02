@@ -1,6 +1,7 @@
 describe UsersController, type: :controller do
   fixtures :users
   fixtures :interests
+  fixtures :certifications
 
   include_context 'before_after_mailer'
 
@@ -69,7 +70,7 @@ describe UsersController, type: :controller do
         before do
           @interest = interests(:peace)
         end
-        context 'public interest' do
+        context 'public' do
           it 'updates a user with the interest' do
             patch :update, id: @user, user: {
               email: 'bill@murray.com',
@@ -79,29 +80,65 @@ describe UsersController, type: :controller do
               .to eq true
           end
         end
-        context 'not public interest' do
+        context 'private' do
           before do
             @interest.update(public: false)
           end
-          it 'does not add the interest to user interest list' do
+          it 'creates the private interest' do
             patch :update, id: @user, user: {
               email: 'bill@murray.com',
               interests: ['Peace']
             }, commit: 'Save'
             expect(@user.reload.interests.pluck(:name).include?('Peace'))
-              .to eq false
+              .to eq true
+            expect(Interest.find_by(name: 'Peace').public).to eq false
           end
         end
-        context 'no interest' do
-          before do
-            @interest.update(public: false)
-          end
+        context 'no interests' do
           it 'does not add the interest to user interest list' do
             patch :update, id: @user, user: {
               email: 'bill@murray.com',
               interests: []
             }, commit: 'Save'
             expect(@user.reload.interests.blank?).to eq true
+          end
+        end
+      end
+      context 'with certifications' do
+        before do
+          @certification = certifications(:ami)
+        end
+        context 'public' do
+          it 'updates a user with the certification' do
+            patch :update, id: @user, user: {
+              email: 'bill@murray.com',
+              certifications: ['AMI']
+            }, commit: 'Save'
+            expect(@user.reload.certifications.pluck(:name).include?('AMI'))
+              .to eq true
+          end
+        end
+        context 'private' do
+          before do
+            @certification.update(public: false)
+          end
+          it 'creates the private certification' do
+            patch :update, id: @user, user: {
+              email: 'bill@murray.com',
+              certifications: ['AMI']
+            }, commit: 'Save'
+            expect(@user.reload.certifications.pluck(:name).include?('AMI'))
+              .to eq true
+            expect(Certification.find_by(name: 'AMI').public).to eq false
+          end
+        end
+        context 'no certifications' do
+          it 'does not add the certification to user certification list' do
+            patch :update, id: @user, user: {
+              email: 'bill@murray.com',
+              certifications: []
+            }, commit: 'Save'
+            expect(@user.reload.certifications.blank?).to eq true
           end
         end
       end

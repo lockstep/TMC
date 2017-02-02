@@ -11,8 +11,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      Interest.update_user_interests(@user, @interests)
-      Certification.update_user_certifications(@user, @certifications)
+      Interest.manage_user_interests(@user, @interests)
+      Certification.manage_user_certifications(
+        @user, @certifications
+      )
       sign_in(@user, bypass: true)
       if session[:calculating_shipping_for_product].present?
         redirect_to shipping_product_path(

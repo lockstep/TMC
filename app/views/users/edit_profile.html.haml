@@ -67,23 +67,38 @@
                     maxlength: User::MAX_BIO_LENGTH
             .row
               .col-sm-6
-                .form-group
-                  = f.label :interests, 'Interests', class: 'form-label'
-                  - Interest.public_interests.each do |interest|
-                    .checkbox
-                      %label
-                        = check_box_tag 'user[interests][]', interest.name,
-                          has_interest?(@user, interest.name)
-                        = interest.name
+                %section.form-group.interest
+                  = f.label :interests, 'Interest', class: 'form-label'
+                  .interests
+                    - interests_available_to(@user).each do |interest|
+                      .checkbox
+                        %label
+                          = check_box_tag 'user[interests][]', interest.name,
+                            has_interest?(@user, interest.name)
+                          .text
+                            = interest.name
+
+                  .form-inline.custom
+                    .form-group
+                      = text_field_tag 'interest', nil,
+                        placeholder: 'New Interest', class: 'form-control'
+                    %a{class: 'btn btn-secondary'} ADD
               .col-sm-6
-                .form-group
+                %section.form-group.certification
                   = f.label :certifications, 'Trainings & Certifications',
                     class: 'form-label'
-                  - Certification.public_certifications.each do |certification|
-                    .checkbox
-                      %label
-                        = check_box_tag 'user[certifications][]', certification.name,
-                          has_certification?(@user, certification.name)
-                        = certification.name
+                  .certifications
+                    - certifications_available_to(@user).each do |certification|
+                      .checkbox
+                        %label
+                          = check_box_tag 'user[certifications][]', certification.name,
+                            has_certification?(@user, certification.name)
+                          .text
+                            = certification.name
+                  .form-inline.custom
+                    .form-group
+                      = text_field_tag 'certification', nil,
+                        placeholder: 'New Certification', class: 'form-control'
+                    %a{class: 'btn btn-secondary'} ADD
             .form-group.m-t-2
               = f.submit "Save profile", class: "btn btn-cart"

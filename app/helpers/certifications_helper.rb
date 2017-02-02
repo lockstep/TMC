@@ -1,5 +1,5 @@
 module CertificationsHelper
-  def user_certifications(user)
+  def format_user_certifications(user)
     certification_names = user.certifications.pluck(:name)
     return 'N/A' unless certification_names.present?
     certification_names.sort.join(', ')
@@ -7,5 +7,10 @@ module CertificationsHelper
 
   def has_certification?(user, certification_name)
     user.certifications.pluck(:name).include?(certification_name)
+  end
+
+  def certifications_available_to(user)
+    Certification.public_certifications.concat(user.certifications)
+      .uniq.sort_by(&:name)
   end
 end
