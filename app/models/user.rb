@@ -13,14 +13,19 @@ class User < ActiveRecord::Base
   has_many :line_items, through: :completed_orders
   has_many :purchased_products, through: :line_items, source: :product
   has_many :identities
+  has_many :personal_interests
+  has_many :interests, through: :personal_interests
+  has_many :certificate_acquisitions
+  has_many :certifications, through: :certificate_acquisitions
 
-  attr_accessor :editing_address
+  attr_accessor :editing_address, :editing_profile
   validates_presence_of :first_name, :last_name, :address_line_one,
     :address_city, :address_postal_code, :address_country,
     if: :editing_address
 
   validates_presence_of :first_name, :last_name, :school_name,
     :position, if: :bambini_pilot_participant?
+  validates :bio, length: { maximum: 100 }
 
   enum role: [:user, :admin]
 

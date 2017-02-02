@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170205133720) do
+ActiveRecord::Schema.define(version: 20170207055415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,22 @@ ActiveRecord::Schema.define(version: 20170205133720) do
   create_table "alternate_language_products", id: false, force: :cascade do |t|
     t.integer "left_product_id",  null: false
     t.integer "right_product_id", null: false
+  end
+
+  create_table "certificate_acquisitions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "certification_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "certificate_acquisitions", ["user_id", "certification_id"], name: "index_certificate_acquisitions_on_user_id_and_certification_id", using: :btree
+
+  create_table "certifications", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "public",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "charges", force: :cascade do |t|
@@ -107,6 +123,13 @@ ActiveRecord::Schema.define(version: 20170205133720) do
 
   add_index "images", ["imageable_id", "imageable_type", "primary"], name: "index_images_on_imageable_id_and_imageable_type_and_primary", unique: true, where: "(\"primary\" = true)", using: :btree
 
+  create_table "interests", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "public",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   create_table "line_items", force: :cascade do |t|
     t.integer  "product_id"
     t.integer  "order_id"
@@ -126,6 +149,13 @@ ActiveRecord::Schema.define(version: 20170205133720) do
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
+  create_table "personal_interests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "interest_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -260,7 +290,7 @@ ActiveRecord::Schema.define(version: 20170205133720) do
     t.string   "address_state"
     t.string   "address_postal_code"
     t.string   "address_country"
-    t.string   "school_name"
+    t.string   "organization_name"
     t.string   "position"
     t.boolean  "bambini_pilot_participant", default: false
   end
