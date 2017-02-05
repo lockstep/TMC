@@ -16,6 +16,7 @@ class TopicDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     description: Field::Text,
+    force_subnavigation: Field::Boolean,
     parent_id: Field::Number,
     position: Field::Number,
     created_at: Field::DateTime,
@@ -49,6 +50,7 @@ class TopicDashboard < Administrate::BaseDashboard
     :name,
     :description,
     :parent_id,
+    :force_subnavigation,
     :created_at,
     :updated_at,
   ]
@@ -63,6 +65,7 @@ class TopicDashboard < Administrate::BaseDashboard
     :presentations,
     :name,
     :description,
+    :force_subnavigation,
     :visual_exploration
   ]
 

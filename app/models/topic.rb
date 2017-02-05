@@ -4,6 +4,8 @@ class Topic < ActiveRecord::Base
 
   belongs_to :parent, class_name: 'Topic', foreign_key: 'parent_id'
   belongs_to :visual_exploration
+  delegate :image, to: :visual_exploration, prefix: true,
+    allow_nil: true
   has_many :children, class_name: 'Topic', foreign_key: 'parent_id'
 
   has_many :presentations

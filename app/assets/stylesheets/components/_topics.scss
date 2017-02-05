@@ -11,3 +11,27 @@
     margin: 0px;
   }
 }
+
+ul.big-topic-list {
+  margin-top: 58px;
+  li {
+    height: 130px;
+    margin-bottom: 20px;
+    text-align: center;
+    -webkit-background-size: cover;
+    -moz-background-size:    cover;
+    -o-background-size:      cover;
+    background-size:         cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    .name {
+      align-self: center;
+      padding: 20px 30px;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      min-width: 280px;
+    }
+  }
+}

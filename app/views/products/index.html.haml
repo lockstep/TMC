@@ -13,10 +13,17 @@
       .col-sm-4#sidebar
         = render 'sidebar'
       .col-sm-8#products-list
-        = render 'topic_description'
-        = render 'visual_exploration',
-          visual_exploration: @topic.try(:visual_exploration)
-        = render 'sort_bar'
-        = render 'products_list', colspan: 4, products: @results
-        .pagination-container
-          = paginate @results
+        - if @topic.try(:force_subnavigation?)
+          %ul.list-unstyled.big-topic-list
+            - @topic.children.each do |child_topic|
+              = link_to controller: :products, topic_ids: child_topic.id do
+                %li(style="background-image: url('#{child_topic.visual_exploration_image.try(:url) || image_url('hero_bg')}')")
+                  .name= child_topic.name
+        - else
+          = render 'topic_description'
+          = render 'visual_exploration',
+            visual_exploration: @topic.try(:visual_exploration)
+          = render 'sort_bar'
+          = render 'products_list', colspan: 4, products: @results
+          .pagination-container
+            = paginate @results
