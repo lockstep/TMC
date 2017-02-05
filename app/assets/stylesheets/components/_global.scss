@@ -52,12 +52,12 @@ body {
 }
 
 a {
-  color: $green-medium;
+  color: $blue;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 
   &:hover, &:active, &:focus {
-    color: $green-dark;
+    color: $pink;
     text-decoration: none;
   }
 }
