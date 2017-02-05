@@ -6,7 +6,7 @@
               description: @product.description,
               amount: @product.price)
 
-%section#product
+%section#product.product-show
   .container
     = breadcrumb_nav(product: @product)
     .row
@@ -39,6 +39,19 @@
           - if @product.free
             .free-label
               free
+        - if @product.vendor_profile_complete?
+          .row
+            .col-xs-12
+              .vendor-profile
+                .detail
+                  .info Vendor Info
+                  .avatar(style="background-image: url('#{@product.vendor_avatar.url(:medium)}');")
+                  .name= @product.vendor_full_name
+                  .location
+                    %i.fa.fa-map-marker
+                    = @product.vendor_public_location
+                  .bio= @product.vendor_bio.html_safe
+
         .social
           = facebook_like
           = pin_it(image: object_image(@product),

@@ -47,16 +47,6 @@
     }
   }
 
-  .free {
-    .price {
-      text-decoration: line-through;
-      font-size: 0.8rem;
-    }
-
-    .free-label {
-      font-size: 0.8rem;
-    }
-  }
 
   .section-title {
     font-size: 12pt;
@@ -69,6 +59,62 @@
   .section {
     margin-bottom: 40px;
     font-size: 12pt;
+  }
+
+  .vendor-profile {
+    margin-top: 30px;
+
+    .detail {
+      position: relative;
+      padding: 20px;
+      background-color: $lighter-grey;
+      padding-left: 130px;
+      min-height: 130px;
+
+      .info {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-color: darken($grey, 10%);
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 5px;
+      }
+
+      .name {
+        font-size: 17px;
+        text-transform: none;
+        color: $blue;
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      .location {
+        color: gray;
+      }
+
+      .avatar {
+        position: absolute;
+        top:  20px;
+        left: 20px;
+        height: 90px;
+        width:  90px;
+      }
+    }
+  }
+}
+
+.product-show {
+  .free {
+    .price {
+      text-decoration: line-through;
+      font-size: 16px;
+    }
+
+    .free-label {
+      font-size: 20px;
+    }
   }
 }
 
@@ -101,6 +147,13 @@
 
   .details {
     height: 120px;
+
+    .free-label {
+      font-size: 0.8rem;
+    }
+    .price {
+      font-size: 0.8rem !important;
+    }
   }
 }
 

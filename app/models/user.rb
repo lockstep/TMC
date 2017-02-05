@@ -51,8 +51,24 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar,
     content_type: /\Aimage\/.*\Z/
 
+  def profile_complete?
+    required_fields = [
+      :first_name, :last_name, :bio, :address_city, :address_country,
+      :avatar_file_name
+    ]
+    required_fields.all? { |attr| send(attr).present? }
+  end
+
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def public_location
+    if address_state.blank?
+      "#{address_city}, #{address_country}"
+    else
+      "#{address_city}, #{address_state}, #{address_country}"
+    end
   end
 
   def set_default_role
