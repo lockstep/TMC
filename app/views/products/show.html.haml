@@ -48,7 +48,7 @@
           Description
         .section
           = @product.description.html_safe
-        - unless @product.alternate_language_products.empty?
+        - unless @product.alternate_language_products.live.empty?
           %h5.section-title
             Language
           .section
