@@ -18,6 +18,7 @@
             - @topic.children.each do |child_topic|
               = link_to controller: :products, topic_ids: child_topic.id do
                 %li(style="background-image: url('#{child_topic.visual_exploration_image.try(:url) || image_url('hero_bg')}')")
+                  .lighten-layer
                   .name= child_topic.name
         - else
           = render 'topic_description'
