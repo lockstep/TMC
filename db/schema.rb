@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114045153) do
+ActiveRecord::Schema.define(version: 20170204100610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(version: 20170114045153) do
 
   add_index "adjustments", ["order_id"], name: "index_adjustments_on_order_id", using: :btree
   add_index "adjustments", ["promotion_id"], name: "index_adjustments_on_promotion_id", using: :btree
+
+  create_table "alternate_language_products", id: false, force: :cascade do |t|
+    t.integer "left_product_id",  null: false
+    t.integer "right_product_id", null: false
+  end
 
   create_table "charges", force: :cascade do |t|
     t.integer  "amount"
@@ -180,6 +185,7 @@ ActiveRecord::Schema.define(version: 20170114045153) do
     t.text     "external_resource_url"
     t.string   "show_cta_text"
     t.string   "list_cta_text"
+    t.integer  "language",                      default: 0
   end
 
   add_index "products", ["presentation_id"], name: "index_products_on_presentation_id", using: :btree

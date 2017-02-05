@@ -24,10 +24,31 @@ describe 'Product show page', type: :feature do
       @related_product = products(:flamingo).reload
       @product.related_products << @related_product
     end
-    it 'shows breadcrumbs in the right order' do
+    it 'shows related product' do
       expect(@product.reload.related_products).to include @related_product.reload
       visit product_path(@product)
       expect(page).to have_content @related_product.name
+    end
+  end
+
+  context 'product has an alternate language' do
+    before do
+      @product = products(:memory_puzzle_card).reload
+      @alternate_product = @product.create_alternate_language_product(1)
+      @alternate_product.update(name: 'something different', live: true)
+    end
+    it 'shows related product and can navigate to alterate language' do
+      expect(@product.reload.related_products)
+        .to include @alternate_product.reload
+      visit product_path(@product)
+      expect(page).to have_content @alternate_product.name
+      select 'Spanish', from: 'alternate_language_product'
+      click_button 'Select Language'
+      expect(page).to have_current_path product_path(@alternate_product)
+      expect(page).to have_content @product.name
+      select 'English', from: 'alternate_language_product'
+      click_button 'Select Language'
+      expect(page).to have_current_path product_path(@product)
     end
   end
 

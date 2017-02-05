@@ -18,3 +18,4 @@
 //= require ion.rangeSlider
 //= require bootstrap
 //= require tmc
+//= require product

@@ -25,6 +25,11 @@ class ProductsController < ApplicationController
     update_session
   end
 
+  def change_language
+    @selected_product = Product.find(params[:alternate_language_product])
+    redirect_to @selected_product
+  end
+
   def shipping
     authenticate_user!
     if current_user.address_complete?
@@ -43,7 +48,7 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
-    @results = @product.related_products
+    @results = @product.related_products.live
   end
 
   def recently_viewed

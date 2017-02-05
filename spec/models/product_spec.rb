@@ -22,6 +22,36 @@ describe Product, type: :model do
     expect(p).to be_valid
   end
 
+  describe '#create_alternate_language_product' do
+    before do
+      @product = products(:memory_puzzle_card).reload
+    end
+    it 'creates a new product and links them' do
+      spanish = @product.create_alternate_language_product(1)
+      expect(spanish.name).to match 'Spanish'
+      chinese = @product.create_alternate_language_product('2')
+      expect(chinese.name).to match 'Chinese'
+      expect(spanish.related_products).to include chinese
+      expect(chinese.alternate_language_products).to include spanish
+    end
+    it 'will not create duplicates' do
+      product = Product.create(name: 'test')
+      existing_count = Product.count
+      english = product.create_alternate_language_product(0)
+      expect(product.id).to eq english.id
+      expect(existing_count).to eq Product.count
+    end
+    it 'handles naming properly' do
+      product = Product.create(name: 'test - me')
+      spanish = product.create_alternate_language_product(1)
+      expect(spanish.name).to match 'test - me'
+      expect(spanish.name).to match 'Spanish'
+      chinese = spanish.create_alternate_language_product(2)
+      expect(chinese.name).to match 'Chinese'
+      expect(chinese.name).not_to match 'Spanish'
+    end
+  end
+
   describe '#presentation' do
     it 'returns the presentation it belongs to' do
       expect(number_cards.presentation).to eq quiz_game

@@ -4,6 +4,12 @@ Rails.application.routes.draw do
       resources dashboard_resource
     end
 
+    resources :products do
+      member do
+        post :create_alternate_language
+      end
+    end
+
     root controller: DashboardManifest::ROOT_DASHBOARD, action: :index
   end
 
@@ -22,6 +28,7 @@ Rails.application.routes.draw do
   resources :products, only: [:show, :index] do
     member do
       get :shipping
+      get :change_language
     end
   end
   resources :users, only: [:show, :edit, :update] do

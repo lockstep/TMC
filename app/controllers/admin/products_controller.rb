@@ -12,5 +12,11 @@ module Admin
         page: page,
       }
     end
+
+    def create_alternate_language
+      product = Product.find(params[:id])
+      new_product = product.create_alternate_language_product(params[:language])
+      redirect_to admin_product_path(new_product)
+    end
   end
 end

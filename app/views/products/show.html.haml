@@ -48,6 +48,19 @@
           Description
         .section
           = @product.description.html_safe
+        - unless @product.alternate_language_products.empty?
+          %h5.section-title
+            Language
+          .section
+            = form_tag change_language_product_path(@product), method: :get,
+              class: 'select-language-form' do
+              .row
+                .col-xs-6
+                  = select_tag 'alternate_language_product',
+                    options_from_collection_for_select(@product.all_language_options, 'id', 'humanized_language', @product.id), class: 'col-xs-12'
+              .select-language-submission
+                %br
+                = submit_tag 'Select Language', class: 'btn btn-cart'
 
         - if @product.external_resource?
           = link_to @product.show_cta_text_with_default,
