@@ -130,6 +130,6 @@ class User < ActiveRecord::Base
   end
 
   def subscribe_to_mailchimp
-    MailchimpSubscriberWorker.perform_async(self.id)
+    MailchimpSubscriberWorker.perform_async(email)
   end
 end

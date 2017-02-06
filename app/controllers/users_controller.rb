@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       elsif session[:calculating_shipping_for_cart].present?
         redirect_to cart_path(calculate_shipping: true)
       elsif params['commit'].match 'Pilot'
-        MailchimpSubscriberWorker.perform_async(@user.id, 'c94cda6346')
+        MailchimpSubscriberWorker.perform_async(@user.email, 'c94cda6346')
         redirect_to :back
       else
         flash[:notice] = 'Your account has been updated.'

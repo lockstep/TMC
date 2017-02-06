@@ -4,10 +4,10 @@ class MailchimpSubscriber
   end
 
   # subscribing individual records
-  def subscribe(user, list_id = nil)
+  def subscribe(email, list_id = nil)
     list = list_id || ENV['MAILCHIMP_LIST_ID']
     @mailchimp.lists.subscribe(
-      list, { email: user.email }, nil, 'html', false, true, false
+      list, { email: email }, nil, 'html', false, true, false
     )
   end
 

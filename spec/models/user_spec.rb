@@ -14,7 +14,7 @@ describe User, type: :model do
       user = User.create(email: 'erik@tmc.com', password: 'mypassword',
                         password_confirmation: 'mypassword')
       expect(MailchimpSubscriberWorker).to have_received(:perform_async)
-        .with(user.id)
+        .with(user.email)
     end
   end
 

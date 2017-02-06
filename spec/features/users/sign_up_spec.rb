@@ -18,7 +18,7 @@ describe 'Sign up', :feature do
       expect(page).to have_content 'Welcome! You have signed up'
       expect(ActionMailer::Base.deliveries.count).to eq 1
       expect(MailchimpSubscriberWorker).to have_received(:perform_async)
-        .with(User.last.id)
+        .with(User.last.email)
       email = ActionMailer::Base.deliveries.first
       expect(email.subject).to eq 'Welcome to The Montessori Company'
       visit root_path

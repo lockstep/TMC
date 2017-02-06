@@ -55,7 +55,7 @@ describe Users::OmniauthCallbacksController do
 
     it 'subscribes the user to Mailchimp' do
       expect(MailchimpSubscriberWorker).to have_received(:perform_async)
-        .with(@user.id)
+        .with(@user.email)
     end
   end
 

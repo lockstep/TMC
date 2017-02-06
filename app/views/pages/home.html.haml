@@ -30,6 +30,26 @@
     .spacer
       = image_tag 'leaf.png', alt: 'The Montessori Company leaf'
 
+%section#subscribe
+  .container
+    %h1.script our newsletter
+    .row
+      .col-xs-12
+        .newsletter-form
+          %p.text-xs-center
+            Stay in the know! Find out about free products and new features
+            by submitting your email address below:
+          = form_tag join_newsletter_path do
+            .row
+              .col-sm-6.col-md-6.col-md-offset-1.col-lg-5.col-lg-offset-2
+                = email_field_tag :email_address, nil, class: 'form-control'
+              .col-sm-6.col-md-4.col-lg-3
+                = submit_tag 'Join Newsletter',
+                  class: 'btn btn-secondary btn-block'
+
+  .spacer
+    = image_tag 'leaf.png', alt: 'The Montessori Company leaf'
+
 %section#featured-products
   .container
     %h1.script featured products

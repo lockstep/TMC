@@ -59,7 +59,7 @@ describe UsersController, type: :controller do
         it 'sends the user to mailchimp' do
           request.env["HTTP_REFERER"] = root_path
           expect(MailchimpSubscriberWorker)
-            .to receive(:perform_async).with(@user.id, 'c94cda6346')
+            .to receive(:perform_async).with('bill@murray.com', 'c94cda6346')
           patch :update, id: @user, user: { email: 'bill@murray.com' },
             commit: 'Join Pilot'
         end

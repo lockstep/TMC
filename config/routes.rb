@@ -44,4 +44,5 @@ Rails.application.routes.draw do
   resources :line_items, only: [:create, :destroy]
   resources :charges, only: [:create]
   resources :posts, only: [:index, :show]
+  post :join_newsletter, to: 'guests#join_newsletter'
 end

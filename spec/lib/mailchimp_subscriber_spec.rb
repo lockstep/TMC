@@ -16,7 +16,7 @@ describe MailchimpSubscriber do
           nil, 'html', false, true, false
         )
       )
-      MailchimpSubscriber.new.subscribe(@user)
+      MailchimpSubscriber.new.subscribe(@user.email)
     end
   end
 

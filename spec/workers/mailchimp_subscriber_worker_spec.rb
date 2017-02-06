@@ -7,9 +7,9 @@ describe MailchimpSubscriberWorker do
     allow_any_instance_of(MailchimpSubscriber).to receive(:subscribe)
   end
 
-  it 'calls the subscriber with the user instance' do
+  it 'calls the subscriber with the user email' do
     expect_any_instance_of(MailchimpSubscriber).to receive(:subscribe)
-      .with(@user, nil)
-    MailchimpSubscriberWorker.perform_async(@user.id)
+      .with(@user.email, nil)
+    MailchimpSubscriberWorker.perform_async(@user.email)
   end
 end

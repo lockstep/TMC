@@ -141,3 +141,13 @@
     font-size: 0.8rem;
   }
 }
+
+.newsletter-form {
+  background-color: $lighter-grey;
+  padding: 40px;
+  margin-bottom: 10px;
+
+  form {
+    margin-top: 30px;
+  }
+}
