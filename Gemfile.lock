@@ -285,6 +285,7 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    puma (3.6.0)
     quantified (1.0.1)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
@@ -293,6 +294,7 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack-timeout (0.3.2)
     rack_session_access (0.1.1)
       builder (>= 2.0.0)
       rack (>= 1.0.0)
@@ -481,7 +483,9 @@ DEPENDENCIES
   pg (~> 0.15)
   poltergeist
   pry-rails
+  puma
   quiet_assets
+  rack-timeout
   rack_session_access
   rails (= 4.2.5)
   rails_12factor
