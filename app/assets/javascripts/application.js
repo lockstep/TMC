@@ -19,3 +19,4 @@
 //= require bootstrap
 //= require tmc
 //= require product
+//= require profile

@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update] do
     member do
       get :edit_address
+      get :profile
+      get :edit_profile
     end
     resources :orders, only: [:index, :show], controller: 'users/orders'
     resources :materials, only: [:index], controller: 'users/materials'
