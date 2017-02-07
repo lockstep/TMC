@@ -23,9 +23,10 @@ class User < ActiveRecord::Base
     :address_city, :address_postal_code, :address_country,
     if: :editing_address
 
-  validates_presence_of :first_name, :last_name, :school_name,
+  validates_presence_of :first_name, :last_name, :organization_name,
     :position, if: :bambini_pilot_participant?
-  validates :bio, length: { maximum: 100 }
+  MAX_BIO_LENGTH = 160
+  validates :bio, length: { maximum: MAX_BIO_LENGTH }
 
   enum role: [:user, :admin]
 
@@ -34,7 +35,8 @@ class User < ActiveRecord::Base
   POSITIONS = [
     'Montessori Guide', 'Montessori Head of School',
     'Montessori Administrator', 'Teacher',
-    'Principal', 'School Administrator', 'Day Care Provider',
+    'Principal', 'School Administrator', 'Consultant',
+    'Materials Vendor', 'Day Care Provider',
     'Parent', 'Other'
   ]
 

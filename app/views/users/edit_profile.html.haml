@@ -1,4 +1,4 @@
-- content_for :title, 'My Address'
+- content_for :title, 'My Profile'
 - @active = 'profile'
 
 .container#account
@@ -32,7 +32,8 @@
                 .row
                   .col-sm-6
                     .form-group
-                      = f.label :position, 'Position', class: 'form-label'
+                      = f.label :position, 'Current Position',
+                        class: 'form-label'
                       = f.select :position, User::POSITIONS,
                         {include_blank: true}, class: 'form-control'
                   .col-sm-6
@@ -51,17 +52,23 @@
                   .col-sm-4
                     .form-group
                       = f.label :address_country, 'Country', class: 'form-label'
-                      = f.text_field :address_country, class: 'form-control'
+                      = country_select "user", "address_country",
+                        { priority_countries: ["US", "CA", "GB", "AU"],
+                          selected: @user.address_country,
+                          include_blank: 'Select Country' },
+                        { class: 'form-control' }
             .row
               .col-sm-12
                 %hr
                 .form-group
-                  = f.label :bio, 'Biography', class: 'form-label'
-                  = f.text_area :bio, rows: 5, class: 'form-control'
+                  = f.label :bio, "Short Bio (#{User::MAX_BIO_LENGTH} characters max)",
+                    class: 'form-label'
+                  = f.text_area :bio, rows: 2, class: 'form-control',
+                    maxlength: User::MAX_BIO_LENGTH
             .row
               .col-sm-6
                 .form-group
-                  = f.label :interests, 'Interest', class: 'form-label'
+                  = f.label :interests, 'Interests', class: 'form-label'
                   - Interest.public_interests.each do |interest|
                     .checkbox
                       %label
