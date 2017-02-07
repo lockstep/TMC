@@ -1,4 +1,6 @@
 class Interest < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: [ :slugged, :finders ]
   has_many :personal_interests
   has_many :users, through: :personal_interests
 
