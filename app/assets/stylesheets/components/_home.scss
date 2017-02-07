@@ -149,5 +149,12 @@
 
   form {
     margin-top: 30px;
+
+    #email_address {
+      border-color: #adadad;
+      &:focus {
+        border-color: #66afe9;
+      }
+    }
   }
 }
