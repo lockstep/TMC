@@ -33,10 +33,9 @@ class User < ActiveRecord::Base
   delegate :url, to: :avatar, prefix: true
 
   POSITIONS = [
-    'Montessori Guide', 'Montessori Head of School',
-    'Montessori Administrator', 'Teacher',
-    'Principal', 'School Administrator', 'Consultant',
-    'Materials Vendor', 'Day Care Provider',
+    'Montessori Guide', 'Head of School', 'Principal',
+    'Administrator', 'Assistant', 'Trainer', 'Consultant',
+    'Material Maker', 'Day Care Provider',
     'Parent', 'Other'
   ]
 
