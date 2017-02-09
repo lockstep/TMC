@@ -18,7 +18,7 @@
                   .image{style: "background-image:url(#{avatar_url(@user)})"}
                   .info change image
                 .newImageName
-                = f.file_field :avatar
+                = f.file_field :avatar, accept: 'image/png,image/jpeg'
               .col-sm-9.p-l-3
                 .row
                   .col-sm-6
