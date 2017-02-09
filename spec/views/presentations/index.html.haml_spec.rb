@@ -7,7 +7,7 @@ describe "presentations/index" do
     render
   end
 
-  it "display list of presentations" do
+  xit "display list of presentations" do
     presentations.each do |presentation|
       expect(rendered).to match presentation.name
     end
