@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
   MAX_BIO_LENGTH = 160
   validates :bio, length: { maximum: MAX_BIO_LENGTH }
 
+  validates_with AttachmentSizeValidator, attributes: :avatar,
+    content_type: { content_type: ['image/jpeg', 'image/png'] },
+    less_than: 1.megabyte
+
   enum role: [:user, :admin]
 
   delegate :url, to: :avatar, prefix: true
