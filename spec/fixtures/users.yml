@@ -11,6 +11,7 @@ michelle:
   <<: *default
 
 paul:
+  first_name: Paul
   email: paul@tmc.com
   role: <%= User.roles[:user] %>
   address_line_one: '3108 Bent Drive'

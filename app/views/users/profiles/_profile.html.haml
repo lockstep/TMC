@@ -1,0 +1,15 @@
+%tr
+  %td
+    .profile-image{style: "background-image:url(#{avatar_url(user)})"}
+  %td
+    = user.first_name
+  %td
+    = user.last_name
+  %td
+    = user.position
+  %td
+    = user.address_country
+  %td
+    = format_user_certifications(user)
+  %td
+    = format_user_interests(user)
