@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  resources :presentations, only: [:index, :show]
+  # resources :presentations, only: [:index, :show]
 
   resources :products, only: [:show, :index] do
     member do

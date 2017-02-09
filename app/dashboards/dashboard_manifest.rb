@@ -13,7 +13,7 @@ class DashboardManifest
     :orders,
     :users,
     :topics,
-    :presentations,
+    # :presentations,
     :products,
     :images,
     :downloadables,
