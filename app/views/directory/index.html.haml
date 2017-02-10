@@ -1,0 +1,68 @@
+- content_for :title, 'Directory'
+- content_for :header_logo, 'false'
+
+.container#directory.m-t-3
+  %h3.text-center.m-b-3 THE MONTESSORI DIRECTORY
+  .row
+    .col-sm-2.search
+      = form_tag '/directory', method: 'get' do
+        %section
+          %h5 Certifications
+          .form-group
+            - @certifications.each do |certification|
+              .checkbox
+                %label
+                  = check_box_tag 'certifications[]', certification.name,
+                    @search_certifications.include?(certification.name)
+                  .text
+                    = certification.name
+        %section
+          %h5 Interests
+          .form-group
+            - @interests.each do |interest|
+              .checkbox
+                %label
+                  = check_box_tag 'interests[]', interest.name,
+                    @search_interests.include?(interest.name)
+                  .text
+                    = interest.name
+        %section
+          %h5 Positions
+          .form-group
+            - User::POSITIONS.each do |position|
+              .checkbox
+                %label
+                  = check_box_tag 'positions[]', position,
+                    @search_positions.include?(position)
+                  .text
+                    = position
+        %section
+          %h5 Countries
+          .form-group
+            = country_select 'countries', nil,
+              { priority_countries: ["US", "CA", "GB", "AU"],
+                selected: @search_countries,
+                include_blank: 'Select Country' },
+              { class: 'form-control' }
+        .form-group
+          = submit_tag "Search", class: "btn btn-cart"
+    .col-sm-10
+      %table.table.table-hover
+        %thead
+          %tr
+            %th{width: '120px'}
+            %th First Name
+            %th Last Name
+            %th Position
+            %th Country
+            %th Certifications
+            %th Interests
+        %tbody
+          - @users.each do |user|
+            = render 'users/profiles/profile', user: user
+      - if @users.blank?
+        .text-center No users with defined specifications have been found
+      .text-center
+        = paginate @users
+
+

@@ -4,11 +4,8 @@ describe Certification, type: :model do
 
   describe 'validations' do
     context 'public name' do
-      before do
-        @certification = certifications(:ami)
-      end
       it 'does not create duplicate public name' do
-        certification = Certification.create(name: @certification.name,
+        certification = Certification.create(name: certifications(:ami).name,
                                              public: true)
         expect(certification.valid?).to eq false
         expect(certification.errors.full_messages.first)
@@ -27,9 +24,8 @@ describe Certification, type: :model do
       end
       context 'user has a public certification' do
         before do
-          certification = certifications(:ami)
           @certification_count = Certification.all.count
-          @user.update(certifications: [certification])
+          @user.update(certifications: [certifications(:ami)])
         end
         it 'creates user private certification' do
           Certification.manage_user_certifications(@user, ['Custom'])
@@ -51,7 +47,7 @@ describe Certification, type: :model do
           certification_names = @user.reload.certifications.pluck(:name)
           expect(certification_names.include?('Custom')).to eq true
           expect(certification_names.length).to eq 1
-          expect(Certification.all.pluck(:name).sort).to eq ['Custom', 'AMI'].sort
+          expect(Certification.find_by(name: 'Private')).to eq nil
         end
       end
       context 'update with same certification name' do
@@ -60,9 +56,10 @@ describe Certification, type: :model do
         end
         it 'does not create duplicate certification' do
           Certification.manage_user_certifications(
-            @user, ['AMI', 'Private', 'Custom'])
-          expect(Certification.all.pluck(:name).sort)
-            .to eq ['AMI', 'Private', 'Custom'].sort
+            @user, ['AMI', 'ABC', 'Custom'])
+          expect(Certification.where(name: 'AMI').count).to eq 1
+          expect(Certification.where(name: 'ABC').count).to eq 1
+          expect(Certification.where(name: 'Custom').count).to eq 1
         end
       end
     end

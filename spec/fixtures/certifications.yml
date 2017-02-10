@@ -1,6 +1,9 @@
 ami:
   name: 'AMI'
   public: true
+abc:
+  name: 'ABC'
+  public: true
 private:
   name: 'Private'
   public: false

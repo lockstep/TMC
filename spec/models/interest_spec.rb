@@ -4,11 +4,9 @@ describe Interest, type: :model do
 
   describe 'validations' do
     context 'public name' do
-      before do
-        @interest = interests(:peace)
-      end
       it 'does not create duplicate public name' do
-        interest = Interest.create(name: @interest.name, public: true)
+        interest = Interest.create(name: interests(:peace).name,
+                                   public: true)
         expect(interest.valid?).to eq false
         expect(interest.errors.full_messages.first)
           .to match 'Name has already been taken'
@@ -51,7 +49,7 @@ describe Interest, type: :model do
           interest_names = @user.reload.interests.pluck(:name)
           expect(interest_names.include?('Custom')).to eq true
           expect(interest_names.length).to eq 1
-          expect(Interest.all.pluck(:name).sort).to eq ['Custom', 'Peace'].sort
+          expect(Interest.find_by(name: 'Private')).to eq nil
         end
       end
       context 'update with same interest name' do
@@ -61,8 +59,9 @@ describe Interest, type: :model do
         it 'does not create duplicate interest' do
           Interest.manage_user_interests(
             @user, ['Peace', 'Private', 'Custom'])
-          expect(Interest.all.pluck(:name).sort)
-            .to eq ['Peace', 'Private', 'Custom'].sort
+          expect(Interest.where(name: 'Peace').count).to eq 1
+          expect(Interest.where(name: 'Private').count).to eq 1
+          expect(Interest.where(name: 'Custom').count).to eq 1
         end
       end
     end

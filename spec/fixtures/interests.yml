@@ -1,6 +1,9 @@
 peace:
   name: 'Peace'
   public: true
+teaching:
+  name: 'Teaching'
+  public: true
 private:
   name: 'Private'
   public: false

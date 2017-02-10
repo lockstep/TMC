@@ -30,6 +30,10 @@
         - else
           %li.nav-item.pull-sm-right
             = link_to 'Login', new_user_session_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'Directory',
+            directory_path,
+            class: 'nav-link'
         %li.nav-item.pull-sm-right
           = link_to 'My Cart', cart_url, class: 'my-cart',
             data: { turbolinks: false }

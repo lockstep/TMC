@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar,
     content_type: /\Aimage\/.*\Z/
 
+  scope :opted_in_to_public_directory, -> {
+    where(opted_in_to_public_directory: true)
+  }
+
   def profile_complete?
     required_fields = [
       :first_name, :last_name, :bio, :address_city, :address_country,

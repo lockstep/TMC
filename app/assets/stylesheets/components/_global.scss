@@ -134,6 +134,10 @@ hr {
   }
 }
 
+.text-center {
+  text-align: center;
+}
+
 // ensure vertical spacing for form inputs when stacked on small screens
 @media (max-width: 768px) {
   [class*="col-"]{
