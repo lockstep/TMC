@@ -17,7 +17,8 @@ class DirectoryController < ApplicationController
   end
 
   def users
-    return User.all.page(params[:page] || 1) unless search?
+    return User.opted_in_to_public_directory
+      .page(params[:page] || 1) unless search?
     user_ids = [
       user_ids_by_certifications(@search_certifications),
       user_ids_by_interests(@search_interests),
@@ -25,7 +26,8 @@ class DirectoryController < ApplicationController
       user_ids_by_countries(@search_countries),
     ]
     user_ids = user_ids.flatten.delete_if { |item| item.nil? }
-    User.where(id: user_ids.uniq).page(params[:page] || 1)
+    User.opted_in_to_public_directory
+      .where(id: user_ids.uniq).page(params[:page] || 1)
   end
 
   def user_ids_by_certifications(certitication_names)

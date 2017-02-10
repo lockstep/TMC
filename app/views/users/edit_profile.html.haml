@@ -100,5 +100,12 @@
                       = text_field_tag 'certification', nil,
                         placeholder: 'New Certification', class: 'form-control'
                     %a{class: 'btn btn-secondary'} ADD
+            .row
+              .col-sm-12
+                %section.from-group.m-t-3
+                  .checkbox
+                    %label
+                      = f.check_box :opted_in_to_public_directory, {}, 'true', 'false'
+                      .text Allow my profile to be listed on public directory
             .form-group.m-t-2
               = f.submit "Save profile", class: "btn btn-cart"

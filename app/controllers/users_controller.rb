@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       :address_line_two, :address_city, :address_state, :address_postal_code,
       :address_country, :editing_address, :editing_profile,
       :first_name, :last_name, :position, :organization_name,
-      :bambini_pilot_participant, :bio, :avatar
+      :bambini_pilot_participant, :bio, :avatar, :opted_in_to_public_directory
     )
   end
 
