@@ -149,6 +149,17 @@ describe 'Directory', type: :feature do
             .to have_content I18n.t('directory.index.no_users_found')
         end
       end
+      context 'user profile' do
+        before do
+          visit directory_profile_path(users(:michelle).id)
+        end
+        it 'does not show the profile but redirects back with warning message' do
+          expect(page)
+            .to have_current_path directory_profile_path(users(:michelle).id)
+          expect(page)
+            .to have_content users(:michelle).full_name.upcase
+        end
+      end
     end
     context 'some user not opted in to public directory' do
       before do
@@ -207,6 +218,16 @@ describe 'Directory', type: :feature do
             expect(page)
               .to have_content I18n.t('directory.index.no_users_found')
           end
+        end
+      end
+      context 'user profile' do
+        before do
+          visit directory_profile_path(users(:paul).id)
+        end
+        it 'does not show the profile but redirects back with warning message' do
+          expect(page).to have_current_path(directory_path)
+          expect(page)
+            .to have_content 'Unable to find the person'
         end
       end
     end

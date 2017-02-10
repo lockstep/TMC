@@ -23,8 +23,11 @@
       background-size: cover;
       border-radius: 50%;
     }
-    td {
-      vertical-align: middle;
+    tr {
+      td {
+        cursor: pointer;
+        vertical-align: middle;
+      }
     }
   }
 }

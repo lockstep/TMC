@@ -1,0 +1,40 @@
+- content_for :title, 'Directory'
+- content_for :header_logo, 'false'
+
+.container#directory.m-t-3
+  = link_to 'Back to Directory', directory_path
+  %h3.text-center.m-y-3
+    = @user.full_name.upcase
+  #profile
+    .row
+      .col-sm-3#avatar
+        .image{style: "background-image:url(#{avatar_url(@user)})"}
+      .col-sm-9.p-l-3
+        .row
+          .col-sm-6
+            .section
+              %small POSITION
+              %div
+                = @user.position
+                %small &nbsp;AT&nbsp;
+                %span
+                  = @user.organization_name
+            .section
+              %small BIOGRAPHY
+              %div
+                = @user.bio
+          .col-sm-6
+            .section
+              %small LOCATION
+              %div
+                = @user.public_location
+            .section
+              %small TRAININGS &amp; CERTIFICATIONS
+              %div
+                = format_user_certifications(@user)
+            .section
+              %small INTERESTS
+              %div
+                = format_user_interests(@user)
+    %hr
+

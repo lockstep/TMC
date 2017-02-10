@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get '/403', to: 'pages#show', page: 'home', as: 'error_403'
   get '/cart', to: 'carts#my_cart', as: 'cart'
   get '/directory', to: 'directory#index'
+  get '/directory/profile/:user_id', to: 'directory#profile',
+    as: 'directory_profile'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

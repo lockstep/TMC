@@ -1,10 +1,18 @@
 class DirectoryController < ApplicationController
   before_action :prepare_search_params, only: :index
+  before_action :prepare_user, only: :profile
 
   def index
     @users = users
     @certifications = Certification.public_certifications
     @interests = Interest.public_interests
+  end
+
+  def profile
+    unless @user
+      flash[:error] = 'Unable to find the person on public directory'
+      return redirect_to directory_path
+    end
   end
 
   private
@@ -71,5 +79,10 @@ class DirectoryController < ApplicationController
     @search_interests.present? ||
     @search_positions.present? ||
     @search_countries.delete_if(&:empty?).present?
+  end
+
+  def prepare_user
+    @user = User.opted_in_to_public_directory
+      .find_by(id: params[:user_id])
   end
 end
