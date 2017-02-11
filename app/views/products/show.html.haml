@@ -49,7 +49,7 @@
                   .name= @product.vendor_full_name
                   .location
                     %i.fa.fa-map-marker
-                    = @product.vendor_public_location
+                    = @product.vendor_public_location(true)
                   .bio= @product.vendor_bio.html_safe
 
         .social

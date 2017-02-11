@@ -25,12 +25,15 @@ describe User, type: :model do
   describe '#public_location' do
     before do
       @user = build(
-        :user, address_city: 'C', address_state: 'S', address_country: 'CO'
+        :user, address_city: 'C', address_state: 'S', address_country: 'CA'
       )
     end
     context 'user as all fields' do
       it 'shows full address' do
-        expect(@user.public_location).to eq 'C, S, CO'
+        expect(@user.public_location).to eq 'C, S, CA'
+      end
+      it 'can show the full country name' do
+        expect(@user.public_location(true)).to eq 'C, S, Canada'
       end
     end
     context 'user has only city/state' do
@@ -40,21 +43,21 @@ describe User, type: :model do
       end
     end
     context 'user has only country' do
-      before { @user = build(:user, address_country: 'CO') }
+      before { @user = build(:user, address_country: 'CA') }
       it 'shows only country' do
-        expect(@user.public_location).to eq 'CO'
+        expect(@user.public_location).to eq 'CA'
       end
     end
     context 'user has only state/country' do
       before { @user.update(address_city: nil) }
       it 'shows only country' do
-        expect(@user.public_location).to eq 'S, CO'
+        expect(@user.public_location).to eq 'S, CA'
       end
     end
     context 'user has only city/country' do
       before { @user.update(address_state: nil) }
       it 'shows only country' do
-        expect(@user.public_location).to eq 'C, CO'
+        expect(@user.public_location).to eq 'C, CA'
       end
     end
   end

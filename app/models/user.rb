@@ -77,8 +77,12 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def public_location
+  def public_location(full_country = false)
     location_string = address_country || ''
+    if address_country && full_country
+      country = ISO3166::Country[address_country]
+      location_string = country.translations[I18n.locale.to_s] || country.name
+    end
     if address_state.present?
       location_string = address_country ?
         "#{address_state}, #{location_string}" : address_state
