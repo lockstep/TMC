@@ -146,7 +146,7 @@ describe 'Directory', type: :feature do
           check 'Material Maker'
           click_button 'Search'
           expect(page)
-            .to have_content 'No users with defined specifications have been found'
+            .to have_content I18n.t('directory.index.no_users_found')
         end
       end
     end
@@ -169,7 +169,7 @@ describe 'Directory', type: :feature do
           end
           it 'does not show the user profile' do
             expect(page)
-              .to have_content 'No users with defined specifications have been found'
+              .to have_content I18n.t('directory.index.no_users_found')
           end
         end
       end
@@ -181,7 +181,7 @@ describe 'Directory', type: :feature do
           end
           it 'does not show the user profile' do
             expect(page)
-              .to have_content 'No users with defined specifications have been found'
+              .to have_content I18n.t('directory.index.no_users_found')
           end
         end
       end
@@ -193,7 +193,7 @@ describe 'Directory', type: :feature do
           end
           it 'shows the users having either option' do
             expect(page)
-              .to have_content 'No users with defined specifications have been found'
+              .to have_content I18n.t('directory.index.no_users_found')
           end
         end
       end
@@ -205,7 +205,7 @@ describe 'Directory', type: :feature do
           end
           it 'shows the user' do
             expect(page)
-              .to have_content 'No users with defined specifications have been found'
+              .to have_content I18n.t('directory.index.no_users_found')
           end
         end
       end

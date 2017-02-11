@@ -61,7 +61,7 @@
           - @users.each do |user|
             = render 'users/profiles/profile', user: user
       - if @users.blank?
-        .text-center No users with defined specifications have been found
+        .text-center= t('.no_users_found')
       .text-center
         = paginate @users
 

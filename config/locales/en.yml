@@ -7,3 +7,6 @@ en:
         adjustment_total: Discount
         promotion_code: Discount Code
         total: Order Total
+  directory:
+    index:
+      no_users_found: Sorry, no users were found.

@@ -14,9 +14,10 @@ document.addEventListener("turbolinks:load", function() {
     avatar.$fileField.change(function(){
       if (!this.files || this.files.length < 1) return;
       avatar.$newImageName.html('Uploading...');
+      avatar.$newImageName.addClass('alert alert-info');
       var $form = avatar.$fileField.closest('form');
       $form.find(':input[type="submit"]').click();
-      $(':input[type="submit"]').prop('disabled', true);
+      $('input, select, textarea').prop('disabled', true);
     });
 
     // upload avatar
