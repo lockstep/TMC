@@ -1,17 +1,19 @@
 - content_for :title, 'Directory'
 - content_for :header_logo, 'false'
 
-.container#directory.m-t-3
-  = link_to 'Back to Directory', directory_path
-  %h3.text-center.m-y-3
-    = @user.full_name.upcase
-  #profile
+.container#directory.profile.m-t-3
+  .row
+    %h1.text-center
+      = link_to '< Back to Directory', directory_path, class: 'hidden-xs-down'
+      = @user.full_name.upcase
+    %hr
+  #profile.m-t-2
     .row
       .col-sm-3#avatar
         .image{style: "background-image:url(#{avatar_url(@user)})"}
       .col-sm-9.p-l-3
         .row
-          .col-sm-6
+          .col-sm-5
             .section
               %small POSITION
               %div
@@ -20,21 +22,23 @@
                 %span
                   = @user.organization_name
             .section
-              %small BIOGRAPHY
-              %div
-                = @user.bio
-          .col-sm-6
-            .section
               %small LOCATION
               %div
                 = @user.public_location
+          .col-sm-7
+            .section
+              %small BIOGRAPHY
+              %div
+                = @user.bio
+        .row
+          .col-sm-5
             .section
               %small TRAININGS &amp; CERTIFICATIONS
               %div
                 = format_user_certifications(@user)
+          .col-sm-7
             .section
               %small INTERESTS
               %div
                 = format_user_interests(@user)
-    %hr
 

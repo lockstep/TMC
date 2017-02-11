@@ -1,8 +1,22 @@
 #directory {
   h1 {
+    position: relative;
     font-size: 24px;
     color: $blue;
   }
+
+  &.profile {
+    h1 {
+      font-size: 30px;
+      a {
+        font-size: 18px;
+        position: absolute;
+        left: 0px;
+        top: 5px;
+      }
+    }
+  }
+
   .search {
     input[type='checkbox'] {
       display: initial;
