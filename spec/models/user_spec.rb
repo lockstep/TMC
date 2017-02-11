@@ -22,6 +22,43 @@ describe User, type: :model do
     it { expect(michelle.email).to eq 'mich@tmc.com' }
   end
 
+  describe '#public_location' do
+    before do
+      @user = build(
+        :user, address_city: 'C', address_state: 'S', address_country: 'CO'
+      )
+    end
+    context 'user as all fields' do
+      it 'shows full address' do
+        expect(@user.public_location).to eq 'C, S, CO'
+      end
+    end
+    context 'user has only city/state' do
+      before { @user.update(address_country: nil) }
+      it 'returns city and state' do
+        expect(@user.public_location).to eq 'C, S'
+      end
+    end
+    context 'user has only country' do
+      before { @user = build(:user, address_country: 'CO') }
+      it 'shows only country' do
+        expect(@user.public_location).to eq 'CO'
+      end
+    end
+    context 'user has only state/country' do
+      before { @user.update(address_city: nil) }
+      it 'shows only country' do
+        expect(@user.public_location).to eq 'S, CO'
+      end
+    end
+    context 'user has only city/country' do
+      before { @user.update(address_state: nil) }
+      it 'shows only country' do
+        expect(@user.public_location).to eq 'C, CO'
+      end
+    end
+  end
+
   describe '#full_name' do
     it { expect(michelle.full_name).to eq 'Michelle TMC' }
   end

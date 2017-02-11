@@ -1,7 +1,7 @@
 module InterestsHelper
   def format_user_interests(user)
     interest_names = user.interests.pluck(:name)
-    return 'N/A' unless interest_names.present?
+    return '' unless interest_names.present?
     interest_names.sort.join(', ')
   end
 

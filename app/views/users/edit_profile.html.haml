@@ -68,7 +68,7 @@
             .row
               .col-sm-6
                 %section.form-group.interest
-                  = f.label :interests, 'Interest', class: 'form-label'
+                  = f.label :interests, 'Interests', class: 'form-label'
                   .interests
                     - interests_available_to(@user).each do |interest|
                       .checkbox
@@ -102,10 +102,21 @@
                     %a{class: 'btn btn-secondary'} ADD
             .row
               .col-sm-12
-                %section.from-group.m-t-3
+                %section.montessori-directory-appeal.m-t-3.p-a-1
+                  %h5 The Montessori Directory
+                  %p
+                    Would you like to connect with other Montessorians around
+                    the world? In an effort to bring our community closer
+                    together we are hosting a global
+                    = succeed '.' do
+                      = link_to "Montessori Directory", directory_path,
+                        target: '_blank'
+                    Select the box below to add your profile to the directory!
                   .checkbox
                     %label
                       = f.check_box :opted_in_to_public_directory, {}, 'true', 'false'
-                      .text Allow my profile to be listed on public directory
+                      .text
+                        List my profile in The Montessori Directory
+
             .form-group.m-t-2
               = f.submit "Save profile", class: "btn btn-cart"

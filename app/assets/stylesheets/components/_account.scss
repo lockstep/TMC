@@ -10,6 +10,15 @@
   .product-preview {
     width: 80px;
   }
+
+  .montessori-directory-appeal {
+    border: solid 1px $light-grey;
+
+    h5 {
+      font-weight: bold;
+      color: $black;
+    }
+  }
 }
 
 .home-sidebar {

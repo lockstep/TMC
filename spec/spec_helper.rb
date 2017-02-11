@@ -20,6 +20,7 @@ require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'rack_session_access/capybara'
 require 'sidekiq/testing'
+require 'factory_girl_rails'
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 
@@ -56,6 +57,8 @@ RSpec.configure do |config|
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
+
+  config.include FactoryGirl::Syntax::Methods
 
   # rspec-mocks config goes here. You can use an alternate test double
   # library (such as bogus or mocha) by changing the `mock_with` option here.

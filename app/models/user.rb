@@ -78,11 +78,15 @@ class User < ActiveRecord::Base
   end
 
   def public_location
-    if address_state.blank?
-      "#{address_city}, #{address_country}"
-    else
-      "#{address_city}, #{address_state}, #{address_country}"
+    location_string = address_country || ''
+    if address_state.present?
+      location_string = address_country ?
+        "#{address_state}, #{location_string}" : address_state
     end
+    if address_city.present?
+      location_string = "#{address_city}, #{location_string}"
+    end
+    location_string
   end
 
   def set_default_role

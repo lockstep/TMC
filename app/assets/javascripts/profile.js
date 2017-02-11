@@ -35,6 +35,8 @@ document.addEventListener("turbolinks:load", function() {
       $customAddButton: $interestSection.find('.custom a')
     }
 
+    handleReturnPress(interest);
+
     // append a new custom interest
     interest.$customAddButton.click(function(e) {
       e.preventDefault();
@@ -58,6 +60,8 @@ document.addEventListener("turbolinks:load", function() {
       $customAddButton: $certificationSection.find('.custom a')
     }
 
+    handleReturnPress(certification);
+
     // append a new custom certification
     certification.$customAddButton.click(function(e) {
       e.preventDefault();
@@ -72,6 +76,16 @@ document.addEventListener("turbolinks:load", function() {
       certification.$certifications.append(checkboxElement('certifications',
                                                            newCertificationName));
       clearCustomInput(certification.$customInput);
+    });
+  }
+
+  function handleReturnPress(customFieldsObject) {
+    customFieldsObject.$customInput.keydown(function(e) {
+      if (e.which == 13) {
+        e.preventDefault();
+        e.stopPropagation();
+        customFieldsObject.$customAddButton.click();
+      }
     });
   }
 

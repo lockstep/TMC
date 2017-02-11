@@ -1,8 +1,14 @@
 - content_for :title, 'Directory'
 - content_for :header_logo, 'false'
 
-.container#directory.m-t-3
-  %h3.text-center.m-b-3 THE MONTESSORI DIRECTORY
+.container#directory.m-t-2
+  .text-xs-center.m-b-2
+    = image_tag 'leaf-rotated.png', alt: 'The Montessori Company Leaf',
+      class: 'leaf'
+  %h1.text-center.m-b-1 THE MONTESSORI DIRECTORY
+  .text-xs-center.m-b-3
+    = image_tag 'leaf.png', alt: 'The Montessori Company Leaf',
+      class: 'leaf'
   .row
     .col-sm-2.search
       = form_tag '/directory', method: 'get' do
@@ -47,14 +53,13 @@
         .form-group
           = submit_tag "Search", class: "btn btn-cart"
     .col-sm-10
-      %table.table.table-hover
+      %table.table.table-hover.table-responsive
         %thead
           %tr
             %th{width: '120px'}
-            %th First Name
-            %th Last Name
+            %th Name
             %th Position
-            %th Country
+            %th Location
             %th Certifications
             %th Interests
         %tbody
