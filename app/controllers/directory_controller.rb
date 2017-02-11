@@ -6,6 +6,13 @@ class DirectoryController < ApplicationController
     @users = users
     @certifications = Certification.public_certifications
     @interests = Interest.public_interests
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @users, root: 'profiles',
+          each_serializer: PublicUserSerializer
+      end
+    end
   end
 
   def profile

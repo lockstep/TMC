@@ -37,6 +37,7 @@ RSpec.configure do |config|
   config.mock_with :rspec
 
   config.include Rails.application.routes.url_helpers
+  config.include Support::ResponseHelpers, type: :request
 
   # We are using DatabaseCleaner (see below)
   config.use_transactional_fixtures = false
