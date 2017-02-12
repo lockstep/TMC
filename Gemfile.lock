@@ -163,6 +163,8 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
+    faker (1.7.3)
+      i18n (~> 0.5)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
@@ -473,6 +475,7 @@ DEPENDENCIES
   devise-async
   erb2haml
   factory_girl_rails
+  faker
   fog-aws
   font-awesome-rails
   friendly_id (~> 5.1.0)

@@ -60,6 +60,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara', '~> 2.7.0'
   gem 'poltergeist'
+  gem 'faker'
 end
 
 group :development do
