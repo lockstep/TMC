@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
     hash_secret: "JUST4URLUNIQUENESS",
     s3_protocol: "https",
     styles: {
-      thumb: "100x100>", small: "200x200>", medium: "400x400>"
+      thumb: "100x100#", small: "200x200#", medium: "400x400#"
     },
     default_url: "#{ENV['HOST']}/images/montessori_avatar.jpg"
 
