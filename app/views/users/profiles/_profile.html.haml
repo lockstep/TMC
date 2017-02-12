@@ -1,6 +1,6 @@
 %tr{onclick: "document.location = '#{directory_profile_path(user.id)}'"}
   %td
-    .profile-image{style: "background-image:url(#{avatar_url(user)})"}
+    .profile-image{style: "background-image:url(#{user.avatar.url(:thumb)})"}
   %td
     = user.full_name
   %td

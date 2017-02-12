@@ -2,10 +2,7 @@ describe DirectoryController, type: :request do
 
   describe '#index' do
     before do
-      @user = create(
-        :user, opted_in_to_public_directory: true, first_name: 'Jane',
-        last_name: 'Austin'
-      )
+      @user = create(:user, opted_in_to_public_directory: true)
     end
     it 'returns users in requested format' do
       get '/directory.json'

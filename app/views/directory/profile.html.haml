@@ -10,7 +10,7 @@
   #profile.m-t-2
     .row
       .col-sm-3#avatar
-        .image{style: "background-image:url(#{avatar_url(@user)})"}
+        .image{style: "background-image:url(#{@user.avatar.url(:medium)})"}
       .col-sm-9.p-l-3
         .row
           .col-sm-5
@@ -18,9 +18,10 @@
               %small POSITION
               %div
                 = @user.position
-                %small &nbsp;AT&nbsp;
-                %span
-                  = @user.organization_name
+                - if @user.organization_name.present?
+                  %small &nbsp;AT&nbsp;
+                  %span
+                    = @user.organization_name
             .section
               %small LOCATION
               %div

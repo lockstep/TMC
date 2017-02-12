@@ -4,6 +4,8 @@ default: &default
 
 michelle:
   first_name: Michelle
+  last_name: Rugel
+  position: User::POSITIONS.first
   last_name: TMC
   bio: Michelle is an AMI certified primary and elementary guide.
   email: mich@tmc.com
@@ -12,6 +14,8 @@ michelle:
 
 paul:
   first_name: Paul
+  last_name: Hiatt
+  position: User::POSITIONS.first
   email: paul@tmc.com
   role: <%= User.roles[:user] %>
   address_line_one: '3108 Bent Drive'

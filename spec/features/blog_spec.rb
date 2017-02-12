@@ -21,7 +21,7 @@ describe 'Blog', type: :feature do
           visit posts_path
           within "#blog-post-#{@has_author.id}" do
             expect(page).to have_content 'by Michelle TMC'
-            expect(page).to have_css("img[src*='avatars/medium/missing.png']")
+            expect(page).to have_css("img[src*='images/montessori_avatar.jpg']")
           end
         end
       end

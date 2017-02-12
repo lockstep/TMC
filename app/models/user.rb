@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name, :organization_name,
     :position, if: :bambini_pilot_participant?
+
+  validates_presence_of :first_name, :last_name,
+    :position, :address_country, if: :opted_in_to_public_directory?
+
   MAX_BIO_LENGTH = 160
   validates :bio, length: { maximum: MAX_BIO_LENGTH }
 
@@ -55,7 +59,8 @@ class User < ActiveRecord::Base
     s3_protocol: "https",
     styles: {
       thumb: "100x100>", small: "200x200>", medium: "400x400>"
-    }
+    },
+    default_url: '/images/montessori_avatar.jpg'
 
   validates_attachment_content_type :avatar,
     content_type: /\Aimage\/.*\Z/

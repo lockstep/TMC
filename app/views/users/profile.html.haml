@@ -23,9 +23,10 @@
                 %small POSITION
                 %div
                   = @user.position
-                  %small &nbsp;AT&nbsp;
-                  %span
-                    = @user.organization_name
+                  - if @user.organization_name.present?
+                    %small &nbsp;AT&nbsp;
+                    %span
+                      = @user.organization_name
               .section
                 %small LOCATION
                 %div
