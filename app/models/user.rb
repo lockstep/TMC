@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   after_initialize :set_default_role, :if => :new_record?
-  after_commit :send_welcome_email, :subscribe_to_mailchimp, on: :create
 
   has_many :orders
   has_many :posts
@@ -121,8 +120,10 @@ class User < ActiveRecord::Base
     if user.nil?
       user = User.where(email: auth.info.email).first_or_initialize
       unless user.persisted?
+
         user.password = Devise.friendly_token[0,20]
         user.save!
+        user.set_up_registering_user!
       end
     end
 
@@ -137,6 +138,11 @@ class User < ActiveRecord::Base
     true
   end
 
+  def set_up_registering_user!
+    send_welcome_email
+    subscribe_to_mailchimp
+  end
+
   private
 
   def password_required?
@@ -148,7 +154,7 @@ class User < ActiveRecord::Base
   end
 
   def send_welcome_email
-    WelcomeNewUserWorker.perform_async(self.id)
+    WelcomeNewUserWorker.perform_in(1.second, self.id)
   end
 
   def subscribe_to_mailchimp
