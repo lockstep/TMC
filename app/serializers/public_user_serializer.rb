@@ -2,7 +2,7 @@ class PublicUserSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :position,
     :organization_name, :address_country, :avatar_url_thumb,
     :avatar_url_small, :avatar_url_medium, :full_address_country,
-    :position_with_organization
+    :position_with_organization, :full_name
 
   def avatar_url_thumb
     object.avatar.url(:thumb)
