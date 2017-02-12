@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
     styles: {
       thumb: "100x100>", small: "200x200>", medium: "400x400>"
     },
-    default_url: '/images/montessori_avatar.jpg'
+    default_url: "#{ENV['HOST']}/images/montessori_avatar.jpg"
 
   validates_attachment_content_type :avatar,
     content_type: /\Aimage\/.*\Z/
@@ -81,11 +81,16 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def full_address_country
+    return if address_country.blank?
+    country = ISO3166::Country[address_country]
+    country.translations[I18n.locale.to_s] || country.name
+  end
+
   def public_location(full_country = false)
     location_string = address_country || ''
     if address_country && full_country
-      country = ISO3166::Country[address_country]
-      location_string = country.translations[I18n.locale.to_s] || country.name
+      location_string = full_address_country
     end
     if address_state.present?
       location_string = address_country ?
