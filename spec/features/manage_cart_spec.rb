@@ -34,6 +34,21 @@ describe 'Ordering process', type: :feature do
       expect(page).not_to have_button 'Add to Cart'
       expect(page).to have_content 'already in your cart'
     end
+
+    it 'is smoother with js enabled', :js do
+      visit product_path @product
+      expect(page).to have_content @product.name.upcase
+      click_button 'Add to Cart'
+      sleep 1 # FKINGGG AJAX SPECS ADJKFJJDFJSDFJSDFASD
+      # It remains on the page
+      expect(page).not_to have_content 'Your Cart'
+      # check we actually added it
+      click_link 'My Cart'
+      expect(page).to have_content 'Your Cart'
+      expect(page).to have_content @product.name
+      click_link @product.name
+      expect(page).to have_content 'already in your cart'
+    end
   end
 
   context 'promo code' do

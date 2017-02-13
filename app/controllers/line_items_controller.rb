@@ -5,7 +5,11 @@ class LineItemsController < ApplicationController
     if !@order.user && current_user
       @order.update(user: current_user)
     end
-    redirect_to @order
+
+    respond_to do |format|
+      format.html { redirect_to @order }
+      format.json { render json: { success: true } }
+    end
   end
 
   def destroy
