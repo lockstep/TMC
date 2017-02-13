@@ -7,6 +7,17 @@ class UsersMailer < ApplicationMailer
     mail(to: @user.email, subject: "Welcome to The Montessori Company")
   end
 
+  def new_private_message(message_id)
+    @private_message = FeedItems::PrivateMessage.find(message_id)
+    @recipient = @private_message.feedable
+    @author = @private_message.author
+    mail(
+      to: @recipient.email,
+      bcc: ADMIN_EMAILS,
+      subject: "New Private Message on TMC"
+    )
+  end
+
   def bad_link(product)
     @product = product
     mail(to: ADMIN_EMAILS, subject: "Bad Link Found on TMC")

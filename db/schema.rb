@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210003935) do
+ActiveRecord::Schema.define(version: 20170213142819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,19 @@ ActiveRecord::Schema.define(version: 20170210003935) do
 
   add_index "explorable_locations", ["explorable_type", "explorable_id"], name: "index_explorable_locations_on_explorable_type_and_explorable_id", using: :btree
   add_index "explorable_locations", ["visual_exploration_id"], name: "index_explorable_locations_on_visual_exploration_id", using: :btree
+
+  create_table "feed_items", force: :cascade do |t|
+    t.string   "type"
+    t.text     "message"
+    t.integer  "feedable_id"
+    t.string   "feedable_type"
+    t.integer  "author_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "feed_items", ["author_id"], name: "index_feed_items_on_author_id", using: :btree
+  add_index "feed_items", ["feedable_type", "feedable_id"], name: "index_feed_items_on_feedable_type_and_feedable_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false

@@ -10,3 +10,14 @@ en:
   directory:
     index:
       no_users_found: Sorry, no users were found.
+    profile:
+      send_message: Send Private Message
+      user_not_found:  Sorry, no public profile was found at that url.
+      own_messages: You cannot send messages to yourself.
+      sign_in_to_send_message_html: Please <a href="%{sign_in}">sign in</a>
+        or <a href="%{sign_up}">sign up</a> to send messages.
+  feed_items:
+    send_message:
+      message_sent: Your message has been sent!
+      message_empty: Oops, looks like you didn't add a message.
+      must_authenticate: You must be logged in to send messages.

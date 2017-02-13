@@ -1,7 +1,7 @@
 - content_for :title, 'Directory'
 - content_for :header_logo, 'false'
 
-.container#directory.profile.m-t-3
+.container#directory.directory-profile.m-t-3
   .row
     %h1.text-center
       = link_to '< Back to Directory', directory_path, class: 'hidden-xs-down'
@@ -55,3 +55,25 @@
         #products-list
           = render 'products/products_list', colspan: 3,
             products: @vendor_products
+  .row.m-t-2
+    .text-xs-center.m-b-2
+      = image_tag 'leaf.png', alt: 'The Montessori Company Leaf',
+        class: 'leaf'
+    .col-lg-6
+      %a#messages
+      %h3.text-xs-center.m-b-2 Private Messages
+      %hr
+      - if user_signed_in?
+        - if @user == current_user
+          %p.text-xs-center= t('.own_messages')
+        - else
+          - @private_messages.each do |private_message|
+            .private-message{ class: ('from-me' if private_message.author == current_user) }
+              = simple_format(private_message.message)
+              .sent-info= message_sent_info(private_message, current_user)
+          = form_for [ @user, FeedItem.new ], url: { action: 'send_message', controller: :feed_items } do |f|
+            .form-group
+              = f.text_area :message, class: 'form-control', rows: 3
+            = f.submit 'Send Private Message', class: 'btn btn-cart pull-right'
+      - else
+        .text-xs-center= t('.sign_in_to_send_message_html', sign_in: new_user_session_path, sign_up: new_user_registration_path)

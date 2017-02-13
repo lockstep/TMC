@@ -5,7 +5,7 @@
     color: $blue;
   }
 
-  &.profile {
+  &.directory-profile {
     h1 {
       font-size: 30px;
       a {
@@ -42,6 +42,31 @@
         cursor: pointer;
         vertical-align: middle;
       }
+    }
+  }
+}
+
+.directory-profile {
+  .private-message {
+    position: relative;
+    padding: 15px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    background-color: $lighter-blue;
+
+    &.from-me {
+      background-color: $lighter-grey;
+    }
+
+    .sent-info {
+      position: absolute;
+      bottom: 9px;
+      right:  13px;
+      font-size: 11px;
+      font-style: italic;
+      color: gray;
     }
   }
 }

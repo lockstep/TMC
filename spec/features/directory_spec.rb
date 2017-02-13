@@ -227,7 +227,7 @@ describe 'Directory', type: :feature do
         it 'does not show the profile but redirects back with warning message' do
           expect(page).to have_current_path(directory_path)
           expect(page)
-            .to have_content 'Unable to find the person'
+            .to have_content I18n.t('directory.profile.user_not_found')
         end
       end
     end

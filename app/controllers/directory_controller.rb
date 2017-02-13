@@ -17,10 +17,13 @@ class DirectoryController < ApplicationController
 
   def profile
     unless @user
-      flash[:error] = 'Unable to find the person on public directory'
+      flash[:error] = t('.user_not_found')
       return redirect_to directory_path
     end
     @vendor_products = @user.products_for_sale.live
+    @private_messages = FeedItems::PrivateMessage.conversation_between(
+      @user, current_user, 10
+    )
   end
 
   private
