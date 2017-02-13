@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :completed_orders, -> { paid }, class_name: 'Order'
   has_many :line_items, through: :completed_orders
   has_many :purchased_products, through: :line_items, source: :product
+  has_many :products_for_sale, class_name: 'Product', foreign_key: :vendor_id
   has_many :identities
   has_many :personal_interests
   has_many :interests, through: :personal_interests

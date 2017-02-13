@@ -32,14 +32,26 @@
               %div
                 = @user.bio
         .row
-          .col-sm-5
-            .section
-              %small TRAININGS &amp; CERTIFICATIONS
-              %div
-                = format_user_certifications(@user)
-          .col-sm-7
-            .section
-              %small INTERESTS
-              %div
-                = format_user_interests(@user)
+          - if format_user_certifications(@user).present?
+            .col-sm-5
+              .section
+                %small TRAININGS &amp; CERTIFICATIONS
+                %div
+                  = format_user_certifications(@user)
+          - if format_user_interests(@user).present?
+            .col-sm-7
+              .section
+                %small INTERESTS
+                %div
+                  = format_user_interests(@user)
 
+  - if !@vendor_products.empty?
+    .row.m-t-2
+      .col-xs-12
+        .text-xs-center.m-b-2
+          = image_tag 'leaf.png', alt: 'The Montessori Company Leaf',
+            class: 'leaf'
+        %h3.text-xs-center.m-b-3 Products on The Marketplace
+        #products-list
+          = render 'products/products_list', colspan: 3,
+            products: @vendor_products

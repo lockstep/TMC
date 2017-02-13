@@ -20,6 +20,7 @@ class DirectoryController < ApplicationController
       flash[:error] = 'Unable to find the person on public directory'
       return redirect_to directory_path
     end
+    @vendor_products = @user.products_for_sale.live
   end
 
   private
