@@ -14,6 +14,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  rescue_from ActionController::InvalidAuthenticityToken do |exception|
+    flash[:alert] =
+      "Oops, it looks like your session became inactive. Mind trying again?"
+    redirect_to_back_or_default
+  end
+
   def after_sign_in_path_for(resource)
     stored_location_for(resource) || root_path
   end
@@ -49,5 +55,14 @@ class ApplicationController < ActionController::Base
 
   def current_ability
     @current_ability ||= Ability.new(current_user, session)
+  end
+
+  def redirect_to_back_or_default(default = root_url)
+    if request.env["HTTP_REFERER"].present? &&
+        request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+      redirect_to :back
+    else
+      redirect_to default
+    end
   end
 end
