@@ -16,8 +16,13 @@ en:
       own_messages: You cannot send messages to yourself.
       sign_in_to_send_message_html: Please <a href="%{sign_in}">sign in</a>
         or <a href="%{sign_up}">sign up</a> to send messages.
+      must_be_in_directory_for_messages_html: Want to send private messages? Join
+        the Montessori Directory by completing your
+        profile <a href="%{path}">here</a>.
   feed_items:
     send_message:
       message_sent: Your message has been sent!
       message_empty: Oops, looks like you didn't add a message.
       must_authenticate: You must be logged in to send messages.
+      must_be_directory_member: You must belong to the Montessori
+        Directory to perform this action.

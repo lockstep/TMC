@@ -1,5 +1,6 @@
 class FeedItemsController < ApplicationController
   before_action :ensure_user_authenticated!
+  before_action :ensure_user_belongs_to_directory, only: [ :send_message ]
 
   def send_message
     user = User.find(params[:user_id])
@@ -23,6 +24,12 @@ class FeedItemsController < ApplicationController
   def ensure_user_authenticated!
     return if user_signed_in?
     redirect_to new_user_session_path, alert: t('.must_authenticate')
+  end
+
+  def ensure_user_belongs_to_directory
+    return if current_user.opted_in_to_public_directory?
+    redirect_to edit_profile_user_path(current_user),
+      alert: t('.must_be_directory_member')
   end
 
 end

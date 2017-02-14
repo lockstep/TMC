@@ -64,7 +64,9 @@
       %h3.text-xs-center.m-b-2 Private Messages
       %hr
       - if user_signed_in?
-        - if @user == current_user
+        - if !current_user.opted_in_to_public_directory?
+          .text-xs-center= t('.must_be_in_directory_for_messages_html', path: edit_profile_user_path(current_user.id))
+        - elsif @user == current_user
           %p.text-xs-center= t('.own_messages')
         - else
           - @private_messages.each do |private_message|

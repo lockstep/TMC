@@ -44,6 +44,17 @@ feature 'Directory Profile', type: :feature do
           expect(page).to have_content I18n.t('directory.profile.own_messages')
         end
       end
+
+      context 'viewing user is not in the public directory' do
+        before do
+          @user.update(opted_in_to_public_directory: false)
+        end
+        it 'does not let user send messages' do
+          visit directory_profile_path(@vendor)
+          expect(page).not_to have_field 'feed_item_message'
+          expect(page).to have_content I18n.t('directory.profile.must_be_in_directory_for_messages_html').first(20)
+        end
+      end
     end
     context 'user is not signed in' do
       it 'asks user to sign in first' do
