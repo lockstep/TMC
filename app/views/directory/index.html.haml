@@ -2,16 +2,23 @@
 - content_for :header_logo, 'false'
 
 .container#directory.m-t-2
-  .text-xs-center.m-b-2
-    = image_tag 'leaf-rotated.png', alt: 'The Montessori Company Leaf',
-      class: 'leaf'
-  %h1.text-center.m-b-1 THE MONTESSORI DIRECTORY
-  .text-xs-center.m-b-3
-    = image_tag 'leaf.png', alt: 'The Montessori Company Leaf',
-      class: 'leaf'
-  .row
-    .col-sm-2.search
-      = form_tag '/directory', method: 'get' do
+  = form_tag '/directory', method: 'get' do
+    .text-xs-center.m-b-2
+      = image_tag 'leaf-rotated.png', alt: 'The Montessori Company Leaf',
+        class: 'leaf'
+    %h1.text-center.m-b-1 THE MONTESSORI DIRECTORY
+    .text-xs-center.m-b-3
+      = image_tag 'leaf.png', alt: 'The Montessori Company Leaf',
+        class: 'leaf'
+    .row.query.m-b-3
+      .col-sm-12
+        %h5.pull-left FILTERS
+        .form-inline
+          = text_field_tag 'query', @search_query, class: 'form-control',
+            placeholder: 'Enter search query'
+          = submit_tag "Search", class: "btn btn-cart"
+    .row
+      .col-sm-2.search
         %section
           %h5 Certifications
           .form-group
@@ -52,22 +59,22 @@
               { class: 'form-control' }
         .form-group
           = submit_tag "Search", class: "btn btn-cart"
-    .col-sm-10
-      %table.table.table-hover.table-responsive
-        %thead
-          %tr
-            %th{width: '120px'}
-            %th Name
-            %th Position
-            %th Location
-            %th Certifications
-            %th Interests
-        %tbody
-          - @users.each do |user|
-            = render 'users/profiles/profile', user: user
-      - if @users.blank?
-        .text-center= t('.no_users_found')
-      .text-center
-        = paginate @users
+      .col-sm-10
+        %table.table.table-hover
+          %thead
+            %tr
+              %th{width: '120px'}
+              %th Name
+              %th Position
+              %th Location
+              %th Certifications
+              %th Interests
+          %tbody
+            - @users.each do |user|
+              = render 'users/profiles/profile', user: user
+        - if @users.blank?
+          .text-center= t('.no_users_found')
+        .text-center
+          = paginate @users
 
 
