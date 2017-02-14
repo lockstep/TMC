@@ -20,7 +20,7 @@ describe 'Directory', type: :feature do
     )
   end
 
-  describe 'search' do
+  describe 'filter search' do
     context 'all users opted in to public directory' do
       context 'no filters' do
         it 'shows only opted in users' do
@@ -42,7 +42,9 @@ describe 'Directory', type: :feature do
             check 'AMI'
           end
           it 'shows the user' do
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
             expect(page).not_to have_content 'Paul'
             expect(page).to have_content 'Michelle'
           end
@@ -53,7 +55,9 @@ describe 'Directory', type: :feature do
             check 'ABC'
           end
           it 'shows the users having either option' do
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
             expect(page).to have_content 'Paul'
             expect(page).to have_content 'Michelle'
           end
@@ -72,7 +76,9 @@ describe 'Directory', type: :feature do
             check 'Peace'
           end
           it 'shows the user' do
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
             expect(page).not_to have_content 'Paul'
             expect(page).to have_content 'Michelle'
           end
@@ -83,7 +89,9 @@ describe 'Directory', type: :feature do
             check 'Teaching'
           end
           it 'shows the users having either option' do
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
             expect(page).to have_content 'Paul'
             expect(page).to have_content 'Michelle'
           end
@@ -103,7 +111,9 @@ describe 'Directory', type: :feature do
             check 'Montessori Guide'
           end
           it 'shows the user' do
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
             expect(page).not_to have_content 'Paul'
             expect(page).to have_content 'Michelle'
           end
@@ -114,7 +124,9 @@ describe 'Directory', type: :feature do
             check 'Head of School'
           end
           it 'shows the users having either option' do
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
             expect(page).to have_content 'Paul'
             expect(page).to have_content 'Michelle'
           end
@@ -132,7 +144,9 @@ describe 'Directory', type: :feature do
             select 'Thailand'
           end
           it 'shows the user' do
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
             expect(page).not_to have_content 'Michelle'
             expect(page).to have_content 'Paul'
           end
@@ -144,7 +158,9 @@ describe 'Directory', type: :feature do
         end
         it 'shows no records message' do
           check 'Material Maker'
-          click_button 'Search'
+          within '.search' do
+            click_button 'Search'
+          end
           expect(page)
             .to have_content I18n.t('directory.index.no_users_found')
         end
@@ -176,7 +192,9 @@ describe 'Directory', type: :feature do
         context 'not opted in user certification selected' do
           before do
             check 'ABC'
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
           end
           it 'does not show the user profile' do
             expect(page)
@@ -188,7 +206,9 @@ describe 'Directory', type: :feature do
         context 'not opted in user interest selected' do
           before do
             check 'Teaching'
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
           end
           it 'does not show the user profile' do
             expect(page)
@@ -200,7 +220,9 @@ describe 'Directory', type: :feature do
         context 'not opted in user position selected' do
           before do
             check 'Head of School'
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
           end
           it 'shows the users having either option' do
             expect(page)
@@ -212,7 +234,9 @@ describe 'Directory', type: :feature do
         context 'not opted in user country selected' do
           before do
             select 'Thailand'
-            click_button 'Search'
+            within '.search' do
+              click_button 'Search'
+            end
           end
           it 'shows the user' do
             expect(page)
@@ -231,5 +255,117 @@ describe 'Directory', type: :feature do
         end
       end
     end
+  end
+  describe 'query search' do
+    before do
+      visit directory_path
+    end
+    context 'first name' do
+      it 'shows the specified user' do
+        within '.query' do
+          fill_in 'query', with: 'michelle'
+          click_button 'Search'
+        end
+        expect(page).to have_content 'Michelle'
+        expect(page).not_to have_content 'Paul'
+      end
+      context 'path of name' do
+        it 'shows the specified user' do
+          within '.query' do
+            fill_in 'query', with: 'chel'
+            click_button 'Search'
+          end
+          expect(page).to have_content 'Michelle'
+          expect(page).not_to have_content 'Paul'
+        end
+      end
+    end
+    context 'last name' do
+      it 'shows the specified user' do
+        within '.query' do
+          fill_in 'query', with: 'HIATT'
+          click_button 'Search'
+        end
+        expect(page).to have_content 'Paul'
+        expect(page).not_to have_content 'Michelle'
+      end
+    end
+    context 'multiple names' do
+      it 'shows the specified user' do
+        within '.query' do
+          fill_in 'query', with: 'HIATT chel'
+          click_button 'Search'
+        end
+        expect(page).to have_content 'Paul'
+        expect(page).to have_content 'Michelle'
+      end
+    end
+    context 'interest' do
+      it 'shows the specified user' do
+        within '.query' do
+          fill_in 'query', with: 'teaching'
+          click_button 'Search'
+        end
+        expect(page).to have_content 'Paul'
+        expect(page).not_to have_content 'Michelle'
+      end
+      context 'multiple interests' do
+        it 'shows the specified user' do
+          within '.query' do
+            fill_in 'query', with: 'teaching peace'
+            click_button 'Search'
+          end
+          expect(page).to have_content 'Paul'
+          expect(page).to have_content 'Michelle'
+        end
+      end
+      context 'private interest' do
+        before do
+          users(:paul).interests.create(name: 'private')
+        end
+        it 'shows the specified user' do
+          within '.query' do
+            fill_in 'query', with: 'private'
+            click_button 'Search'
+          end
+          expect(page).not_to have_content 'Michelle'
+          expect(page).to have_content 'Paul'
+        end
+      end
+    end
+    context 'certification' do
+      it 'shows the specified user' do
+        within '.query' do
+          fill_in 'query', with: 'ami'
+          click_button 'Search'
+        end
+        expect(page).not_to have_content 'Paul'
+        expect(page).to have_content 'Michelle'
+      end
+      context 'multiple certifications' do
+        it 'shows the specified user' do
+          within '.query' do
+            fill_in 'query', with: 'AMI abc'
+            click_button 'Search'
+          end
+          expect(page).to have_content 'Paul'
+          expect(page).to have_content 'Michelle'
+        end
+      end
+      context 'private certification' do
+        before do
+          users(:michelle).interests.create(name: 'private')
+        end
+        it 'shows the specified user' do
+          within '.query' do
+            fill_in 'query', with: 'private'
+            click_button 'Search'
+          end
+          expect(page).to have_content 'Michelle'
+          expect(page).not_to have_content 'Paul'
+        end
+      end
+    end
+
   end
 end

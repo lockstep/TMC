@@ -17,6 +17,19 @@
     }
   }
 
+  .query {
+    h5 {
+      margin: 0.5em 0 0;
+      color: $blue;
+    }
+    .form-inline {
+      text-align: center;
+      input[type='text'] {
+        width: 30%;
+      }
+    }
+  }
+
   .search {
     input[type='checkbox'] {
       display: initial;
