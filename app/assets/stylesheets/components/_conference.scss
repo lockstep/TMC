@@ -2,4 +2,18 @@
   h5 {
     color: $blue;
   }
+  tr {
+    td {
+      cursor: pointer;
+      vertical-align: middle;
+    }
+  }
+  .breakout-session {
+    a {
+        font-size: 18px;
+        position: absolute;
+        left: 0px;
+        top: 5px;
+      }
+  }
 }

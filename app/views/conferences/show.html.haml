@@ -3,7 +3,7 @@
 - if @conference
   .container#conference
     %h3.m-b-3.text-center
-      = "#{@conference.name} CONGRESS"
+      = "#{@conference.name} Congress"
     .row
       .col-sm-10
         %h5.m-b-1 Breakout Sessions
@@ -17,11 +17,11 @@
               %th Location
           %tbody
             - @conference.breakout_sessions.each do |session|
-              %tr
+              %tr{onclick: "document.location = '#{breakout_session_conference_path(session.conference.slug, session.slug)}'"}
                 %td
                   = session.name
                 %td
-                  = session.day ? session.day.strftime("%m/%d/%y") : 'N/A'
+                  = format_date(session)
                 %td
                   = breakout_session_time(session)
                 %td

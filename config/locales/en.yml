@@ -27,6 +27,12 @@ en:
       all_messages_disabled: Your account may no longer send or receive private messages.
       block_user: Block Messages From This User
       unblock_user: Unblock Messages From This User
+  breakout_sessions:
+    show:
+      sign_in_to_post_comments_html: Please <a href="%{sign_in}">sign in</a>
+        or <a href="%{sign_up}">sign up</a> to post comments.
+      sign_in_or_sign_up_html: Please <a href="%{sign_in}">sign in</a>
+        or <a href="%{sign_up}">sign up</a>
   feed_items:
     send_message:
       message_sent: Your message has been sent!

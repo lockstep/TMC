@@ -4,6 +4,11 @@ module ConferencesHelper
     "#{format_time(session.start_time)} - #{format_time(session.end_time)}"
   end
 
+  def format_date(session)
+    return 'N/A' unless session.day
+    session.day.strftime("%m/%d/%y")
+  end
+
   def format_organizers(session)
     return 'N/A' if session.organizers.blank?
     session.organizers.map(&:full_name).reject(&:empty?).join(', ')
