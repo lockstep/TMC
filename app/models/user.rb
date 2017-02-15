@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   has_many :interests, through: :personal_interests
   has_many :certificate_acquisitions
   has_many :certifications, through: :certificate_acquisitions
+  has_many :organized_breakout_sessions
+  has_many :breakout_sessions, through: :organized_breakout_sessions
 
   attr_accessor :editing_address, :editing_profile
   validates_presence_of :first_name, :last_name, :address_line_one,

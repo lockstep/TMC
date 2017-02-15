@@ -53,4 +53,8 @@ Rails.application.routes.draw do
   resources :charges, only: [:create]
   resources :posts, only: [:index, :show]
   post :join_newsletter, to: 'guests#join_newsletter'
+
+  resources :conferences, only: [:show] do
+    resources :breakout_sessions, only: [:show]
+  end
 end
