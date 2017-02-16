@@ -13,7 +13,7 @@
     .row.query.m-b-3
       .col-sm-12
         %h5.pull-left FILTERS
-        .form-inline
+        .form-inline.text-xs-right
           = text_field_tag 'query', @search_query, class: 'form-control',
             placeholder: 'Enter search query'
           = submit_tag "Search", class: "btn btn-cart"
