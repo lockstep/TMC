@@ -4,7 +4,7 @@ describe PagesController, type: :request do
     it 'performs the preaction' do
       expect(@user).to be_private_messages_enabled
       get '/', preaction: 'disable_private_messages', user_id: @user.id,
-        email_access_token: @user.email_access_token
+        a: @user.email_access_token
       expect(@user).not_to be_private_messages_enabled
     end
   end
