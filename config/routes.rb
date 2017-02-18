@@ -42,10 +42,18 @@ Rails.application.routes.draw do
     end
     resources :orders, only: [:index, :show], controller: 'users/orders'
     resources :materials, only: [:index], controller: 'users/materials'
+
     controller :feed_items do
       post :send_message
     end
+
+    controller :feed_policies do
+      patch :toggle_private_messages_enabled
+    end
+
   end
+
+
   resources :orders, only: [:show, :update] do
     get 'success', on: :member
   end

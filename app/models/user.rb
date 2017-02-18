@@ -156,6 +156,10 @@ class User < ActiveRecord::Base
     subscribe_to_mailchimp
   end
 
+  def private_messages_enabled?
+    FeedPolicies::FeedItemsDisabled.find_by(feedable: self).nil?
+  end
+
   private
 
   def password_required?

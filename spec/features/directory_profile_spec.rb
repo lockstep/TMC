@@ -45,6 +45,29 @@ feature 'Directory Profile', type: :feature do
         end
       end
 
+      context 'viewing user blocks all messages' do
+        it 'does not let user post' do
+          visit directory_profile_path(@vendor)
+          click_link I18n.t('directory.profile.disable_all_messages')
+          expect(page).to have_content I18n.t(
+            'feed_policies.toggle_private_messages_enabled.all_messages_disabled'
+          )
+          fill_in 'feed_item_message', with: 'my message'
+          click_button I18n.t('directory.profile.send_message')
+          expect(page).to have_content I18n.t(
+            'feed_items.send_message.self_messages_disabled'
+          )
+          click_link I18n.t('directory.profile.enable_all_messages')
+          expect(page).to have_content I18n.t(
+            'feed_policies.toggle_private_messages_enabled.all_messages_enabled'
+          )
+          fill_in 'feed_item_message', with: 'my message'
+          click_button I18n.t('directory.profile.send_message')
+          expect(page)
+            .to have_content I18n.t('feed_items.send_message.message_sent')
+        end
+      end
+
       context 'viewing user is not in the public directory' do
         before do
           @user.update(opted_in_to_public_directory: false)

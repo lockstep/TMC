@@ -73,9 +73,23 @@
             .private-message{ class: ('from-me' if private_message.author == current_user) }
               = simple_format(private_message.message)
               .sent-info= message_sent_info(private_message, current_user)
-          = form_for [ @user, FeedItem.new ], url: { action: 'send_message', controller: :feed_items } do |f|
-            .form-group
-              = f.text_area :message, class: 'form-control', rows: 3
-            = f.submit 'Send Private Message', class: 'btn btn-cart pull-right'
+          .row
+            .col-xs-12
+              = form_for [ @user, FeedItem.new ], url: { action: 'send_message', controller: :feed_items } do |f|
+                .form-group
+                  = f.text_area :message, class: 'form-control', rows: 3
+                = f.submit 'Send Private Message',
+                  class: 'btn btn-cart pull-right'
+          .row
+            .col-xs-12
+              %hr.m-t-3
+              - if current_user.private_messages_enabled?
+                - toggle_messages_text = t('.disable_all_messages')
+              - else
+                - toggle_messages_text = t('.enable_all_messages')
+              = link_to toggle_messages_text,
+                user_toggle_private_messages_enabled_path(current_user),
+                method: :patch
+
       - else
         .text-xs-center= t('.sign_in_to_send_message_html', sign_in: new_user_session_path, sign_up: new_user_registration_path)

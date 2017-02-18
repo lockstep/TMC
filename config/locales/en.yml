@@ -1,5 +1,8 @@
 en:
   site_name: Montessori Materials by The Montessori Company
+  errors:
+    must_authenticate: You must be logged in first.
+    unauthorized: Unauthorized action
   helpers:
     label:
       order:
@@ -19,10 +22,22 @@ en:
       must_be_in_directory_for_messages_html: Want to send private messages? Join
         the Montessori Directory by completing your
         profile <a href="%{path}">here</a>.
+      disable_all_messages: Disable Private Messages
+      enable_all_messages: Enable Private Messages
+      all_messages_disabled: Your account may no longer send or receive private messages.
   feed_items:
     send_message:
       message_sent: Your message has been sent!
       message_empty: Oops, looks like you didn't add a message.
-      must_authenticate: You must be logged in to send messages.
       must_be_directory_member: You must belong to the Montessori
         Directory to perform this action.
+      must_be_directory_member: You must belong to the Montessori
+        Directory to perform this action.
+      user_messages_disabled: This user has disabled private messages.
+      self_messages_disabled: You disabled private messaging.
+  feed_policies:
+    toggle_private_messages_enabled:
+      all_messages_disabled: Your account may no longer send or receive private
+        messages from other users.
+      all_messages_enabled: Your account may now send and receive private
+        messages from other users.
