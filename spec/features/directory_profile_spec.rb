@@ -68,6 +68,29 @@ feature 'Directory Profile', type: :feature do
         end
       end
 
+      context 'viewing user blocks viewed user' do
+        it 'does not let user post' do
+          visit directory_profile_path(@vendor)
+          click_link I18n.t('directory.profile.block_user')
+          expect(page).to have_content I18n.t(
+            'feed_policies.toggle_user_blocked.blocked'
+          )
+          fill_in 'feed_item_message', with: 'my message'
+          click_button I18n.t('directory.profile.send_message')
+          expect(page).to have_content I18n.t(
+            'feed_items.send_message.messages_blocked'
+          )
+          click_link I18n.t('directory.profile.unblock_user')
+          expect(page).to have_content I18n.t(
+            'feed_policies.toggle_user_blocked.unblocked'
+          )
+          fill_in 'feed_item_message', with: 'my message'
+          click_button I18n.t('directory.profile.send_message')
+          expect(page)
+            .to have_content I18n.t('feed_items.send_message.message_sent')
+        end
+      end
+
       context 'viewing user is not in the public directory' do
         before do
           @user.update(opted_in_to_public_directory: false)

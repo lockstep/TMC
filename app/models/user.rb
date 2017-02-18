@@ -160,6 +160,11 @@ class User < ActiveRecord::Base
     FeedPolicies::FeedItemsDisabled.find_by(feedable: self).nil?
   end
 
+  def messages_from_user_blocked?(user)
+    FeedPolicies::FeedItemsBlockedFromUser.find_by(feedable: self, user: user)
+      .present?
+  end
+
   private
 
   def password_required?

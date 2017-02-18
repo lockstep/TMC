@@ -83,6 +83,14 @@
           .row
             .col-xs-12
               %hr.m-t-3
+              - if current_user.messages_from_user_blocked?(@user)
+                - toggle_block_text = t('.unblock_user')
+              - else
+                - toggle_block_text = t('.block_user')
+              = link_to toggle_block_text,
+                user_toggle_user_blocked_path(@user),
+                method: :patch
+              %br
               - if current_user.private_messages_enabled?
                 - toggle_messages_text = t('.disable_all_messages')
               - else

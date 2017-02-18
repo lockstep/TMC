@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218084020) do
+ActiveRecord::Schema.define(version: 20170218101305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,9 +134,11 @@ ActiveRecord::Schema.define(version: 20170218084020) do
     t.string   "feedable_type"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "user_id"
   end
 
   add_index "feed_policies", ["feedable_type", "feedable_id"], name: "index_feed_policies_on_feedable_type_and_feedable_id", using: :btree
+  add_index "feed_policies", ["user_id"], name: "index_feed_policies_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -381,6 +383,7 @@ ActiveRecord::Schema.define(version: 20170218084020) do
   add_foreign_key "charges", "orders"
   add_foreign_key "downloadables", "products"
   add_foreign_key "explorable_locations", "visual_explorations"
+  add_foreign_key "feed_policies", "users"
   add_foreign_key "identities", "users"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"

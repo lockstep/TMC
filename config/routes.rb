@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
     controller :feed_policies do
       patch :toggle_private_messages_enabled
+      patch :toggle_user_blocked
     end
 
   end

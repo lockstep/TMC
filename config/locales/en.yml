@@ -25,6 +25,8 @@ en:
       disable_all_messages: Disable Private Messages
       enable_all_messages: Enable Private Messages
       all_messages_disabled: Your account may no longer send or receive private messages.
+      block_user: Block Messages From This User
+      unblock_user: Unblock Messages From This User
   feed_items:
     send_message:
       message_sent: Your message has been sent!
@@ -35,9 +37,13 @@ en:
         Directory to perform this action.
       user_messages_disabled: This user has disabled private messages.
       self_messages_disabled: You disabled private messaging.
+      messages_blocked: Messages to and from this user are disabled.
   feed_policies:
     toggle_private_messages_enabled:
       all_messages_disabled: Your account may no longer send or receive private
         messages from other users.
       all_messages_enabled: Your account may now send and receive private
         messages from other users.
+    toggle_user_blocked:
+      blocked: Messages to and from this user are disabled.
+      unblocked: Messages to and from this user are enabled.

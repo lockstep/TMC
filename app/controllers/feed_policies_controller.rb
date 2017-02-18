@@ -1,7 +1,8 @@
 class FeedPoliciesController < ApplicationController
   before_action :ensure_user_authenticated!
   before_action :set_user
-  before_action :ensure_user_is_authorized
+  before_action :ensure_user_is_authorized,
+    only: [ :toggle_private_messages_enabled ]
 
   def toggle_private_messages_enabled
     if policy = FeedPolicies::FeedItemsDisabled.find_by(feedable: @user)
@@ -10,6 +11,19 @@ class FeedPoliciesController < ApplicationController
     else
       FeedPolicies::FeedItemsDisabled.create(feedable: @user)
       redirect_to :back, notice: t('.all_messages_disabled')
+    end
+  end
+
+  def toggle_user_blocked
+    policy = FeedPolicies::FeedItemsBlockedFromUser
+      .find_by(feedable: current_user, user: @user)
+    if policy
+      policy.destroy
+      redirect_to :back, notice: t('.unblocked')
+    else
+      FeedPolicies::FeedItemsBlockedFromUser
+        .create(feedable: current_user, user: @user)
+      redirect_to :back, notice: t('.blocked')
     end
   end
 

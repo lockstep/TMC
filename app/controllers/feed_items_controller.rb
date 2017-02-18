@@ -38,10 +38,13 @@ class FeedItemsController < ApplicationController
   end
 
   def ensure_messages_enabled
-    if FeedPolicies::FeedItemsDisabled.find_by(feedable: @user)
+    if !@user.private_messages_enabled?
       redirect_to :back, alert: t('.user_messages_disabled')
-    elsif FeedPolicies::FeedItemsDisabled.find_by(feedable: current_user)
+    elsif !current_user.private_messages_enabled?
       redirect_to :back, alert: t('.self_messages_disabled')
+    elsif @user.messages_from_user_blocked?(current_user) ||
+      current_user.messages_from_user_blocked?(@user)
+      redirect_to :back, alert: t('.messages_blocked')
     end
   end
 
