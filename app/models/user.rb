@@ -165,6 +165,10 @@ class User < ActiveRecord::Base
       .present?
   end
 
+  def email_access_token
+    Digest::SHA256.hexdigest("#{id}:#{ENV['SECRET_KEY_BASE']}")
+  end
+
   private
 
   def password_required?

@@ -20,3 +20,22 @@
 
 <%= render 'shared/mailers/button',
   cta: 'Respond', url: "#{directory_profile_url(@author.id, anchor: 'messages')}" %>
+
+<tr>
+  <td>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+          <p>
+            Don't want to receive private messages? Just
+            <%= link_to 'click here',
+              root_url(user_id: @recipient.id,
+                      preaction: 'disable_private_messages',
+                      a: @recipient.email_access_token) %>
+            to disable them.
+          </p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
