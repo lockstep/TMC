@@ -33,8 +33,7 @@
                           = organizer.full_name
         %section.post-comment
           - if user_signed_in?
-            = form_tag comment_breakout_session_path(@breakout_session),
-              remote: true, class: 'form-inline' do
+            = form_for [ @breakout_session, FeedItem.new ], url: { action: 'send_breakout_session_message', controller: :feed_items } do |f|
               .row
                 .col-sm-2.text-center
                   .form-group
@@ -44,9 +43,9 @@
                         = current_user.full_name
                 .col-sm-10
                   .form-group.post-input
-                    = text_area_tag 'message', nil, rows: 4,
-                      class: 'form-control', placeholder: 'Enter You Message'
-                    = submit_tag 'POST', class: 'btn btn-cart'
+                    = hidden_field_tag 'breakout_session_comment[breakout_session_id]', @breakout_session.id
+                    = f.text_area :message, rows: 4, class: 'form-control', placeholder: 'Enter You Message'
+                    = f.submit "POST", class: 'btn btn-cart'
           - else
             %h5.m-b-2.text-center Post Comments
             %hr
@@ -57,23 +56,23 @@
         %section.comments.m-y-3
           %h5 Comments
           .comments.m-t-2
-            - unless @breakout_session.comments.any?
+            - unless @breakout_session.messages.any?
               %div No comments available
-            - @breakout_session.comments.order(created_at: :desc).each do |comment|
-              - commentator = comment.user
+            - @breakout_session.messages.each do |message|
+              - author = User.find_by(id: message.author_id)
               .row.m-b-2
                 .col-sm-2.text-center
                   .profile
-                    .avatar{style: "background-image:url(#{comment.user.avatar.url(:thumb)})"}
+                    .avatar{style: "background-image:url(#{author.avatar.url(:thumb)})"}
                 .col-sm-10
-                  .commentator
-                    = commentator.full_name
+                  .author
+                    = author.full_name
                     %span
-                      = " · #{commentator.position} at #{commentator.organization_name}"
+                      = " · #{author.position} at #{author.organization_name}"
                     %small.pull-right
-                      = "#{time_ago_in_words(comment.created_at)} ago"
+                      = "#{time_ago_in_words(message.created_at)} ago"
                   .comment
-                    = comment.message
+                    = message.message
 
       .col-sm-3
         .text-center
@@ -81,7 +80,7 @@
             - if @breakout_session.attendees.find_by(id: current_user.id)
             - else
               %section.join.m-t-2.m-b-3
-                = form_tag join_breakout_session_path(@breakout_session), remote: true do
+                = form_tag breakout_session_join_path(@breakout_session) do
                   = submit_tag 'JOIN SESSION', class: 'btn btn-cart'
           - else
             %section.join.m-t-2.m-b-3

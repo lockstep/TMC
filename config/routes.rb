@@ -70,9 +70,12 @@ Rails.application.routes.draw do
     end
   end
 
-  post 'breakout_sessions/:id/join_session', to: 'breakout_sessions#join_session',
-    as: 'join_breakout_session'
-  post 'breakout_sessions/:id/comment', to: 'breakout_sessions#comment',
-    as: 'comment_breakout_session'
+  resources :breakout_sessions, only: [:show] do
+    controller :feed_items do
+      post :send_breakout_session_message
+    end
+    post :join_session, to: 'breakout_sessions#join_session',
+      as: 'join'
+  end
 
 end

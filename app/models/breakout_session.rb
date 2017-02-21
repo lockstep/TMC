@@ -12,9 +12,14 @@ class BreakoutSession < ActiveRecord::Base
   has_many :breakout_session_attendees
   has_many :attendees, through: :breakout_session_attendees,
     source: :user
-  has_many :comments, class_name: 'BreakoutSessionComment',
-    foreign_key: 'breakout_session_id'
-
   delegate :name, to: :conference, prefix: true
   delegate :slug, to: :conference, prefix: true
+
+  def messages
+    messages = FeedItem.where(feedable_type: 'BreakoutSession').where(
+      "feedable_id = #{self.id}"
+    )
+    messages.order(created_at: :desc)
+  end
+
 end

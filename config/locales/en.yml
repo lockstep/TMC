@@ -33,6 +33,10 @@ en:
         or <a href="%{sign_up}">sign up</a> to post comments.
       sign_in_or_sign_up_html: Please <a href="%{sign_in}">sign in</a>
         or <a href="%{sign_up}">sign up</a>
+    join_session:
+      already_joined: You've already joined the session.
+      joined_session: You've successfully joined the session.
+      profile_must_be_listed_in_the_directory: Your profile must be listed in The Montessori Directory
   feed_items:
     send_message:
       message_sent: Your message has been sent!
@@ -44,6 +48,9 @@ en:
       user_messages_disabled: This user has disabled private messages.
       self_messages_disabled: You disabled private messaging.
       messages_blocked: Messages to and from this user are disabled.
+    send_breakout_session_message:
+      message_sent: Your message has been sent!
+      message_empty: Oops, looks like you didn't add a message.
   feed_policies:
     toggle_private_messages_enabled:
       all_messages_disabled: Your account may no longer send or receive private

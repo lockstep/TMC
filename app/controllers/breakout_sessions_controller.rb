@@ -1,24 +1,31 @@
 class BreakoutSessionsController < ApplicationController
-  before_action :set_session, only: [:show, :join_session, :comment]
+  before_action :set_breakout_session, only: [:show, :join_session]
 
-  def comment
-    return unless current_user
-    return if params[:message].blank?
-    @breakout_session.comments.create(user: current_user,
-                                      message: params[:message])
+  def show
+    store_location_for(:user, breakout_session_conference_path(
+      @breakout_session.conference, @breakout_session))
   end
 
   def join_session
-    return unless current_user
-    return if @breakout_session.attendees.find_by(id: current_user.id)
+    authenticate_user!
+    if @breakout_session.attendees.find_by(id: current_user.id)
+      redirect_to :back, alert: t('.already_joined')
+      return
+    end
+
+    unless current_user.opted_in_to_public_directory?
+      redirect_to :back, alert: t('.profile_must_be_listed_in_the_directory')
+      return
+    end
     @breakout_session.attendees << current_user
     @breakout_session.save
+    redirect_to :back, notice: t('.joined_session')
   end
 
   private
 
-  def set_session
-    @breakout_session = BreakoutSession
-      .find(params[:breakout_session_id] || params[:id])
+  def set_breakout_session
+    @breakout_session = BreakoutSession.find(
+      params[:breakout_session_id] || params[:id])
   end
 end
