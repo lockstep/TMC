@@ -32,14 +32,14 @@ ActiveRecord::Schema.define(version: 20170218101305) do
     t.integer "right_product_id", null: false
   end
 
-  create_table "breakout_session_attendees", force: :cascade do |t|
+  create_table "breakout_session_attendances", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "breakout_session_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
 
-  add_index "breakout_session_attendees", ["user_id", "breakout_session_id"], name: "breakout_session_attendees_index", using: :btree
+  add_index "breakout_session_attendances", ["user_id", "breakout_session_id"], name: "breakout_session_attendances_index", using: :btree
 
   create_table "breakout_session_locations", force: :cascade do |t|
     t.string   "name"

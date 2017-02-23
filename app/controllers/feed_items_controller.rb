@@ -1,7 +1,7 @@
 class FeedItemsController < ApplicationController
   before_action :ensure_user_authenticated!
   before_action :set_user, only: [:send_message]
-  before_action :set_breakout_session, only: [:send_breakout_session_message]
+  before_action :set_breakout_session, only: [:send_breakout_session_comment]
   before_action :ensure_user_belongs_to_directory, only: [ :send_message ]
   before_action :ensure_messages_enabled, only: [ :send_message ]
 
@@ -17,15 +17,15 @@ class FeedItemsController < ApplicationController
     end
   end
 
-  def send_breakout_session_message
+  def send_breakout_session_comment
     if feed_item_params[:message].blank?
-      redirect_to :back, alert: t('.message_empty')
+      redirect_to :back, alert: t('.comment_empty')
     else
-      FeedItems::BreakoutSessionMessage.create(
+      FeedItems::BreakoutSessionComment.create(
         feedable: @breakout_session, message: feed_item_params[:message],
         author: current_user
       )
-      redirect_to :back, notice: t('.message_sent')
+      redirect_to :back, notice: t('.comment_sent')
     end
   end
 

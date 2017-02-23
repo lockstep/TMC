@@ -4,6 +4,7 @@ class BreakoutSessionsController < ApplicationController
   def show
     store_location_for(:user, breakout_session_conference_path(
       @breakout_session.conference, @breakout_session))
+    @comments = @breakout_session.comments(params[:page] || 1)
   end
 
   def join_session
@@ -12,7 +13,6 @@ class BreakoutSessionsController < ApplicationController
       redirect_to :back, alert: t('.already_joined')
       return
     end
-
     unless current_user.opted_in_to_public_directory?
       redirect_to :back, alert: t('.profile_must_be_listed_in_the_directory')
       return

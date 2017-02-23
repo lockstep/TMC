@@ -72,7 +72,7 @@ Rails.application.routes.draw do
 
   resources :breakout_sessions, only: [:show] do
     controller :feed_items do
-      post :send_breakout_session_message
+      post :send_breakout_session_comment
     end
     post :join_session, to: 'breakout_sessions#join_session',
       as: 'join'

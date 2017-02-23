@@ -48,7 +48,7 @@ describe 'BreakoutSession', type: :feature do
           it 'shows the message' do
             fill_in('feed_item_message', with: 'hello world')
             click_button 'POST'
-            expect(page).to have_content 'message has been sent'
+            expect(page).to have_content 'comment has been sent'
             within 'section.comments' do
               expect(page).to have_content 'hello world'
             end
@@ -57,7 +57,7 @@ describe 'BreakoutSession', type: :feature do
         context 'invalid message' do
           it 'shows the message' do
             click_button 'POST'
-            expect(page).to have_content "didn't add a message"
+            expect(page).to have_content "didn't add a comment"
             within 'section.comments' do
               expect(page).not_to have_content 'hello world'
             end
@@ -67,8 +67,9 @@ describe 'BreakoutSession', type: :feature do
       context 'join the session' do
         context 'user is opted in to public directory' do
           before do
-            allow_any_instance_of(User)
-              .to receive(:opted_in_to_public_directory?) { true }
+            users(:michelle).update(
+              opted_in_to_public_directory: true
+            )
           end
           it "shows the user's in attendee list" do
             click_button 'JOIN SESSION'

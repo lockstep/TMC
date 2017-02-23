@@ -3,6 +3,7 @@ en:
   errors:
     must_authenticate: You must be logged in first.
     unauthorized: Unauthorized action
+    must_have_opted_in_to_public_directory: User must have opted in to public directory
   helpers:
     label:
       order:
@@ -48,9 +49,9 @@ en:
       user_messages_disabled: This user has disabled private messages.
       self_messages_disabled: You disabled private messaging.
       messages_blocked: Messages to and from this user are disabled.
-    send_breakout_session_message:
-      message_sent: Your message has been sent!
-      message_empty: Oops, looks like you didn't add a message.
+    send_breakout_session_comment:
+      comment_sent: Your comment has been sent!
+      comment_empty: Oops, looks like you didn't add a comment.
   feed_policies:
     toggle_private_messages_enabled:
       all_messages_disabled: Your account may no longer send or receive private

@@ -9,17 +9,18 @@ class BreakoutSession < ActiveRecord::Base
   has_many :organized_breakout_sessions
   has_many :organizers, through: :organized_breakout_sessions,
     source: :user
-  has_many :breakout_session_attendees
-  has_many :attendees, through: :breakout_session_attendees,
+  has_many :breakout_session_attendances
+  has_many :attendees, through: :breakout_session_attendances,
     source: :user
+
   delegate :name, to: :conference, prefix: true
   delegate :slug, to: :conference, prefix: true
 
-  def messages
-    messages = FeedItem.where(feedable_type: 'BreakoutSession').where(
-      "feedable_id = #{self.id}"
-    )
-    messages.order(created_at: :desc)
+  def comments(page = 1, per = 15)
+    FeedItems::BreakoutSessionComment.where(
+      feedable_type: 'BreakoutSession',
+      feedable_id: id
+    ).order(created_at: :desc).page(page).per(per)
   end
 
 end

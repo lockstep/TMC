@@ -33,7 +33,8 @@
                           = organizer.full_name
         %section.post-comment
           - if user_signed_in?
-            = form_for [ @breakout_session, FeedItem.new ], url: { action: 'send_breakout_session_message', controller: :feed_items } do |f|
+            = form_for [ @breakout_session, FeedItem.new ],
+              url: { action: 'send_breakout_session_comment', controller: :feed_items } do |f|
               .row
                 .col-sm-2.text-center
                   .form-group
@@ -56,10 +57,10 @@
         %section.comments.m-y-3
           %h5 Comments
           .comments.m-t-2
-            - unless @breakout_session.messages.any?
+            - unless @comments.any?
               %div No comments available
-            - @breakout_session.messages.each do |message|
-              - author = User.find_by(id: message.author_id)
+            - @comments.each do |comment|
+              - author = User.find_by(id: comment.author_id)
               .row.m-b-2
                 .col-sm-2.text-center
                   .profile
@@ -70,9 +71,11 @@
                     %span
                       = " · #{author.position} at #{author.organization_name}"
                     %small.pull-right
-                      = "#{time_ago_in_words(message.created_at)} ago"
+                      = "#{time_ago_in_words(comment.created_at)} ago"
                   .comment
-                    = message.message
+                    = comment.message
+            .text-center
+              = paginate @comments
 
       .col-sm-3
         .text-center

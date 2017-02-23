@@ -19,8 +19,8 @@ class User < ActiveRecord::Base
   has_many :certifications, through: :certificate_acquisitions
   has_many :organized_breakout_sessions
   has_many :breakout_sessions, through: :organized_breakout_sessions
-  has_many :breakout_session_attendees
-  has_many :attended_breakout_sessions, through: :breakout_session_attendees,
+  has_many :breakout_session_attendances
+  has_many :attended_breakout_sessions, through: :breakout_session_attendances,
     source: :breakout_session
 
   attr_accessor :editing_address, :editing_profile
