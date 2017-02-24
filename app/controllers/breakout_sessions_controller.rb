@@ -4,7 +4,10 @@ class BreakoutSessionsController < ApplicationController
   def show
     store_location_for(:user, breakout_session_conference_path(
       @breakout_session.conference, @breakout_session))
-    @comments = @breakout_session.comments(params[:page] || 1)
+    @comments = @breakout_session.breakout_session_comments
+      .order(created_at: :desc)
+      .page(params[:page] || 1)
+      .per(15)
   end
 
   def join_session

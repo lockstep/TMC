@@ -3,7 +3,6 @@ en:
   errors:
     must_authenticate: You must be logged in first.
     unauthorized: Unauthorized action
-    must_have_opted_in_to_public_directory: User must have opted in to public directory
   helpers:
     label:
       order:
@@ -35,8 +34,8 @@ en:
       sign_in_or_sign_up_html: Please <a href="%{sign_in}">sign in</a>
         or <a href="%{sign_up}">sign up</a>
     join_session:
-      already_joined: You've already joined the session.
-      joined_session: You've successfully joined the session.
+      already_joined: You've already joined the breakout session.
+      joined_session: You've successfully joined the breakout session.
       profile_must_be_listed_in_the_directory: Your profile must be listed in The Montessori Directory
   feed_items:
     send_message:
@@ -50,7 +49,7 @@ en:
       self_messages_disabled: You disabled private messaging.
       messages_blocked: Messages to and from this user are disabled.
     send_breakout_session_comment:
-      comment_sent: Your comment has been sent!
+      comment_sent: Your comment has been saved!
       comment_empty: Oops, looks like you didn't add a comment.
   feed_policies:
     toggle_private_messages_enabled:

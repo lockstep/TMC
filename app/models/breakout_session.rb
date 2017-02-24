@@ -12,15 +12,14 @@ class BreakoutSession < ActiveRecord::Base
   has_many :breakout_session_attendances
   has_many :attendees, through: :breakout_session_attendances,
     source: :user
+  has_many :opted_in_attendees, -> {
+      where(opted_in_to_public_directory: true)
+    },
+    through: :breakout_session_attendances,
+    source: :user
+  has_many :breakout_session_comments, as: :feedable
 
   delegate :name, to: :conference, prefix: true
   delegate :slug, to: :conference, prefix: true
-
-  def comments(page = 1, per = 15)
-    FeedItems::BreakoutSessionComment.where(
-      feedable_type: 'BreakoutSession',
-      feedable_id: id
-    ).order(created_at: :desc).page(page).per(per)
-  end
 
 end

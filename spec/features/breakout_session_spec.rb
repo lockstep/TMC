@@ -48,7 +48,7 @@ describe 'BreakoutSession', type: :feature do
           it 'shows the message' do
             fill_in('feed_item_message', with: 'hello world')
             click_button 'POST'
-            expect(page).to have_content 'comment has been sent'
+            expect(page).to have_content 'comment has been save'
             within 'section.comments' do
               expect(page).to have_content 'hello world'
             end

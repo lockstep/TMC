@@ -80,7 +80,7 @@
       .col-sm-3
         .text-center
           - if user_signed_in?
-            - if @breakout_session.attendees.find_by(id: current_user.id)
+            - if @breakout_session.opted_in_attendees.find_by(id: current_user.id)
             - else
               %section.join.m-t-2.m-b-3
                 = form_tag breakout_session_join_path(@breakout_session) do
@@ -96,8 +96,8 @@
             %h5 Attendees
             %hr
             .attendees
-              - if @breakout_session.attendees.any?
-                - @breakout_session.attendees.each do |attendee|
+              - if @breakout_session.opted_in_attendees.any?
+                - @breakout_session.opted_in_attendees.each do |attendee|
                   = link_to directory_profile_path(attendee.id), class: 'attendee' do
                     .profile
                       .avatar{style: "background-image:url(#{attendee.avatar.url(:thumb)})"}

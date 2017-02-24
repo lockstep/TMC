@@ -21,7 +21,7 @@ class FeedItemsController < ApplicationController
     if feed_item_params[:message].blank?
       redirect_to :back, alert: t('.comment_empty')
     else
-      FeedItems::BreakoutSessionComment.create(
+      BreakoutSessionComment.create(
         feedable: @breakout_session, message: feed_item_params[:message],
         author: current_user
       )
