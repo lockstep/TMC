@@ -64,6 +64,18 @@ Rails.application.routes.draw do
   post :join_newsletter, to: 'guests#join_newsletter'
 
   resources :conferences, only: [:show] do
-    resources :breakout_sessions, only: [:show]
+    member do
+      get ':breakout_session_id', to: 'breakout_sessions#show',
+        as: 'breakout_session'
+    end
   end
+
+  resources :breakout_sessions, only: [:show] do
+    controller :feed_items do
+      post :send_breakout_session_comment
+    end
+    post :join_session, to: 'breakout_sessions#join_session',
+      as: 'join'
+  end
+
 end

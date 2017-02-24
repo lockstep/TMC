@@ -10,6 +10,7 @@ michelle:
   bio: Michelle is an AMI certified primary and elementary guide.
   email: mich@tmc.com
   role: <%= User.roles[:admin] %>
+  address_country: 'US'
   <<: *default
 
 paul:

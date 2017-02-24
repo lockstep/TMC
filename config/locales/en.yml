@@ -27,6 +27,16 @@ en:
       all_messages_disabled: Your account may no longer send or receive private messages.
       block_user: Block Messages From This User
       unblock_user: Unblock Messages From This User
+  breakout_sessions:
+    show:
+      sign_in_to_post_comments_html: Please <a href="%{sign_in}">sign in</a>
+        or <a href="%{sign_up}">sign up</a> to post comments.
+      sign_in_or_sign_up_html: Please <a href="%{sign_in}">sign in</a>
+        or <a href="%{sign_up}">sign up</a>
+    join_session:
+      already_joined: You've already joined the breakout session.
+      joined_session: You've successfully joined the breakout session.
+      profile_must_be_listed_in_the_directory: Your profile must be listed in The Montessori Directory
   feed_items:
     send_message:
       message_sent: Your message has been sent!
@@ -38,6 +48,9 @@ en:
       user_messages_disabled: This user has disabled private messages.
       self_messages_disabled: You disabled private messaging.
       messages_blocked: Messages to and from this user are disabled.
+    send_breakout_session_comment:
+      comment_sent: Your comment has been saved!
+      comment_empty: Oops, looks like you didn't add a comment.
   feed_policies:
     toggle_private_messages_enabled:
       all_messages_disabled: Your account may no longer send or receive private

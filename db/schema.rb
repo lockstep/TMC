@@ -32,6 +32,15 @@ ActiveRecord::Schema.define(version: 20170218101305) do
     t.integer "right_product_id", null: false
   end
 
+  create_table "breakout_session_attendances", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "breakout_session_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "breakout_session_attendances", ["user_id", "breakout_session_id"], name: "breakout_session_attendances_index", using: :btree
+
   create_table "breakout_session_locations", force: :cascade do |t|
     t.string   "name"
     t.integer  "conference_id"
@@ -50,9 +59,11 @@ ActiveRecord::Schema.define(version: 20170218101305) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "breakout_session_location_id"
+    t.string   "slug"
   end
 
   add_index "breakout_sessions", ["conference_id"], name: "index_breakout_sessions_on_conference_id", using: :btree
+  add_index "breakout_sessions", ["slug"], name: "index_breakout_sessions_on_slug", unique: true, using: :btree
 
   create_table "certificate_acquisitions", force: :cascade do |t|
     t.integer  "user_id"

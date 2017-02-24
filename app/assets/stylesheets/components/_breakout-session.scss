@@ -1,0 +1,114 @@
+#breakout-session {
+  h1 {
+    position: relative;
+    font-size: 30px;
+    color: $blue;
+    a {
+      font-size: 18px;
+      position: absolute;
+      left: 0px;
+      top: 5px;
+    }
+  }
+  .card {
+    padding: 1em;
+    border: none;
+    box-shadow: 0px 1px 5px 1px $grey;
+    line-height: 2.2em;
+  }
+  .information {
+    small {
+      color: $blog-grey;
+      margin-right: 0.25em;
+    }
+  }
+  .join {
+    a {
+      font-size: 1em;
+    }
+  }
+  section {
+    line-height: 2em;
+    textarea {
+      width: 100%;
+    }
+  }
+
+  section.post-comment {
+    text-align: right;
+    .form-group.post-input {
+      width: 100%;
+    }
+  }
+  .post-comment, .comments {
+    .profile {
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
+      .name {
+        display: initial;
+        font-size: 0.8em;
+      }
+    }
+  }
+  .comments {
+    .profile {
+      width: 100%;
+      .avatar {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+      }
+    }
+    .author {
+      font-weight: bold;
+      color: $blue;
+      span, small {
+        font-weight: normal;
+        color: $blog-grey;
+      }
+    }
+  }
+
+  form {
+    input[type="submit"] {
+      margin-top: 0.5em;
+    }
+  }
+
+  .profile {
+    display: table;
+    .avatar {
+      width: 35px;
+      height: 35px;
+      background-size: cover;
+      background-position: center;
+    }
+    .name {
+      padding-left: 0.5em;
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+
+  .organizers {
+    .organizer {
+      display: inline-block;
+      margin-bottom: 0.5em;
+      position: relative;
+      .profile {
+        margin-right: 0.5em;
+        .name {
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+
+  .attendee {
+    display: block;
+    margin-bottom: 1em;
+    padding-left: 2em;
+  }
+}
