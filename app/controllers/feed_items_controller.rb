@@ -2,6 +2,7 @@ class FeedItemsController < ApplicationController
   before_action :ensure_user_authenticated!
   before_action :set_user, only: [:send_message]
   before_action :set_breakout_session, only: [:send_breakout_session_comment]
+  before_action :set_interest, only: [:send_interest_comment]
   before_action :ensure_user_belongs_to_directory, only: [ :send_message ]
   before_action :ensure_messages_enabled, only: [ :send_message ]
 
@@ -29,6 +30,18 @@ class FeedItemsController < ApplicationController
     end
   end
 
+  def send_interest_comment
+    if feed_item_params[:message].blank?
+      redirect_to :back, alert: t('.comment_empty')
+    else
+      InterestComment.create(
+        feedable: @interest, message: feed_item_params[:message],
+        author: current_user
+      )
+      redirect_to :back, notice: t('.comment_sent')
+    end
+  end
+
   private
 
   def set_user
@@ -37,6 +50,10 @@ class FeedItemsController < ApplicationController
 
   def set_breakout_session
     @breakout_session = BreakoutSession.find(params[:breakout_session_id])
+  end
+
+  def set_interest
+    @interest = Interest.find(params[:interest_id])
   end
 
   def feed_item_params

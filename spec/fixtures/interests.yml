@@ -4,6 +4,7 @@ peace:
 teaching:
   name: 'Teaching'
   public: true
+  slug: 'teaching'
 private:
   name: 'Private'
   public: false
