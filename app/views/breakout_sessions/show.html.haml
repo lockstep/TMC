@@ -1,107 +1,63 @@
-- content_for :title, 'Breakout Session'
+- content_for :title, "#{@breakout_session.name} | Montessori Conference Breakout Sessions"
+- content_for :header_logo, 'false'
 
-- if @breakout_session
-  .container#breakout-session
-    %h1.text-center
-      = link_to "< Back to #{@breakout_session.conference_name} Congress",
-        conference_path(@breakout_session.conference_slug), class: 'hidden-xs-down'
-      = @breakout_session.name.upcase
-    %hr.m-b-3
-    .row.m-t-2
-      .col-sm-9
-        .card.m-b-3
-          .row.information
-            .col-sm-6
+.container#breakout-session.m-t-3
+  %h1.text-center
+    = link_to "< Back",
+      conference_path(@breakout_session.conference_slug), class: 'hidden-xs-down'
+    = @breakout_session.name.upcase
+  %hr.m-b-3
+  .row.m-t-2
+    .col-sm-9
+      .card.m-b-3
+        .row.information
+          .col-sm-6
+            %div
+              %small DATE:
+              = format_date(@breakout_session)
+            %div
+              %small SESSION TIME:
+              = breakout_session_time(@breakout_session)
+          .col-sm-6
+            %div
+              %small LOCATION:
+              = format_location(@breakout_session)
+            .organizers
+              %small ORGANIZERS:
               %div
-                %small DATE:
-                = format_date(@breakout_session)
-              %div
-                %small SESSION TIME:
-                = breakout_session_time(@breakout_session)
-            .col-sm-6
-              %div
-                %small LOCATION:
-                = format_location(@breakout_session)
-              .organizers
-                %small ORGANIZERS:
-                %div
-                  - @breakout_session.organizers.each do |organizer|
-                    = link_to directory_profile_path(organizer.id), class: 'organizer' do
-                      .profile
-                        .avatar{style: "background-image:url(#{organizer.avatar.url(:thumb)})"}
-                        .name
-                          = organizer.full_name
-        %section.post-comment
-          - if user_signed_in?
-            = form_for [ @breakout_session, FeedItem.new ],
-              url: { action: 'send_breakout_session_comment', controller: :feed_items } do |f|
-              .row
-                .col-sm-2.text-center
-                  .form-group
+                - @breakout_session.organizers.each do |organizer|
+                  = link_to directory_profile_path(organizer.id), class: 'organizer' do
                     .profile
-                      .avatar{style: "background-image:url(#{current_user.avatar.url(:thumb)})"}
+                      .avatar{style: "background-image:url(#{organizer.avatar.url(:thumb)})"}
                       .name
-                        = current_user.full_name
-                .col-sm-10
-                  .form-group.post-input
-                    = hidden_field_tag 'breakout_session_comment[breakout_session_id]', @breakout_session.id
-                    = f.text_area :message, rows: 4, class: 'form-control', placeholder: 'Enter You Message'
-                    = f.submit "POST", class: 'btn btn-cart'
-          - else
-            %h5.m-b-2.text-center Post Comments
+                        = organizer.full_name
+      = render 'feed_items/comment_feed', comments: @comments,
+        create_comment_url: breakout_session_send_breakout_session_comment_path(@breakout_session)
+
+    .col-sm-3
+      .text-center
+        - if user_signed_in?
+          - unless @breakout_session.opted_in_attendees.find_by(id: current_user.id)
+            %section.join.m-t-2.m-b-3
+              = form_tag breakout_session_join_path(@breakout_session) do
+                = submit_tag 'JOIN SESSION', class: 'btn btn-cart'
+        - else
+          %section.join.m-t-2.m-b-3
+            %h5.text-center Join Session
             %hr
-            .text-xs-center= t('.sign_in_to_post_comments_html',
+            .text-xs-center= t('.sign_in_or_sign_up_html',
               sign_in: new_user_session_path, sign_up: new_user_registration_path)
 
-        %hr.m-t-3
-        %section.comments.m-y-3
-          %h5 Comments
-          .comments.m-t-2
-            - unless @comments.any?
-              %div No comments available
-            - @comments.each do |comment|
-              - author = User.find_by(id: comment.author_id)
-              .row.m-b-2
-                .col-sm-2.text-center
+        %section
+          %h5 Attendees
+          %hr
+          .attendees
+            - if @breakout_session.opted_in_attendees.any?
+              - @breakout_session.opted_in_attendees.each do |attendee|
+                = link_to directory_profile_path(attendee.id), class: 'attendee' do
                   .profile
-                    .avatar{style: "background-image:url(#{author.avatar.url(:thumb)})"}
-                .col-sm-10
-                  .author
-                    = author.full_name
-                    %span
-                      = " · #{author.position} at #{author.organization_name}"
-                    %small.pull-right
-                      = "#{time_ago_in_words(comment.created_at)} ago"
-                  .comment
-                    = comment.message
-            .text-center
-              = paginate @comments
-
-      .col-sm-3
-        .text-center
-          - if user_signed_in?
-            - if @breakout_session.opted_in_attendees.find_by(id: current_user.id)
+                    .avatar{style: "background-image:url(#{attendee.avatar.url(:thumb)})"}
+                    .name
+                      = attendee.full_name
             - else
-              %section.join.m-t-2.m-b-3
-                = form_tag breakout_session_join_path(@breakout_session) do
-                  = submit_tag 'JOIN SESSION', class: 'btn btn-cart'
-          - else
-            %section.join.m-t-2.m-b-3
-              %h5.text-center Join Session
-              %hr
-              .text-xs-center= t('.sign_in_or_sign_up_html',
-                sign_in: new_user_session_path, sign_up: new_user_registration_path)
-
-          %section
-            %h5 Attendees
-            %hr
-            .attendees
-              - if @breakout_session.opted_in_attendees.any?
-                - @breakout_session.opted_in_attendees.each do |attendee|
-                  = link_to directory_profile_path(attendee.id), class: 'attendee' do
-                    .profile
-                      .avatar{style: "background-image:url(#{attendee.avatar.url(:thumb)})"}
-                      .name
-                        = attendee.full_name
-              - else
-                %div No attendees
+              %div No attendees

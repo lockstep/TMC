@@ -5,10 +5,17 @@ class InterestsController < ApplicationController
   def show
     store_location_for(:user, interest_path(@interest))
     @users = @interest.users.opted_in_to_public_directory
-    @comments = @interest.interest_comments
+    @comments = @interest.comments
       .order(created_at: :desc)
       .page(params[:page] || 1)
       .per(15)
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @interest, root: 'interest',
+          each_serializer: InterestSerializer, comments: @comments
+      end
+    end
   end
 
   def add_user_interest

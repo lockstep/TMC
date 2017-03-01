@@ -17,7 +17,7 @@ class BreakoutSession < ActiveRecord::Base
     },
     through: :breakout_session_attendances,
     source: :user
-  has_many :breakout_session_comments, as: :feedable
+  has_many :comments, as: :feedable, class_name: 'FeedItems::Comment'
 
   delegate :name, to: :conference, prefix: true
   delegate :slug, to: :conference, prefix: true

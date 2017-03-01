@@ -2,12 +2,18 @@ class BreakoutSessionsController < ApplicationController
   before_action :set_breakout_session, only: [:show, :join_session]
 
   def show
-    store_location_for(:user, breakout_session_conference_path(
-      @breakout_session.conference, @breakout_session))
-    @comments = @breakout_session.breakout_session_comments
+    store_location_for(:user, breakout_session_path(@breakout_session))
+    @comments = @breakout_session.comments
       .order(created_at: :desc)
       .page(params[:page] || 1)
       .per(15)
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @breakout_session, root: 'breakout_session',
+          each_serializer: BreakoutSessionSerializer, comments: @comments
+      end
+    end
   end
 
   def join_session

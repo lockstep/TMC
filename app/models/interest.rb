@@ -3,7 +3,7 @@ class Interest < ActiveRecord::Base
   friendly_id :name, use: [ :slugged, :finders ]
   has_many :personal_interests
   has_many :users, through: :personal_interests
-  has_many :interest_comments, as: :feedable
+  has_many :comments, as: :feedable, class_name: 'FeedItems::Comment'
 
   validates_uniqueness_of :name, if: :public?
 

@@ -15,9 +15,7 @@ describe 'BreakoutSession', type: :feature do
 
   describe 'show' do
     before do
-      visit breakout_session_conference_path(
-        conferences(:ami).slug, breakout_sessions(:teaching).slug
-      )
+      visit breakout_session_path(breakout_sessions(:teaching).slug)
     end
     context 'user not signed in' do
       it 'displays breakout session informaiton' do
@@ -39,8 +37,8 @@ describe 'BreakoutSession', type: :feature do
         signin(users(:michelle).email, 'qawsedrf')
       end
       it 'redirects back to breakout session page' do
-        expect(page).to have_current_path breakout_session_conference_path(
-          conferences(:ami).slug, breakout_sessions(:teaching).slug
+        expect(page).to have_current_path breakout_session_path(
+          breakout_sessions(:teaching).slug
         )
       end
       context 'post message' do

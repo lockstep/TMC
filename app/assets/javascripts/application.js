@@ -14,8 +14,10 @@
 //= require jquery.mobile.just-touch
 //= require jquery_ujs
 //= require turbolinks
+//= require axios.min
 //= require tether
 //= require bootstrap
 //= require tmc
 //= require product
 //= require profile
+//= require upload_comment_image

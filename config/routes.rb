@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/directory', to: 'directory#index'
   get '/directory/profile/:user_id', to: 'directory#profile',
     as: 'directory_profile'
+  get '/aws_s3_auth', to: 'aws_services#aws_s3_auth'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -65,13 +66,6 @@ Rails.application.routes.draw do
   resources :posts, only: [:index, :show]
   post :join_newsletter, to: 'guests#join_newsletter'
 
-  resources :conferences, only: [:show] do
-    member do
-      get ':breakout_session_id', to: 'breakout_sessions#show',
-        as: 'breakout_session'
-    end
-  end
-
   resources :breakout_sessions, only: [:show] do
     controller :feed_items do
       post :send_breakout_session_comment
@@ -79,6 +73,8 @@ Rails.application.routes.draw do
     post :join_session, to: 'breakout_sessions#join_session',
       as: 'join'
   end
+
+  resources :conferences, only: [:show]
 
   resources :interests, only: [:show] do
     controller :feed_items do

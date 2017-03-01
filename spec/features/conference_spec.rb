@@ -20,7 +20,7 @@ describe 'Conference', type: :feature do
       visit conference_path(conferences(:ami).slug)
     end
     it 'shows conference brekout session' do
-      expect(page).to have_content "#{conferences(:ami).name} Congress"
+      expect(page).to have_content "#{conferences(:ami).name}"
       expect(page).to have_content Date.today.strftime("%m/%d/%y")
       session = breakout_sessions(:teaching)
       start_time = "#{format_time(session.start_time)}"

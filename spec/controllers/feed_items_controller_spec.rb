@@ -1,4 +1,7 @@
 describe FeedItemsController do
+  fixtures :breakout_sessions
+  fixtures :interests
+
   describe '#send_message' do
     before do
       @user1 = create(:user, opted_in_to_public_directory: true)
@@ -29,6 +32,40 @@ describe FeedItemsController do
             feed_item: { message: 'my message' }
           }
           expect(response).to redirect_to edit_profile_user_path(@user1.id)
+        end
+      end
+
+      context 'send_breakout_session_comment' do
+        before do
+          Sidekiq::Testing.fake!
+        end
+        it 'executes resize worker when raw image key is present' do
+          expect {
+            post :send_breakout_session_comment, {
+              breakout_session_id: breakout_sessions(:teaching).id,
+              feed_item: {
+                message: 'my message',
+                raw_image_s3_key: 'some-key'
+              }
+            }
+          }.to change(FeedItemImageResizeWorker.jobs, :size).by(1)
+        end
+      end
+
+      context 'send_interest_comment' do
+        before do
+          Sidekiq::Testing.fake!
+        end
+        it 'executes resize worker when raw image key is present' do
+          expect {
+            post :send_interest_comment, {
+              interest_id: interests(:teaching).id,
+              feed_item: {
+                message: 'my message',
+                raw_image_s3_key: 'some-key'
+              }
+            }
+          }.to change(FeedItemImageResizeWorker.jobs, :size).by(1)
         end
       end
     end

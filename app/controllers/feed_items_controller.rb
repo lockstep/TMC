@@ -1,8 +1,6 @@
 class FeedItemsController < ApplicationController
   before_action :ensure_user_authenticated!
   before_action :set_user, only: [:send_message]
-  before_action :set_breakout_session, only: [:send_breakout_session_comment]
-  before_action :set_interest, only: [:send_interest_comment]
   before_action :ensure_user_belongs_to_directory, only: [ :send_message ]
   before_action :ensure_messages_enabled, only: [ :send_message ]
 
@@ -19,45 +17,38 @@ class FeedItemsController < ApplicationController
   end
 
   def send_breakout_session_comment
-    if feed_item_params[:message].blank?
-      redirect_to :back, alert: t('.comment_empty')
-    else
-      BreakoutSessionComment.create(
-        feedable: @breakout_session, message: feed_item_params[:message],
-        author: current_user
-      )
-      redirect_to :back, notice: t('.comment_sent')
-    end
+    @feedable = BreakoutSession.find(params[:breakout_session_id])
+    create_comment
   end
 
   def send_interest_comment
-    if feed_item_params[:message].blank?
-      redirect_to :back, alert: t('.comment_empty')
-    else
-      InterestComment.create(
-        feedable: @interest, message: feed_item_params[:message],
-        author: current_user
-      )
-      redirect_to :back, notice: t('.comment_sent')
-    end
+    @feedable = Interest.find(params[:interest_id])
+    create_comment
   end
 
   private
+
+  def create_comment
+    comment = FeedItems::Comment.new(
+      feedable: @feedable,
+      message: feed_item_params[:message],
+      raw_image_s3_key: feed_item_params[:raw_image_s3_key],
+      author: current_user
+    )
+    if comment.save
+      FeedItemImageResizeWorker.perform_async(comment.id)
+      redirect_to :back, notice: t('.comment_sent')
+    else
+      redirect_to :back, alert: t('.comment_empty')
+    end
+  end
 
   def set_user
     @user = User.find(params[:user_id])
   end
 
-  def set_breakout_session
-    @breakout_session = BreakoutSession.find(params[:breakout_session_id])
-  end
-
-  def set_interest
-    @interest = Interest.find(params[:interest_id])
-  end
-
   def feed_item_params
-    params.require(:feed_item).permit(:message)
+    params.require(:feed_item).permit(:message, :raw_image_s3_key)
   end
 
   def ensure_user_authenticated!
