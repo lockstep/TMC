@@ -2,7 +2,11 @@ module PresentationsHelper
   class TopicsNav
     def initialize(view:, controller:)
       @view = view
-      @topics = Topic.where(parent_id: nil)
+      # We have < 500 topics and don't expect many more. If we see
+      # a significant increase in topics moving forward we'll need
+      # to index them and do this logic via an indexer.
+      @all_topics = Topic.all
+      Topic.set_self_or_children_have_products(@all_topics)
       @controller = controller
     end
 
@@ -18,14 +22,14 @@ module PresentationsHelper
     delegate :link_to, :content_tag, :safe_join, :concat, to: :view
 
     def nav_content
-      sorted(@topics).collect do |topic|
+      sorted(top_level_topics).collect do |topic|
         concat(main_topic(topic))
       end
     end
 
     def main_topic(topic)
       content_tag :div, class: 'well' do
-        main_topic_link(topic).concat(child_topics(topic.children))
+        main_topic_link(topic).concat(child_topic_tags(topic_children(topic)))
       end
     end
 
@@ -37,7 +41,7 @@ module PresentationsHelper
       )
     end
 
-    def child_topics(children)
+    def child_topic_tags(children)
       content_tag :ul, class: 'category' do
         sorted(children).collect do |child_topic|
           concat(child_link(child_topic))
@@ -45,8 +49,12 @@ module PresentationsHelper
       end
     end
 
+    def topic_children(topic)
+      @all_topics.select { |t| t.parent_id == topic.id }
+    end
+
     def child_link(topic)
-      if topic.children.empty?
+      if topic_children(topic).empty?
         content_tag :li do
           link_to(link_text(topic),
                   { controller: @controller, topic_ids: topic.id, },
@@ -58,13 +66,12 @@ module PresentationsHelper
     end
 
     def link_text(topic)
-      count = Product.search(
-        where: {
-          topic_ids: [topic.id],
-          live: true
-        }).count
-      return topic.name if count == 0
+      return topic.name unless topic.self_or_children_have_products
       "• #{topic.name}"
+    end
+
+    def top_level_topics
+      @all_topics.select { |topic| topic.parent_id.blank? }
     end
 
     def sorted(topics)
