@@ -4,4 +4,6 @@ class FeedItem < ActiveRecord::Base
 
   delegate :first_name, to: :author, allow_nil: true,
     prefix: true
+
+  validates_presence_of :message
 end

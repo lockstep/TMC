@@ -70,6 +70,6 @@ en:
       sign_in_or_sign_up_html: Please <a href="%{sign_in}">sign in</a>
         or <a href="%{sign_up}">sign up</a>
     add_user_interest:
-      interest_added: The interest has been added to your account.
+      interest_added: This interest has been added to your account.
       private_interest: This interest is private and cannot be shared.
       interest_already_added: Your account already has this interest.

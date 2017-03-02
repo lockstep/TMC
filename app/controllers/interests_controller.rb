@@ -23,7 +23,7 @@ class InterestsController < ApplicationController
     end
     @user.interests << @interest
     @user.save
-    return redirect_to :back, notice: t('.interest_added')
+    redirect_to :back, notice: t('.interest_added')
   end
 
   private
