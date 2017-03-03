@@ -73,3 +73,4 @@ en:
       interest_added: This interest has been added to your account.
       private_interest: This interest is private and cannot be shared.
       interest_already_added: Your account already has this interest.
+      interest_can_be_added_only_to_your_account: Interest can be added only to your account.

@@ -21,6 +21,10 @@ class InterestsController < ApplicationController
       redirect_to :back, alert: t('.interest_already_added')
       return
     end
+    if current_user != @user
+      redirect_to :back, alert: t('.interest_can_be_added_only_to_your_account')
+      return
+    end
     @user.interests << @interest
     @user.save
     redirect_to :back, notice: t('.interest_added')
