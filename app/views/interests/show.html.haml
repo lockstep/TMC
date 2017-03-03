@@ -1,0 +1,90 @@
+- content_for :title, 'Interest'
+
+.container#interest
+  %h1.text-center
+    = link_to "< Back to Directory", directory_path, class: 'hidden-xs-down'
+
+    = @interest.name.upcase
+  %hr.m-b-3
+  .row.m-t-2
+    .col-sm-8
+      %section.post-comment
+        - if user_signed_in?
+          = form_tag interest_send_interest_comment_path(@interest) do
+            .row
+              .col-sm-2.text-center
+                .form-group
+                  .profile
+                    .avatar{style: "background-image:url(#{current_user.avatar.url(:thumb)})"}
+                    .name
+                      = current_user.full_name
+              .col-sm-10
+                .form-group.post-input
+                  = text_area_tag 'feed_item[message]', '', rows: 4,
+                    class: 'form-control', placeholder: 'Enter Your Comment'
+                  = submit_tag "POST", class: "btn btn-cart"
+        - else
+          %h5.m-b-2.text-center Post Comments
+          %hr
+          .text-xs-center= t('.sign_in_to_post_comments_html',
+            sign_in: new_user_session_path, sign_up: new_user_registration_path)
+
+      %hr.m-t-2
+      %section.comments.m-y-3
+        %h5 Comments
+        .comments.m-t-2
+          - unless @comments.any?
+            %div No comments available
+          - @comments.each do |comment|
+            - author = User.find_by(id: comment.author_id)
+            .row.m-b-2
+              .col-sm-2.text-center
+                .profile
+                  .avatar{style: "background-image:url(#{author.avatar.url(:thumb)})"}
+              .col-sm-10
+                .author
+                  = author.full_name
+                  %span
+                    = " · #{author.position} at #{author.organization_name}"
+                  %small.pull-right
+                    = "#{time_ago_in_words(comment.created_at)} ago"
+                .comment
+                  = comment.message
+          .text-center
+            = paginate @comments
+
+    .col-sm-4
+      .text-center
+        - if user_signed_in?
+          - unless @users.include?(current_user)
+            %section.join.m-b-3
+              = form_tag user_add_interest_path(current_user), method: :patch do
+                = hidden_field_tag :id, @interest.id
+                = submit_tag 'ADD TO PROFILE', class: 'btn btn-cart',
+                  disabled: current_user.interests.include?(@interest)
+        - else
+          %section.add-interest.m-b-3
+            %h5.text-center Join Interest Group
+            %hr
+            .text-xs-center= t('.sign_in_or_sign_up_html',
+              sign_in: new_user_session_path, sign_up: new_user_registration_path)
+        %section
+          %h5 Others Who Share This Interest
+          %hr.m-b-2
+          .users
+            - if @users.any?
+              - @users.first(10).each do |user|
+                = link_to directory_profile_path(user.id), class: 'user' do
+                  .profile
+                    .avatar{style: "background-image:url(#{user.avatar.url(:thumb)})"}
+                    .name
+                      = user.full_name
+              - if @users.count > 10
+                = link_to 'See All', directory_path('interests[]' => @interest.name),
+                  class: "m-t-1 btn btn-secondary"
+            - else
+              %div N/A
+
+
+
+

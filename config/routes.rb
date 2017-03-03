@@ -52,6 +52,8 @@ Rails.application.routes.draw do
       patch :toggle_user_blocked
     end
 
+    patch :add_interest, to: 'interests#add_user_interest'
+
   end
 
 
@@ -76,6 +78,12 @@ Rails.application.routes.draw do
     end
     post :join_session, to: 'breakout_sessions#join_session',
       as: 'join'
+  end
+
+  resources :interests, only: [:show] do
+    controller :feed_items do
+      post :send_interest_comment
+    end
   end
 
 end

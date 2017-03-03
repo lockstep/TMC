@@ -1,0 +1,80 @@
+#interest {
+  h1 {
+    position: relative;
+    font-size: 30px;
+    color: $blue;
+    a {
+      font-size: 18px;
+      position: absolute;
+      left: 0px;
+      top: 5px;
+    }
+  }
+  .profile {
+    display: table;
+    .avatar {
+      width: 35px;
+      height: 35px;
+      background-size: cover;
+      background-position: center;
+    }
+    .name {
+      padding-left: 0.5em;
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+  .user {
+    display: block;
+    margin-bottom: 1em;
+    padding-left: 4em;
+  }
+  section {
+    line-height: 2em;
+    textarea {
+      width: 100%;
+    }
+  }
+
+  section.post-comment {
+    text-align: right;
+    .form-group.post-input {
+      width: 100%;
+    }
+  }
+  .post-comment, .comments {
+    .profile {
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
+      .name {
+        display: initial;
+        font-size: 0.8em;
+      }
+    }
+  }
+  .comments {
+    .profile {
+      width: 100%;
+      .avatar {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+      }
+    }
+    .author {
+      font-weight: bold;
+      color: $blue;
+      span, small {
+        font-weight: normal;
+        color: $blog-grey;
+      }
+    }
+  }
+  form {
+    input[type="submit"] {
+      margin-top: 0.5em;
+    }
+  }
+}
