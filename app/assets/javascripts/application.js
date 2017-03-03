@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require tether
-//= require ion.rangeSlider
 //= require bootstrap
 //= require tmc
 //= require product
