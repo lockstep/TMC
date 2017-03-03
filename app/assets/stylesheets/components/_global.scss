@@ -1,10 +1,11 @@
 @font-face {
   font-family: 'Script';
-  src: url('Salt_and_Spices_Pro_Regular.eot?#iefix') format('embedded-opentype'),
-       url('Salt_and_Spices_Pro_Regular.otf')  format('opentype'),
-       url('Salt_and_Spices_Pro_Regular.woff') format('woff'),
-       url('Salt_and_Spices_Pro_Regular.ttf')  format('truetype'),
-       url('Salt_and_Spices_Pro_Regular.svg#Salt_and_Spices_Pro_Regular') format('svg');
+  src: url('Salt_and_Spices_Pro_Regular.eot?'); /* IE9 Compat Modes */
+  src: url('Salt_and_Spices_Pro_Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('Salt_and_Spices_Pro_Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('Salt_and_Spices_Pro_Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('Salt_and_Spices_Pro_Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('Salt_and_Spices_Pro_Regular.svg#Salt_and_Spices_Pro_Regular') format('svg'); /* Legacy iOS */
   font-weight: normal;
   font-style: normal;
 }
