@@ -127,7 +127,7 @@ class User < ActiveRecord::Base
     )
   end
 
-  def self.find_for_oauth(auth, signed_in_resource = nil)
+  def self.find_for_oauth(auth, signed_in_resource = nil, alternate_onboarding_function)
     return unless auth.info.email
 
     identity = Identity.find_for_oauth(auth)
@@ -139,7 +139,11 @@ class User < ActiveRecord::Base
 
         user.password = Devise.friendly_token[0,20]
         user.save!
-        user.set_up_registering_user!
+        if alternate_onboarding_function.blank?
+          user.set_up_registering_user!
+        else
+          user.send(alternate_onboarding_function)
+        end
       end
     end
 
@@ -152,6 +156,12 @@ class User < ActiveRecord::Base
 
   def remember_me
     true
+  end
+
+  def onboard_directory_member
+    # NOTE: If people are just registering for the directory (e.g. during
+    # the conference) we don't want to bother them with product marketing.
+    send_welcome_email(true)
   end
 
   def set_up_registering_user!
@@ -182,8 +192,8 @@ class User < ActiveRecord::Base
     password.present? || password_confirmation.present?
   end
 
-  def send_welcome_email
-    WelcomeNewUserWorker.perform_in(1.second, self.id)
+  def send_welcome_email(hide_products = false)
+    WelcomeNewUserWorker.perform_in(1.second, self.id, hide_products)
   end
 
   def subscribe_to_mailchimp

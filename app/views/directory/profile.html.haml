@@ -65,7 +65,7 @@
       %hr
       - if user_signed_in?
         - if !current_user.opted_in_to_public_directory?
-          .text-xs-center= t('.must_be_in_directory_for_messages_html', path: edit_profile_user_path(current_user.id))
+          .text-xs-center= t('.must_be_in_directory_for_messages_html', path: edit_profile_users_path)
         - elsif @user == current_user
           %p.text-xs-center= t('.own_messages')
         - else

@@ -4,14 +4,16 @@ describe 'Directory', type: :feature do
   fixtures :interests
 
   before do
-    users(:michelle).update(
+    @michelle = users(:michelle)
+    @michelle.update(
       address_country: 'US',
       position: 'Montessori Guide',
       certifications: [certifications(:ami)],
       interests: [interests(:peace)],
       opted_in_to_public_directory: true
     )
-    users(:paul).update(
+    @paul = users(:paul)
+    @paul.update(
       address_country: 'TH',
       position: 'Head of School',
       certifications: [certifications(:abc)],
@@ -176,11 +178,32 @@ describe 'Directory', type: :feature do
             .to have_content users(:michelle).full_name.upcase
         end
       end
+      context 'user is logged in and already in the directory' do
+        before { @user = @michelle }
+        include_context 'signed in user'
+        it 'does not show join button' do
+          visit directory_path
+          expect(page).not_to have_link 'Join Directory'
+        end
+      end
     end
     context 'some user not opted in to public directory' do
       before do
-        users(:paul).update(opted_in_to_public_directory: false)
+        @paul.update(opted_in_to_public_directory: false)
         visit directory_path
+      end
+      context 'user wants to join' do
+        it 'walks the user through the process' do
+          click_link 'Join Directory'
+          fill_sign_in_form(@paul.email, 'qawsedrf')
+          click_button('Log in')
+          expect(page).to have_field "user_first_name"
+          fill_in 'user_first_name', with: 'p'
+          fill_in 'user_last_name', with: 'p'
+          check 'user_opted_in_to_public_directory'
+          click_button 'Save profile'
+          expect(page).to have_content I18n.t('devise.registrations.joined_directory')
+        end
       end
       context 'no filters' do
         it 'shows only opted in users' do

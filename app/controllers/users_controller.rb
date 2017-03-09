@@ -6,10 +6,22 @@ class UsersController < ApplicationController
     redirect_to user_materials_path @user
   end
 
+  def edit_profile
+    authenticate_user!
+    unless session[:alternate_onboarding_function].blank?
+      if current_user.opted_in_to_public_directory?
+        session.delete(:alternate_onboarding_function)
+        redirect_to directory_path, notice: t('users.already_in_directory')
+        return
+      end
+    end
+  end
+
   def edit_address
   end
 
   def update
+    @was_directory_member = @user.opted_in_to_public_directory?
     if @user.update_attributes(user_params)
       Interest.manage_user_interests(@user, @interests)
       Certification.manage_user_certifications(
@@ -26,8 +38,13 @@ class UsersController < ApplicationController
         MailchimpSubscriberWorker.perform_async(@user.email, 'c94cda6346')
         redirect_to :back
       else
-        flash[:notice] = 'Your account has been updated.'
-        render update_complete_path(params['commit'])
+        if opted_into_directory?
+          flash[:notice] = t('devise.registrations.joined_directory')
+          redirect_to directory_path
+        else
+          flash[:notice] = 'Your account has been updated.'
+          render update_complete_path(params['commit'])
+        end
       end
     else
       render update_complete_path(params['commit'])
@@ -35,6 +52,11 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def opted_into_directory?
+    return if @was_directory_member
+    @user.opted_in_to_public_directory?
+  end
 
   def user_params
     params.require(:user).permit(

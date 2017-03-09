@@ -15,6 +15,11 @@ class DirectoryController < ApplicationController
     end
   end
 
+  def join_directory
+    session[:alternate_onboarding_function] = 'onboard_directory_member'
+    redirect_to edit_profile_users_path
+  end
+
   def profile
     unless @user
       flash[:error] = t('.user_not_found')

@@ -31,7 +31,7 @@ describe FeedItemsController do
             user_id: @user2.id,
             feed_item: { message: 'my message' }
           }
-          expect(response).to redirect_to edit_profile_user_path(@user1.id)
+          expect(response).to redirect_to edit_profile_users_path
         end
       end
 

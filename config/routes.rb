@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/403', to: 'pages#show', page: 'home', as: 'error_403'
   get '/cart', to: 'carts#my_cart', as: 'cart'
   get '/directory', to: 'directory#index'
+  post '/directory/join', to: 'directory#join_directory'
   get '/directory/profile/:user_id', to: 'directory#profile',
     as: 'directory_profile'
   get '/aws_s3_auth', to: 'aws_services#aws_s3_auth'
@@ -36,10 +37,13 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: [:show, :edit, :update] do
+
+    collection do
+      get :edit_profile
+    end
     member do
       get :edit_address
       get :profile
-      get :edit_profile
     end
     resources :orders, only: [:index, :show], controller: 'users/orders'
     resources :materials, only: [:index], controller: 'users/materials'

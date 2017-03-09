@@ -11,8 +11,12 @@
       = image_tag 'leaf.png', alt: 'The Montessori Company Leaf',
         class: 'leaf'
     .row.query.m-b-3
-      .col-sm-12
+      .col-sm-2
         %h5.pull-left FILTERS
+      .col-sm-10
+        - unless user_signed_in? && current_user.opted_in_to_public_directory?
+          = link_to 'Join Directory', directory_join_path, method: :post,
+            class: 'btn btn-cart pull-left'
         .form-inline.text-xs-right
           = text_field_tag 'query', @search_query, class: 'form-control',
             placeholder: 'Enter search query'

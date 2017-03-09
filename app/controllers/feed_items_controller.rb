@@ -58,7 +58,7 @@ class FeedItemsController < ApplicationController
 
   def ensure_user_belongs_to_directory
     return if current_user.opted_in_to_public_directory?
-    redirect_to edit_profile_user_path(current_user),
+    redirect_to edit_profile_users_path,
       alert: t('.must_be_directory_member')
   end
 

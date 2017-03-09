@@ -6,16 +6,16 @@
     .col-sm-3
       = render 'users/shared/sidebar'
     .col-sm-9
-      %h3.m-b-3 My Profile
+      %h3.m-b-3 My Directory Profile
       #profile
         .show
-          = form_for @user, html: { multipart: true } do |f|
+          = form_for (@user || current_user), html: { multipart: true } do |f|
             .m-b-3
               = render 'users/shared/error_messages'
             .row
               .col-sm-3#avatar
                 %a{href: '#'}
-                  .image{style: "background-image:url(#{@user.avatar.url(:medium)})"}
+                  .image{style: "background-image:url(#{(@user || current_user).avatar.url(:medium)})"}
                   .info change image
                 .newImageName
                 = f.file_field :avatar, accept: 'image/png,image/jpeg'
@@ -54,7 +54,7 @@
                       = f.label :address_country, 'Country', class: 'form-label'
                       = country_select "user", "address_country",
                         { priority_countries: ["US", "CA", "GB", "AU"],
-                          selected: @user.address_country,
+                          selected: (@user || current_user).address_country,
                           include_blank: 'Select Country' },
                         { class: 'form-control' }
             .row
@@ -70,11 +70,11 @@
                 %section.form-group.interest
                   = f.label :interests, 'Interests', class: 'form-label'
                   .interests
-                    - interests_available_to(@user).each do |interest|
+                    - interests_available_to((@user || current_user)).each do |interest|
                       .checkbox
                         %label
                           = check_box_tag 'user[interests][]', interest.name,
-                            has_interest?(@user, interest.name)
+                            has_interest?((@user || current_user), interest.name)
                           .text
                             = interest.name
 
@@ -88,11 +88,11 @@
                   = f.label :certifications, 'Trainings & Certifications',
                     class: 'form-label'
                   .certifications
-                    - certifications_available_to(@user).each do |certification|
+                    - certifications_available_to((@user || current_user)).each do |certification|
                       .checkbox
                         %label
                           = check_box_tag 'user[certifications][]', certification.name,
-                            has_certification?(@user, certification.name)
+                            has_certification?((@user || current_user), certification.name)
                           .text
                             = certification.name
                   .form-inline.custom
