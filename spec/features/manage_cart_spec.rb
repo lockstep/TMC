@@ -35,7 +35,7 @@ describe 'Ordering process', type: :feature do
       expect(page).to have_content 'already in your cart'
     end
 
-    it 'is smoother with js enabled', :js do
+    xit 'is smoother with js enabled', :js do
       visit product_path @product
       expect(page).to have_content @product.name.upcase
       click_button 'Add to Cart'
