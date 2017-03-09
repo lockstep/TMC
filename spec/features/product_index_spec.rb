@@ -45,6 +45,7 @@ describe 'Product search page', type: :feature do
       expect(page).not_to have_content @child_topic_2.name
       click_link @topic_2.name
       expect(page).to have_content @child_topic_2.name.upcase
+      sleep 1
       expect(page).to have_selector('a.active', text: @topic_2.name.upcase)
     end
     context 'the topic has a description' do
