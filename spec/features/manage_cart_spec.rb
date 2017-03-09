@@ -39,7 +39,7 @@ describe 'Ordering process', type: :feature do
       visit product_path @product
       expect(page).to have_content @product.name.upcase
       click_button 'Add to Cart'
-      sleep 2 # FKINGGG AJAX SPECS ADJKFJJDFJSDFJSDFASD
+      sleep 1 # FKINGGG AJAX SPECS ADJKFJJDFJSDFJSDFASD
       # It remains on the page
       expect(page).not_to have_content 'Your Cart'
       # check we actually added it
