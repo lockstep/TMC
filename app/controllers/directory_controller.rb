@@ -20,6 +20,7 @@ class DirectoryController < ApplicationController
       flash[:error] = t('.user_not_found')
       return redirect_to directory_path
     end
+    store_location_for(:user, directory_profile_path(@user))
     @vendor_products = @user.products_for_sale.live
     @private_messages = FeedItems::PrivateMessage.conversation_between(
       @user, current_user, 10
