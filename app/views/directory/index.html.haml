@@ -70,22 +70,24 @@
                 include_blank: 'Select Country' },
               { class: 'form-control' }
         .form-group
-          = submit_tag "Search", class: "btn btn-cart"
+          = submit_tag "Search", class: "btn btn-cart btn-block"
       .col-sm-9.col-md-10
-        %table.table.table-hover.table-responsive
-          %thead
-            %tr
-              %th{width: '120px'}
-              %th Name
-              %th Position
-              %th Location
-              %th Certifications
-              %th Interests
-          %tbody
-            - @users.each do |user|
-              = render 'users/profiles/profile', user: user
-        - if @users.blank?
-          .text-center= t('.no_users_found')
+        .table-responsive
+          %table.table.table-hover
+            %thead
+              %tr
+                %th
+                %th Name
+                %th Position
+                %th Location
+                %th Certifications
+                %th Interests
+            %tbody
+              - @users.each do |user|
+                = render 'users/profiles/profile', user: user
+              - if @users.blank?
+                %tr
+                  %td.text-center{ colspan: 6 }= t('.no_users_found')
         .text-center
           = paginate @users
 
