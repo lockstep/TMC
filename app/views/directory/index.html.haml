@@ -11,18 +11,26 @@
       = image_tag 'leaf.png', alt: 'The Montessori Company Leaf',
         class: 'leaf'
     .row.query.m-b-3
-      .col-sm-2
+      .col-sm-3.col-md-2.hidden-xs-down
         %h5.pull-left FILTERS
-      .col-sm-10
-        - unless user_signed_in? && current_user.opted_in_to_public_directory?
-          = link_to 'Join Directory', directory_join_path, method: :post,
-            class: 'btn btn-cart pull-left'
-        .form-inline.text-xs-right
-          = text_field_tag 'query', @search_query, class: 'form-control',
-            placeholder: 'Enter search query'
-          = submit_tag "Search", class: "btn btn-cart"
+      .col-xs-12.col-sm-9.col-md-10
+        .row
+          .col-sm-4.hidden-xs-down
+            - unless user_signed_in? && current_user.opted_in_to_public_directory?
+              = link_to 'Join Directory', directory_join_path, method: :post,
+                class: 'btn btn-cart pull-left'
+          .col-sm-8.col-lg-6.col-lg-offset-2
+            .row
+              .col-xs-7.col-sm-8
+                = text_field_tag 'query', @search_query, class: 'form-control',
+                  placeholder: 'Enter search query'
+              .col-xs-5.col-sm-4
+                = submit_tag "Search", class: "btn btn-cart btn-block"
+        %p.small.hidden-sm-up
+          For the best experience, browse The Montessori Directory on
+          a larger browser or download our mobile application.
     .row
-      .col-sm-2.search
+      .col-sm-3.col-md-2.search.hidden-xs-down
         %section
           %h5 Certifications
           .form-group
@@ -63,8 +71,8 @@
               { class: 'form-control' }
         .form-group
           = submit_tag "Search", class: "btn btn-cart"
-      .col-sm-10
-        %table.table.table-hover
+      .col-sm-9.col-md-10
+        %table.table.table-hover.table-responsive
           %thead
             %tr
               %th{width: '120px'}
