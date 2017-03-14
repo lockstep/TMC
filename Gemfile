@@ -43,6 +43,7 @@ gem 'stripe', '~> 1.36.1'
 gem 'slack-notifier'
 gem 'country_select'
 gem "rack-timeout"
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17', '>= 4.17.47'
 
 group :test do
   gem 'stripe-ruby-mock', require: 'stripe_mock'

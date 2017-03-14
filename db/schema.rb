@@ -51,15 +51,15 @@ ActiveRecord::Schema.define(version: 20170316070057) do
   add_index "breakout_session_locations", ["conference_id"], name: "index_breakout_session_locations_on_conference_id", using: :btree
 
   create_table "breakout_sessions", force: :cascade do |t|
-    t.string   "name"
-    t.date     "day"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.string   "name",                                      null: false
     t.integer  "conference_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.integer  "breakout_session_location_id"
     t.string   "slug"
+    t.text     "description",                  default: "", null: false
+    t.datetime "starts_at"
+    t.datetime "ends_at"
   end
 
   add_index "breakout_sessions", ["conference_id"], name: "index_breakout_sessions_on_conference_id", using: :btree
@@ -361,9 +361,9 @@ ActiveRecord::Schema.define(version: 20170316070057) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.integer  "role",                         default: 0,       null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.integer  "role",                         default: 0,     null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

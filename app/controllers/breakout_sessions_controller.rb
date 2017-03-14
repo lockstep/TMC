@@ -1,6 +1,10 @@
 class BreakoutSessionsController < ApplicationController
   before_action :set_breakout_session, only: [:show, :join_session]
 
+  def new
+    @breakout_session = BreakoutSession.new
+  end
+
   def show
     store_location_for(:user, breakout_session_path(@breakout_session))
     @comments = @breakout_session.comments

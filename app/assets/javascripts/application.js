@@ -21,3 +21,5 @@
 //= require product
 //= require profile
 //= require upload_comment_image
+//= require moment
+//= require bootstrap-datetimepicker

@@ -1,12 +1,12 @@
 module ConferencesHelper
 
   def breakout_session_time(session)
-    "#{format_time(session.start_time)} - #{format_time(session.end_time)}"
+    "#{format_time(session.starts_at)} - #{format_time(session.ends_at)}"
   end
 
   def format_date(session)
-    return 'N/A' unless session.day
-    session.day.strftime("%m/%d/%y")
+    return 'N/A' unless session.starts_at
+    session.starts_at.strftime("%m/%d/%y")
   end
 
   def format_organizers(session)

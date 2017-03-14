@@ -1,0 +1,37 @@
+- content_for :title, 'Create a New Breakout Session'
+
+.container
+  %h3.text-xs-center New Breakout Session
+  .row
+    .col-sm-6.col-sm-offset-3.m-t-2
+      = form_for @breakout_session do |f|
+        = render 'users/shared/error_messages'
+        .form-group
+          = f.label :name, class: 'form-label'
+          = f.text_field :name, class: 'form-control'
+        .form-group
+          = f.label :description, class: 'form-label'
+          = f.text_area :description, class: 'form-control'
+        .form-group
+          = f.label :starts_at, class: 'form-label'
+          #starts-at.input-group.date
+            = f.text_field :starts_at, class: 'form-control'
+            %span.input-group-addon
+              %i.fa.fa-calendar
+        .form-group
+          = f.submit "Save", class: "btn btn-cart btn-block"
+
+:javascript
+  $(function () {
+    $('#starts-at').datetimepicker({
+      allowInputToggle: true,
+      icons: {
+        time: 'fa fa-clock-o',
+        date: 'fa fa-calendar',
+        up: 'fa fa-plus',
+        down: 'fa fa-minus',
+        next: 'fa fa-chevron-right',
+        previous: 'fa fa-chevron-left'
+      }
+    });
+  });

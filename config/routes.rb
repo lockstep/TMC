@@ -59,7 +59,6 @@ Rails.application.routes.draw do
     end
 
     patch :add_interest, to: 'interests#add_user_interest'
-
   end
 
 
@@ -71,7 +70,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:index, :show]
   post :join_newsletter, to: 'guests#join_newsletter'
 
-  resources :breakout_sessions, only: [:show] do
+  resources :breakout_sessions, only: [:show, :create, :new] do
     controller :feed_items do
       post :send_breakout_session_comment
     end
