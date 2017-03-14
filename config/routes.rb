@@ -24,6 +24,9 @@ Rails.application.routes.draw do
     as: 'directory_profile'
   get '/aws_s3_auth', to: 'aws_services#aws_s3_auth'
 
+  get '/admin/become/users/:id', to: 'admin/users#become',
+    as: 'become_user'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
