@@ -1,11 +1,8 @@
 @charset "utf-8";
 
-@import "variables/vars";
-@import "mixins";
-@import "frameworks_and_overrides";
-
 @import "bourbon";
 @import "neat";
+@import "mixins";
 
 @import "selectize";
 @import "datetime_picker";

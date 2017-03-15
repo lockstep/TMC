@@ -5,8 +5,8 @@ describe PresentationsHelper, type: :helper do
   let(:topics)        { Topic.includes(:children).where(parent_id: nil) }
   let(:child_topics)  { Topic.where.not(parent_id: nil) }
 
-  xdescribe "#topics_nav" do
-    subject { helper.topics_nav }
+  describe "#topics_nav" do
+    subject { helper.topics_nav(controller: :products) }
 
     it 'include all names in parent topics' do
       topics.pluck(:name).each do |topic_name|
@@ -21,7 +21,7 @@ describe PresentationsHelper, type: :helper do
     end
   end
 
-  xdescribe "#breadcrumb_nav" do
+  describe "#breadcrumb_nav" do
     context 'no product given' do
       subject { helper.breadcrumb_nav }
       it 'does not break' do

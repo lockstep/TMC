@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :async, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  after_initialize :set_default_role, :if => :new_record?
-
   has_many :orders
   has_many :posts
   has_many :completed_orders, -> { paid }, class_name: 'Order'
@@ -106,10 +104,6 @@ class User < ActiveRecord::Base
       location_string = "#{address_city}, #{location_string}"
     end
     location_string
-  end
-
-  def set_default_role
-    self.role ||= :user
   end
 
   def address_complete?
