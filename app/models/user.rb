@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :async, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  include UsersHelper
-
   has_many :orders
   has_many :posts
   has_many :completed_orders, -> { paid }, class_name: 'Order'
@@ -183,6 +181,11 @@ class User < ActiveRecord::Base
 
   def email_access_token
     Digest::SHA256.hexdigest("#{id}:#{ENV['SECRET_KEY_BASE']}")
+  end
+
+  def clear_devise_reset_password_token
+    clear_reset_password_token
+    save
   end
 
   private
