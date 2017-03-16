@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :async, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  include UsersHelper
+
   has_many :orders
   has_many :posts
   has_many :completed_orders, -> { paid }, class_name: 'Order'

@@ -8,6 +8,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
       session.delete(:alternate_onboarding_function)
+      @user.clear_devise_reset_password_token
     else
       unless env["omniauth.auth.info.email"]
         flash[:alert] = "Signing up with Facebok only works when you provide " \
