@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include DeviseTokenAuth::Concerns::User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :async, :registerable,
@@ -83,6 +84,12 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  # This is part of a really idiotic song and dance I'm doing with
+  # devise_token_auth to get it to work without changes to the gem.
+  def confirmed_at
+    Time.now
   end
 
   def full_address_country

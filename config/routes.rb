@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :admin do
     DashboardManifest::DASHBOARDS.each do |dashboard_resource|
       resources dashboard_resource
@@ -83,6 +84,14 @@ Rails.application.routes.draw do
   resources :interests, only: [:show] do
     controller :feed_items do
       post :send_interest_comment
+    end
+  end
+
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v1 do
+      mount_devise_token_auth_for 'User', at: 'users', controllers: {
+        sessions: 'api/v1/users/sessions'
+      }
     end
   end
 
