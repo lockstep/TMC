@@ -15,4 +15,13 @@ class OrdersMailer < ApplicationMailer
       subject: "New Purchase on The Marketplace"
     )
   end
+
+  def notify_duplicate_products(order_ids)
+    @orders = Order.includes(:line_items).where(id: order_ids)
+    mail(
+      to: ADMIN_EMAILS,
+      subject: "Order with Duplicate Product Items"
+    )
+  end
+
 end
