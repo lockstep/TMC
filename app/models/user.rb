@@ -183,6 +183,11 @@ class User < ActiveRecord::Base
     Digest::SHA256.hexdigest("#{id}:#{ENV['SECRET_KEY_BASE']}")
   end
 
+  def clear_devise_reset_password_token
+    clear_reset_password_token
+    save
+  end
+
   private
 
   def password_required?
