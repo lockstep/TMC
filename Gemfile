@@ -35,7 +35,7 @@ gem 'active_shipping'
 
 gem 'searchkick', '~> 1.2.1'
 gem 'typhoeus'
-gem 'airbrake', '~> 5.6'
+gem 'airbrake', '~> 5.8'
 gem 'newrelic_rpm'
 gem 'friendly_id', '~> 5.1.0'
 
