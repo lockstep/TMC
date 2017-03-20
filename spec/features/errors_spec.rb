@@ -7,9 +7,8 @@ describe 'Error pages', type: :feature do
       expect(page).to have_link 'Keep shopping'
     end
     it 'notifies Airbrake' do
-      allow(Airbrake).to receive(:notify)
+      expect(Airbrake[:default]).to receive(:notify)
       visit order_path 1
-      expect(Airbrake).to have_received(:notify)
     end
   end
   context 'page not found' do
@@ -19,17 +18,15 @@ describe 'Error pages', type: :feature do
       expect(page).to have_link 'Keep shopping'
     end
     it 'does not notify Airbrake' do
-      allow(Airbrake).to receive(:notify)
+      expect(Airbrake[:default]).not_to receive(:notify)
       visit '/made-up'
-      expect(Airbrake).not_to have_received(:notify)
     end
   end
   context 'file not found' do
     it 'does not notify Airbrake' do
-      allow(Airbrake).to receive(:notify)
+      expect(Airbrake[:default]).not_to receive(:notify)
       visit '/non_existent_stylesheet.css'
       expect(page).to have_content 'does not exist'
-      expect(Airbrake).not_to have_received(:notify)
     end
   end
   context '500' do
@@ -43,9 +40,8 @@ describe 'Error pages', type: :feature do
       expect(page).to have_link "Let's go"
     end
     it 'notifies Airbrake' do
-      allow(Airbrake).to receive(:notify)
+      expect(Airbrake[:default]).to receive(:notify)
       visit order_path 1
-      expect(Airbrake).to have_received(:notify)
     end
   end
 end
