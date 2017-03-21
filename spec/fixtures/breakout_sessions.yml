@@ -1,6 +1,5 @@
 teaching:
   name: Teaching
-  day: <%= Date.today %>
-  start_time: '15:00'
-  end_time: '16:00'
+  starts_at: <%= 2.hours.from_now %>
+  ends_at: <%= 4.hours.from_now %>
   slug: teaching

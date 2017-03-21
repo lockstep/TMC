@@ -23,8 +23,8 @@ describe 'Conference', type: :feature do
       expect(page).to have_content "#{conferences(:ami).name}"
       expect(page).to have_content Date.today.strftime("%m/%d/%y")
       session = breakout_sessions(:teaching)
-      start_time = "#{format_time(session.start_time)}"
-      end_time = "#{format_time(session.end_time)}"
+      start_time = "#{format_time(session.starts_at)}"
+      end_time = "#{format_time(session.ends_at)}"
       expect(page)
         .to have_content "#{start_time} - #{end_time}"
       expect(page).to have_content users(:paul).full_name
