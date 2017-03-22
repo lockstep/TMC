@@ -46,7 +46,11 @@
                 .detail
                   .info Vendor Info
                   .avatar(style="background-image: url('#{@product.vendor_avatar.url(:medium)}');")
-                  .name= @product.vendor_full_name
+                  - if @product.vendor_opted_in_to_public_directory?
+                    = link_to directory_profile_path(@product.vendor_id) do
+                      .name= @product.vendor_full_name
+                  - else
+                    .name= @product.vendor_full_name
                   .location
                     %i.fa.fa-map-marker
                     = @product.vendor_public_location(true)
