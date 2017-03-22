@@ -7,7 +7,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name: Field::String,
     role: Enum,
     email: Field::String,
-    bio: WysiwygField,
+    bio: Field::Text,
     orders: Field::HasMany,
     encrypted_password: Field::String,
     reset_password_token: Field::String,

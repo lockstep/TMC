@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
     @results = Product.search(
       search_query,
       misspellings: { edit_distance: 1 },
-      fields: [:name, :description],
+      fields: [:name, :description, :vendor_organization_name, :vendor_name],
       where: search_options,
       order: sort_by,
       page: page,

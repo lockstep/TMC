@@ -27,7 +27,8 @@ class Product < ActiveRecord::Base
   delegate :download_url, to: :downloadable, allow_nil: true
   delegate :active_shipping_location, to: :vendor
   delegate :profile_complete?, :full_name, :public_location, :bio,
-    :avatar, :opted_in_to_public_directory?, to: :vendor, prefix: true, allow_nil: true
+    :avatar, :opted_in_to_public_directory?, :organization_name,
+    to: :vendor, prefix: true, allow_nil: true
 
   LANGUAGES = {
     'English' => 0,
@@ -41,6 +42,8 @@ class Product < ActiveRecord::Base
     {
       name: name,
       description: description,
+      vendor_organization_name: vendor_organization_name,
+      vendor_name: vendor_full_name,
       topic_ids: topic_ids_array,
       live: live,
       created_at: created_at,
