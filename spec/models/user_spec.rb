@@ -12,6 +12,21 @@ describe User, type: :model do
     it { expect(michelle.email).to eq 'mich@tmc.com' }
   end
 
+  describe 'country' do
+    context 'valid country code' do
+      it 'is valid' do
+        u = build(:user, address_country: 'NL')
+        expect(u).to be_valid
+      end
+    end
+    context 'invalid country code' do
+      it 'is not valid' do
+        u = build(:user, address_country: 'NLDFDFF')
+        expect(u).not_to be_valid
+      end
+    end
+  end
+
   describe '#public_location' do
     before do
       @user = build(

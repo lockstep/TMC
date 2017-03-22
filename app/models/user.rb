@@ -33,6 +33,9 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name,
     :position, :address_country, if: :opted_in_to_public_directory?
 
+  validates_inclusion_of :address_country, in: ISO3166::Country.codes,
+    if: '!blank?'
+
   MAX_BIO_LENGTH = 160
   validates :bio, length: { maximum: MAX_BIO_LENGTH }
 
