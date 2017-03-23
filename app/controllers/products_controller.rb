@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
     )
     @recent_products = recently_viewed
     @query = search_query == '*' ? '' : search_query
-    @topic = Topic.find_by(id: params[:topic_ids])
+    @topic = Topic.find_by(id: topic_id)
     @sort_by =
       params[:sort] || "#{DEFAULT_SORT.keys[0]}:#{DEFAULT_SORT.values[0]}"
   end
@@ -68,14 +68,24 @@ class ProductsController < ApplicationController
   end
 
   def search_query
+    # If searching a new topic, clear the query.
+    return '*' if params[:topic_ids] != params[:previous_topic]
     params[:q].present? ? params[:q] : '*'
   end
 
   def search_options
     {}.tap do |options|
-      options[:topic_ids] = [params[:topic_ids]] if params[:topic_ids].to_i > 0
+      options[:topic_ids] = [ topic_id ] if topic_id
       options[:live] = true
     end
+  end
+
+  def topic_id
+    return nil unless params[:topic_ids].to_i > 0
+    # NOTE: For now we've decided not to allow combined searches of topics
+    # and arbitrary queries (via params[:q])
+    return nil if search_query != '*'
+    params[:topic_ids]
   end
 
   def sort_by

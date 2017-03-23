@@ -150,6 +150,15 @@ describe 'Product search page', type: :feature do
         expect(page).not_to have_content 'Number Cards'.upcase
       end
     end
+    it 'can filter products' do
+      visit products_path
+      expect(page).to have_content 'Animal Cards'
+      expect(page).to have_content 'Number Board'
+      fill_in :q, with: 'animal'
+      click_button 'Search'
+      expect(page).to have_content 'Animal Cards'
+      expect(page).not_to have_content 'Number Board'
+    end
     context 'search by topics' do
       before do
         @no_presentation = products(:flamingo)
@@ -165,6 +174,7 @@ describe 'Product search page', type: :feature do
         before do
           @birds = topics(:birds)
           @ostrich = products(:ostrich)
+          @memory = products(:memory_puzzle_card)
           @cards = products(:number_cards)
         end
         it 'persists topic selection when other options are set' do
@@ -175,6 +185,29 @@ describe 'Product search page', type: :feature do
           expect(page).to have_content @ostrich.name
           # topic stays narrowed down to Birds
           expect(page).not_to have_content @cards.name
+        end
+        it 'clears the query with a new topic', :js do
+          visit products_path
+          expect(page).to have_content @ostrich.name.upcase
+          expect(page).to have_content @memory.name.upcase
+          fill_in :q, with: @memory.name.upcase
+          click_button 'Search'
+          expect(page).to have_content @memory.name.upcase
+          expect(page).not_to have_content @ostrich.name.upcase
+
+          all('.product-categories a')[1].click
+          expect(page).to have_content @ostrich.name.upcase
+          expect(page).not_to have_content @memory.name.upcase
+        end
+        it 'clears topic when new query' do
+          visit products_path
+          expect(page).to have_content @ostrich.name
+          expect(page).to have_content @memory.name
+          first(:link, @ostrich.topics.first.name).click
+          expect(page).not_to have_content @memory.name
+          fill_in :q, with: @memory.name
+          click_button 'Search'
+          expect(page).to have_content @memory.name
         end
       end
     end

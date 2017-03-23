@@ -5,6 +5,7 @@
     - cache cache_key_for_products do
       = topics_nav(controller: :products)
     = hidden_field_tag 'topic_ids', @topic.try(:id)
+    = hidden_field_tag 'previous_topic', @topic.try(:id)
 
   %h1.hidden-xs-down.script Looking for Something?
   .query-container
@@ -13,6 +14,12 @@
       = fa_icon 'search'
   = submit_tag "Search", id: 'search-button',
     class: "btn btn-cart form-control"
+  - if @topic
+    %br
+    %br
+    %p.small
+      Note: A new search will clear your category selection:
+      %b #{@topic.name}
   %p.filter-label.text-xs-right.hidden-sm-up
     %span#mobile-menu-open
       = fa_icon 'filter'
