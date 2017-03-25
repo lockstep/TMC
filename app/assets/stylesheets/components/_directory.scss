@@ -1,20 +1,8 @@
 #directory {
-  h1 {
+  .directory-header {
     position: relative;
     font-size: 24px;
     color: $blue;
-  }
-
-  &.directory-profile {
-    h1 {
-      font-size: 30px;
-      a {
-        font-size: 18px;
-        position: absolute;
-        left: 0px;
-        top: 5px;
-      }
-    }
   }
 
   .query {

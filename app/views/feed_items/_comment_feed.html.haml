@@ -31,7 +31,7 @@
     - if comments.empty?
       %div No comments available
     - comments.each do |comment|
-      .row.m-b-2
+      .row.m-b-3
         .col-sm-3.col-lg-2.text-center
           .profile
             .avatar{style: "background-image:url(#{comment.author_avatar.url(:thumb)})"}

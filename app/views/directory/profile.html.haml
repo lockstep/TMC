@@ -1,12 +1,13 @@
 - content_for :title, 'Directory'
 - content_for :header_logo, 'false'
 
-.container#directory.directory-profile.m-t-3
-  .row
-    %h1.text-center
-      = link_to '< Back to Directory', directory_path, class: 'hidden-xs-down'
-      = @user.full_name.upcase
-    %hr
+.container#directory.directory-profile.simple-show-layout.m-t-3
+  .row.title-section
+    .col-md-3.hidden-sm-down
+      = link_to '< Back to Directory', directory_path
+    .col-md-6
+      %h1.text-center= @user.full_name.upcase
+  %hr
   #profile.m-t-2
     .row
       .col-sm-3#avatar
@@ -43,7 +44,7 @@
               .section
                 %small INTERESTS
                 %div
-                  = format_user_interests(@user)
+                  = user_interests_with_links(@user)
 
   - if !@vendor_products.empty?
     .row.m-t-2

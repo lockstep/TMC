@@ -19,7 +19,7 @@ describe 'Interest', type: :feature do
         within 'section.add-interest' do
           expect(page).to have_content 'Please sign in or sign up'
         end
-        within '.users' do
+        within '.right-user-list' do
           expect(page).to have_content 'Paul'
         end
       end
@@ -85,7 +85,7 @@ describe 'Interest', type: :feature do
             end
             it "shows the user's in interest list" do
               click_button 'ADD TO PROFILE'
-              within '.users' do
+              within '.right-user-list' do
                 expect(page).to have_content users(:michelle).first_name
               end
             end

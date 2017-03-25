@@ -1,0 +1,27 @@
+.right-user-list {
+
+  .user-in-list {
+    display: block;
+    margin-bottom: 1.2em;
+  }
+
+  .profile {
+    display: relative;
+    padding-left: 30px;
+    .avatar {
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      background-size: cover;
+      background-position: center;
+    }
+    .name {
+      padding-left: 45px;
+      line-height: 35px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+}

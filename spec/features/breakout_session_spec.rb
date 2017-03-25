@@ -34,7 +34,9 @@ describe 'BreakoutSession', type: :feature do
         within 'section.post-comment' do
           click_on 'sign in'
         end
-        signin(users(:michelle).email, 'qawsedrf')
+        user = users(:michelle)
+        user.update(opted_in_to_public_directory: true)
+        signin(user.email, 'qawsedrf')
       end
       it 'redirects back to breakout session page' do
         expect(page).to have_current_path breakout_session_path(
@@ -71,16 +73,19 @@ describe 'BreakoutSession', type: :feature do
           end
           it "shows the user's in attendee list" do
             click_button 'JOIN SESSION'
-            within '.attendees' do
+            within '.right-user-list' do
               expect(page).to have_content users(:michelle).first_name
             end
           end
         end
         context 'user is not opted in to public directory' do
+          before do
+            users(:michelle).update(opted_in_to_public_directory: false)
+          end
           it 'shows warning and does not list the user in attendee list' do
             click_button 'JOIN SESSION'
             expect(page).to have_content 'must be listed in The Montessori Directory'
-            within '.attendees' do
+            within '.right-user-list' do
               expect(page).not_to have_content users(:michelle).first_name
             end
           end

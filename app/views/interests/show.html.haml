@@ -14,36 +14,36 @@
         create_comment_url: interest_send_interest_comment_path(@interest)
 
     .col-sm-4
-      .text-center
-        - if user_signed_in?
-          - unless @users.include?(current_user)
-            %section.join.m-b-3
-              = form_tag user_add_interest_path(current_user), method: :patch do
-                = hidden_field_tag :id, @interest.id
-                = submit_tag 'ADD TO PROFILE', class: 'btn btn-cart',
-                  disabled: current_user.interests.include?(@interest)
-        - else
-          %section.add-interest.m-b-3
-            %h5.text-center Join Interest Group
-            %hr
-            .text-xs-center= t('.sign_in_or_sign_up_html',
-              sign_in: new_user_session_path, sign_up: new_user_registration_path)
-        %section
-          %h5 Others Who Share This Interest
-          %hr.m-b-2
-          .users
-            - if @users.any?
-              - @users.first(10).each do |user|
-                = link_to directory_profile_path(user.id), class: 'user' do
-                  .profile
-                    .avatar{style: "background-image:url(#{user.avatar.url(:thumb)})"}
-                    .name
-                      = user.full_name
-              - if @users.count > 10
+      - if user_signed_in?
+        - unless @users.include?(current_user)
+          %section.join.m-b-3.text-center
+            = form_tag user_add_interest_path(current_user), method: :patch do
+              = hidden_field_tag :id, @interest.id
+              = submit_tag 'ADD TO PROFILE', class: 'btn btn-cart',
+                disabled: current_user.interests.include?(@interest)
+      - else
+        %section.add-interest.m-b-3
+          %h5.text-center Join Interest Group
+          %hr
+          .text-xs-center= t('.sign_in_or_sign_up_html',
+            sign_in: new_user_session_path, sign_up: new_user_registration_path)
+      %section.right-user-list
+        %h5.text-center Others Who Share This Interest
+        %hr.m-b-2
+        - if @users.any?
+          - @users.first(10).each do |user|
+            = link_to directory_profile_path(user.id), class: 'user-in-list' do
+              .profile
+                .avatar{style: "background-image:url(#{user.avatar.url(:thumb)})"}
+                .name
+                  = user.full_name
+          - if @users.count > 10
+            .row
+              .col-xs-8.col-xs-offset-2
                 = link_to 'See All', directory_path('interests[]' => @interest.name),
-                  class: "m-t-1 btn btn-secondary"
-            - else
-              %div N/A
+                  class: "m-t-1 btn btn-secondary btn-block"
+        - else
+          %div.text-center N/A
 
 
 

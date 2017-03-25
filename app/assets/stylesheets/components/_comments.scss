@@ -1,0 +1,35 @@
+section.post-comment {
+
+  form {
+    input[type="submit"] {
+      margin-top: 0.5em;
+    }
+  }
+
+  text-align: right;
+  .form-group.post-input {
+    width: 100%;
+  }
+
+}
+
+.comments {
+  .profile {
+    width: 100%;
+    .avatar {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      background-size: cover;
+      background-position: center
+    }
+  }
+  .author {
+    font-weight: bold;
+    color: $blue;
+    span, small {
+      font-weight: normal;
+      color: $blog-grey;
+    }
+  }
+}
