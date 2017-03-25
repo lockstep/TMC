@@ -158,3 +158,15 @@ hr {
 .leaf {
   width: 65px;
 }
+
+.simple-show-layout {
+  .title-section {
+    h1 {
+      font-size: 30px;
+      color: $blue;
+    }
+    a {
+      line-height: 33px;
+    }
+  }
+}

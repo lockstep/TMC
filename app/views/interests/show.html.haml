@@ -1,11 +1,12 @@
 - content_for :title, "#{@interest.name} | Montessori Interests"
 - content_for :header_logo, 'false'
 
-.container#interest.m-t-3
-  %h1.text-center
-    = link_to "< Back to Directory", directory_path, class: 'hidden-xs-down'
-
-    = @interest.name.upcase
+.container#interest.m-t-3.simple-show-layout
+  .row.title-section
+    .col-md-3.hidden-sm-down
+      = link_to "< Back to Directory", directory_path
+    .col-md-6
+      %h1.text-center= @interest.name.upcase
   %hr.m-b-3
   .row.m-t-2
     .col-sm-8

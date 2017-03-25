@@ -28,10 +28,10 @@
       %div No comments available
     - comments.each do |comment|
       .row.m-b-2
-        .col-sm-2.text-center
+        .col-sm-3.col-lg-2.text-center
           .profile
             .avatar{style: "background-image:url(#{comment.author_avatar.url(:thumb)})"}
-        .col-sm-10
+        .col-sm-9.col-lg-10
           .author.m-b-1
             = comment.author_full_name
             %span

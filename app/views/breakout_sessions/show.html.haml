@@ -1,11 +1,14 @@
 - content_for :title, "#{@breakout_session.name} | Montessori Conference Breakout Sessions"
 - content_for :header_logo, 'false'
 
-.container#breakout-session.m-t-3
-  %h1.text-center
-    = link_to "< Back",
-      conference_path(@breakout_session.conference_slug), class: 'hidden-xs-down'
-    = @breakout_session.name.upcase
+.container#breakout-session.m-t-3.simple-show-layout
+  .row.title-section
+    .col-md-3.hidden-sm-down
+      = link_to "< Back",
+        conference_path(@breakout_session.conference_slug), class: 'hidden-xs-down'
+    .col-md-6
+      %h1.text-center= @breakout_session.name.upcase
+
   %hr.m-b-3
   .row.m-t-2
     .col-sm-9
