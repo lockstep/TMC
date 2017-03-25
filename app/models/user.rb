@@ -50,8 +50,7 @@ class User < ActiveRecord::Base
   POSITIONS = [
     'Montessori Guide', 'Head of School', 'Principal',
     'Administrator', 'Assistant', 'Trainer', 'Consultant',
-    'Material Maker', 'Day Care Provider',
-    'Parent', 'Other'
+    'Owner', 'Material Maker', 'Day Care Provider', 'Parent', 'Other'
   ]
 
   has_attached_file :avatar,
