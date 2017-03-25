@@ -59,6 +59,9 @@ en:
     add_comment_placeholder: Write comment or drop image here
     sign_in_to_post_comments_html: Please <a href="%{sign_in}">sign in</a>
       or <a href="%{sign_up}">sign up</a> to post comments.
+    must_be_in_directory_to_post_html: Want to add comments? Join
+      <a href="%{directory_path}">The Montessori Directory</a> by
+      completing your profile <a href="%{path}">here</a>.
   feed_policies:
     toggle_private_messages_enabled:
       all_messages_disabled: Your account may no longer send or receive private

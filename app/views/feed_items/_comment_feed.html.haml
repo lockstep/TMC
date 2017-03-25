@@ -1,23 +1,27 @@
 %section.post-comment
   - if user_signed_in?
-    = form_for FeedItem.new, url: create_comment_url do |f|
-      .row
-        .col-sm-12
-          .form-group.post-input
-            .direct-image-upload
-              .input
-                = f.hidden_field :raw_image_s3_key
-                = f.text_area :message, rows: 4, class: 'form-control',
-                  placeholder: t('feed_items.add_comment_placeholder')
-              .status
-                .background
-                .message
-                  .ready-message
-                    = t('upload_image.drop_an_image_to_upload')
-                  .uploading-message
-                    = t('upload_image.uploading_the_image')
-              .pull-left.form-control-feedback
-            = f.submit "POST", class: 'btn btn-cart'
+    - if !current_user.opted_in_to_public_directory?
+      .text-xs-center= t('feed_items.must_be_in_directory_to_post_html',
+        path: edit_profile_users_path, directory_path: directory_path)
+    - else
+      = form_for FeedItem.new, url: create_comment_url do |f|
+        .row
+          .col-sm-12
+            .form-group.post-input
+              .direct-image-upload
+                .input
+                  = f.hidden_field :raw_image_s3_key
+                  = f.text_area :message, rows: 4, class: 'form-control',
+                    placeholder: t('feed_items.add_comment_placeholder')
+                .status
+                  .background
+                  .message
+                    .ready-message
+                      = t('upload_image.drop_an_image_to_upload')
+                    .uploading-message
+                      = t('upload_image.uploading_the_image')
+                .pull-left.form-control-feedback
+              = f.submit "POST", class: 'btn btn-cart'
   - else
     .text-xs-center= t('feed_items.sign_in_to_post_comments_html',
       sign_in: new_user_session_path, sign_up: new_user_registration_path)
@@ -33,7 +37,11 @@
             .avatar{style: "background-image:url(#{comment.author_avatar.url(:thumb)})"}
         .col-sm-9.col-lg-10
           .author.m-b-1
-            = comment.author_full_name
+            - if comment.author_opted_in_to_public_directory?
+              = link_to directory_profile_path(comment.author_id) do
+                = comment.author_full_name
+            - else
+              = comment.author_full_name
             %span
               = " · #{comment.author_position} at #{comment.author_organization_name}"
             %small.pull-right

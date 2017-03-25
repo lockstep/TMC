@@ -5,6 +5,7 @@ class FeedItem < ActiveRecord::Base
   validates_presence_of :message, if: "raw_image_s3_key.blank?", on: :create
 
   delegate :first_name, :full_name, :avatar, :position, :organization_name,
+    :opted_in_to_public_directory?,
     to: :author, allow_nil: true,
     prefix: true
 
