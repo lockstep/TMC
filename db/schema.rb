@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316070057) do
+ActiveRecord::Schema.define(version: 20170324174743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -333,6 +333,23 @@ ActiveRecord::Schema.define(version: 20170316070057) do
     t.integer "left_product_id",  null: false
     t.integer "right_product_id", null: false
   end
+
+  create_table "searchjoy_searches", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "search_type"
+    t.string   "query"
+    t.string   "normalized_query"
+    t.integer  "results_count"
+    t.datetime "created_at"
+    t.integer  "convertable_id"
+    t.string   "convertable_type"
+    t.datetime "converted_at"
+  end
+
+  add_index "searchjoy_searches", ["convertable_id", "convertable_type"], name: "index_searchjoy_searches_on_convertable_id_and_convertable_type", using: :btree
+  add_index "searchjoy_searches", ["created_at"], name: "index_searchjoy_searches_on_created_at", using: :btree
+  add_index "searchjoy_searches", ["search_type", "created_at"], name: "index_searchjoy_searches_on_search_type_and_created_at", using: :btree
+  add_index "searchjoy_searches", ["search_type", "normalized_query", "created_at"], name: "index_searchjoy_searches_on_search_type_normalized_query", using: :btree
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"

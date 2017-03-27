@@ -5,15 +5,23 @@ class ProductsController < ApplicationController
   DEFAULT_SORT = { times_sold: :desc }
 
   def index
-    @results = Product.search(
-      search_query,
+    opts = {
       misspellings: { edit_distance: 1 },
       fields: [:name, :description, :vendor_organization_name, :vendor_name],
       where: search_options,
       order: sort_by,
       page: page,
       per_page: 12
-    )
+    }
+
+    # don't track when paginating, only track when query is present
+    if page == 1 && search_query != '*'
+      opts.merge!({
+        track: { user_id: current_user.try(:id) }
+      })
+    end
+
+    @results = Product.search(search_query, opts)
     @recent_products = recently_viewed
     @query = search_query == '*' ? '' : search_query
     @topic = Topic.find_by(id: topic_id)

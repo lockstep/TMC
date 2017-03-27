@@ -42,6 +42,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'stripe', '~> 1.36.1'
 gem 'slack-notifier'
 gem 'country_select'
+gem 'searchjoy', '~> 0.2'
 
 group :test do
   gem 'stripe-ruby-mock', require: 'stripe_mock'

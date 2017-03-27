@@ -5,9 +5,9 @@ describe 'Admin sections', type: :feature do
 
   let(:admin) { users(:michelle) }
 
-  before { signin(admin.email, 'qawsedrf') }
-
   describe 'Dashboards index pages' do
+    before { signin(admin.email, 'qawsedrf') }
+
     DashboardManifest::DASHBOARDS.each do |dashboard|
       context dashboard do
         it 'is a working admin dashboard' do
@@ -20,7 +20,30 @@ describe 'Admin sections', type: :feature do
     end
   end
 
+  describe 'Searches' do
+    context 'signed in user' do
+      before { signin(admin.email, 'qawsedrf') }
+
+      it 'is accessible' do
+        visit admin_searchjoy_path
+        expect(page).to have_content 'Searchjoy'
+      end
+    end
+
+    context 'guest user' do
+      it 'cannot peek under the hood' do
+        visit admin_searchjoy_path
+        expect(page).to have_current_path(new_user_session_path)
+        within '#flash_alert' do
+          expect(page).to have_content "Please sign in or sign up"
+        end
+      end
+    end
+  end
+
   describe 'Dashboard search' do
+    before { signin(admin.email, 'qawsedrf') }
+
     describe 'Users' do
       it 'is a working search' do
         visit "/admin/users?search=mich"

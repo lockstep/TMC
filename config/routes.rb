@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
   namespace :admin do
+    authenticate :user, lambda { |user| user.admin? } do
+      mount Searchjoy::Engine, at: "searchjoy"
+    end
+
     DashboardManifest::DASHBOARDS.each do |dashboard_resource|
       resources dashboard_resource
     end
