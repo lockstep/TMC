@@ -47,7 +47,9 @@ Airbrake.configure do |c|
 end
 
 Airbrake.add_filter do |notice|
-  notice.ignore! if notice[:context][:userAgent].match(/BLEXBot/)
+  if notice[:context] && notice[:context][:userAgent]
+    notice.ignore! if notice[:context][:userAgent].match(/BLEXBot/)
+  end
 end
 # If Airbrake doesn't send any expected exceptions, we suggest to uncomment the
 # line below. It might simplify debugging of background Airbrake workers, which
