@@ -25,7 +25,7 @@ gem 'devise_token_auth', github: 'lockstep/devise_token_auth',
   tag: 'v0.1.38.beta6'
 gem 'devise-async'
 gem 'omniauth', '~> 1.3.1'
-gem 'omniauth-facebook', '~> 3.0.0'
+gem 'omniauth-facebook', '~> 4.0.0'
 gem 'administrate', '~> 0.4.0'
 gem 'kaminari', '~> 0.17'
 gem 'sitemap_generator'
@@ -42,7 +42,6 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'stripe', '~> 1.36.1'
 gem 'slack-notifier'
 gem 'country_select'
-gem "rack-timeout"
 
 group :test do
   gem 'stripe-ruby-mock', require: 'stripe_mock'
@@ -78,6 +77,7 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem "rack-timeout"
   gem 'puma'
 end
 
