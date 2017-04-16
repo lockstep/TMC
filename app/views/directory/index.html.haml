@@ -17,8 +17,8 @@
         .row
           .col-sm-4.hidden-xs-down
             - unless user_signed_in? && current_user.opted_in_to_public_directory?
-              = link_to 'Join Directory', directory_join_path, method: :post,
-                class: 'btn btn-cart pull-left'
+              = link_to t('directory.actions.join'), directory_join_path,
+                method: :post, class: 'btn btn-cart pull-left'
           .col-sm-8.col-lg-6.col-lg-offset-2
             .row
               .col-xs-7.col-sm-8

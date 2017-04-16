@@ -1,6 +1,7 @@
 class DirectoryController < ApplicationController
   before_action :prepare_search_params, only: :index
   before_action :prepare_user, only: :profile
+  before_action :set_post_directory_join_path, only: :join_directory
 
   def index
     @users = users
@@ -33,6 +34,11 @@ class DirectoryController < ApplicationController
   end
 
   private
+
+  def set_post_directory_join_path
+    return if params[:post_directory_join_path].blank?
+    session[:post_directory_join_path] = params[:post_directory_join_path]
+  end
 
   def prepare_search_params
     @search_certifications = params[:certifications] || []

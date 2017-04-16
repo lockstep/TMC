@@ -2,13 +2,42 @@ describe 'BreakoutSession', type: :feature do
   before do
     @conference = create(:conference)
     @breakout_session = create(:breakout_session)
-    @breakout_session_location = create(:breakout_session_location)
+    @breakout_session_location = create(:breakout_session_location,
+                                       conference: @conference)
     @breakout_session.update(location: @breakout_session_location)
     @organizer = create(:user, first_name: 'Paul')
+    @user = create(:user, first_name: 'Michelle')
+    @user.update(opted_in_to_public_directory: true)
   end
 
   describe 'apply for breakout session' do
-    
+    context 'a timeslot exists' do
+      before do
+        create(:breakout_session_location_timeslot,
+              breakout_session_location: @breakout_session_location)
+        create(:breakout_session_location_timeslot,
+               breakout_session_location: @breakout_session_location)
+      end
+      it 'forces the user to sign up and fill out form' do
+        visit conference_path(@conference)
+        click_link I18n.t('breakout_sessions.actions.apply')
+        click_link I18n.t('directory.actions.join')
+        signin(@user.email, 'password')
+        fill_in :breakout_session_name, with: 'my session'
+        fill_in :breakout_session_description, with: 'my desc'
+        click_button I18n.t('breakout_sessions.new.submit')
+        expect(page).to have_content(
+          I18n.t('breakout_sessions.create.thank_you')
+        )
+        # NOTE: Submissions should not appear until approved
+        visit conference_path(@conference)
+        expect(page).not_to have_content 'my session'
+        click_link I18n.t('breakout_sessions.actions.apply')
+        expect(page).to have_content(
+          I18n.t('breakout_sessions.errors.already_applied')
+        )
+      end
+    end
   end
 
   describe 'show' do
@@ -34,8 +63,6 @@ describe 'BreakoutSession', type: :feature do
         within 'section.post-comment' do
           click_on 'sign in'
         end
-        @user = create(:user, first_name: 'Michelle')
-        @user.update(opted_in_to_public_directory: true)
         signin(@user.email, 'password')
       end
       it 'redirects back to breakout session page' do

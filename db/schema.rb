@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324174743) do
+ActiveRecord::Schema.define(version: 20170416090527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,25 +41,38 @@ ActiveRecord::Schema.define(version: 20170324174743) do
 
   add_index "breakout_session_attendances", ["user_id", "breakout_session_id"], name: "breakout_session_attendances_index", using: :btree
 
+  create_table "breakout_session_location_timeslots", force: :cascade do |t|
+    t.integer  "breakout_session_location_id"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.date     "day"
+    t.integer  "breakout_session_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "breakout_session_location_timeslots", ["breakout_session_id"], name: "index_location_timeslot_on_session_id", using: :btree
+  add_index "breakout_session_location_timeslots", ["breakout_session_location_id"], name: "index_location_timeslot_on_session_location_id", using: :btree
+
   create_table "breakout_session_locations", force: :cascade do |t|
     t.string   "name"
     t.integer  "conference_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "capacity"
   end
 
   add_index "breakout_session_locations", ["conference_id"], name: "index_breakout_session_locations_on_conference_id", using: :btree
 
   create_table "breakout_sessions", force: :cascade do |t|
     t.string   "name"
-    t.date     "day"
-    t.time     "start_time"
-    t.time     "end_time"
     t.integer  "conference_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "breakout_session_location_id"
     t.string   "slug"
+    t.boolean  "approved",                     default: false
+    t.text     "description"
   end
 
   add_index "breakout_sessions", ["conference_id"], name: "index_breakout_sessions_on_conference_id", using: :btree
@@ -414,6 +427,8 @@ ActiveRecord::Schema.define(version: 20170324174743) do
 
   add_foreign_key "adjustments", "orders"
   add_foreign_key "adjustments", "promotions"
+  add_foreign_key "breakout_session_location_timeslots", "breakout_session_locations"
+  add_foreign_key "breakout_session_location_timeslots", "breakout_sessions"
   add_foreign_key "breakout_session_locations", "conferences"
   add_foreign_key "breakout_sessions", "conferences"
   add_foreign_key "charges", "orders"

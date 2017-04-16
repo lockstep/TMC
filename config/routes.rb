@@ -86,7 +86,11 @@ Rails.application.routes.draw do
       as: 'join'
   end
 
-  resources :conferences, only: [:show]
+  resources :conferences, only: [:show] do
+    member do
+      resources :breakout_sessions, only: [ :new, :create ]
+    end
+  end
 
   resources :interests, only: [:show] do
     controller :feed_items do

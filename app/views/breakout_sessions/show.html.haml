@@ -26,14 +26,11 @@
               %small LOCATION:
               = format_location(@breakout_session)
             .organizers
-              %small ORGANIZERS:
-              %div
+              %small ORGANIZER:
+              %span
                 - @breakout_session.organizers.each do |organizer|
                   = link_to directory_profile_path(organizer.id), class: 'organizer' do
-                    .profile
-                      .avatar{style: "background-image:url(#{organizer.avatar.url(:thumb)})"}
-                      .name
-                        = organizer.full_name
+                    = organizer.full_name
       = render 'feed_items/comment_feed', comments: @comments,
         create_comment_url: breakout_session_send_breakout_session_comment_path(@breakout_session)
 

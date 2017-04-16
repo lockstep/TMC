@@ -6,7 +6,7 @@ module ConferencesHelper
 
   def format_date(session)
     return 'N/A' unless session.day
-    session.day.strftime("%m/%d/%y")
+    session.day.strftime("%A %b %e")
   end
 
   def format_organizers(session)
@@ -16,7 +16,7 @@ module ConferencesHelper
 
   def format_location(session)
     return 'N/A' unless session.location
-    session.location.name
+    session.location_name
   end
 
   private

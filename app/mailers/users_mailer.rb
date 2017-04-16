@@ -19,6 +19,11 @@ class UsersMailer < ApplicationMailer
     )
   end
 
+  def new_breakout_session_application(breakout_session_id)
+    @breakout_session = BreakoutSession.find(breakout_session_id)
+    mail(to: ADMIN_EMAILS, subject: "New Breakout Session Application")
+  end
+
   def bad_link(product)
     @product = product
     mail(to: ADMIN_EMAILS, subject: "Bad Link Found on TMC")

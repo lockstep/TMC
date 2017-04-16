@@ -1,6 +1,39 @@
 class BreakoutSessionsController < ApplicationController
   before_action :set_breakout_session, only: [:show, :join_session]
 
+  def new
+    if current_user && OrganizedBreakoutSession.pluck(:user_id).include?(current_user.id)
+      redirect_to :back, notice: t('breakout_sessions.errors.already_applied')
+    else
+      conference = Conference.find(params[:id])
+      @breakout_session = BreakoutSession.new(conference: conference)
+      @timeslots = @breakout_session.breakout_session_timeslots.
+        order(:day, :start_time).available
+    end
+  end
+
+  def create
+    authenticate_user!
+    conference = Conference.find(params[:id])
+    @timeslot = BreakoutSessionLocationTimeslot.find(
+      params[:breakout_session][:breakout_session_location_timeslot]
+    )
+    @breakout_session = BreakoutSession.new(breakout_session_params)
+    @breakout_session.conference = conference
+    @breakout_session.organizers << current_user
+    if @breakout_session.save
+      @timeslot.update!(breakout_session: @breakout_session)
+      UsersMailer.new_breakout_session_application(@breakout_session.id)
+        .deliver_later
+      redirect_to directory_path, notice: t('.thank_you')
+    else
+      @timeslots = @breakout_session.breakout_session_timeslots.
+        order(:day, :start_time).available
+      flash.now[:error] = 'Please complete all fields.'
+      render :new
+    end
+  end
+
   def show
     store_location_for(:user, breakout_session_path(@breakout_session))
     @comments = @breakout_session.comments
@@ -36,5 +69,11 @@ class BreakoutSessionsController < ApplicationController
   def set_breakout_session
     @breakout_session = BreakoutSession.find(
       params[:breakout_session_id] || params[:id])
+  end
+
+  def breakout_session_params
+    params.require(:breakout_session).permit(
+      :name, :description
+    )
   end
 end

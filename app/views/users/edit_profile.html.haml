@@ -112,6 +112,10 @@
                       = link_to "Montessori Directory", directory_path,
                         target: '_blank'
                     Select the box below to add your profile to the directory!
+                    %br
+                    %small
+                      NOTE: This is required in order to submit applictions for
+                      breakout sessions at conferences.
                   .checkbox
                     %label
                       = f.check_box :opted_in_to_public_directory, {}, 'true', 'false'

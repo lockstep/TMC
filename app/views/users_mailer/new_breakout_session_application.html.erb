@@ -1,0 +1,28 @@
+<% content_for :preheader, "New Breakout Session Application" %>
+
+<tr>
+  <td>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+          <p>
+            Name: <%= @breakout_session.name %>
+          </p>
+          <p>
+          <% organizer = @breakout_session.organizers.first %>
+            Organizer:
+            <%= link_to "#{organizer.full_name} (#{organizer.email})",
+              directory_profile_url(organizer) %>
+          </p>
+          <p>
+            Description: <br />
+            <%= @breakout_session.description %>
+          </p>
+          <p>
+            Location/Timeslot: <%= @breakout_session.breakout_session_location_timeslot.select_name %>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>

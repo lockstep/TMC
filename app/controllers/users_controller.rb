@@ -11,7 +11,12 @@ class UsersController < ApplicationController
     unless session[:alternate_onboarding_function].blank?
       if current_user.opted_in_to_public_directory?
         session.delete(:alternate_onboarding_function)
-        redirect_to directory_path, notice: t('users.already_in_directory')
+        if next_path = session[:post_directory_join_path]
+          session.delete(:post_directory_join_path)
+          redirect_to next_path
+        else
+          redirect_to directory_path, notice: t('users.already_in_directory')
+        end
         return
       end
     end
@@ -40,7 +45,12 @@ class UsersController < ApplicationController
       else
         if opted_into_directory?
           flash[:notice] = t('devise.registrations.joined_directory')
-          redirect_to directory_path
+          if next_path = session[:post_directory_join_path]
+            session.delete(:post_directory_join_path)
+            redirect_to next_path
+          else
+            redirect_to directory_path
+          end
         else
           flash[:notice] = 'Your account has been updated.'
           render update_complete_path(params['commit'])

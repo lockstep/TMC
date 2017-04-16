@@ -1,0 +1,43 @@
+- content_for :title, "#{@breakout_session.conference_name} | Host Breakout Session"
+- content_for :header_logo, 'false'
+
+.container#new-breakout-session.m-t-3.simple-show-layout
+  .row.title-section
+    .col-md-3.hidden-sm-down
+      -# = link_to "< Back",
+      -#   conference_path(@breakout_session.conference_slug),
+      -#   class: 'hidden-xs-down'
+    .col-md-6
+      %h1.text-center= t('.header')
+
+  %hr.m-b-3
+  .row.m-t-2
+    .col-sm-12
+      - if current_user.try(:opted_in_to_public_directory?)
+        .row
+          .col-sm-8.col-sm-offset-2
+            = form_for @breakout_session do |f|
+              .form-group
+                = f.label :name, 'Breakout Session Name', class: 'form-label'
+                = f.text_field :name, class: 'form-control'
+              .form-group
+                = f.label :description, class: 'form-label'
+                = f.text_area :description, rows: 7, class: 'form-control'
+              .form-group
+                = f.label :breakout_session_location_timeslot,
+                  'Location and Timeslot', class: 'form-label'
+                = f.select :breakout_session_location_timeslot,
+                  options_from_collection_for_select(@timeslots, 'id', 'select_name'),
+                  {}, class: 'form-control'
+              .form-group.text-xs-center
+                = f.submit t('.submit'), class: "btn btn-cart"
+      - else
+        .text-xs-center
+          %p= t('.unauthenticated_intro',
+            conference_name: @breakout_session.conference_name)
+          = link_to t('directory.actions.join'),
+            directory_join_path(post_directory_join_path: new_breakout_session_path(@breakout_session.conference)),
+            method: :post, class: 'btn btn-cart'
+          %br
+          %br
+          %p= t('.unauthenticated_conclusion')

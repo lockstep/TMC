@@ -21,7 +21,7 @@
             %th Organizers
             %th Location
         %tbody
-          - @conference.breakout_sessions.each do |session|
+          - @conference.breakout_sessions.approved.each do |session|
             %tr{onclick: "document.location = '#{breakout_session_path(session)}'"}
               %td
                 = session.name
@@ -33,3 +33,8 @@
                 = format_organizers(session)
               %td
                 = format_location(session)
+  .row
+    .col-sm-4
+      = link_to t('breakout_sessions.actions.apply'),
+        new_breakout_session_path(@conference),
+        class: 'btn btn-primary btn-cart'
