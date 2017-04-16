@@ -1,15 +1,32 @@
 describe FeedItemsController do
   describe '#send_message' do
     before do
+      Sidekiq::Testing.inline!
       @user1 = create(:user, opted_in_to_public_directory: true)
       @user2 = create(:user)
       request.env["HTTP_REFERER"] = root_path
     end
-    context 'user signed in' do
-      before do
-        sign_in @user1
-        Sidekiq::Testing.inline!
+    context 'via api', type: :request do
+      context 'user authenticated' do
+        it 'sends the private message via email' do
+          post "/api/v1/users/#{@user2.id}/send_message",
+            { feed_item: { message: 'my message' } }, auth_headers(@user1)
+          expect(FeedItems::PrivateMessage.count).to eq 1
+          expect(ActionMailer::Base.deliveries.count).to eq(1)
+          expect(ActionMailer::Base.deliveries.last.encoded)
+            .to match 'my message'
+        end
       end
+      context 'user not authenticated' do
+        before do
+          post "/api/v1/users/#{@user2.id}/send_message",
+            { feed_item: { message: 'my message' } }
+        end
+        it_behaves_like 'an unauthorized request'
+      end
+    end
+    context 'user signed in', type: :controller do
+      before { sign_in @user1 }
       it 'sends the private message via email' do
         post :send_message, {
           user_id: @user2.id,

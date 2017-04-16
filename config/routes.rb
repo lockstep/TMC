@@ -103,6 +103,8 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for 'User', at: 'users', controllers: {
         sessions: 'api/v1/users/sessions'
       }, skip: [ :omniauth_callbacks ]
+
+      post '/users/:user_id/send_message', to: 'feed_items#send_message'
     end
   end
 
