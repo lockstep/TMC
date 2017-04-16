@@ -1,25 +1,25 @@
 describe 'BreakoutSession', type: :feature do
-  fixtures :users
-  fixtures :conferences
-  fixtures :breakout_sessions
-  fixtures :breakout_session_locations
-
   before do
-    conferences(:ami).update(
-      breakout_sessions: [breakout_sessions(:teaching)]
-    )
-    breakout_sessions(:teaching).update(
-      organizers: [users(:paul)]
-    )
+    @conference = create(:conference)
+    @breakout_session = create(:breakout_session)
+    @breakout_session_location = create(:breakout_session_location)
+    @breakout_session.update(location: @breakout_session_location)
+    @organizer = create(:user, first_name: 'Paul')
+  end
+
+  describe 'apply for breakout session' do
+    
   end
 
   describe 'show' do
     before do
-      visit breakout_session_path(breakout_sessions(:teaching).slug)
+      @conference.update(breakout_sessions: [ @breakout_session ])
+      @breakout_session.update(organizers: [ @organizer ])
+      visit breakout_session_path(@breakout_session.slug)
     end
     context 'user not signed in' do
       it 'displays breakout session informaiton' do
-        expect(page).to have_content breakout_sessions(:teaching).name.upcase
+        expect(page).to have_content @breakout_session.name.upcase
         expect(page).to have_content 'Please sign in or sign up to post comments'
         within 'section.join' do
           expect(page).to have_content 'Please sign in or sign up'
@@ -34,13 +34,13 @@ describe 'BreakoutSession', type: :feature do
         within 'section.post-comment' do
           click_on 'sign in'
         end
-        user = users(:michelle)
-        user.update(opted_in_to_public_directory: true)
-        signin(user.email, 'qawsedrf')
+        @user = create(:user, first_name: 'Michelle')
+        @user.update(opted_in_to_public_directory: true)
+        signin(@user.email, 'password')
       end
       it 'redirects back to breakout session page' do
         expect(page).to have_current_path breakout_session_path(
-          breakout_sessions(:teaching).slug
+          @breakout_session.slug
         )
       end
       context 'post message' do
@@ -67,26 +67,26 @@ describe 'BreakoutSession', type: :feature do
       context 'join the session' do
         context 'user is opted in to public directory' do
           before do
-            users(:michelle).update(
+            @user.update(
               opted_in_to_public_directory: true
             )
           end
           it "shows the user's in attendee list" do
             click_button 'JOIN SESSION'
             within '.right-user-list' do
-              expect(page).to have_content users(:michelle).first_name
+              expect(page).to have_content @user.first_name
             end
           end
         end
         context 'user is not opted in to public directory' do
           before do
-            users(:michelle).update(opted_in_to_public_directory: false)
+            @user.update(opted_in_to_public_directory: false)
           end
           it 'shows warning and does not list the user in attendee list' do
             click_button 'JOIN SESSION'
             expect(page).to have_content 'must be listed in The Montessori Directory'
             within '.right-user-list' do
-              expect(page).not_to have_content users(:michelle).first_name
+              expect(page).not_to have_content @user.first_name
             end
           end
         end
