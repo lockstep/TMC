@@ -1,7 +1,4 @@
 describe FeedItemsController do
-  fixtures :breakout_sessions
-  fixtures :interests
-
   describe '#send_message' do
     before do
       @user1 = create(:user, opted_in_to_public_directory: true)
@@ -42,7 +39,7 @@ describe FeedItemsController do
         it 'executes resize worker when raw image key is present' do
           expect {
             post :send_breakout_session_comment, {
-              breakout_session_id: breakout_sessions(:teaching).id,
+              breakout_session_id: create(:breakout_session).id,
               feed_item: {
                 message: 'my message',
                 raw_image_s3_key: 'some-key'
@@ -59,7 +56,7 @@ describe FeedItemsController do
         it 'executes resize worker when raw image key is present' do
           expect {
             post :send_interest_comment, {
-              interest_id: interests(:teaching).id,
+              interest_id: create(:interest).id,
               feed_item: {
                 message: 'my message',
                 raw_image_s3_key: 'some-key'
