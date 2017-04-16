@@ -1,5 +1,6 @@
 describe 'BreakoutSession', type: :feature do
   before do
+    BreakoutSession.all.destroy_all
     @conference = create(:conference)
     @breakout_session = create(:breakout_session)
     @breakout_session_location = create(:breakout_session_location,

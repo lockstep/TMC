@@ -3,7 +3,7 @@ class BreakoutSessionsController < ApplicationController
 
   def new
     if current_user && OrganizedBreakoutSession.pluck(:user_id).include?(current_user.id)
-      redirect_to :back, notice: t('breakout_sessions.errors.already_applied')
+      redirect_to directory_path, notice: t('breakout_sessions.errors.already_applied')
     else
       conference = Conference.find(params[:id])
       @breakout_session = BreakoutSession.new(conference: conference)
