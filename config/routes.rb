@@ -110,6 +110,11 @@ Rails.application.routes.draw do
           resources :private_messages, only: [ :index ]
         end
       end
+      resources :conferences, only: [:show] do
+        member do
+          resources :breakout_sessions, only: [:index]
+        end
+      end
     end
   end
 
