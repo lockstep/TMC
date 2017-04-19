@@ -1,6 +1,7 @@
 module Api
   module V1
     class Users::SessionsController < DeviseTokenAuth::SessionsController
+      protect_from_forgery with: :null_session
 
       def create
         super do
