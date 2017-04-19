@@ -6,7 +6,8 @@ class FeedItemsController < ApplicationController
       redirect_to :back, alert: t('.message_empty')
     else
       message = FeedItems::PrivateMessage.create(
-        feedable: @user, message: feed_item_params[:message], author: author
+        feedable: @user, message: feed_item_params[:message],
+        author: current_user
       )
       UsersMailer.new_private_message(message.id).deliver_later
       redirect_to :back, notice: t('.message_sent')
@@ -30,7 +31,7 @@ class FeedItemsController < ApplicationController
       feedable: @feedable,
       message: feed_item_params[:message],
       raw_image_s3_key: feed_item_params[:raw_image_s3_key],
-      author: author
+      author: current_user
     )
     if comment.save
       FeedItemImageResizeWorker.perform_async(comment.id)
@@ -38,11 +39,6 @@ class FeedItemsController < ApplicationController
     else
       redirect_to :back, alert: t('.comment_empty')
     end
-  end
-
-  def author
-    return @author if @author
-    return @author = current_user if current_user
   end
 
 end

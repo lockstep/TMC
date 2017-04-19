@@ -7,18 +7,12 @@ class Api::V1::FeedItemsController < Api::V1::BaseController
         status: 422
     else
       message = FeedItems::PrivateMessage.create(
-        feedable: @user, message: feed_item_params[:message], author: author
+        feedable: @user, message: feed_item_params[:message],
+        author: current_user
       )
       UsersMailer.new_private_message(message.id).deliver_later
       head :created
     end
-  end
-
-  private
-
-  def author
-    return @author if @author
-    return @author = current_api_v1_user if current_api_v1_user
   end
 
 end

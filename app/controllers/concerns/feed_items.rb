@@ -19,7 +19,7 @@ module FeedItems
   end
 
   def ensure_user_belongs_to_directory
-    return if author.opted_in_to_public_directory?
+    return if current_user.opted_in_to_public_directory?
     error = t('.must_be_directory_member')
     respond_to do |format|
       format.html do
@@ -53,7 +53,7 @@ module FeedItems
   end
 
   def ensure_user_authenticated!
-    return if author
+    return if current_user
     respond_to do |format|
       format.html do
         redirect_to new_user_session_path, alert: t('errors.must_authenticate')

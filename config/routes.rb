@@ -105,6 +105,11 @@ Rails.application.routes.draw do
       }, skip: [ :omniauth_callbacks ]
 
       post '/users/:user_id/send_message', to: 'feed_items#send_message'
+      resources :users, only: [] do
+        member do
+          resources :private_messages, only: [ :index ]
+        end
+      end
     end
   end
 
