@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   force_ssl if: :ssl_configured?
-  before_filter :reject_methods
 
   rescue_from CanCan::AccessDenied do |exception|
     if current_user
@@ -64,12 +63,6 @@ class ApplicationController < ActionController::Base
       redirect_to :back
     else
       redirect_to default
-    end
-  end
-
-  def reject_methods
-    if ['TRACE'].include?(request.method)
-      raise ActionController::MethodNotAllowed.new('Method not allowed')
     end
   end
 end
