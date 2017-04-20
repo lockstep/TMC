@@ -13,3 +13,6 @@
 /tmp
 *.swp
 .rbenv-vars
+
+# Ignore RubyMine config
+.idea/
