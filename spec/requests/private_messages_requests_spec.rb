@@ -14,7 +14,7 @@ describe 'user fetching private messages', type: :request do
           auth_headers(@user)
         message = response_json['private_messages'][0]
         expect(message['message']).to eq @message1.message
-        expect(message['created_time_ago']).not_to eq nil
+        expect(message['created_at_time_ago_in_words']).not_to eq nil
       end
     end
     context 'unauthenticated user' do
