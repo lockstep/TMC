@@ -110,7 +110,12 @@ Rails.application.routes.draw do
           resources :private_messages, only: [ :index ]
         end
       end
-      resources :conferences, only: [:show]
+      resources :conferences, only: [:show] do
+        member do
+          post :image, to: 'conferences#save_image'
+          get :images
+        end
+      end
     end
   end
 

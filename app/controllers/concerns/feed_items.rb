@@ -4,8 +4,8 @@ module FeedItems
   included do
     before_action :ensure_user_authenticated!
     before_action :set_user, only: [:send_message]
-    before_action :ensure_user_belongs_to_directory, only: [ :send_message ]
-    before_action :ensure_messages_enabled, only: [ :send_message ]
+    before_action :ensure_user_belongs_to_directory, only: [:send_message, :save_image]
+    before_action :ensure_messages_enabled, only: [:send_message]
   end
 
   protected
