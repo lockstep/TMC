@@ -1,8 +1,7 @@
 class BreakoutSessionSerializer < ActiveModel::Serializer
-  attributes :id, :name
-  has_many :comments, serializer: CommentSerializer
+  attributes :id, :name, :description, :day, :start_time, :end_time,
+    :approved, :location_name
+  has_many :organized_breakout_sessions, serializer: OrganizerSerializer,
+    key: :organizers
 
-  def comments
-    instance_options[:comments]
-  end
 end
