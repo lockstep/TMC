@@ -111,10 +111,7 @@ Rails.application.routes.draw do
         end
       end
       resources :conferences, only: [:show] do
-        member do
-          post :image, to: 'conferences#save_image'
-          get :images
-        end
+        resources :images, only: [ :index, :create ]
       end
     end
   end

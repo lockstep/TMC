@@ -23,7 +23,7 @@ describe 'user fetching conference data', type: :request do
       before { @user = create(:user) }
       context 'user does not belong to directory' do
         before do
-          post "/api/v1/conferences/#{@conference.id}/image",
+          post "/api/v1/conferences/#{@conference.id}/images",
             { "feed_item": { "raw_image_s3_key": "some-key" } },
             auth_headers(@user)
         end
@@ -36,7 +36,7 @@ describe 'user fetching conference data', type: :request do
         end
         it 'executes resize worker when raw image key is present' do
           expect {
-            post "/api/v1/conferences/#{@conference.id}/image",
+            post "/api/v1/conferences/#{@conference.id}/images",
               { "feed_item": { "raw_image_s3_key": "some-key" } },
               auth_headers(@user)
           }.to change(FeedItemImageResizeWorker.jobs, :size).by(1)
@@ -46,7 +46,7 @@ describe 'user fetching conference data', type: :request do
 
     context 'unauthenticated user' do
       before do
-        post "/api/v1/conferences/#{@conference.id}/image",
+        post "/api/v1/conferences/#{@conference.id}/images",
           { "feed_item": { "raw_image_s3_key": "some-key" } }
       end
       it_behaves_like 'an unauthorized request'
