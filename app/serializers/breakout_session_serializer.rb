@@ -2,7 +2,7 @@ class BreakoutSessionSerializer < ActiveModel::Serializer
   include ConferencesHelper
   
   attributes :id, :name, :description, :day, :start_time, :end_time,
-    :approved, :location_name
+    :location_name
   has_many :organized_breakout_sessions, serializer: OrganizerSerializer,
     key: :organizers
 

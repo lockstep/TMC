@@ -115,6 +115,8 @@ Rails.application.routes.draw do
           resources :breakout_sessions, only: [:index]
         end
       end
+
+      resources :breakout_sessions, only: [:show]
     end
   end
 
