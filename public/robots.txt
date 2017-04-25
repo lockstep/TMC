@@ -5,3 +5,6 @@ User-agent: *
 Disallow: /orders/
 Disallow: /cart/
 Disallow: /users/
+
+User-agent: BLEXBot
+Disallow: /

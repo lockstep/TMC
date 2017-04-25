@@ -9,6 +9,8 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+
+require_relative '../lib/rack/reject_methods'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -40,5 +42,7 @@ module TMC
     config.exceptions_app = -> (env) {
       ErrorsController.action(:show).call(env)
     }
+
+    config.middleware.use Rack::RejectMethods
   end
 end
