@@ -110,7 +110,9 @@ Rails.application.routes.draw do
           resources :private_messages, only: [ :index ]
         end
       end
-      resources :conferences, only: [:show]
+      resources :conferences, only: [:show] do
+        resources :images, only: [ :index, :create ]
+      end
     end
   end
 

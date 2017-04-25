@@ -5,4 +5,5 @@ class Conference < ActiveRecord::Base
   has_many :breakout_sessions
   has_many :breakout_session_locations
   has_many :breakout_session_timeslots, through: :breakout_session_locations
+  has_many :images, as: :feedable, class_name: 'FeedItems::Image'
 end
