@@ -25,7 +25,7 @@ module AwsHelper
 
   def s3_policy(content_type)
     Base64.encode64(s3_policy_data(content_type).to_json)
-      .gsub("\n", "")
+      .delete("\n", "")
   end
 
   def s3_policy_data(content_type)

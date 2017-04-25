@@ -117,8 +117,9 @@ Rails.application.routes.draw do
           resources :breakout_sessions, only: [:index]
         end
       end
+
       resources :breakout_sessions, only: [:show]
-      get 'aws_s3_auth', to: 'aws_services#aws_s3_auth'
+      resource :aws_s3_auth, only: [:show]
     end
   end
 
