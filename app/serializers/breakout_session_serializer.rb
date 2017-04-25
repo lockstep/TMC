@@ -1,8 +1,20 @@
 class BreakoutSessionSerializer < ActiveModel::Serializer
-  attributes :id, :name
-  has_many :comments, serializer: CommentSerializer
+  include ConferencesHelper
+  
+  attributes :id, :name, :description, :day, :start_time, :end_time,
+    :location_name
+  has_many :organized_breakout_sessions, serializer: OrganizerSerializer,
+    key: :organizers
 
-  def comments
-    instance_options[:comments]
+  def day
+    format_date(object)
+  end
+
+  def start_time
+    format_time(object.start_time)
+  end
+
+  def end_time
+    format_time(object.end_time)
   end
 end
