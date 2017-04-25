@@ -31,7 +31,7 @@ describe 'retrieving breakout sessions for conference', type: :request do
           expect(breakout_session['location_name'])
             .to eq @breakout_session_location.name
           expect(breakout_session['day'])
-            .to eq @timeslot.day.strftime('%F')
+            .to eq @timeslot.day.strftime('%A %b %e')
           expect(breakout_session['organizers'])
             .to eq []
         end
