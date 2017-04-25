@@ -110,7 +110,7 @@ Rails.application.routes.draw do
           resources :private_messages, only: [ :index ]
         end
       end
-      
+
       resources :conferences, only: [:index, :show] do
         resources :images, only: [ :index, :create ]
         member do
@@ -119,7 +119,7 @@ Rails.application.routes.draw do
       end
 
       resources :breakout_sessions, only: [:show]
-
+      resource :aws_s3_auth, only: [:show]
     end
   end
 
