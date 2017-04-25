@@ -20,7 +20,7 @@ module AwsHelper
         ENV['S3_SECRET'],
         s3_policy(content_type)
       )
-    ).gsub("\n", "")
+    ).delete("\n")
   end
 
   def s3_policy(content_type)
