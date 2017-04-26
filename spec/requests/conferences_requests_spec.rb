@@ -4,37 +4,28 @@ describe 'user fetching conference data', type: :request do
     create(:conference, name: 'Monte Congress', slug: 'monte-congress')
   end
 
-  describe 'GET /api/v1/conferences' do
-    context '@user is authenticated' do
-      before { @user = create(:user) }
-      it 'should return conferences list' do
-        get "/api/v1/conferences", auth_headers(@user)
-        conferences = response_json['conferences']
-        expect(conferences.size).to eq 2
-        expect(conferences.first['name']).to eq 'AMI Congress'
-        expect(conferences.last['name']).to eq 'Monte Congress'
-      end
-    end
-    context 'unauthenticated user' do
-      before { get "/api/v1/conferences" }
-      it_behaves_like 'an unauthorized request'
+  describe 'GET /conferences.json' do
+    before { @user = create(:user) }
+    it 'should return conferences list' do
+      get "/conferences.json", auth_headers(@user)
+      conferences = response_json['conferences']
+      expect(conferences.size).to eq 2
+      expect(conferences.first['name']).to eq 'AMI Congress'
+      expect(conferences.last['name']).to eq 'Monte Congress'
     end
   end
 
-  describe 'GET /api/v1/conferences/:id' do
-    context '@user is authenticated' do
-      before { @user = create(:user) }
-      it 'should return conference data' do
-        get "/api/v1/conferences/#{@conference.id}", auth_headers(@user)
-        conference = response_json['conference']
-        expect(conference['name']).to eq @conference.name
-      end
+  describe 'GET /conferences/:id.json' do
+    before { @user = create(:user) }
+    it 'should return conference data' do
+      get "/conferences/#{@conference.id}.json"
+      conference = response_json['conference']
+      expect(conference['name']).to eq @conference.name
     end
-    context 'unauthenticated user' do
-      before do
-        get "/api/v1/conferences/#{@conference.id}"
-      end
-      it_behaves_like 'an unauthorized request'
+    it 'should return conference data with slug' do
+      get "/conferences/#{@conference.slug}.json"
+      conference = response_json['conference']
+      expect(conference['name']).to eq @conference.name
     end
   end
 
