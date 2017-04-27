@@ -120,8 +120,7 @@ Rails.application.routes.draw do
 
       resources :breakout_sessions, only: [:index, :show]
       resource :aws_s3_auth, only: [:show]
-      resources :directory, only: [:index]
     end
   end
-
+  get '/api/v1/directory', to: 'directory#index', format: "json"
 end
