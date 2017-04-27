@@ -1,7 +1,6 @@
 module Api
   module V1
     class BreakoutSessionsController < BaseController
-      before_filter :authenticate_user!
       before_action :set_breakout_session,
         :require_approved_breakout_session, only: [:show]
 
