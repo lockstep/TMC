@@ -1,8 +1,9 @@
 %section.post-comment
   - if user_signed_in?
     - if !current_user.opted_in_to_public_directory?
-      .text-xs-center= t('feed_items.must_be_in_directory_to_post_html',
-        path: edit_profile_users_path, directory_path: directory_path)
+      %strong
+        .text-xs-center= t('feed_items.must_be_in_directory_to_post_html',
+          path: edit_profile_users_path, directory_path: directory_path)
     - else
       = form_for FeedItem.new, url: create_comment_url do |f|
         .row
