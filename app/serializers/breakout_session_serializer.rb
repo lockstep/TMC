@@ -17,4 +17,8 @@ class BreakoutSessionSerializer < ActiveModel::Serializer
   def end_time
     format_time(object.end_time)
   end
+
+  def location_name
+    format_location(object)
+  end
 end

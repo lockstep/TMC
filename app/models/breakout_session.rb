@@ -32,7 +32,7 @@ class BreakoutSession < ActiveRecord::Base
   delegate :name, to: :location, prefix: true,
     allow_nil: true
   delegate :start_time, :end_time, :day,
-    to: :breakout_session_location_timeslot
+    to: :breakout_session_location_timeslot, allow_nil: true
 
   scope :approved, -> { where(approved: true) }
   scope :order_by_time, -> {
