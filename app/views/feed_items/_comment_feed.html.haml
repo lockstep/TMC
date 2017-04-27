@@ -43,7 +43,10 @@
             - else
               = comment.author_full_name
             %span
-              = " · #{comment.author_position} at #{comment.author_organization_name}"
+              - if comment.author_organization_name.present?
+                = " · #{comment.author_position} at #{comment.author_organization_name}"
+              - else
+                = " · #{comment.author_position}"
             %small.pull-right
               = "#{time_ago_in_words(comment.created_at)} ago"
           .comment{ id: "comment-#{comment.id}" }
