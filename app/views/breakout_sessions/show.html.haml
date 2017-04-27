@@ -32,10 +32,8 @@
                   = link_to directory_profile_path(organizer.id), class: 'organizer' do
                     = organizer.full_name
         - if @breakout_session.description.present?
-          .row.information
+          .row.information.m-b-1
             .col-sm-12
-              %small SUMMARY:
-              %br
               = @breakout_session.description
 
       .help.card-block.m-b-2
