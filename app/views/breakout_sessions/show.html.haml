@@ -32,9 +32,9 @@
                   = link_to directory_profile_path(organizer.id), class: 'organizer' do
                     = organizer.full_name
         - if @breakout_session.description.present?
-          .row.information.m-b-1
+          .row.information
             .col-sm-12
-              = @breakout_session.description
+              %p= @breakout_session.description
 
       .help.card-block.m-b-2
         Please post questions or comments below leading up to the conference

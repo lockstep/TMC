@@ -10,10 +10,15 @@
       color: $blog-grey;
       margin-right: 0.25em;
     }
+    p {
+      margin-top: 10px;
+      line-height: 1.5rem;
+    }
   }
 
   .help.card-block {
     border-left: solid 5px $light-blue;
+
   }
 
   .join {
