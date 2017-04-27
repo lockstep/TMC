@@ -120,6 +120,7 @@ Rails.application.routes.draw do
 
       resources :breakout_sessions, only: [:index, :show]
       resource :aws_s3_auth, only: [:show]
+      resources :directory, only: [:index]
     end
   end
 
