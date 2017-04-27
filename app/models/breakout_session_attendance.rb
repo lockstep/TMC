@@ -8,8 +8,10 @@ class BreakoutSessionAttendance < ActiveRecord::Base
 
   def user_must_have_opted_into_public_directory
     return if user.opted_in_to_public_directory?
-    errors.add :base,
-      I18n.t('breakout_sessions.join_session.profile_must_be_listed_in_the_directory')
+    errors.add :base, I18n.t(
+      'breakout_sessions.join_session.profile_must_be_listed_in_the_directory',
+      directory_path: '/directory'
+    )
   end
 
 end

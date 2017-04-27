@@ -58,7 +58,8 @@ en:
     join_session:
       already_joined: You've already joined the breakout session.
       joined_session: You've successfully joined the breakout session.
-      profile_must_be_listed_in_the_directory: Your profile must be listed in The Montessori Directory
+      profile_must_be_listed_in_the_directory: Your profile must
+        be listed in <a href="%{directory_path}">The Montessori Directory</a>.
   feed_items:
     send_message:
       message_sent: Your message has been sent!

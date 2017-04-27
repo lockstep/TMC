@@ -56,7 +56,10 @@ class BreakoutSessionsController < ApplicationController
       return
     end
     unless current_user.opted_in_to_public_directory?
-      redirect_to :back, alert: t('.profile_must_be_listed_in_the_directory')
+      redirect_to :back, alert: t(
+        '.profile_must_be_listed_in_the_directory',
+        directory_path: directory_path
+      )
       return
     end
     @breakout_session.attendees << current_user
