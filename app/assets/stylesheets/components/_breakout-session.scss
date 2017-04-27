@@ -11,6 +11,11 @@
       margin-right: 0.25em;
     }
   }
+
+  .help.card-block {
+    border-left: solid 5px $lighter-grey;
+  }
+
   .join {
     a {
       font-size: 1em;

@@ -11,7 +11,7 @@ describe 'BreakoutSession', type: :feature do
     @user.update(opted_in_to_public_directory: true)
   end
 
-  describe 'apply for breakout session' do
+  xdescribe 'apply for breakout session' do
     context 'a timeslot exists' do
       before do
         create(:breakout_session_location_timeslot,

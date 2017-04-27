@@ -12,7 +12,7 @@
   %hr.m-b-3
   .row.m-t-2
     .col-sm-9
-      .card.m-b-3
+      .card.m-b-2
         .row.information
           .col-sm-6
             %div
@@ -26,11 +26,24 @@
               %small LOCATION:
               = format_location(@breakout_session)
             .organizers
-              %small ORGANIZER:
+              %small HOST:
               %span
                 - @breakout_session.organizers.each do |organizer|
                   = link_to directory_profile_path(organizer.id), class: 'organizer' do
                     = organizer.full_name
+        - if @breakout_session.description.present?
+          .row.information
+            .col-sm-12
+              %small SUMMARY:
+              %br
+              = @breakout_session.description
+
+      .help.card-block.m-b-2
+        Please post questions or comments below leading up to the conference
+        to help your host tailor their discussion to your interests! This
+        discussion board will stay live after the conference for feedback and
+        ongoing discussion.
+
       = render 'feed_items/comment_feed', comments: @comments,
         create_comment_url: breakout_session_send_breakout_session_comment_path(@breakout_session)
 
