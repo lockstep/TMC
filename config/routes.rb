@@ -118,7 +118,10 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :breakout_sessions, only: [:index, :show]
+      resources :breakout_sessions, only: [:index, :show] do
+        resources :comments, only: [ :index, :create ]
+      end
+
       resource :aws_s3_auth, only: [:show]
     end
   end

@@ -14,4 +14,10 @@ FactoryGirl.define do
     author nil
     raw_image_s3_key 'some-key'
   end
+
+  factory :feed_comment, class: 'FeedItems::Comment' do
+    type 'FeedItems::Comment'
+    message 'a general comment'
+    feedable nil
+  end
 end
