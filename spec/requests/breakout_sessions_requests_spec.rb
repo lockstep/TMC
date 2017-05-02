@@ -244,11 +244,5 @@ describe 'breakout session exists', type: :request do
         end
       end
     end
-    context 'unauthenticated user' do
-      before do
-        get "/api/v1/breakout_sessions/#{@breakout_session.id}/comments"
-      end
-      it_behaves_like 'an unauthorized request'
-    end
   end
 end

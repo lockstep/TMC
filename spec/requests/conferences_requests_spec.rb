@@ -85,11 +85,5 @@ describe 'user fetching conference data', type: :request do
         expect(images.size).to eq(3)
       end
     end
-    context 'unauthenticated user' do
-      before do
-        get "/api/v1/conferences/#{@conference.id}/images"
-      end
-      it_behaves_like 'an unauthorized request'
-    end
   end
 end
