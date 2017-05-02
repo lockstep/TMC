@@ -6,7 +6,7 @@ module Api
 
       def index
         breakout_sessions = BreakoutSession.where(
-          conference_id: find_conference_id
+          conference_id: params[:id]
         ).approved
         render json: breakout_sessions
       end
@@ -29,13 +29,6 @@ module Api
         end
       end
 
-      def find_conference_id
-        params[:id] ||
-        Conference.find_or_create_by(
-          name: 'International Montessori Congress',
-          location: "Prague, Czech Republic"
-        ).id
-      end
     end
   end
 end
