@@ -5,24 +5,24 @@ module ConferencesHelper
   end
 
   def format_date(session)
-    return 'N/A' unless session.day
+    return 'TBD' unless session.day
     session.day.strftime("%A %b %e")
   end
 
   def format_organizers(session)
-    return 'N/A' if session.organizers.blank?
+    return 'TBD' if session.organizers.blank?
     session.organizers.map(&:full_name).reject(&:empty?).join(', ')
   end
 
   def format_location(session)
-    return 'N/A' unless session.location
+    return 'TBD' unless session.location
     session.location_name
   end
 
   private
 
   def format_time(time)
-    return 'N/A' unless time.present?
+    return 'TBD' unless time.present?
     time.strftime("%H:%M")
   end
 end
