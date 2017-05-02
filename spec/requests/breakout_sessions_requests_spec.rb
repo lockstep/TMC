@@ -281,17 +281,30 @@ describe 'breakout session exists', type: :request do
     context '@user is authenticated' do
       before do
         @user = create(:user)
-        create_list(:feed_comment, 3, feedable: @breakout_session)
+        create_list(
+          :feed_comment,
+          3,
+          feedable: @breakout_session,
+          author: @user
+        )
         image_with_comment = create(
           :feed_comment,
           feedable: @breakout_session,
-          raw_image_s3_key: 's3-key'
+          raw_image_s3_key: 's3-key',
+          author: @user
         )
       end
       it 'returns a list of comments belonging to the breakout session' do
         get "/api/v1/breakout_sessions/#{@breakout_session.id}/comments",
           auth_headers(@user)
         expect(response_json['comments'].size).to eq 4
+      end
+      it "returns user's data along with their comment" do
+        get "/api/v1/breakout_sessions/#{@breakout_session.id}/comments",
+          auth_headers(@user)
+        comment = response_json['comments'][0]
+        expect(comment['author']['full_name']).to eq 'Jane Austen'
+        expect(comment['author']['avatar_url_thumb']).not_to eq nil
       end
       context 'lot of comments exist' do
         before do
