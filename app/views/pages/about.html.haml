@@ -8,15 +8,19 @@
     .row
       .col-sm-12
         %p
-          Michelle received her M.Ed. from Loyola University and was trained as an
-          AMI elementary guide by Kay Baker at the Washington Montessori
-          Institute. She taught in an elementary classroom in Chicago and helped
-          to organize a new Montessori environment in Switzerland before moving
-          to Puebla, Mexico for her AMI primary training under Coral Ruiz. She has
-          since been a primary guide at the Montessori
-          Academy Bangkok International School in Thailand, but recently moved to
-          Denver, CO where she is studying with Judi Orion in the AMI Assistants
-          to Infancy program for the summer.
+          The Montessori Company is the brainchild of Michelle Rugel,
+          an AMI-trained guide and the Head of School at Hiatt Farms
+          Montessori. Michelle received her M.Ed. from Loyola University and
+          was trained as an elementary guide by Kay Baker at the
+          Washington Montessori Institute. She taught in an elementary
+          classroom in Chicago and helped to organize a new Montessori
+          environment in Switzerland before moving to Puebla, Mexico for
+          her AMI primary training under Coral Ruiz. From 2014-2016 she served
+          as a primary guide at the Montessori Academy Bangkok International
+          School in Thailand before moving to Denver, CO where she is
+          studying with Judi Orion in the AMI Assistants
+          to Infancy program for the summer. Her primary school at Hiatt
+          Farms is scheduled to open in 2018.
         %p
           While in Thailand Michelle joined forces with the amazing illustrator
           = link_to 'Erik Rempen',
@@ -33,7 +37,17 @@
           making it easy for parents and guides to buy hand-crafted products
           designed to follow Maria Montessori's philosophy.
         %p
-          We hope that you enjoy our materials! If you need help navigating the
+          - conference = Conference.find_by(id: 1) || Conference.create
+          The Montessori Company has also partnered with AMI to provide
+          an easy way for Montessorians around the world to connect on
+          = link_to 'The Montessori Directory', directory_path
+          and to discuss conference topics before and after Montessori
+          conferences like
+          = succeed '.' do
+            = link_to 'IMC Prague 2017', conference_path(conference)
+        %p
+          We hope that you enjoy our little corner of the internet!
+          If you need help navigating the
           website or have suggestions for materials we should create, please
           don't hesitate to reach out directly to
           = succeed '.' do

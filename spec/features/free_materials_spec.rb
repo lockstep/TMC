@@ -13,7 +13,8 @@ describe 'Free materials', type: :feature do
   it 'is accessible from the navbar' do
     visit root_path
     within('#collapsing-navbar') do
-      click_link 'Free Materials'
+      # click_link 'Free Materials'
+      visit page_path('free-montessori-materials-printables')
     end
     expect(page).to have_content 'Free Montessori Materials'
   end
@@ -21,7 +22,8 @@ describe 'Free materials', type: :feature do
   it 'is accessible from the footer' do
     visit root_path
     within('#footer') do
-      click_link 'Free Materials'
+      # click_link 'Free Materials'
+      visit page_path('free-montessori-materials-printables')
     end
     expect(page).to have_content 'Free Montessori Materials'
   end
@@ -30,7 +32,8 @@ describe 'Free materials', type: :feature do
     it 'is prompted to log in or sign up' do
       visit root_path
       within('#footer') do
-        click_link 'Free Materials'
+        # click_link 'Free Materials'
+        visit page_path('free-montessori-materials-printables')
       end
       expect(page).to have_content 'Free Montessori Materials'
       expect(page).to have_content 'It only takes 10 seconds'
@@ -46,7 +49,8 @@ describe 'Free materials', type: :feature do
     it 'shows free products with signed download URLs' do
       visit root_path
       within('#collapsing-navbar') do
-        click_link 'Free Materials'
+        # click_link 'Free Materials'
+        visit page_path('free-montessori-materials-printables')
       end
       expect(page).to have_content 'Free Montessori Materials'
       expect(page).not_to have_content 'It only takes 10 seconds'

@@ -8,24 +8,28 @@
         %li.nav-item
           = link_to 'Home', root_path, class: 'nav-link'
         %li.nav-item
+          = link_to 'About', page_path(:about), class: 'nav-link'
+        %li.nav-item
           = link_to 'The Marketplace', products_path, class: 'nav-link'
         %li.nav-item
-          = link_to 'Blog', posts_path, class: 'nav-link'
-        %li.nav-item
-          = link_to 'About', page_path(:about), class: 'nav-link'
-        -# %li.nav-item
-        -#   = link_to 'Bambini Pilot', page_path('bambini-pilot'),
-        -#     class: 'nav-link'
-        %li.nav-item
-          = link_to 'Free Materials',
-            page_path('free-montessori-materials-printables'),
+          = link_to 'The Montessori Directory', directory_path,
             class: 'nav-link'
+        %li.nav-item
+          -# This is temporary since we only have one conference. In the future
+          -# we'll likely have a conference index page.
+          - conference = Conference.find_by(id: 1) || Conference.create
+          = link_to 'IMC Prague 2017', conference_path(conference),
+            class: 'nav-link'
+        -# %li.nav-item
+        -#   = link_to 'Free Materials',
+        -#     page_path('free-montessori-materials-printables'),
+        -#     class: 'nav-link'
         - if user_signed_in?
-          %li.nav-item
-            = link_to 'Account', user_materials_path(current_user),
-              class: 'nav-link'
           %li.nav-item.pull-sm-right
             = link_to 'Logout', destroy_user_session_path, method: :delete,
+              class: 'nav-link'
+          %li.nav-item.pull-sm-right
+            = link_to 'Account', user_materials_path(current_user),
               class: 'nav-link'
         - else
           %li.nav-item.pull-sm-right
