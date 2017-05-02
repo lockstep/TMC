@@ -16,7 +16,10 @@ class FeedItemsController < ApplicationController
 
   def send_breakout_session_comment
     @feedable = BreakoutSession.find(params[:breakout_session_id])
-    create_comment
+    comment = create_comment
+    if comment.persisted? && !comment.message.blank?
+      UsersMailer.new_breakout_session_comment(comment.id).deliver_later
+    end
   end
 
   def send_interest_comment
@@ -39,6 +42,7 @@ class FeedItemsController < ApplicationController
     else
       redirect_to :back, alert: t('.comment_empty')
     end
+    comment
   end
 
 end

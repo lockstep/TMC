@@ -51,9 +51,14 @@ describe FeedItemsController do
 
       context 'send_breakout_session_comment' do
         before do
-          Sidekiq::Testing.fake!
+          Sidekiq::Testing.inline!
+          @organizer = create(:user, email: 'c@t.com')
+          @breakout_session = create(
+            :breakout_session, organizers: [ @organizer ]
+          )
         end
         it 'executes resize worker when raw image key is present' do
+          Sidekiq::Testing.fake!
           expect {
             post :send_breakout_session_comment, {
               breakout_session_id: create(:breakout_session).id,
@@ -63,6 +68,31 @@ describe FeedItemsController do
               }
             }
           }.to change(FeedItemImageResizeWorker.jobs, :size).by(1)
+        end
+        it 'sends the comment to the organizer via email' do
+          post :send_breakout_session_comment, {
+            breakout_session_id: @breakout_session.id,
+            feed_item: {
+              message: 'my message'
+            }
+          }
+          expect(@breakout_session.comments.count).to eq 1
+          expect(ActionMailer::Base.deliveries.count).to eq(1)
+          expect(ActionMailer::Base.deliveries.last.encoded)
+            .to match 'my message'
+          expect(ActionMailer::Base.deliveries.last.to)
+            .to eq [ @organizer.email ]
+        end
+        it 'does not send images via email' do
+          Sidekiq::Testing.fake!
+          post :send_breakout_session_comment, {
+            breakout_session_id: @breakout_session.id,
+            feed_item: {
+              raw_image_s3_key: 'my message'
+            }
+          }
+          expect(@breakout_session.comments.count).to eq 1
+          expect(ActionMailer::Base.deliveries.count).to eq(0)
         end
       end
 

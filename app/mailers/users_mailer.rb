@@ -19,6 +19,19 @@ class UsersMailer < ApplicationMailer
     )
   end
 
+  def new_breakout_session_comment(comment_id)
+    @comment = FeedItems::Comment.find(comment_id)
+    @breakout_session = @comment.feedable
+    @recipients = @breakout_session.organizers.pluck(:email)
+    @author = @comment.author
+    mail(
+      to: @recipients,
+      bcc: ADMIN_EMAILS,
+      reply_to: ADMIN_EMAILS,
+      subject: "New Comment on #{@breakout_session.name}"
+    )
+  end
+
   def new_breakout_session_application(breakout_session_id)
     @breakout_session = BreakoutSession.find(breakout_session_id)
     mail(to: ADMIN_EMAILS, subject: "New Breakout Session Application")
