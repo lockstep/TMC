@@ -28,7 +28,8 @@ class BreakoutSession < ActiveRecord::Base
   has_many :comments, as: :feedable, class_name: 'FeedItems::Comment'
 
   delegate :name, :slug, to: :conference, prefix: true
-  delegate :name, to: :location, prefix: true
+  delegate :name, to: :location, prefix: true,
+    allow_nil: true
   delegate :start_time, :end_time, :day,
     to: :breakout_session_location_timeslot
 

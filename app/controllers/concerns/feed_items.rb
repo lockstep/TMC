@@ -2,7 +2,7 @@ module FeedItems
   extend ActiveSupport::Concern
 
   included do
-    before_action :ensure_user_authenticated!
+    before_action :ensure_user_authenticated!, except: [ :index ]
     before_action :set_user, only: [:send_message]
     before_action :ensure_user_belongs_to_directory, only: [:send_message, :create]
     before_action :ensure_messages_enabled, only: [:send_message]

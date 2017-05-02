@@ -20,12 +20,12 @@ module AwsHelper
         ENV['S3_SECRET'],
         s3_policy(content_type)
       )
-    ).delete("\n")
+    ).gsub("\n", "")
   end
 
   def s3_policy(content_type)
     Base64.encode64(s3_policy_data(content_type).to_json)
-      .delete("\n", "")
+      .gsub("\n", "")
   end
 
   def s3_policy_data(content_type)

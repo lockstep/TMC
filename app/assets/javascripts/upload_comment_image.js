@@ -99,13 +99,18 @@ document.addEventListener("turbolinks:load", function() {
 TMC.pollForCommentImages = function(){
   var $missingImageComments = $('.comments .missing-image').closest('.comment');
   if($missingImageComments.length === 0) return;
-  var path = window.location.pathname + window.location.search;
+  var currentPath = window.location.pathname + window.location.search;
+  var path;
+  // TODO: Add interest comments api endpoint to clean up this shitty shitty
+  // code.
+  if(currentPath.match('breakout_sessions')) {
+    path = '/api/v1' + currentPath + '/comments';
+  } else path = currentPath;
   $.ajax(path, {
     dataType: 'JSON',
     success: function(res) {
       setTimeout(TMC.pollForCommentImages, 2000);
-      var feedable = res.breakout_session || res.interest;
-      var comments = feedable.comments;
+      var comments = res.comments || res.interest.comments;
       $.each($missingImageComments, function(_, comment) {
         var $comment = $(comment);
         var id = $comment.prop('id');
