@@ -86,6 +86,8 @@ Rails.application.routes.draw do
     end
     post :join_session, to: 'breakout_sessions#join_session',
       as: 'join'
+    resources :breakout_session_supplements, only: [ :create, :destroy ],
+      shallow: true
   end
 
   resources :conferences, only: [:show] do

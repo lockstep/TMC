@@ -45,10 +45,10 @@ describe 'BreakoutSession', type: :feature do
     before do
       @conference.update(breakout_sessions: [ @breakout_session ])
       @breakout_session.update(organizers: [ @organizer ])
-      visit breakout_session_path(@breakout_session.slug)
     end
     context 'user not signed in' do
       it 'displays breakout session informaiton' do
+        visit breakout_session_path(@breakout_session.slug)
         expect(page).to have_content @breakout_session.name.upcase
         expect(page).to have_content 'Please sign in or sign up to post comments'
         within 'section.join' do
@@ -59,8 +59,31 @@ describe 'BreakoutSession', type: :feature do
         end
       end
     end
+
+    feature 'organizer uploads breakout session document' do
+      before do
+        allow_any_instance_of(Paperclip::Attachment)
+          .to receive(:save).and_return(true)
+        @breakout_session.update(organizers: [ @user ])
+        visit breakout_session_path(@breakout_session.slug)
+        within 'section.post-comment' do
+          click_on 'sign in'
+        end
+        signin(@user.email)
+      end
+      scenario 'organizer uploads document' do
+        attach_file 'breakout_session_supplement_document',
+          'spec/fixtures/breakout_session_imports/standard.csv'
+        click_button 'Upload Document'
+        expect(page).to have_content 'standard.csv'
+        click_link 'Remove File'
+        expect(page).not_to have_content 'standard.csv'
+      end
+    end
+
     context 'signed in' do
       before do
+        visit breakout_session_path(@breakout_session.slug)
         within 'section.post-comment' do
           click_on 'sign in'
         end

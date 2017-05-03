@@ -10,6 +10,7 @@ class BreakoutSession < ActiveRecord::Base
   # session is only ever associated with one timeslot.
   has_many :breakout_session_timeslots, through: :conference
 
+  has_many :breakout_session_supplements
   has_one :breakout_session_location_timeslot
   has_one :location, through: :breakout_session_location_timeslot,
     source: :breakout_session_location

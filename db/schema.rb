@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170416090527) do
+ActiveRecord::Schema.define(version: 20170503220933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,18 @@ ActiveRecord::Schema.define(version: 20170416090527) do
   end
 
   add_index "breakout_session_locations", ["conference_id"], name: "index_breakout_session_locations_on_conference_id", using: :btree
+
+  create_table "breakout_session_supplements", force: :cascade do |t|
+    t.integer  "breakout_session_id"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "breakout_session_supplements", ["breakout_session_id"], name: "index_breakout_session_supplements_on_breakout_session_id", using: :btree
 
   create_table "breakout_sessions", force: :cascade do |t|
     t.string   "name"
@@ -430,6 +442,7 @@ ActiveRecord::Schema.define(version: 20170416090527) do
   add_foreign_key "breakout_session_location_timeslots", "breakout_session_locations"
   add_foreign_key "breakout_session_location_timeslots", "breakout_sessions"
   add_foreign_key "breakout_session_locations", "conferences"
+  add_foreign_key "breakout_session_supplements", "breakout_sessions"
   add_foreign_key "breakout_sessions", "conferences"
   add_foreign_key "charges", "orders"
   add_foreign_key "downloadables", "products"

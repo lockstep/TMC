@@ -36,6 +36,34 @@
             .col-sm-12
               %p= @breakout_session.description
 
+      - unless @breakout_session_supplements.empty?
+        %h5 Breakout Session Documents
+        %ul.list-unstyled
+          - @breakout_session_supplements.each do |supplement|
+            %li
+              = link_to supplement.document_file_name, supplement.document.url,
+                target: '_blank'
+              - if @breakout_session.organizers.include?(current_user)
+                |
+                = link_to 'Remove File',
+                  breakout_session_supplement_path(supplement),
+                  method: :delete, class: 'warning-link'
+
+      - if @breakout_session.organizers.include?(current_user)
+        %hr
+        %h5 Presenter-only Document Upload
+        %p Upload your presentation or supplemental materials here.
+        .row
+          .col-sm-12
+            = form_for [ @breakout_session, BreakoutSessionSupplement.new ],
+              class: 'form' do |f|
+              = f.file_field :document
+              %br
+              %br
+              = f.submit 'Upload Document', class: 'btn btn-cart'
+        %hr
+        %br
+
       .help.card-block.m-b-2
         Please post questions or comments below leading up to the conference
         to help your host tailor their discussion to your interests! This
