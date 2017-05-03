@@ -16,3 +16,4 @@
 
 # Ignore RubyMine config
 .idea/
+.byebug_history
