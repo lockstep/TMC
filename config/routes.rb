@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :breakout_session_imports, only: [ :new, :create ]
+
     root controller: DashboardManifest::ROOT_DASHBOARD, action: :index
   end
 

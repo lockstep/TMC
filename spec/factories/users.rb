@@ -7,4 +7,8 @@ FactoryGirl.define do
     address_country 'CA'
     position User::POSITIONS.first
   end
+
+  factory :admin, parent: :user do
+    role User.roles[:admin]
+  end
 end
