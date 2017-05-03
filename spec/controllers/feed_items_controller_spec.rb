@@ -83,6 +83,21 @@ describe FeedItemsController do
           expect(ActionMailer::Base.deliveries.last.to)
             .to eq [ @organizer.email ]
         end
+        context 'the author is an organizer' do
+          before do
+            @breakout_session.update(organizers: [ @user1 ])
+          end
+          it 'does not send the comment to the organizer via email' do
+            post :send_breakout_session_comment, {
+              breakout_session_id: @breakout_session.id,
+              feed_item: {
+                message: 'my message'
+              }
+            }
+            expect(@breakout_session.comments.count).to eq 1
+            expect(ActionMailer::Base.deliveries.count).to eq(0)
+          end
+        end
         it 'does not send images via email' do
           Sidekiq::Testing.fake!
           post :send_breakout_session_comment, {

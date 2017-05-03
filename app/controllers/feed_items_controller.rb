@@ -17,7 +17,7 @@ class FeedItemsController < ApplicationController
   def send_breakout_session_comment
     @feedable = BreakoutSession.find(params[:breakout_session_id])
     comment = create_comment
-    if comment.persisted? && !comment.message.blank?
+    if should_send_new_breakout_session_comment?(comment)
       UsersMailer.new_breakout_session_comment(comment.id).deliver_later
     end
   end
@@ -28,6 +28,11 @@ class FeedItemsController < ApplicationController
   end
 
   private
+
+  def should_send_new_breakout_session_comment?(comment)
+    comment.persisted? && !comment.message.blank? &&
+      !@feedable.organizers.include?(comment.author)
+  end
 
   def create_comment
     comment = FeedItems::Comment.new(
