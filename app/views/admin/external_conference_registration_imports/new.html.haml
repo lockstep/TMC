@@ -1,0 +1,5 @@
+= form_for ExternalConferenceRegistrationImport.new,
+  url: admin_external_conference_registration_imports_path do |f|
+  = f.select :conference_id, options_from_collection_for_select(Conference.all, 'id', 'name')
+  = f.file_field :import_file
+  = f.submit 'Import'

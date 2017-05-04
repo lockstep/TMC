@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503220933) do
+ActiveRecord::Schema.define(version: 20170504191427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,18 @@ ActiveRecord::Schema.define(version: 20170503220933) do
 
   add_index "explorable_locations", ["explorable_type", "explorable_id"], name: "index_explorable_locations_on_explorable_type_and_explorable_id", using: :btree
   add_index "explorable_locations", ["visual_exploration_id"], name: "index_explorable_locations_on_visual_exploration_id", using: :btree
+
+  create_table "external_conference_registration_imports", force: :cascade do |t|
+    t.integer  "conference_id"
+    t.string   "import_file_file_name"
+    t.string   "import_file_content_type"
+    t.integer  "import_file_file_size"
+    t.datetime "import_file_updated_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "external_conference_registration_imports", ["conference_id"], name: "index_external_conference_registration_imports_on_conference_id", using: :btree
 
   create_table "feed_items", force: :cascade do |t|
     t.string   "type"
@@ -447,6 +459,7 @@ ActiveRecord::Schema.define(version: 20170503220933) do
   add_foreign_key "charges", "orders"
   add_foreign_key "downloadables", "products"
   add_foreign_key "explorable_locations", "visual_explorations"
+  add_foreign_key "external_conference_registration_imports", "conferences"
   add_foreign_key "feed_policies", "users"
   add_foreign_key "identities", "users"
   add_foreign_key "line_items", "orders"

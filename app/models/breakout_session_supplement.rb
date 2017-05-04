@@ -13,6 +13,9 @@ class BreakoutSessionSupplement < ActiveRecord::Base
     hash_secret: "JUST4URLUNIQUENESSes",
     s3_protocol: "https"
 
+  validates_with AttachmentSizeValidator,
+    attributes: :document, less_than: 5.megabytes
+
   validates_with AttachmentContentTypeValidator,
     attributes: :document,
     content_type: [
