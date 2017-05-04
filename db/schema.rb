@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504191427) do
+ActiveRecord::Schema.define(version: 20170504204130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,21 @@ ActiveRecord::Schema.define(version: 20170504191427) do
   end
 
   add_index "external_conference_registration_imports", ["conference_id"], name: "index_external_conference_registration_imports_on_conference_id", using: :btree
+
+  create_table "external_conference_registrations", force: :cascade do |t|
+    t.integer  "conference_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "external_id"
+    t.string   "country_code"
+    t.string   "email"
+    t.string   "company"
+    t.date     "registered_on"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "external_conference_registrations", ["conference_id"], name: "index_external_conference_registrations_on_conference_id", using: :btree
 
   create_table "feed_items", force: :cascade do |t|
     t.string   "type"
@@ -460,6 +475,7 @@ ActiveRecord::Schema.define(version: 20170504191427) do
   add_foreign_key "downloadables", "products"
   add_foreign_key "explorable_locations", "visual_explorations"
   add_foreign_key "external_conference_registration_imports", "conferences"
+  add_foreign_key "external_conference_registrations", "conferences"
   add_foreign_key "feed_policies", "users"
   add_foreign_key "identities", "users"
   add_foreign_key "line_items", "orders"
