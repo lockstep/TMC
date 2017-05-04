@@ -78,6 +78,32 @@ describe User, type: :model do
     end
   end
 
+  describe '#onboard_directory_member' do
+    context 'no matching conference registration' do
+      it 'does not complain' do
+        user = create(:user)
+        user.onboard_directory_member
+      end
+    end
+    context 'matching conference registration' do
+      before do
+        @matching_registration = create(:external_conference_registration,
+                                        email: 'test@test.com',
+                                       first_name: 'yoyo')
+      end
+      it 'pulls data from the matching registration' do
+        user = create(:user, email: 'test@test.com', first_name: nil)
+        user.onboard_directory_member
+        expect(user.reload.first_name).to match 'yoyo'
+      end
+      it 'does not replace existing data' do
+        user = create(:user, email: 'test@test.com')
+        user.onboard_directory_member
+        expect(user.reload.first_name).to match 'Jane'
+      end
+    end
+  end
+
   describe '#role' do
     it 'returns role as a string' do
       expect(michelle.role).to be_kind_of(String)

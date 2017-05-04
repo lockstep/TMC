@@ -165,11 +165,13 @@ class User < ActiveRecord::Base
     # NOTE: If people are just registering for the directory (e.g. during
     # the conference) we don't want to bother them with product marketing.
     send_welcome_email(true)
+    pull_data_from_external_conference_registrations
   end
 
   def set_up_registering_user!
     send_welcome_email
     subscribe_to_mailchimp
+    pull_data_from_external_conference_registrations
   end
 
   def private_messages_enabled?
@@ -207,4 +209,18 @@ class User < ActiveRecord::Base
   def subscribe_to_mailchimp
     MailchimpSubscriberWorker.perform_async(email)
   end
+
+  def pull_data_from_external_conference_registrations
+    matching_registration = ExternalConferenceRegistration
+      .where(email: email).order(created_at: :desc).first
+    return unless matching_registration
+
+    update(
+      first_name: first_name || matching_registration.first_name,
+      last_name: last_name || matching_registration.last_name,
+      address_country: address_country || matching_registration.country_code,
+      organization_name: organization_name || matching_registration.company
+    )
+  end
+
 end
