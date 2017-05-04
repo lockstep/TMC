@@ -4,11 +4,13 @@ describe 'breakout session exists', type: :request do
     @breakout_session_location = create(:breakout_session_location)
     @breakout_session = create(
       :breakout_session,
+      name: 'drawing',
       location: @breakout_session_location
     )
     @timeslot = create(
       :breakout_session_location_timeslot,
-      day: Date.today,
+      start_time: '04/16/2017 14:23:14',
+      day: '2017-04-16',
       breakout_session: @breakout_session
     )
     @conference.update(
@@ -61,7 +63,8 @@ describe 'breakout session exists', type: :request do
         )
         create(
           :breakout_session_location_timeslot,
-          day: Date.today,
+          start_time: '04/15/2017 14:23:14',
+          day: '2017-04-15',
           breakout_session: @breakout_session_2
         )
         @conference.update(
@@ -75,13 +78,13 @@ describe 'breakout session exists', type: :request do
           ]
         )
       end
-      it 'should return a list of breakout sessions correctly' do
+      it 'should return a list of breakout sessions ordered by time' do
         get "/api/v1/conferences/#{@conference.id}/breakout_sessions",
           auth_headers(@user)
         breakout_sessions = response_json['breakout_sessions']
-        breakout_session = breakout_sessions[1]
         expect(breakout_sessions.size).to eq 2
-        expect(breakout_session['name']).to eq @breakout_session_2.name
+        expect(breakout_sessions[0]['name']).to eq @breakout_session_2.name
+        expect(breakout_sessions[1]['name']).to eq @breakout_session.name
       end
       context 'non-approved breakout session exists' do
         before do

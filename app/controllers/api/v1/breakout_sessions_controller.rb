@@ -7,7 +7,8 @@ module Api
       def index
         breakout_sessions = BreakoutSession.where(
           conference_id: params[:id]
-        ).approved
+        ).approved.order_by_time
+
         render json: breakout_sessions
       end
 
