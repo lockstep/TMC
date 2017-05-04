@@ -89,12 +89,17 @@
       %section.right-user-list
         %h5.text-center Attendees
         %hr
-        - if @breakout_session.opted_in_attendees.any?
-          - @breakout_session.opted_in_attendees.each do |attendee|
+        - audience_size = @breakout_session.opted_in_attendees.count
+        - if audience_size > 0
+          - limit = 15
+          - @breakout_session.opted_in_attendees.order(created_at: :desc).limit(limit).each do |attendee|
             = link_to directory_profile_path(attendee.id), class: 'user-in-list' do
               .profile
                 .avatar{style: "background-image:url(#{attendee.avatar.url(:thumb)})"}
                 .name
                   = attendee.full_name
+          - if audience_size > limit
+            .text-center
+              %i And #{ audience_size - limit } more
         - else
           %div.text-center No attendees
