@@ -35,5 +35,14 @@ class BreakoutSession < ActiveRecord::Base
     to: :breakout_session_location_timeslot
 
   scope :approved, -> { where(approved: true) }
+  scope :order_by_time, -> {
+    self.includes(:breakout_session_location_timeslot)
+      .order( 
+        <<-EOS.strip_heredoc.squish
+          breakout_session_location_timeslots.day ASC,
+          breakout_session_location_timeslots.start_time ASC
+        EOS
+      )
+  }
 
 end
