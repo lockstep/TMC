@@ -1,7 +1,7 @@
 #home {
   .hero-container {
     height: 390px;
-    background: url(hero_bg.jpg) no-repeat left;
+    background: image-url('hero_bg.jpg') no-repeat left;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -119,7 +119,7 @@
 
     .right-cell {
       display: table-cell;
-      background: url(testimonial.jpg) no-repeat right;
+      background: image_url('testimonial.jpg') no-repeat right;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
