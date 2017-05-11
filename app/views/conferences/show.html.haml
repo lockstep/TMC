@@ -25,10 +25,10 @@
             %th Organizer
             %th Location
         %tbody
-          - @conference.breakout_sessions.approved.each do |session|
+          - @conference.breakout_sessions.approved.order_by_time.each do |session|
             %tr{onclick: "document.location = '#{breakout_session_path(session)}'"}
               %td
-                = session.name
+                = truncate(session.name, length: 50, separator: ' ')
               %td
                 = format_date(session)
               %td
