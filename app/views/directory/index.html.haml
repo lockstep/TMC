@@ -1,5 +1,9 @@
-- content_for :title, 'Directory'
+- content_for :title, 'The Montessori Directory'
 - content_for :header_logo, 'false'
+- content_for :meta_tags do
+  = meta_tags(title: 'The Montessori Directory',
+    image: asset_url('directory_image.png'),
+    description: "Connect with other Montessorians and Montessori families around the world!"))
 
 .container#directory.m-t-2
   = form_tag '/directory', method: 'get' do

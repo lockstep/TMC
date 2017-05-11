@@ -1,5 +1,5 @@
 en:
-  site_name: Montessori Materials by The Montessori Company
+  site_name: The Montessori Company
   errors:
     must_authenticate: You must be logged in first.
     unauthorized: Unauthorized action
