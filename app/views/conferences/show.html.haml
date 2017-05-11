@@ -1,5 +1,9 @@
 - content_for :title, "#{@conference.name} | Montessori Conferences"
 - content_for :header_logo, 'false'
+- content_for :meta_tags do
+  = meta_tags(title: "#{@conference.name}",
+    image: asset_url("conferences/#{@conference.id}.png"),
+    description: "#{@conference.name} in #{@conference.location}")
 
 .container#conference.m-t-2
   .text-xs-center.m-b-2
