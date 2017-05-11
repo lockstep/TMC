@@ -2,8 +2,8 @@
 - content_for :header_logo, 'false'
 - content_for :meta_tags do
   = meta_tags(title: "Breakout Session: #{@breakout_session.name}",
-    image: asset_url("conferences/#{@conference.id}.png"),
-    description: "#{@breakout_session.description || @breakout_session.name} at the #{@conference.name}")
+    image: asset_url("conferences/#{@breakout_session.conference_id}.png"),
+    description: "#{@breakout_session.description || @breakout_session.name} at the #{@breakout_session.conference_name}")
 
 .container#breakout-session.m-t-3.simple-show-layout
   .row.title-section
