@@ -28,7 +28,7 @@ class ExternalConferenceRegistrationImport < ActiveRecord::Base
 
   def import!
     CSV.parse(
-      open(import_file.expiring_url(10.seconds), "r:iso-8859-1"),
+      open(import_file.expiring_url(10.seconds)),
       :headers => true
     ) do |row|
       ExternalConferenceRegistration.find_or_create_from_import_row(

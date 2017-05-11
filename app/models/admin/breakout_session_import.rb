@@ -9,7 +9,7 @@ module Admin
       self.conference = Conference.find(conference_id)
       CSV.foreach(
         import_file.path,
-        encoding: "iso-8859-1:utf-8",
+        encoding: "utf-8",
         :headers => true
       ) { |row| import_row(row) }
     end
