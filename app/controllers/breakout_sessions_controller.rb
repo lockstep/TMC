@@ -40,6 +40,7 @@ class BreakoutSessionsController < ApplicationController
       .order(created_at: :desc)
       .page(params[:page] || 1)
       .per(15)
+    @conference = @breakout_session.conference
     @breakout_session_supplements =
       @breakout_session.breakout_session_supplements
     respond_to do |format|

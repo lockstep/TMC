@@ -72,11 +72,11 @@ module Admin
     end
 
     def determine_breakout_session_name(row)
-      row['Short title']&.strip
+      row['Title of presentation']&.strip
     end
 
     def determine_breakout_session_description(row, breakout_session)
-      description = row['Title of presentation'].strip
+      description = row['Short title'].strip
       if description.size < 40 || description.size <= breakout_session.name.size
         return nil
       end
