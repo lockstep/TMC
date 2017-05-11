@@ -40,7 +40,8 @@ class ExternalConferenceRegistrationImport < ActiveRecord::Base
   private
 
   def row_attributes(row)
-    names = row['Name'].split(',')
+    names = row['Name']&.split(',')
+    return {} if names.nil? # This is just a bad import
     first_name = names.size > 1 ? names[1].strip : nil
     last_name = names.size > 1 ? names[0].strip : nil
     registered_on = Date.strptime(row['Regist Date'].strip, '%m/%d/%Y')
