@@ -20,7 +20,7 @@ feature 'Admin imports breakout sessions' do
         opted_in_to_public_directory: true
       )
     end
-    scenario 'breakout session is created' do
+    xscenario 'breakout session is created' do
       visit new_admin_breakout_session_import_path
       complete_import
       expect(page).to have_content 'my title'
