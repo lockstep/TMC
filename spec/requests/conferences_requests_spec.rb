@@ -83,6 +83,7 @@ describe 'user fetching conference data', type: :request do
         get "/api/v1/conferences/#{@conference.id}/images", auth_headers(@user)
         images = response_json['images']
         expect(images.size).to eq(3)
+        expect(images.first['owner']).to eq @user.full_name
       end
     end
   end
