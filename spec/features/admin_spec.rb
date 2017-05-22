@@ -5,6 +5,19 @@ describe 'Admin sections', type: :feature do
 
   let(:admin) { users(:michelle) }
 
+  describe 'Admin navbar' do
+    before { signin(admin.email, 'qawsedrf') }
+
+    it 'is present' do
+      visit "/admin"
+      DashboardManifest::DASHBOARDS.each do |dashboard|
+        within '.sidebar__list' do
+          expect(page).to have_link dashboard.to_s.titleize
+        end
+      end
+    end
+  end
+
   describe 'Dashboards index pages' do
     before { signin(admin.email, 'qawsedrf') }
 
