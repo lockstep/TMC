@@ -24,9 +24,10 @@
                 .line-two free materials
         .col-sm-8.no-left-gutter
           .hero-container
-            .tagline
-              %p Beautiful Montessori resources,
-              %p lovingly crafted & curated by an AMI Montessori guide
+            %h1.tagline
+              Beautiful Montessori resources,
+              %br
+              lovingly crafted &amp; curated by an AMI Montessori guide
     .spacer
       = image_tag 'leaf.png', alt: 'The Montessori Company leaf'
 
@@ -52,7 +53,7 @@
 
 %section#featured-products
   .container
-    %h1.script featured products
+    %h1.script featured Montessori products
     #products-list
       = render 'products/products_list', colspan: 3, products: @featured_products
 
