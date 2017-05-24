@@ -1,0 +1,24 @@
+%script{type: "application/ld+json"}
+  :plain
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": "#{ @product.name.gsub('"', "'") }",
+      "image": "#{ @product.primary_image.url(:medium) }",
+      "description": "#{ strip_tags(@product.description).gsub('"', "'") }",
+      "brand": {
+        "@type": "Thing",
+        "name": "The Montessori Company"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "#{ @product.price }",
+        "availability": "http://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "The Montessori Company"
+        }
+      }
+    }
+
