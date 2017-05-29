@@ -91,7 +91,7 @@ Rails.application.routes.draw do
       shallow: true
   end
 
-  resources :conferences, only: [:show] do
+  resources :conferences, only: [:index, :show] do
     member do
       resources :breakout_sessions, only: [ :new, :create ]
     end
@@ -116,7 +116,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :conferences, only: [:index, :show] do
+      resources :conferences, only: [:show] do
         resources :images, only: [ :index, :create ]
         member do
           resources :breakout_sessions, only: [:index]
