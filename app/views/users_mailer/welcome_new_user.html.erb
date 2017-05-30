@@ -8,13 +8,30 @@
         </tr>
         <tr>
           <td align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
-            <p>
-              I'm delighted to welcome you to The Montessori Company,
-              home of <%= link_to 'The Marketplace', products_url %>
-              and <%= link_to 'The Montessori Directory', directory_url %>.
-              If there is anything I can help you with just hit Reply
-              and I'll be in touch!
-            </p>
+            <% if @hide_products %>
+              <%- conference = Conference.find_by(id: 1) || Conference.create %>
+              <p>
+                Welcome to The Montessori Directory.
+                The <%= link_to '28th International Montessori Congress', 'http://www.montessoricongress2017.org/' %> has partnered with
+                <%= link_to 'The Montessori Company', root_url %>
+                to create an interactive, online Montessori community where
+                we can engage <%= link_to 'Breakout Session Speakers', conference_url(conference) %> before, during and after the conference as well as network
+                with other participants.
+
+              </p>
+              <p>
+                Thank you for joining our online community and please respond to this
+                email if there is anything I can help you with!
+              </p>
+            <% else %>
+              <p>
+                I'm delighted to welcome you to The Montessori Company,
+                home of <%= link_to 'The Marketplace', products_url %>
+                and <%= link_to 'The Montessori Directory', directory_url %>.
+                If there is anything I can help you with just hit Reply
+                and I'll be in touch!
+              </p>
+            <% end %>
             <p>
             ~ Michelle
             </p>

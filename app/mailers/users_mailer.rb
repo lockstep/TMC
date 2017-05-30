@@ -5,7 +5,8 @@ class UsersMailer < ApplicationMailer
     @user = User.find(user_id)
     @hide_products = hide_products
     @results = Product.search('*', order: { times_sold: :desc }).first(4)
-    mail(to: @user.email, subject: "Welcome to The Montessori Company")
+    subject = @hide_products ? "Welcome to The Montessori Directory" : "Welcome to The Montessori Company"
+    mail(to: @user.email, subject: subject)
   end
 
   def new_private_message(message_id)
