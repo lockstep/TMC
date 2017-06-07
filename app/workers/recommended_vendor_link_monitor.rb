@@ -21,8 +21,12 @@ class RecommendedVendorLinkMonitor
 
   def check_url(url)
     return if url.blank?
-    res = Net::HTTP.get(URI(url))
+    uri = URI.parse(url)
+    res = Net::HTTP.get(uri)
     raise "Bad Link" if res.to_i >= 400
+  rescue OpenSSL::SSL::SSLError
+    # NOTE: Some external sites are on old SSL versions (TLS 1) that are not
+    # natively supported by ruby. We're going to ignore these for now.
   end
 
   def send_notification(product, _exception)
