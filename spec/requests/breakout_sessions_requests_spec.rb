@@ -49,7 +49,8 @@ describe 'breakout session exists', type: :request do
         breakout_session = response_json['breakout_sessions'][0]
         organizers = breakout_session['organizers']
         expect(organizers.size).to eq 2
-        expect(organizers[1]['full_name']).to eq 'John Doe'
+        expect(organizers[1]['first_name']).to eq 'Jane'
+        expect(organizers[1]['last_name']).to eq 'Austen'
       end
     end
     context 'another breakout session created' do
