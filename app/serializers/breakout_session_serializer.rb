@@ -1,10 +1,9 @@
 class BreakoutSessionSerializer < ActiveModel::Serializer
   include ConferencesHelper
-  
+
   attributes :id, :name, :description, :day, :start_time, :end_time,
     :location_name
-  has_many :organized_breakout_sessions, serializer: OrganizerSerializer,
-    key: :organizers
+  has_many :organizers, serializer: PublicUserSerializer
 
   def day
     format_date(object)
