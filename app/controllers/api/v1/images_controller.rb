@@ -4,7 +4,7 @@ class Api::V1::ImagesController < Api::V1::BaseController
   def index
     page_num = params[:page] || 1
     conference = Conference.find(params[:conference_id])
-    images = conference.images.order(:created_at).page(page_num).per(15)
+    images = conference.images.order(created_at: :desc).page(page_num).per(15)
     render json: images,
       each_serializer: ImageSerializer, root: 'images',
       meta: {
