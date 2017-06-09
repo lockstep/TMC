@@ -44,5 +44,6 @@ module TMC
     }
 
     config.middleware.use Rack::RejectMethods
+    config.middleware.use Rack::Attack
   end
 end
