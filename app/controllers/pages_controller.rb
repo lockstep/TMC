@@ -3,7 +3,8 @@ class PagesController < ApplicationController
 
   PAGES = [
     'home', 'about', 'terms', 'privacy',
-    'free-montessori-materials-printables', 'bambini-pilot'
+    'free-montessori-materials-printables', 'bambini-pilot',
+    'support'
   ]
 
   def show

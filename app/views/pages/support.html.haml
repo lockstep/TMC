@@ -1,0 +1,15 @@
+- content_for :title, 'Support'
+- content_for :meta_tags do
+  = meta_tags(title: 'Support')
+
+%section#about-us
+  .container
+    %h1.script Support
+    .row
+      .col-sm-12
+        %p
+          Hi there! If you need any help with an order or one of our mobile
+          apps please reach out directly to Michelle at
+          = succeed '.' do
+            = mail_to 'michelle@themontessoricompany.com',
+              'michelle@themontessoricompany.com', subject: 'Hi TMC!'
