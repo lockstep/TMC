@@ -106,7 +106,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'users', controllers: {
-        sessions: 'api/v1/users/sessions'
+        sessions: 'api/v1/users/sessions',
+        registrations: 'api/v1/users/registrations'
       }, skip: [ :omniauth_callbacks ]
 
       post '/users/:user_id/send_message', to: 'feed_items#send_message'
