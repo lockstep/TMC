@@ -35,6 +35,7 @@ class Product < ActiveRecord::Base
     'Spanish | Español' => 1,
     'Simplified Chinese | 简化' => 2,
     'Traditional Chinese | 傳統' => 3,
+    'Pinyin | 拼音' => 5,
     'Blank (No Text)' => 4
   }
 
