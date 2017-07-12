@@ -5,6 +5,16 @@ describe 'user register himself', type: :request do
         post "/api/v1/users", user_params
         user = response_json['user']
         expect(user.keys).to include('id')
+
+        user = User.find(user['id'])
+        expect(user.first_name).to eq 'test'
+        expect(user.last_name).to eq 'example'
+        expect(user.position).to eq 'Other'
+        expect(user.organization_name).to eq 'Example'
+        expect(user.address_city).to eq 'somewhere'
+        expect(user.address_state).to eq 'LA'
+        expect(user.address_country).to eq 'US'
+        expect(user.opted_in_to_public_directory).to eq true
       end
     end
 
@@ -21,7 +31,15 @@ describe 'user register himself', type: :request do
       {
         email: 'test@example.com',
         password: 'test1234',
-        password_confirmation: 'test1234'
+        password_confirmation: 'test1234',
+        first_name: 'test',
+        last_name: 'example',
+        position: 'Other',
+        organization_name: 'Example',
+        address_city: 'somewhere',
+        address_state: 'LA',
+        address_country: 'US',
+        opted_in_to_public_directory: true
       }
     end
   end
