@@ -34,8 +34,12 @@ class ProductsController < ApplicationController
   end
 
   def change_language
-    @selected_product = Product.find(params[:alternate_language_product])
-    redirect_to @selected_product
+    if params[:alternate_language_product].blank?
+      redirect_to :back, alert: "Please select a language from the list."
+    else
+      @selected_product = Product.find(params[:alternate_language_product])
+      redirect_to @selected_product
+    end
   end
 
   def shipping
