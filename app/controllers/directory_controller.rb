@@ -45,6 +45,12 @@ class DirectoryController < ApplicationController
     @search_interests = params[:interests] || []
     @search_positions = params[:positions] || []
     @search_countries = params[:countries] || []
+    # NOTE: Not sure which client uses a hash here...should be an array.
+    # But this error suggests we have a use case for a hash instead:
+    # https://herokuapp47609268herokucom.airbrake.io/projects/120717/groups/2012212250789074461/notices/2012212247683781812
+    if @search_countries.is_a?(Hash)
+      @search_countries = @search_countries.values
+    end
     @search_query = params[:query]
   end
 
