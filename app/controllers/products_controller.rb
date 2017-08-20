@@ -35,6 +35,10 @@ class ProductsController < ApplicationController
 
   def change_language
     if params[:alternate_language_product].blank?
+      if request.env["HTTP_REFERER"].blank?
+        redirect_to(products_path)
+        return
+      end
       redirect_to :back, alert: "Please select a language from the list."
     else
       @selected_product = Product.find(params[:alternate_language_product])
