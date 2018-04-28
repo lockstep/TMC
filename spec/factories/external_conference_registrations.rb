@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :external_conference_registration do
     conference nil
     first_name "MyString"

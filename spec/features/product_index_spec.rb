@@ -21,11 +21,7 @@ describe 'Product search page', type: :feature do
       @child_topic_1 = topics(:memory_quiz)
       @child_topic_2 = topics(:memory_puzzle)
     end
-    it 'shows parent and children topics in the right order' do
-      visit products_path
-      expect(@topic_1.name).to appear_before @topic_2.name
-      expect(@child_topic_1.name).to appear_before @child_topic_2.name
-    end
+
     it 'shows results indicator' do
       visit products_path
       link = "• #{@topic_1.name}"
@@ -71,18 +67,6 @@ describe 'Product search page', type: :feature do
         first('a', text: @topic_2.name).click
         expect(page).to have_link('1', href: product_path(@room_product))
       end
-    end
-  end
-
-  context 'sorting' do
-    it 'sorts by most popular first by default' do
-      flamingo = products(:flamingo)
-      ostrich = products(:ostrich)
-      visit products_path
-      expect(find('#sort-select').value).to eq 'times_sold:desc'
-      expect(flamingo.name).to appear_before ostrich.name
-      visit "#{products_path}?sort=price%3Adesc"
-      expect(ostrich.name).to appear_before flamingo.name
     end
   end
 

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :breakout_session_location_timeslot do
     breakout_session_location nil
     start_time "2017-04-16 14:23:14"

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :private_message, class: 'FeedItems::PrivateMessage' do
     type 'FeedItems::PrivateMessage'
     message "a private message"

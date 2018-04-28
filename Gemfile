@@ -17,7 +17,7 @@ gem 'font-awesome-rails'
 gem 'paperclip', '~> 4.3'
 gem 'aws-sdk', '~> 1.67.0'
 gem 'cancancan', '~> 1.10'
-gem 'actionmailer_inline_css'
+gem 'actionmailer_inline_css', '~> 1.6.0'
 
 gem 'active_model_serializers', '~> 0.10.0rc4'
 gem 'sidekiq', '~> 4.1.0'
@@ -32,7 +32,7 @@ gem 'kaminari', '~> 0.17'
 gem 'sitemap_generator'
 gem 'fog-aws'
 gem 'mailchimp-api', require: 'mailchimp'
-gem 'active_shipping'
+gem 'active_shipping', '~> 2.1.1'
 
 gem 'searchkick', '~> 1.2.1'
 gem 'typhoeus'
@@ -47,7 +47,6 @@ gem 'searchjoy', '~> 0.2'
 
 group :test do
   gem 'stripe-ruby-mock', require: 'stripe_mock'
-  gem 'orderly'
   gem 'rack_session_access'
   gem 'rspec_junit_formatter', '0.2.2'
   gem 'database_cleaner'
@@ -60,8 +59,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  gem 'capybara', '~> 2.7.0'
+  gem 'factory_bot_rails'
+  gem 'capybara', '~> 2.18.0'
   gem 'poltergeist'
   gem 'faker'
 end
@@ -73,7 +72,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'web-console', '~> 2.0'
   gem 'spring', '1.6.4'
-  gem 'erb2haml'
   gem 'spring-commands-rspec'
 end
 
