@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/lockstep/devise_token_auth.git
+  remote: https://github.com/lockstep/devise_token_auth.git
   revision: 99285ab945f41ab9bf3d7fe2d1d754134c2f5338
   tag: v0.1.38.beta7
   specs:
@@ -532,4 +532,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.16.0.pre.3
+   1.16.1
