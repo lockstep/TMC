@@ -117,6 +117,20 @@ describe 'breakout session exists', type: :request do
       expect(breakout_session['organizers'])
         .to eq []
     end
+    context 'a breakout session has no location assigned yet' do
+      before do
+        @breakout_session_no_location = create(
+          :breakout_session,
+          slug: 'easy-session'
+        )
+      end
+      it 'should return the formatted data correctly' do
+        get "/api/v1/breakout_sessions/#{@breakout_session_no_location.id}"
+        breakout_session = response_json['breakout_session']
+        expect(breakout_session['location_name'])
+          .to eq 'TBD'
+      end
+    end
     context 'non-approved breakout session exists' do
       before do
         @breakout_session.update(approved: false)
